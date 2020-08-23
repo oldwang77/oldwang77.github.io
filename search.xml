@@ -95,4 +95,82 @@
 <p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200823102736.png" alt="image-20200726111055365"></p>
 ]]></content>
   </entry>
+  <entry>
+    <title>MySQL学习笔记-狂神说MySQL</title>
+    <url>/2020/08/23/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%8B%82%E7%A5%9E%E8%AF%B4MySQL/</url>
+    <content><![CDATA[<h1 id="初识Mysql"><a href="#初识Mysql" class="headerlink" title="初识Mysql"></a>初识Mysql</h1><h2 id="数据库分类"><a href="#数据库分类" class="headerlink" title="数据库分类"></a>数据库分类</h2><p>关系数据库     Sql</p>
+<ul>
+<li>MySql、Oracle、Sql Server</li>
+<li>通过表和表之间，行和列之间关系进行存储。学员信息表，考勤表</li>
+</ul>
+<p>非关系型数据库   NoSql   not only sql</p>
+<ul>
+<li>Redis、MongDB</li>
+<li>对象存储，通过对象的自身属性来决定</li>
+</ul>
+<p>DBMS(数据库管理系统)</p>
+<ul>
+<li>数据库的管理软件，科学有效的管理我们的数据。维护和获取数据</li>
+<li>MySQL，本质上是一个数据库管理系统</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql uroot -p123456        <span class="comment">--连接数据库</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span>;                    <span class="comment">--查看全部数据库</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> school;                            <span class="comment">--使用数据库</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span>;                        <span class="comment">--查看数据库全部的表</span></span><br><span class="line"><span class="keyword">describe</span> student;                <span class="comment">--查看数据库中全部的表的信息</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> westos;    <span class="comment">--创建一个数据库</span></span><br><span class="line"></span><br><span class="line">exit;                                        <span class="comment">--退出连接</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="操作数据库"><a href="#操作数据库" class="headerlink" title="操作数据库"></a>操作数据库</h2><p>mysql关键字不区分大小写</p>
+<h3 id="数据库的类型"><a href="#数据库的类型" class="headerlink" title="数据库的类型"></a>数据库的类型</h3><p>数值</p>
+<ul>
+<li>tinyint       十分小的数据    1个字节</li>
+<li>smallint.   较小的数据        2个字节</li>
+<li>int             标准                    4个字节</li>
+<li>float          浮点数                4个字节</li>
+<li>double     浮点数                 8个字节</li>
+<li>decimal   字符串形式的浮点数  金融计算的时候，一般用</li>
+</ul>
+<p>字符串</p>
+<ul>
+<li>char  字符串固定大小。0-255</li>
+<li>varchar   可变字符串。 0-65535</li>
+<li>text         文本串          2^16-1</li>
+</ul>
+<p>时间日期</p>
+<ul>
+<li>date     YYYY-MM-DD</li>
+<li>time.    HH:mm:ss</li>
+<li>datetime.  YYYY-MM-DD  HH:mm:ss   <strong>最常用的时间格式</strong></li>
+<li>timestamp.   时间戳。  1970.1.1到现在的毫秒数</li>
+</ul>
+<p>null</p>
+<ul>
+<li>没有值，未知</li>
+<li>不要使用NULL进行运算，结果一定为NULL</li>
+</ul>
+<h3 id="数据库的字段属性（重点）"><a href="#数据库的字段属性（重点）" class="headerlink" title="数据库的字段属性（重点）"></a>数据库的字段属性（重点）</h3><p>Unsigned</p>
+<ul>
+<li>无符号整数</li>
+<li>声明该列不能为负数</li>
+</ul>
+<p>zerofill</p>
+<ul>
+<li>0填充</li>
+<li>不足的位数，使用0来填充</li>
+</ul>
+<p>auto_increment</p>
+<ul>
+<li>通常理解为自增，自动在上一条记录的基础上+1</li>
+<li>通常用来设计唯一的主键index,必须是整数类型</li>
+<li>可以自定义设计主键自增的起始值</li>
+</ul>
+<p>非空   NULL   not NULL</p>
+<ul>
+<li>设置为not NULL,如果不赋值，就会报错</li>
+</ul>
+<p>默认：</p>
+<ul>
+<li>设置默认的值</li>
+</ul>
+<h2 id="创建数据库表"><a href="#创建数据库表" class="headerlink" title="创建数据库表"></a>创建数据库表</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--目标:创建一个schoo1数据库</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--创建学生表(列,字段)使用SQL 创建</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--学号int 登录密码varchar(20)姓名,性别varchar(2),出生日期(datatime)，家庭住址，emai1--注意点，使用英文()，表的名称和字段尽量使用括起来</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- AUTO_ INCREMENT 自增</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--字符串使用单引号括起来!</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--所有的语句后面加，(英文的)，最后一个不用加</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- PRIMARY KEY 主键，一般- 一个表只有一个唯一 -的主键!</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> school</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`student`</span> (</span><br><span class="line"><span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">&#x27;学号&#x27;</span>,</span><br><span class="line"><span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;匿名&#x27;</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;姓名&#x27;</span>,</span><br><span class="line"><span class="string">`pwd`</span> <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;123456&#x27;</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;密码&#x27;</span>,</span><br><span class="line"><span class="string">`sex`</span> <span class="built_in">VARCHAR</span>(<span class="number">2</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;男&#x27;</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;性别&#x27;</span>,</span><br><span class="line"><span class="string">`birthday`</span> DATETIME <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;出生日期&#x27;</span>,</span><br><span class="line"><span class="string">`address`</span> <span class="built_in">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;家庭住址&#x27;</span>,</span><br><span class="line"><span class="string">`email`</span> <span class="built_in">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;邮箱&#x27;</span>,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">)<span class="keyword">ENGINE</span>=<span class="keyword">INNODB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
 </search>
