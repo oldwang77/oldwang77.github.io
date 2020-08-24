@@ -3,7 +3,66 @@
   <entry>
     <title>Abyss&#39;s resume</title>
     <url>/2020/08/14/Abyss&#39;s%20resume/</url>
-    <content><![CDATA[<h1 id="项目经历"><a href="#项目经历" class="headerlink" title="项目经历"></a>项目经历</h1><ul>
+    <content><![CDATA[<h1 id="学习之路"><a href="#学习之路" class="headerlink" title="学习之路"></a>学习之路</h1><h2 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h2><p>阶段一 JavaSE阶段</p>
+<ul>
+<li><input disabled="" type="checkbox"> Java语言基础</li>
+<li><input disabled="" type="checkbox"> Java容器</li>
+<li><input disabled="" type="checkbox"> Java并发</li>
+<li><input disabled="" type="checkbox"> JVM</li>
+</ul>
+<p>阶段二 前端部分</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> HTML5</li>
+<li><input checked="" disabled="" type="checkbox"> CSS3</li>
+<li><input disabled="" type="checkbox"> JavaScript</li>
+<li><input checked="" disabled="" type="checkbox"> Layui框架</li>
+</ul>
+<p>阶段三 数据库</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> MySQL数据库</li>
+<li><input checked="" disabled="" type="checkbox"> Oracle数据库</li>
+</ul>
+<p>阶段四 JavaWeb开发</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Servlet</li>
+<li><input checked="" disabled="" type="checkbox"> Tomcat</li>
+<li><input checked="" disabled="" type="checkbox"> Maven</li>
+<li><input checked="" disabled="" type="checkbox"> JSP</li>
+<li><input checked="" disabled="" type="checkbox"> MVC三层架构</li>
+<li><input checked="" disabled="" type="checkbox"> 监听器</li>
+<li><input checked="" disabled="" type="checkbox"> 过滤器</li>
+<li><input checked="" disabled="" type="checkbox"> Ajax</li>
+</ul>
+<p>阶段五 SSM框架学习</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Mybatis</li>
+<li><input checked="" disabled="" type="checkbox"> Spring5</li>
+<li><input checked="" disabled="" type="checkbox"> SpringMVC</li>
+<li><input checked="" disabled="" type="checkbox"> SSM框架整合</li>
+</ul>
+<p>阶段六 微服务和Linux运维</p>
+<ul>
+<li><input disabled="" type="checkbox"> Vue入门</li>
+<li><input disabled="" type="checkbox"> SpringBoot</li>
+<li><input disabled="" type="checkbox"> SpringCloud</li>
+<li><input disabled="" type="checkbox"> 开源项目分析</li>
+<li><input disabled="" type="checkbox"> 服务器购买和环境部署</li>
+<li><input disabled="" type="checkbox"> Linux运维</li>
+</ul>
+<p>阶段七 微服务进阶</p>
+<ul>
+<li><input disabled="" type="checkbox"> JUC并发编程</li>
+<li><input disabled="" type="checkbox"> MybatisPlus</li>
+<li><input disabled="" type="checkbox"> Git</li>
+<li><input disabled="" type="checkbox"> Redis</li>
+<li><input disabled="" type="checkbox"> Docker</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><ul>
+<li><input disabled="" type="checkbox"> Pytorch</li>
+</ul>
+<h1 id="项目经历"><a href="#项目经历" class="headerlink" title="项目经历"></a>项目经历</h1><ul>
 <li>大学生自主创新项目“基于电子鼻系统的水果腐败过程的表征方法”（项⽬编号：XYB2018168）2017年5⽉ - 2018年1⽉</li>
 </ul>
 <ol>
@@ -18,8 +77,6 @@
 <li><strong>2017-2018学年三好学生</strong>   南京邮电大学</li>
 <li><strong>2016-2017、2017-2018、2018-2019年 一等奖学金</strong>   南京邮电大学</li>
 </ul>
-<a id="more"></a>
-
 <h2 id="竞赛方面"><a href="#竞赛方面" class="headerlink" title="竞赛方面"></a>竞赛方面</h2><ul>
 <li><p>2019年5月：<strong>第十届中国大学生服务外包创新创业大赛 全国二等奖</strong>    中国大学生服务外包创新创业大赛组委会</p>
 </li>
