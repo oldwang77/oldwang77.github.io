@@ -22,18 +22,21 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="DAO层第二章 梳理所有技术和搭建工程2-1 相关技术介绍 MySQL：表设计-SQL技巧-事务和行级锁 MyBatis: Dao层设计与开发-Mybatis合理使用-MyBatis与Spring整合 Spring：Spring IOC整合Service-声明式事务 SpringMVC：Restful接口的设计和使用-框架运作流程-Controller设计 前端：交互设计-BootStrap-jQ">
+  <meta name="description" content="DAO层第二章 技术和搭建工程2-1 相关技术介绍 MySQL：表设计-SQL技巧-事务和行级锁 MyBatis: Dao层设计与开发-Mybatis合理使用-MyBatis与Spring整合 Spring：Spring IOC整合Service-声明式事务 SpringMVC：Restful接口的设计和使用-框架运作流程-Controller设计 前端：交互设计-BootStrap-jQuery">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于SpringMVC+Spring+Mybatis实现高并发秒杀API">
 <meta property="og:url" content="http://yoursite.com/2020/08/29/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API/index.html">
 <meta property="og:site_name" content="abyss">
-<meta property="og:description" content="DAO层第二章 梳理所有技术和搭建工程2-1 相关技术介绍 MySQL：表设计-SQL技巧-事务和行级锁 MyBatis: Dao层设计与开发-Mybatis合理使用-MyBatis与Spring整合 Spring：Spring IOC整合Service-声明式事务 SpringMVC：Restful接口的设计和使用-框架运作流程-Controller设计 前端：交互设计-BootStrap-jQ">
+<meta property="og:description" content="DAO层第二章 技术和搭建工程2-1 相关技术介绍 MySQL：表设计-SQL技巧-事务和行级锁 MyBatis: Dao层设计与开发-Mybatis合理使用-MyBatis与Spring整合 Spring：Spring IOC整合Service-声明式事务 SpringMVC：Restful接口的设计和使用-框架运作流程-Controller设计 前端：交互设计-BootStrap-jQuery">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200829095054.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200829095812.png">
 <meta property="article:published_time" content="2020-08-29T09:43:24.000Z">
-<meta property="article:modified_time" content="2020-08-29T01:46:55.068Z">
+<meta property="article:modified_time" content="2020-08-29T07:15:35.405Z">
 <meta property="article:author" content="wangfangxin">
 <meta property="article:tag" content="Java开发">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200829095054.png">
 
 
 <link rel="canonical" href="http://yoursite.com/2020/08/29/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API/">
@@ -205,7 +208,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DAO%E5%B1%82"><span class="nav-number">1.</span> <span class="nav-text">DAO层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%A2%B3%E7%90%86%E6%89%80%E6%9C%89%E6%8A%80%E6%9C%AF%E5%92%8C%E6%90%AD%E5%BB%BA%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">第二章 梳理所有技术和搭建工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.1.</span> <span class="nav-text">2-1 相关技术介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%92%8C%E4%BE%9D%E8%B5%96"><span class="nav-number">1.1.2.</span> <span class="nav-text">2-2 创建项目和依赖</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A7%92%E6%9D%80%E4%B8%9A%E5%8A%A1%E5%88%86%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">第三章 秒杀业务分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-Dao%E5%B1%82%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91"><span class="nav-number">1.3.</span> <span class="nav-text">第四章 Dao层设计与开发</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Service%E5%B1%82"><span class="nav-number">2.</span> <span class="nav-text">Service层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web%E5%B1%82"><span class="nav-number">3.</span> <span class="nav-text">web层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">高并发优化</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DAO%E5%B1%82"><span class="nav-number">1.</span> <span class="nav-text">DAO层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%8A%80%E6%9C%AF%E5%92%8C%E6%90%AD%E5%BB%BA%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">第二章 技术和搭建工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.1.</span> <span class="nav-text">2-1 相关技术介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%92%8C%E4%BE%9D%E8%B5%96"><span class="nav-number">1.1.2.</span> <span class="nav-text">2-2 创建项目和依赖</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A7%92%E6%9D%80%E4%B8%9A%E5%8A%A1%E5%88%86%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">第三章 秒杀业务分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%A7%92%E6%9D%80%E4%B8%9A%E5%8A%A1%E5%88%86%E6%9E%90"><span class="nav-number">1.2.1.</span> <span class="nav-text">3-1 秒杀业务分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-MySQL%E5%AE%9E%E7%8E%B0%E7%A7%92%E6%9D%80%E7%9A%84%E9%9A%BE%E7%82%B9"><span class="nav-number">1.2.2.</span> <span class="nav-text">3-2 MySQL实现秒杀的难点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%AE%9E%E7%8E%B0%E5%93%AA%E4%BA%9B%E7%A7%92%E6%9D%80%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.3.</span> <span class="nav-text">3-3 实现哪些秒杀功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-Dao%E5%B1%82%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%BC%80%E5%8F%91"><span class="nav-number">1.3.</span> <span class="nav-text">第四章 Dao层设计与开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E4%B8%8E%E7%BC%96%E7%A0%81"><span class="nav-number">1.4.</span> <span class="nav-text">4-1 数据库设计与编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Dao%E5%AE%9E%E4%BD%93%E5%92%8C%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A0%81"><span class="nav-number">1.5.</span> <span class="nav-text">4-2 Dao实体和接口编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0Dao%E7%90%86%E8%AE%BA"><span class="nav-number">1.6.</span> <span class="nav-text">4-3 基于MyBatis实现Dao理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E5%9F%BA%E4%BA%8EMyBatis%E5%AE%9E%E7%8E%B0Dao%E7%BC%96%E7%A8%8B"><span class="nav-number">1.7.</span> <span class="nav-text">4-4 基于MyBatis实现Dao编程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Service%E5%B1%82"><span class="nav-number">2.</span> <span class="nav-text">Service层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web%E5%B1%82"><span class="nav-number">3.</span> <span class="nav-text">web层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">高并发优化</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -311,7 +314,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-08-29 09:43:24 / 修改时间：01:46:55" itemprop="dateCreated datePublished" datetime="2020-08-29T09:43:24Z">2020-08-29</time>
+              <time title="创建时间：2020-08-29 09:43:24 / 修改时间：07:15:35" itemprop="dateCreated datePublished" datetime="2020-08-29T09:43:24Z">2020-08-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -336,7 +339,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>444</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -353,7 +356,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="DAO层"><a href="#DAO层" class="headerlink" title="DAO层"></a>DAO层</h1><h2 id="第二章-梳理所有技术和搭建工程"><a href="#第二章-梳理所有技术和搭建工程" class="headerlink" title="第二章 梳理所有技术和搭建工程"></a>第二章 梳理所有技术和搭建工程</h2><h3 id="2-1-相关技术介绍"><a href="#2-1-相关技术介绍" class="headerlink" title="2-1 相关技术介绍"></a>2-1 相关技术介绍</h3><ul>
+        <h1 id="DAO层"><a href="#DAO层" class="headerlink" title="DAO层"></a>DAO层</h1><h2 id="第二章-技术和搭建工程"><a href="#第二章-技术和搭建工程" class="headerlink" title="第二章 技术和搭建工程"></a>第二章 技术和搭建工程</h2><h3 id="2-1-相关技术介绍"><a href="#2-1-相关技术介绍" class="headerlink" title="2-1 相关技术介绍"></a>2-1 相关技术介绍</h3><ul>
 <li>MySQL：表设计-SQL技巧-事务和行级锁</li>
 <li>MyBatis: Dao层设计与开发-Mybatis合理使用-MyBatis与Spring整合</li>
 <li>Spring：Spring IOC整合Service-声明式事务</li>
@@ -365,7 +368,46 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate -DgroupId=com.lewis.seckill -DartifactId=seckill -Dpackage=com.lewis.seckill -Dversion=1.0-SNAPSHOT -DarchetypeArtifactId=maven-archetype-webapp</span><br></pre></td></tr></table></figure>
 
 <p>添加依赖pom.xml</p>
-<h2 id="第三章-秒杀业务分析"><a href="#第三章-秒杀业务分析" class="headerlink" title="第三章 秒杀业务分析"></a>第三章 秒杀业务分析</h2><h2 id="第四章-Dao层设计与开发"><a href="#第四章-Dao层设计与开发" class="headerlink" title="第四章 Dao层设计与开发"></a>第四章 Dao层设计与开发</h2><h1 id="Service层"><a href="#Service层" class="headerlink" title="Service层"></a>Service层</h1><h1 id="web层"><a href="#web层" class="headerlink" title="web层"></a>web层</h1><h1 id="高并发优化"><a href="#高并发优化" class="headerlink" title="高并发优化"></a>高并发优化</h1>
+<more>
+
+<h2 id="第三章-秒杀业务分析"><a href="#第三章-秒杀业务分析" class="headerlink" title="第三章 秒杀业务分析"></a>第三章 秒杀业务分析</h2><h3 id="3-1-秒杀业务分析"><a href="#3-1-秒杀业务分析" class="headerlink" title="3-1 秒杀业务分析"></a>3-1 秒杀业务分析</h3><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200829095054.png" alt="image-20200829095052830"></p>
+<p>有<strong>MySQL与NoSQL</strong>两种数据落地的方案</p>
+<ul>
+<li>MySQL属于关系型数据库，而MySQL内置的事务机制来可以准确的帮我们完成减库存和记录购买明细的过程。MySQL有多种存储引擎，但只有InnoDB存储引擎支持事务。InnoDB支持行级锁和表级锁，默认使用行级锁</li>
+<li>NoSQL属于非关系型数据库，近些年来在数据存储方面承担了很大的职责，<strong>但是对于事务的支持做的并不是很好</strong>，更多追求的是性能、高复用、分布式。</li>
+</ul>
+<p><strong>事务机制</strong>依然是目前最可靠的数据落地方案，我们这里还是选用mysql。</p>
+<blockquote>
+<p>数据落地是什么意思</p>
+</blockquote>
+<ul>
+<li><strong>落地数据</strong>：就是被持久化的数据，这种数据一般放在硬盘或是其他的持久化存储设备里，例如：图片、系统日志、在页面上显示的数据以及保存在关系数据库里的数据等等，落地数据一定会有一个固定的载体，他们不会瞬时消失的。</li>
+<li><strong>不落地数据</strong>：一般指存储在内存或者是网络传输里的数据，这些数据是瞬时，使用完毕就会消失，例如：我们在浏览器发送给服务器的请求；从数据库读取出来的一直到页面展示前的数据等等。</li>
+<li>“不落地”传输能够满足用户在性能上的要求。</li>
+</ul>
+<h3 id="3-2-MySQL实现秒杀的难点"><a href="#3-2-MySQL实现秒杀的难点" class="headerlink" title="3-2 MySQL实现秒杀的难点"></a>3-2 MySQL实现秒杀的难点</h3><blockquote>
+<p>难点在于如何处理竞争</p>
+</blockquote>
+<p>​        当一个用户在执行秒杀某件商品时，其他也想要秒杀该商品的用户就只能等待，直到上一个用户提交或回滚了事务，他才能够得到该商品的锁执行秒杀操作。这里就涉及到了锁的竞争。</p>
+<p>对于MySQL来说，竞争反应到背后的技术是就是事务+行级锁：</p>
+<p>start transaction（开启事务）→ <strong>update库存数量</strong> → insert购买明细 → commit（提交事务）</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200829095812.png" alt="image-20200829095811431"></p>
+<p>​    在秒杀系统中，在同一时刻会有很多用户在秒杀同一件商品，那么如何高效低处理这些竞争？如何高效地提交事务？这些将在后面进行讲解</p>
+<h3 id="3-3-实现哪些秒杀功能"><a href="#3-3-实现哪些秒杀功能" class="headerlink" title="3-3 实现哪些秒杀功能"></a>3-3 实现哪些秒杀功能</h3><p>我们只实现秒杀相关的功能</p>
+<ul>
+<li>秒杀接口暴露</li>
+<li>执行秒杀</li>
+<li>相关查询</li>
+</ul>
+<blockquote>
+<p>为什么需要进行秒杀接口暴露</p>
+</blockquote>
+<p>​        现实中有的用户回通过浏览器插件提前知道秒杀接口，填入参数和地址来实现自动秒杀，这对于其他用户来说是不公平的，我们也不希望看到这种情况</p>
+<h2 id="第四章-Dao层设计与开发"><a href="#第四章-Dao层设计与开发" class="headerlink" title="第四章 Dao层设计与开发"></a>第四章 Dao层设计与开发</h2><h2 id="4-1-数据库设计与编码"><a href="#4-1-数据库设计与编码" class="headerlink" title="4-1 数据库设计与编码"></a>4-1 数据库设计与编码</h2><p>在mysql中，我们可以通过</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> seckill\G</span><br></pre></td></tr></table></figure>
+
+<p>来显示我们创建这个表的代码</p>
+<h2 id="4-2-Dao实体和接口编码"><a href="#4-2-Dao实体和接口编码" class="headerlink" title="4-2 Dao实体和接口编码"></a>4-2 Dao实体和接口编码</h2><h2 id="4-3-基于MyBatis实现Dao理论"><a href="#4-3-基于MyBatis实现Dao理论" class="headerlink" title="4-3 基于MyBatis实现Dao理论"></a>4-3 基于MyBatis实现Dao理论</h2><h2 id="4-4-基于MyBatis实现Dao编程"><a href="#4-4-基于MyBatis实现Dao编程" class="headerlink" title="4-4 基于MyBatis实现Dao编程"></a>4-4 基于MyBatis实现Dao编程</h2><h1 id="Service层"><a href="#Service层" class="headerlink" title="Service层"></a>Service层</h1><h1 id="web层"><a href="#web层" class="headerlink" title="web层"></a>web层</h1><h1 id="高并发优化"><a href="#高并发优化" class="headerlink" title="高并发优化"></a>高并发优化</h1>
     </div>
 
     
@@ -468,13 +510,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">14k</span>
+    <span title="站点总字数">15k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">13 分钟</span>
+    <span title="站点阅读时长">14 分钟</span>
 </div>
 
       
