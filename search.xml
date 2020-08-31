@@ -516,12 +516,42 @@
 <p>来显示我们创建这个表的代码</p>
 <h3 id="4-2-Dao实体和接口编码"><a href="#4-2-Dao实体和接口编码" class="headerlink" title="4-2 Dao实体和接口编码"></a>4-2 Dao实体和接口编码</h3><h3 id="4-3-基于MyBatis实现Dao理论"><a href="#4-3-基于MyBatis实现Dao理论" class="headerlink" title="4-3 基于MyBatis实现Dao理论"></a>4-3 基于MyBatis实现Dao理论</h3><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200829154204.png" alt="image-20200829154202835"></p>
 <p>​    mybatis做的就是建立数据库和实体对象之间的映射关系</p>
-<h3 id="4-4-基于MyBatis实现Dao编程"><a href="#4-4-基于MyBatis实现Dao编程" class="headerlink" title="4-4 基于MyBatis实现Dao编程"></a>4-4 基于MyBatis实现Dao编程</h3><h1 id="Service层"><a href="#Service层" class="headerlink" title="Service层"></a>Service层</h1><h1 id="web层"><a href="#web层" class="headerlink" title="web层"></a>web层</h1><h1 id="高并发优化"><a href="#高并发优化" class="headerlink" title="高并发优化"></a>高并发优化</h1>]]></content>
+<h3 id="4-4-基于MyBatis实现Dao编程"><a href="#4-4-基于MyBatis实现Dao编程" class="headerlink" title="4-4 基于MyBatis实现Dao编程"></a>4-4 基于MyBatis实现Dao编程</h3><p>mybatis相对于其他一些类似框架的优势在于，他能够更加自由的控制sql语句</p>
+<h3 id="4-6-MyBatis整合Spring理论"><a href="#4-6-MyBatis整合Spring理论" class="headerlink" title="4-6 MyBatis整合Spring理论"></a>4-6 MyBatis整合Spring理论</h3><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200830172207.png" alt="image-20200830172205544"></p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200830172257.png" alt="image-20200830172255520"></p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200830172423.png" alt="image-20200830172421341"></p>
+<h1 id="Service层"><a href="#Service层" class="headerlink" title="Service层"></a>Service层</h1><h1 id="web层"><a href="#web层" class="headerlink" title="web层"></a>web层</h1><h1 id="高并发优化"><a href="#高并发优化" class="headerlink" title="高并发优化"></a>高并发优化</h1>]]></content>
       <categories>
         <category>项目开发</category>
       </categories>
       <tags>
         <tag>Java开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>苏州值得一吃的地方</title>
+    <url>/2020/08/29/%E8%8B%8F%E5%B7%9E%E5%80%BC%E5%BE%97%E4%B8%80%E5%90%83%E7%9A%84%E5%9C%B0%E6%96%B9/</url>
+    <content><![CDATA[<p>之前去苏州游玩了一圈，记一下值得去吃的几个地方。</p>
+<ul>
+<li>珊味蔬屋</li>
+<li>弄堂里</li>
+<li>方老大</li>
+<li>江南春</li>
+<li>知味观</li>
+<li>烤乐（面包）</li>
+</ul>
+<p>还有几个比较好玩的地方。</p>
+<ul>
+<li>湿地公园</li>
+<li>和创园</li>
+<li>垃圾街</li>
+</ul>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>旅游</tag>
       </tags>
   </entry>
 </search>
