@@ -461,6 +461,8 @@
 <p>entity：用于业务数据的封装，比如数据库中的数据。</p>
 <h3 id="1-3-秒杀Service接口实现"><a href="#1-3-秒杀Service接口实现" class="headerlink" title="1-3 秒杀Service接口实现"></a>1-3 秒杀Service接口实现</h3><p>里面有一个枚举数据类型</p>
 <h2 id="第2章-基于Spring托管Service实现类"><a href="#第2章-基于Spring托管Service实现类" class="headerlink" title="第2章 基于Spring托管Service实现类"></a>第2章 基于Spring托管Service实现类</h2><h3 id="2-1-使用Spring托管Service依赖理论"><a href="#2-1-使用Spring托管Service依赖理论" class="headerlink" title="2-1 使用Spring托管Service依赖理论"></a>2-1 使用Spring托管Service依赖理论</h3><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904204953.png" alt="image-20200904204952610"></p>
+<a id="more"></a>
+
 <p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205132.png" alt="image-20200904205131786"></p>
 <p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205301.png" alt="image-20200904205259937"></p>
 <p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205513.png" alt="image-20200904205512546"></p>
@@ -490,6 +492,8 @@
     <content><![CDATA[<h1 id="一-设计Restful接口"><a href="#一-设计Restful接口" class="headerlink" title="一 设计Restful接口"></a>一 设计Restful接口</h1><h2 id="1-1-前端交互设计"><a href="#1-1-前端交互设计" class="headerlink" title="1-1 前端交互设计"></a>1-1 前端交互设计</h2><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906195729.png" alt="image-20200906195722487"></p>
 <p>详情页的设计</p>
 <p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906195938.png" alt="image-20200906195936465"></p>
+<a id="more"></a>
+
 <h2 id="2-1-Restful接口设计"><a href="#2-1-Restful接口设计" class="headerlink" title="2-1 Restful接口设计"></a>2-1 Restful接口设计</h2><p>Restful是一种优雅的url的表述方式</p>
 <p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906200614.png" alt="image-20200906200613779"></p>
 <p>restful设计的接口</p>
@@ -510,6 +514,8 @@
 <h2 id="2-2-整合SpringMVC框架"><a href="#2-2-整合SpringMVC框架" class="headerlink" title="2-2 整合SpringMVC框架"></a>2-2 整合SpringMVC框架</h2><h1 id="三-实现秒杀相关的Restful接口"><a href="#三-实现秒杀相关的Restful接口" class="headerlink" title="三 实现秒杀相关的Restful接口"></a>三 实现秒杀相关的Restful接口</h1><h1 id="四-基于bootstrap开发页面结构"><a href="#四-基于bootstrap开发页面结构" class="headerlink" title="四 基于bootstrap开发页面结构"></a>四 基于bootstrap开发页面结构</h1><h1 id="五-交互逻辑编程"><a href="#五-交互逻辑编程" class="headerlink" title="五 交互逻辑编程"></a>五 交互逻辑编程</h1><h2 id="5-1-cookie登陆交互"><a href="#5-1-cookie登陆交互" class="headerlink" title="5-1 cookie登陆交互"></a>5-1 cookie登陆交互</h2><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200907214937.png" alt="image-20200907214936580"></p>
 <h2 id="5-3-记时交互"><a href="#5-3-记时交互" class="headerlink" title="5-3 记时交互"></a>5-3 记时交互</h2><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200908191640.png" alt="image-20200908191639348"></p>
 <h2 id="5-4-秒杀交互"><a href="#5-4-秒杀交互" class="headerlink" title="5-4 秒杀交互"></a>5-4 秒杀交互</h2><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200908203629.png" alt="image-20200908203628347"></p>
-<h1 id="六-测试部署web接口"><a href="#六-测试部署web接口" class="headerlink" title="六 测试部署web接口"></a>六 测试部署web接口</h1>]]></content>
+<h1 id="六-测试部署web接口"><a href="#六-测试部署web接口" class="headerlink" title="六 测试部署web接口"></a>六 测试部署web接口</h1><h2 id="6-1-web层课程总结"><a href="#6-1-web层课程总结" class="headerlink" title="6-1 web层课程总结"></a>6-1 web层课程总结</h2><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200908204400.png" alt="image-20200908204359562"></p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200908204659.png" alt="image-20200908204658163"></p>
+]]></content>
   </entry>
 </search>
