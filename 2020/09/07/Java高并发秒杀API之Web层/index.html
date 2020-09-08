@@ -22,28 +22,35 @@
     var CONFIG = {"hostname":"www.wangfx.site","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="第1章 秒杀业务接口设计与实现1-1 开发前的说明1-2 Service接口设计DTO数据传输层：用于Web层和Service层之间传递的数据封装。 entity：用于业务数据的封装，比如数据库中的数据。 1-3 秒杀Service接口实现里面有一个枚举数据类型 第2章 基于Spring托管Service实现类2-1 使用Spring托管Service依赖理论">
+  <meta name="description" content="一 设计Restful接口1-1 前端交互设计 详情页的设计  2-1 Restful接口设计Restful是一种优雅的url的表述方式  restful设计的接口">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java高并发秒杀API之Service层">
-<meta property="og:url" content="https://www.wangfx.site/2020/09/02/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BService%E5%B1%82/index.html">
+<meta property="og:title" content="Java高并发秒杀API之Web层">
+<meta property="og:url" content="https://www.wangfx.site/2020/09/07/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BWeb%E5%B1%82/index.html">
 <meta property="og:site_name" content="abyss">
-<meta property="og:description" content="第1章 秒杀业务接口设计与实现1-1 开发前的说明1-2 Service接口设计DTO数据传输层：用于Web层和Service层之间传递的数据封装。 entity：用于业务数据的封装，比如数据库中的数据。 1-3 秒杀Service接口实现里面有一个枚举数据类型 第2章 基于Spring托管Service实现类2-1 使用Spring托管Service依赖理论">
+<meta property="og:description" content="一 设计Restful接口1-1 前端交互设计 详情页的设计  2-1 Restful接口设计Restful是一种优雅的url的表述方式  restful设计的接口">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904204953.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205132.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205301.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205513.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205709.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904212301.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904212542.png">
-<meta property="article:published_time" content="2020-09-02T10:10:09.000Z">
-<meta property="article:modified_time" content="2020-09-06T11:48:06.138Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906195729.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906195938.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906200614.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906201127.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906201324.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906201354.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906202600.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906204245.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906204415.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906204549.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906204613.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200907214937.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200908191640.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200908203629.png">
+<meta property="article:published_time" content="2020-09-06T19:52:20.000Z">
+<meta property="article:modified_time" content="2020-09-08T12:40:21.796Z">
 <meta property="article:author" content="wangfangxin">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904204953.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906195729.png">
 
 
-<link rel="canonical" href="https://www.wangfx.site/2020/09/02/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BService%E5%B1%82/">
+<link rel="canonical" href="https://www.wangfx.site/2020/09/07/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BWeb%E5%B1%82/">
 
 
 <script class="page-configurations">
@@ -56,7 +63,7 @@
   };
 </script>
 
-  <title>Java高并发秒杀API之Service层 | abyss</title>
+  <title>Java高并发秒杀API之Web层 | abyss</title>
   
 
 
@@ -212,7 +219,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC1%E7%AB%A0-%E7%A7%92%E6%9D%80%E4%B8%9A%E5%8A%A1%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">第1章 秒杀业务接口设计与实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%BC%80%E5%8F%91%E5%89%8D%E7%9A%84%E8%AF%B4%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">1-1 开发前的说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Service%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.2.</span> <span class="nav-text">1-2 Service接口设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E7%A7%92%E6%9D%80Service%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.</span> <span class="nav-text">1-3 秒杀Service接口实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC2%E7%AB%A0-%E5%9F%BA%E4%BA%8ESpring%E6%89%98%E7%AE%A1Service%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">第2章 基于Spring托管Service实现类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E4%BD%BF%E7%94%A8Spring%E6%89%98%E7%AE%A1Service%E4%BE%9D%E8%B5%96%E7%90%86%E8%AE%BA"><span class="nav-number">2.1.</span> <span class="nav-text">2-1 使用Spring托管Service依赖理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E4%BD%BF%E7%94%A8Spring%E6%89%98%E7%AE%A1service%E4%BE%9D%E8%B5%96%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">2-2 使用Spring托管service依赖配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC3%E7%AB%A0-%E9%85%8D%E7%BD%AE%E5%B9%B6%E4%BD%BF%E7%94%A8spring%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="nav-number">3.</span> <span class="nav-text">第3章 配置并使用spring声明式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E4%BD%BF%E7%94%A8Spring%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%90%86%E8%AE%BA"><span class="nav-number">3.1.</span> <span class="nav-text">3-1 使用Spring声明式事务理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E4%BD%BF%E7%94%A8Spring%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">3-2 使用Spring声明式事务配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC4%E7%AB%A0-%E5%AE%8C%E6%88%90Service%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">第4章 完成Service集成测试</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E8%AE%BE%E8%AE%A1Restful%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.</span> <span class="nav-text">一 设计Restful接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%89%8D%E7%AB%AF%E4%BA%A4%E4%BA%92%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.1.</span> <span class="nav-text">1-1 前端交互设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Restful%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.2.</span> <span class="nav-text">2-1 Restful接口设计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-SpringMVC%E6%95%B4%E5%90%88Spring"><span class="nav-number">2.</span> <span class="nav-text">二 SpringMVC整合Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E4%BD%BF%E7%94%A8SpringMVC%E7%90%86%E8%AE%BA"><span class="nav-number">2.1.</span> <span class="nav-text">2-1 使用SpringMVC理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%95%B4%E5%90%88SpringMVC%E6%A1%86%E6%9E%B6"><span class="nav-number">2.2.</span> <span class="nav-text">2-2 整合SpringMVC框架</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-%E5%AE%9E%E7%8E%B0%E7%A7%92%E6%9D%80%E7%9B%B8%E5%85%B3%E7%9A%84Restful%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.</span> <span class="nav-text">三 实现秒杀相关的Restful接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B-%E5%9F%BA%E4%BA%8Ebootstrap%E5%BC%80%E5%8F%91%E9%A1%B5%E9%9D%A2%E7%BB%93%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">四 基于bootstrap开发页面结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94-%E4%BA%A4%E4%BA%92%E9%80%BB%E8%BE%91%E7%BC%96%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">五 交互逻辑编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-cookie%E7%99%BB%E9%99%86%E4%BA%A4%E4%BA%92"><span class="nav-number">5.1.</span> <span class="nav-text">5-1 cookie登陆交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-%E8%AE%B0%E6%97%B6%E4%BA%A4%E4%BA%92"><span class="nav-number">5.2.</span> <span class="nav-text">5-3 记时交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-%E7%A7%92%E6%9D%80%E4%BA%A4%E4%BA%92"><span class="nav-number">5.3.</span> <span class="nav-text">5-4 秒杀交互</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD-%E6%B5%8B%E8%AF%95%E9%83%A8%E7%BD%B2web%E6%8E%A5%E5%8F%A3"><span class="nav-number">6.</span> <span class="nav-text">六 测试部署web接口</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -291,7 +298,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/09/02/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BService%E5%B1%82/">
+    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/09/07/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BWeb%E5%B1%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -307,7 +314,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Java高并发秒杀API之Service层
+          Java高并发秒杀API之Web层
         </h1>
 
         <div class="post-meta">
@@ -317,14 +324,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-09-02 10:10:09" itemprop="dateCreated datePublished" datetime="2020-09-02T10:10:09Z">2020-09-02</time>
+              <time title="创建时间：2020-09-06 19:52:20" itemprop="dateCreated datePublished" datetime="2020-09-06T19:52:20Z">2020-09-06</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-06 11:48:06" itemprop="dateModified" datetime="2020-09-06T11:48:06Z">2020-09-06</time>
+                <time title="修改时间：2020-09-08 12:40:21" itemprop="dateModified" datetime="2020-09-08T12:40:21Z">2020-09-08</time>
               </span>
 
           
@@ -340,7 +347,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>323</span>
+              <span>514</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -357,19 +364,30 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="第1章-秒杀业务接口设计与实现"><a href="#第1章-秒杀业务接口设计与实现" class="headerlink" title="第1章 秒杀业务接口设计与实现"></a>第1章 秒杀业务接口设计与实现</h2><h3 id="1-1-开发前的说明"><a href="#1-1-开发前的说明" class="headerlink" title="1-1 开发前的说明"></a>1-1 开发前的说明</h3><h3 id="1-2-Service接口设计"><a href="#1-2-Service接口设计" class="headerlink" title="1-2 Service接口设计"></a>1-2 Service接口设计</h3><p>DTO数据传输层：用于Web层和Service层之间传递的数据封装。</p>
-<p>entity：用于业务数据的封装，比如数据库中的数据。</p>
-<h3 id="1-3-秒杀Service接口实现"><a href="#1-3-秒杀Service接口实现" class="headerlink" title="1-3 秒杀Service接口实现"></a>1-3 秒杀Service接口实现</h3><p>里面有一个枚举数据类型</p>
-<h2 id="第2章-基于Spring托管Service实现类"><a href="#第2章-基于Spring托管Service实现类" class="headerlink" title="第2章 基于Spring托管Service实现类"></a>第2章 基于Spring托管Service实现类</h2><h3 id="2-1-使用Spring托管Service依赖理论"><a href="#2-1-使用Spring托管Service依赖理论" class="headerlink" title="2-1 使用Spring托管Service依赖理论"></a>2-1 使用Spring托管Service依赖理论</h3><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904204953.png" alt="image-20200904204952610"></p>
-<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205132.png" alt="image-20200904205131786"></p>
-<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205301.png" alt="image-20200904205259937"></p>
-<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205513.png" alt="image-20200904205512546"></p>
-<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205709.png" alt="image-20200904205708497"></p>
-<h3 id="2-2-使用Spring托管service依赖配置"><a href="#2-2-使用Spring托管service依赖配置" class="headerlink" title="2-2 使用Spring托管service依赖配置"></a>2-2 使用Spring托管service依赖配置</h3><h2 id="第3章-配置并使用spring声明式事务"><a href="#第3章-配置并使用spring声明式事务" class="headerlink" title="第3章 配置并使用spring声明式事务"></a>第3章 配置并使用spring声明式事务</h2><h3 id="3-1-使用Spring声明式事务理论"><a href="#3-1-使用Spring声明式事务理论" class="headerlink" title="3-1 使用Spring声明式事务理论"></a>3-1 使用Spring声明式事务理论</h3><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904212301.png" alt="image-20200904212300228"></p>
-<p>​    将开启事务，事务的提交，回滚等交给Spring去做</p>
-<p>​    <img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904212542.png" alt="image-20200904212539823"></p>
-<p><strong>声明式事务独有的概念，和mysql事务无关，事务方法的嵌套</strong></p>
-<h3 id="3-2-使用Spring声明式事务配置"><a href="#3-2-使用Spring声明式事务配置" class="headerlink" title="3-2 使用Spring声明式事务配置"></a>3-2 使用Spring声明式事务配置</h3><h2 id="第4章-完成Service集成测试"><a href="#第4章-完成Service集成测试" class="headerlink" title="第4章 完成Service集成测试"></a>第4章 完成Service集成测试</h2>
+        <h1 id="一-设计Restful接口"><a href="#一-设计Restful接口" class="headerlink" title="一 设计Restful接口"></a>一 设计Restful接口</h1><h2 id="1-1-前端交互设计"><a href="#1-1-前端交互设计" class="headerlink" title="1-1 前端交互设计"></a>1-1 前端交互设计</h2><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906195729.png" alt="image-20200906195722487"></p>
+<p>详情页的设计</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906195938.png" alt="image-20200906195936465"></p>
+<h2 id="2-1-Restful接口设计"><a href="#2-1-Restful接口设计" class="headerlink" title="2-1 Restful接口设计"></a>2-1 Restful接口设计</h2><p>Restful是一种优雅的url的表述方式</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906200614.png" alt="image-20200906200613779"></p>
+<p>restful设计的接口</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906201127.png" alt="image-20200906201126139"></p>
+<h1 id="二-SpringMVC整合Spring"><a href="#二-SpringMVC整合Spring" class="headerlink" title="二 SpringMVC整合Spring"></a>二 SpringMVC整合Spring</h1><h2 id="2-1-使用SpringMVC理论"><a href="#2-1-使用SpringMVC理论" class="headerlink" title="2-1 使用SpringMVC理论"></a>2-1 使用SpringMVC理论</h2><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906201324.png" alt="image-20200906201323020"></p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906201354.png" alt="image-20200906201353200"></p>
+<p>1 DispatcherServlet：中央控制器，他会拦截所有的url，可以理解为是一个servlet分发器</p>
+<p>2 DefaultAnnotation HandlerMapping：默认的映射器，主要作用就是映射url，我们每一个url对应到具体的handler。</p>
+<p>3 DefaultAnnotation HandlerAdapter：默认的适配器，主要作用就是做handler适配 ，按照它要求的规则去执行 Handler</p>
+<p>6 InternalResource ViewResolver：会将Model和list.jsp结合起来返回给用户</p>
+<p>7 Model：可以理解为map，用来传递参数</p>
+<p>我们实际开发过程，只需要开发蓝色部分，其他部分可以通过注解实现</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906202600.png" alt="image-20200906202559939"></p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906204245.png" alt="image-20200906204243962"></p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906204415.png" alt="image-20200906204352148"></p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906204549.png" alt="image-20200906204548925"></p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200906204613.png" alt="image-20200906204611674"></p>
+<h2 id="2-2-整合SpringMVC框架"><a href="#2-2-整合SpringMVC框架" class="headerlink" title="2-2 整合SpringMVC框架"></a>2-2 整合SpringMVC框架</h2><h1 id="三-实现秒杀相关的Restful接口"><a href="#三-实现秒杀相关的Restful接口" class="headerlink" title="三 实现秒杀相关的Restful接口"></a>三 实现秒杀相关的Restful接口</h1><h1 id="四-基于bootstrap开发页面结构"><a href="#四-基于bootstrap开发页面结构" class="headerlink" title="四 基于bootstrap开发页面结构"></a>四 基于bootstrap开发页面结构</h1><h1 id="五-交互逻辑编程"><a href="#五-交互逻辑编程" class="headerlink" title="五 交互逻辑编程"></a>五 交互逻辑编程</h1><h2 id="5-1-cookie登陆交互"><a href="#5-1-cookie登陆交互" class="headerlink" title="5-1 cookie登陆交互"></a>5-1 cookie登陆交互</h2><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200907214937.png" alt="image-20200907214936580"></p>
+<h2 id="5-3-记时交互"><a href="#5-3-记时交互" class="headerlink" title="5-3 记时交互"></a>5-3 记时交互</h2><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200908191640.png" alt="image-20200908191639348"></p>
+<h2 id="5-4-秒杀交互"><a href="#5-4-秒杀交互" class="headerlink" title="5-4 秒杀交互"></a>5-4 秒杀交互</h2><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200908203629.png" alt="image-20200908203628347"></p>
+<h1 id="六-测试部署web接口"><a href="#六-测试部署web接口" class="headerlink" title="六 测试部署web接口"></a>六 测试部署web接口</h1>
     </div>
 
     
@@ -386,7 +404,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.wangfx.site/2020/09/02/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BService%E5%B1%82/" title="Java高并发秒杀API之Service层">https://www.wangfx.site/2020/09/02/Java高并发秒杀API之Service层/</a>
+    <a href="https://www.wangfx.site/2020/09/07/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BWeb%E5%B1%82/" title="Java高并发秒杀API之Web层">https://www.wangfx.site/2020/09/07/Java高并发秒杀API之Web层/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -401,14 +419,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/08/31/%E8%8B%8F%E5%B7%9E%E5%80%BC%E5%BE%97%E4%B8%80%E5%90%83%E7%9A%84%E5%9C%B0%E6%96%B9/" rel="prev" title="苏州值得一吃的地方">
-                  <i class="fa fa-chevron-left"></i> 苏州值得一吃的地方
+                <a href="/2020/09/05/%E5%89%91%E6%8C%87Offer%E7%9B%B4%E9%80%9A%E8%BD%A6/" rel="prev" title="剑指Offer直通车">
+                  <i class="fa fa-chevron-left"></i> 剑指Offer直通车
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/09/05/%E5%89%91%E6%8C%87Offer%E7%9B%B4%E9%80%9A%E8%BD%A6/" rel="next" title="剑指Offer直通车">
-                  剑指Offer直通车 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>
