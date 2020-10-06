@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.wangfx.site","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="作者：人菜就要多学习链接：https:&#x2F;&#x2F;www.nowcoder.com&#x2F;discuss&#x2F;532896?type&#x3D;0&amp;order&#x3D;7&amp;pos&#x3D;6&amp;page&#x3D;1&amp;channel&#x3D;1009&amp;source_id&#x3D;discuss_center_0来源：牛客网 背景介绍本科东北某985机械专业，研究生武汉某985计算机专业，勉勉强强算半个科班？无实习、无项目、无计算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="abyss">
+<meta property="og:url" content="https://www.wangfx.site/2018/10/23/%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="abyss">
+<meta property="og:description" content="作者：人菜就要多学习链接：https:&#x2F;&#x2F;www.nowcoder.com&#x2F;discuss&#x2F;532896?type&#x3D;0&amp;order&#x3D;7&amp;pos&#x3D;6&amp;page&#x3D;1&amp;channel&#x3D;1009&amp;source_id&#x3D;discuss_center_0来源：牛客网 背景介绍本科东北某985机械专业，研究生武汉某985计算机专业，勉勉强强算半个科班？无实习、无项目、无计算">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-10-22T16:11:18.000Z">
+<meta property="article:modified_time" content="2020-10-05T12:23:16.510Z">
+<meta property="article:author" content="wangfangxin">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.wangfx.site/2018/10/23/%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | abyss</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">abyss</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">On the road.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">19</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">背景介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E4%B9%A0%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">复习准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%9A%E5%89%91%E6%8C%87offer-LeetCode"><span class="nav-number">2.1.</span> <span class="nav-text">数据结构与算法：剑指offer+LeetCode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-Linux%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">操作系统+Linux：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="nav-number">2.3.</span> <span class="nav-text">计算机网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%9F%BA%E7%A1%80-JavaWeb-SSM-SpringBoot"><span class="nav-number">2.4.</span> <span class="nav-text">Java基础+JavaWeb+SSM+SpringBoot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93MySQL"><span class="nav-number">2.5.</span> <span class="nav-text">数据库MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM"><span class="nav-number">2.6.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91"><span class="nav-number">2.7.</span> <span class="nav-text">多线程并发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E7%BC%93%E5%AD%98%E5%92%8CMQ%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-number">2.8.</span> <span class="nav-text">Redis缓存和MQ消息队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.9.</span> <span class="nav-text">项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%8B%E6%8B%9B%E9%9D%A2%E7%BB%8F"><span class="nav-number">3.</span> <span class="nav-text">秋招面经</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E6%8F%90%E5%89%8D%E6%89%B9%EF%BC%88%E4%B8%89%E8%BD%AE%E6%8A%80%E6%9C%AF%E9%9D%A2%EF%BC%8Coffer%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">字节跳动提前批（三轮技术面，offer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%9B%E9%93%B6%E7%BD%91%E7%BB%9C%E6%8F%90%E5%89%8D%E6%89%B9%EF%BC%88%E4%B8%89%E8%BD%AE%E6%8A%80%E6%9C%AF%E9%9D%A2%EF%BC%8C%E6%8C%82%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">招银网络提前批（三轮技术面，挂）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E5%85%B4%E4%BC%98%E6%8B%9B%EF%BC%88%E4%B8%A4%E8%BD%AE%E6%8A%80%E6%9C%AF%E9%9D%A2%EF%BC%8C%E6%B5%8B%E8%AF%84%E6%8C%82%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">中兴优招（两轮技术面，测评挂）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%AC%E4%B8%9C%E6%8F%90%E5%89%8D%E6%89%B9%EF%BC%88%E4%B8%A4%E8%BD%AE%E6%8A%80%E6%9C%AF%E3%80%81%E4%B8%80%E8%BD%AEHR%EF%BC%8Coffer%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">京东提前批（两轮技术、一轮HR，offer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%9B%E8%A1%8C%E6%80%BB%E8%A1%8C%E6%8F%90%E5%89%8D%E6%89%B9%EF%BC%88%E4%B8%80%E8%BD%AE%E6%8A%80%E6%9C%AF%EF%BC%8C%E4%B8%80%E8%BD%AE%E7%BB%BC%E5%90%88%EF%BC%8Coffer%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">招行总行提前批（一轮技术，一轮综合，offer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E6%B5%AA%E5%BE%AE%E5%8D%9A%E6%8F%90%E5%89%8D%E6%89%B9%EF%BC%88%E4%B8%A4%E8%BD%AE%E6%8A%80%E6%9C%AF%EF%BC%8C%E6%B3%A1%E6%B1%A0%E5%AD%90%E4%B8%AD%EF%BC%89"><span class="nav-number">3.6.</span> <span class="nav-text">新浪微博提前批（两轮技术，泡池子中）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OPPO%E6%8F%90%E5%89%8D%E6%89%B9%EF%BC%88%E4%B8%A4%E8%BD%AE%E6%8A%80%E6%9C%AF%E3%80%81%E4%B8%80%E8%BD%AEHR%EF%BC%8Coffer%EF%BC%89"><span class="nav-number">3.7.</span> <span class="nav-text">OPPO提前批（两轮技术、一轮HR，offer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BE%E5%BA%A6%E6%8F%90%E5%89%8D%E6%89%B9%EF%BC%88%E4%B8%89%E8%BD%AE%E6%8A%80%E6%9C%AF-%E4%B8%80%E8%BD%AE%E7%BB%BC%E5%90%88%E9%9D%A2%EF%BC%8Coffer%EF%BC%89"><span class="nav-number">3.8.</span> <span class="nav-text">百度提前批（三轮技术+一轮综合面，offer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8C%BF%E8%BE%85%E5%AF%BC%EF%BC%88%E4%B8%80%E9%9D%A2%E6%8C%82%EF%BC%8C%E5%85%A8%E7%A8%8B45%E5%88%86%E9%92%9F%EF%BC%8C%E9%97%AE%E4%BA%8630%E5%88%86%E9%92%9F%E8%AE%A1%E7%BD%91%EF%BC%8C%E9%A1%B6%E4%B8%8D%E4%BD%8F%EF%BC%89"><span class="nav-number">3.9.</span> <span class="nav-text">猿辅导（一面挂，全程45分钟，问了30分钟计网，顶不住）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E6%98%93%E4%BA%92%E8%81%94%E7%BD%91%EF%BC%88%E4%B8%89%E8%BD%AE%E6%8A%80%E6%9C%AF-%E4%B8%80%E8%BD%AEHR%EF%BC%8Coffer%EF%BC%89"><span class="nav-number">3.10.</span> <span class="nav-text">网易互联网（三轮技术+一轮HR，offer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E6%89%8B%E6%8F%90%E5%89%8D%E6%89%B9%EF%BC%88%E4%B8%89%E8%BD%AE%E6%8A%80%E6%9C%AF-%E4%B8%80%E8%BD%AEHR%EF%BC%8Coffer%EF%BC%89"><span class="nav-number">3.11.</span> <span class="nav-text">快手提前批（三轮技术+一轮HR，offer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BF%E9%87%8C%E6%9C%AC%E5%9C%B0%E7%94%9F%E6%B4%BB%EF%BC%88%E4%B8%89%E8%BD%AE%E6%8A%80%E6%9C%AF%E9%9D%A2%EF%BC%8C%E5%8F%88%E8%A2%AB%E5%8F%A6%E4%B8%80%E4%B8%AA%E9%83%A8%E9%97%A8%E6%8D%9E%EF%BC%8C%E8%BF%98%E5%9C%A8%E6%B1%A0%E5%AD%90%E4%B8%AD%E3%80%82%E3%80%82%EF%BC%89"><span class="nav-number">3.12.</span> <span class="nav-text">阿里本地生活（三轮技术面，又被另一个部门捞，还在池子中。。）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%8E%E5%9B%A2%E7%82%B9%E8%AF%84%EF%BC%88%E4%B8%89%E8%BD%AE%E6%8A%80%E6%9C%AF%E9%9D%A2-%E4%B8%80%E8%BD%AEHR%E9%9D%A2%EF%BC%8Coffer%EF%BC%89"><span class="nav-number">3.13.</span> <span class="nav-text">美团点评（三轮技术面+一轮HR面，offer）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wangfangxin"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wangfangxin</p>
+  <div class="site-description" itemprop="description">虽不能至,然心向往之。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/oldwang77" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;oldwang77" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wangfangxin98@163.com" title="E-Mail → wangfangxin98@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://wangfx.blog.csdn.net/" title="CSDN → https:&#x2F;&#x2F;wangfx.blog.csdn.net&#x2F;" rel="noopener" target="_blank"><i class="fa fa-home fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://oldwang77.github.io/" title="Blog → https:&#x2F;&#x2F;oldwang77.github.io&#x2F;" rel="noopener" target="_blank"><i class="fa fa-file fa-fw"></i>Blog</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2018/10/23/%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wangfangxin">
+      <meta itemprop="description" content="虽不能至,然心向往之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abyss">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-10-22 16:11:18" itemprop="dateCreated datePublished" datetime="2018-10-22T16:11:18Z">2018-10-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-05 12:23:16" itemprop="dateModified" datetime="2020-10-05T12:23:16Z">2020-10-05</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="far fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>20k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>18 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>作者：人菜就要多学习<br>链接：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/532896?type=0&amp;order=7&amp;pos=6&amp;page=1&amp;channel=1009&amp;source_id=discuss_center_0">https://www.nowcoder.com/discuss/532896?type=0&amp;order=7&amp;pos=6&amp;page=1&amp;channel=1009&amp;source_id=discuss_center_0</a><br>来源：牛客网</p>
+<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>本科东北某985机械专业，研究生武汉某985计算机专业，勉勉强强算半个科班？无实习、无<a href="">项目</a>、无计算机相关竞赛，”三无”选手一枚，是真滴菜。而且专硕两年制，上了半年课，疫情在家呆了半年，实话说，找工作之前，我没去过实验室，更不用提<a href="">项目</a>了。说到这还是要感谢研究生导师当时保研要了我，我是真没想到自己可以从机械跨专业保研到计算机，如果有学弟学妹想咨询跨专业保研的事，也欢迎私聊。虽然研究生期间没参与过<a href="">项目</a>吧，但好歹简历上有计算机学院的硕士，不会挂简历，足以足以。 </p>
+<p>  因为自己没有研究<a href="">算法</a>相关，加上听往届学长们说找工作越来越难，去年10月开始决定找Java开发岗，后面投递的也都是这个岗位。<strong>最终收获的意向书有：<a href="">字节跳动</a>、<a href="">百度</a>、<a href="">快手</a>、<a href="">美团点评</a>、<a href="">网易</a>、<a href="">京东</a>。</strong>研一下才知道的牛客网，如果能早点知道，可能会准备的更充分，哈哈，再夸一下，<strong>牛客网真是个好网！</strong> </p>
+<h2 id="复习准备"><a href="#复习准备" class="headerlink" title="复习准备"></a>复习准备</h2><p>我是从去年10月份开始自学一些课程，前期主要也就是刷刷<a href="">算法题</a>，毕竟没有找工作的紧迫感，效率也没那么高，真正认真复习应该是年后2月份开始。当时疫情在家，得知武汉一时半会也开不了学，就在家安心复习吧，前期主要还是看视频为主，在家刚开始很难投入学习状态，因为看不进去书，每天就是<strong>看视频**</strong>+<strong><strong>整理<a href="">面经</a>+</strong></strong>刷代码题**，后续状态上来了，就开始看书和背知识点，建议大家早点开始准备，这样就能赶在7月份投一波提前批。我之前也犹豫了一下要不要投提前批，毕竟提前批都是神仙打架，但谁又知道自己是不是神仙呢，哈哈，这里建议在复习的差不多的情况下，可以提前批就投起来，这时候hc多，面试流程快，只要通过面试基本就有位置，而且很重要的是很多大厂提前批免笔试！！！字节、<a href="">京东</a>、<a href="">百度</a>、<a href="">快手</a>都是免笔试的。我是在7月份就拿到了字节和<a href="">京东</a>的意向书，当时心里就很稳了，后面提前批又拿了<a href="">百度</a>和<a href="">快手</a>，所以正式批就没怎么投简历了，省去了每天大量投简历和笔试的时间，本想后续再好好努力冲一下阿里<a href="">腾讯</a>，不过确实有点懈怠了，再加上水平有限，就没拿到，阿里面完了三轮技术，官网显示三面通过，但是没有被发起第四轮面试，应该是投的部门招满了，不再继续面了，后续又被另一个部门捞起来，现在还在流程中，就当挂了吧。 </p>
+<p>如果提前批准备的不是特别好的话，或者说还没开始大量的背书，很多基础的东西答不上，那也不建议投提前批，虽然提前批多一次机会，但是如果面评显示的是基础不好，那么正式批有的就不给面试了，周围有同学就是这样，所以大家还是根据自己的复习进度决定要不要投提前批。之前都说，”金九银十”，感觉现在已经是”金八银九”了，每年7月份就开始招聘了，真是越来越早了。 </p>
+<h3 id="数据结构与算法：剑指offer-LeetCode"><a href="#数据结构与算法：剑指offer-LeetCode" class="headerlink" title="数据结构与算法：剑指offer+LeetCode"></a>数据结构与<a href="">算法</a>：剑指offer+LeetCode</h3><p>  楼主是个跨专业选手，从去年9月研究生开学之后，开始学习数据结构与<a href="">算法</a>，最开始是学的**<a href="">算法</a>导论**那本书，边学边敲，课后题也跟着做，当时是第一次接触DFS、BFS、回溯、二分、贪心、<a href="">动态规划</a>等等<a href="">算法</a>。<a href="">算法</a>导论用了一个月左右时间过了一遍，对基本的数据结构和<a href="">算法</a>有了全新的认识。10月份国庆假期之后，开始刷LeetCode，最开始一天只能刷个2-3道，因为平时还要去教室上研究生的课，利用晚上或者水课带着平板<a href="">刷题</a>，不得不说，每天过的还是很充实的，没课就去图书馆<a href="">刷题</a>，有种世界与我无关，我只管<a href="">刷题</a>上课吃饭睡觉。当然效率不是很高了，因为总有课提前结束要考试或者交大作业的，而且没有找工作的那种紧迫感。 </p>
+<p><a href="">算法题</a>自己一直在坚持刷，LeetCode上搞了三个进度条，<a href="">刷题</a>数分别是456、165、306。这里解释下，第一个进度条是最远刷到的题数，后面两个进度条是重新从头开始刷，第二个是重刷了一下热题100和剑指offer，第三个是今年6月份开始重新按专题刷。因为好多题是看题解做的，做完就忘了，我不是很开窍的那种，所以我能做的就是反复刷，光剑指offer我就刷了三遍，勤能补拙，到后来面试的时候，<a href="">算法题</a>基本都是秒做。还记得<a href="">快手</a>二面一共三道代码题，十分钟不到就写完了，面试官说，小伙子，<a href="">算法题</a>没少刷啊，我俩相视一笑，我觉得代码题真是特别重要的，基本上代码题写不出来，这场面试就挂了，代码题写好了，哪怕基础弱点，也能进二面。建议大家早点开始<a href="">刷题</a>，不用刷太多，我找工作前的两三个月已经不再刷新题了，都是反复刷之前做过的，争取看到题目就能给出思路。 </p>
+<h3 id="操作系统-Linux："><a href="#操作系统-Linux：" class="headerlink" title="操作系统+Linux："></a>操作系统+Linux：</h3><p>  这里还是要感谢下导师，导师是教本科生OS课的，自己报名了导师的助教，平时去教室蹭本科生大三的课，再加上帮本科生改课后作业和实验课，基本上相当于跟着学了一遍OS，不仅有助教的钱拿，还能学东西，何乐而不为，操作系统有一些知识点还是挺难的，比如进程线程区别、进程间共享机制、线程的各种状态以及转化、生产者消费者模型，这个面试有被手撕过，还有文件管理系统、存储系统、磁盘扇区、分页分段段页结合等等，还有一个值得一提的就是LRU进程调度<a href="">算法</a>，头条一面被考的这个。刚好这边是用Linux来讲解的，就又学了一下Linux。这样后续面试的时候，就很有底气的跟面试官介绍这块的内容，不用怕是自己自学的不好而说不明白。建议没学过OS的，可以看看网课，比如王道的，自己看书总感觉理解不透，也抓不住重点。Linux的话，可以自己搞个虚拟机，来个ubuntu，实际操作一下，很多命令都是敲熟了都能背下来了，常考的命令有：top、chmod、du/df、vim、head、tail、ps、kill、cat、ping、grep、cp、mv、rm、tar、diff、scp、ssh、more/less、mkdir、rmdir等等。 </p>
+<h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><p>这个主要是看了韩立刚老师的网课，讲的特别好，B站链接<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV17p411f7ZZ?from=search&amp;seid=17440842255612289452%EF%BC%8C%E7%94%A8%E7%9A%84%E6%98%AF%E8%B0%A2%E5%B8%8C%E4%BB%81%E7%9A%84%E6%95%99%E6%9D%90%EF%BC%8C%E5%90%8E%E9%9D%A2%E6%89%BE%E5%B7%A5%E4%BD%9C%E4%B9%8B%E5%89%8D%E5%8F%88%E7%9C%8B%E4%BA%86%E4%B8%80%E4%B8%8B**%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E3%80%8B**%E9%82%A3%E6%9C%AC%E4%B9%A6%EF%BC%8C%E4%B8%BB%E8%A6%81%E7%9C%8B%E5%BA%94%E7%94%A8%E5%B1%82%E3%80%81%E4%BC%A0%E8%BE%93%E5%B1%82%E3%80%81%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8D%B3%E5%8F%AF%E3%80%82">https://www.bilibili.com/video/BV17p411f7ZZ?from=search&amp;seid=17440842255612289452，用的是谢希仁的教材，后面找工作之前又看了一下**《计算机网络自顶向下》**那本书，主要看应用层、传输层、网络层即可。</a> </p>
+<p> <strong>常考的有：</strong> </p>
+<p>1、OSI七层模型、TCP/IP5层模型以及每一层常用的协议</p>
+<p>2、TCP、UDP协议的区别、TCP粘包问题、数据报文的结构（应用程序+TCP/UDP报文头部+IP报文头部+以太网头部）</p>
+<p>3、点对点和端对端</p>
+<p>4、TCP的滑动窗口、拥塞控制过程、三次握手、四次挥手以及每个过程的状态，为什么三次四次</p>
+<p>5、SYN泛洪攻击</p>
+<p>6、浏览器输入url并回车的过程（①、根据域名查询域名的IP地址，DNS解析。②、TCP连接③、发送HTTP请求④、服务器处理请求并返回HTTP报文⑤、浏览器解析渲染页面⑥、连接结束。）每个过程都要很熟，要经得起推敲，不要面试官一深问就不会说了</p>
+<p>7、HTTP1.0、1.1、2.0之间的区别</p>
+<p>8、HTTP 和HTTPS的区别</p>
+<p>9、SSL连接的过程、对称加密、非对称加密</p>
+<p>10、HTTP请求的各种方法、状态码（1<strong>、2</strong>、3<strong>、4</strong>、5**）</p>
+<p>11、请求行、请求头、请求体、响应行、响应头、响应体都包括什么</p>
+<p> 12、Session和Cookie的区别以及如何解决分布式session问题</p>
+<h3 id="Java基础-JavaWeb-SSM-SpringBoot"><a href="#Java基础-JavaWeb-SSM-SpringBoot" class="headerlink" title="Java基础+JavaWeb+SSM+SpringBoot"></a>Java基础+JavaWeb+SSM+SpringBoot</h3><p>  这个我是看的黑马的教程，基础的部分是在去年10-12月中间完成的，连带一起看了MySQL数据库相关的基础语句，B站链接，B站是个好站！<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1T7411m7Ta?from=search&amp;seid=6765123750945533781%EF%BC%8C%E6%89%BE%E5%B7%A5%E4%BD%9C%E5%89%8D%EF%BC%8C%E7%9C%8B%E4%BA%86Java%E6%A0%B8%E5%BF%83%E5%8D%B7%E5%AE%97%E2%91%A0%E9%82%A3%E6%9C%AC%E4%B9%A6%EF%BC%8C%E9%80%82%E5%90%88%E6%88%91%E8%BF%99%E7%A7%8D%E5%9F%BA%E7%A1%80%E4%B8%8D%E5%A5%BD%E7%9A%84%EF%BC%8C%E5%91%A8%E5%9B%B4%E5%90%8C%E5%AD%A6%E6%9C%89%E7%9C%8B%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%E7%9A%84%EF%BC%8C%E9%82%A3%E4%B8%AA%E4%B9%9F%E4%B8%8D%E9%94%99%E3%80%82%E5%8F%AF%E4%BB%A5%E5%8F%82%E8%80%83%E4%B8%8Bcyc2018%E5%92%8Cjava">https://www.bilibili.com/video/BV1T7411m7Ta?from=search&amp;seid=6765123750945533781，找工作前，看了Java核心卷宗①那本书，适合我这种基础不好的，周围同学有看编程思想的，那个也不错。可以参考下cyc2018和java</a> guide两位老哥关于java基础常见的问题，github上直接搜索即可。 </p>
+<p>  JavaWeb和SSM框架也是看的黑马的视频入门，SSM框架是在今年2-3月份才看完的，SpringBoot也是看的黑马的，后面买了一本《SSM企业及应用框架》那本厚厚的书看了一遍，当做复习了。大厂对框架问的不多，好多就是问的IoC，AOP思想、进而引出反射和动态代理模式的问题，还有问的就是SpringBoot的几大特性，相比Spring的区别等等，大家不要把太多精力放在框架的学习上，面试问的不太多，主要还是基础和代码题。 </p>
+<h3 id="数据库MySQL"><a href="#数据库MySQL" class="headerlink" title="数据库MySQL"></a>数据库MySQL</h3><p>  我学的是MySQL，刚开始也是跟着黑马的视频来的，后续看了一下<strong>《**</strong>MySQL**<strong>应知应会》</strong>入门、<strong>《高性能**</strong>MySQL**<strong>》</strong>前几章，刷了一下lc上数据库的部分就可以了。 </p>
+<p> <strong>常考的有：</strong> </p>
+<p> 1、手撕SQL语句 </p>
+<p> 2、数据库事务、隔离级别、Innodb和Myisam的区别 </p>
+<p> 3、锁机制（悲观锁、乐观锁、行锁表锁、独占锁共享锁等等） </p>
+<p> 4、MVCC、NK-Lock </p>
+<p> 5、索引的数据结构（B+树）、索引优缺点 </p>
+<p> 6、最左前缀原则、索引优化 </p>
+<p> 7、聚簇索引、覆盖索引 </p>
+<p> 8、数据库三大范式 </p>
+<p> 9、主从复制、主从一致、分库分表等等问题 </p>
+<p>后端考察数据库还是蛮多的，多看书，多看<a href="">面经</a>准备。 </p>
+<h3 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h3><p>  强烈推荐<strong>《深入理解**</strong>JVM**<strong>》</strong>周志明的，主要看内存管理、垃圾回收、类加载机制、双亲委派机制这几章即可，后续的JVM调优我没看，也没被问过，是加分项吧，有余力可以看。 </p>
+<h3 id="多线程并发"><a href="#多线程并发" class="headerlink" title="多线程并发"></a>多线程并发</h3><p>  看的是<strong>《**</strong>Java**<strong>并发编程实战》</strong>，这本书相当经典，但是比较难啃，我也是看了两遍才把大概的框架搞清楚，之后又针对不同的知识点看的技术博客，慢慢啃透的。建议书上看不懂的地方可以去CSDN上搜一些博客，加强巩固。 </p>
+<p> <strong>常考的有：</strong> </p>
+<p> 1、进程和线程的区别 </p>
+<p> 2、线程安全的定义、线程的状态 </p>
+<p> 3、多线程的实现方式（Runnable和Callable的区别）、start/run方法的区别 </p>
+<p> 4、wait()/notify()/sleep()/yield()/join()几个方法的意义 </p>
+<p> 5、notifyall()这块涉及到资源池和锁池，可以加深理解下 </p>
+<p> 6、线程池的创建方式，7大参数、阻塞队列、拒绝策略、大小如何设置 </p>
+<p> 7、锁机制：乐观锁CAS、悲观锁synchronized和ReentrantLock、实现原理以及区别，非常重要，基本每次必问，可以多掌握一些，看到<a href="">源码</a>层面，每次这块我都能给面试官说五到十分钟不停。 </p>
+<p> 8、锁优化:偏向锁、轻量级锁、自旋锁、适应性自旋锁、锁消除、锁粗化等 </p>
+<p> 9、Java内存模型和volatile的原理，以及volatile和synchronized区别 </p>
+<p> 10、ThreadLocal线程本地存储原理，<a href="">源码</a>层面</p>
+<p>11、内存泄漏问题</p>
+<p>12、AQS同步队列器原理，CLH队列</p>
+<p>13、AQS组件：ReentrantReadWriteLock、CountDownLatch、CyclicBarrier、Semaphore原理掌握</p>
+<p>14、JUC原子类，原理：CAS+volatile + native方法来保证操作的原子性</p>
+<p>15、集合框架的多线程实现类：CopyOnWriteArrayList、CopyOnWriteArraySet、ConcurrentHashMap、ConcurrentSkipListMap、ConcurrentSkipListSet、ArrayBlockingQueue、LinkedBlockingQueue、ConcurrentLinkedQueue、ConcurrentLinkedDeque</p>
+<h3 id="Redis缓存和MQ消息队列"><a href="#Redis缓存和MQ消息队列" class="headerlink" title="Redis缓存和MQ消息队列"></a>Redis缓存和MQ消息队列</h3><p>  这两个现在基本也是秋招必备的了，当然还有SpringCloud，SpringCloud我没学，<a href="">腾讯</a>二面问到了，没答上，就凉了。 </p>
+<p>  Redis的话可以看《Redis设计与实现》这本书，mq我没有特意看书，是在<a href="">项目</a>中用到了，就上网上找了点博客，加深理解了一下。Redis考察的点还是挺多的，<a href="">京东</a>二面问了15分钟的Redis。 </p>
+<p>常考的有： </p>
+<p> 1、Redis为什么要作为缓存？ 高性能和高并发 </p>
+<p> 2、<a href="">redis</a>和memcached的区别 </p>
+<p> 3、<a href="">redis</a>常用数据结构、以及数据结构底层，常考到跳表的结构 </p>
+<p> 4、定期删除、惰性删除 </p>
+<p> 5、内存淘汰机制 </p>
+<p> 6、持久化机制 </p>
+<p> 7、缓存雪崩、缓存穿透、缓存击穿 </p>
+<p> 8、并发竞争key问题 </p>
+<p> 9、缓存和数据库双写时的数据一致性 </p>
+<p> 10、为什么单线程还那么快？（非阻塞多路IO复用） </p>
+<p> 11、select、poll、epoll区别 </p>
+<p> 12、五种IO模型 </p>
+<p> 13、<a href="">redis</a>集群、哨兵机制 </p>
+<p> 14、分布式锁 </p>
+<h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a><a href="">项目</a></h3><p>  说到<a href="">项目</a>，真的很惭愧，一个是烂大街的秒杀，一个是牛客网高级<a href="">项目</a>课，跟那些<a href="">项目</a>大佬真的没的比，没有实习就意味着只能做网上的开源<a href="">项目</a>，面试官一看就知道<a href="">项目</a>是怎么来的，很尴尬，不过既然这样，那就尽力把两个<a href="">项目</a>都搞熟，争取每个细节都不放过，这样面试官问起来也会对答如流，证明自己亲手做过，能做的就是不能让面试官在<a href="">项目</a>这里减分吧，加分肯定是够呛！ </p>
+<h2 id="秋招面经"><a href="#秋招面经" class="headerlink" title="秋招面经"></a>秋招<a href="">面经</a></h2><h3 id="字节跳动提前批（三轮技术面，offer）"><a href="#字节跳动提前批（三轮技术面，offer）" class="headerlink" title="字节跳动提前批（三轮技术面，offer）"></a><a href="">字节跳动</a>提前批（三轮技术面，offer）</h3><p> 7.6号一面58min </p>
+<p>自我介绍 </p>
+<p>为什么投<a href="">客户端</a>(<a href="">项目</a>是后端的) </p>
+<p>网络 </p>
+<p> 1.http和https区别 </p>
+<p> 2.说一下加密<a href="">算法</a>(说的比较详细，面试官让简单点说) </p>
+<p>多线程 </p>
+<p> 1.synchronized和lock区别 </p>
+<p> 2.说一下各自原理 </p>
+<p> 3.乐观锁悲观锁说一下 </p>
+<p> 4.syn和lock是乐观还是悲观 </p>
+<p> 5.乐观锁有啥？原理和ABA问题 </p>
+<p> 6.重入锁说一下 </p>
+<p> OS </p>
+<p> 1.页面置换<a href="">算法</a> </p>
+<p> 2.LRU缓存，让我设计LRU思路 </p>
+<p> JVM </p>
+<p> 1.说一下垃圾回收这块，知道的都说出来吧 </p>
+<p> 2.新生代和老年代都用什么<a href="">算法</a>？ </p>
+<p> 3.双亲委派说一下 </p>
+<p> 4.类加载过程 </p>
+<p>数据库 </p>
+<p> 1.索引作用？ </p>
+<p> 2.索引的数据结构 </p>
+<p> 3.聚簇索引是什么？ </p>
+<p> 4.innodb是什么索引？ </p>
+<p> 5.查字典是什么索引？ </p>
+<p>代码 </p>
+<p> 1.单例模式(写的双重检验) </p>
+<p>追问syn和volatile作用 </p>
+<p> 2.Z字型遍历<a href="">二叉树</a> </p>
+<p> 7.13号二面55min </p>
+<p>面试官没开摄像头，看不到表情，紧张+1 </p>
+<p>自我介绍 </p>
+<p>聊一下<a href="">项目</a> </p>
+<p> 1.<a href="">项目</a>上线了吗？(没有) </p>
+<p> 2.基于springboot的还是什么？数据库用的啥？(mysql) </p>
+<p> 3.说说依赖注入，ioc </p>
+<p> 4.说说aop，中间讲到了动态代理 </p>
+<p> 5.说一下动态代理(jdk和cglib) </p>
+<p> 6.静态代理和动态代理区别？ </p>
+<p> 7.<a href="">项目</a>里哪块用到aop了(说的事务管理) </p>
+<p> 8.<a href="">redis</a>热key问题如何解决(本地缓存，热key备份) </p>
+<p> 9.如何获得热key(<a href="">redis</a>-cli-hotkeys) </p>
+<p> 10.dns解析过程 </p>
+<p> 11.tcp的拥塞控制 </p>
+<p> 12.jvm内存模型 </p>
+<p> 13.栈里面存了啥？ </p>
+<p> 14.堆的划分，垃圾回收<a href="">算法</a> </p>
+<p> 15.synchronized原理，作用在哪？ </p>
+<p>代码题 </p>
+<p> 1.手撕生产者消费者模型 </p>
+<p> 2.和最大连续子数组 </p>
+<p> 7.16号三面50min </p>
+<p> 1.自我介绍 </p>
+<p> 2.<a href="">项目</a>介绍 </p>
+<p> 3.md5是多少位？（答错了，应该是128位） </p>
+<p> 4.md5原理知道吗？可逆吗？ </p>
+<p> 5.还知道哪些加密<a href="">算法</a>？（说了对称加密和非对称加密） </p>
+<p> 6.哪里用到了非对称加密？（https） </p>
+<p> 7.说一下https请求过程 </p>
+<p> 8.equals和==区别(null哪个能用) </p>
+<p> 9.hashcode和equals </p>
+<p> 10.如果没有重写equals方法，那么a==b和a.equals(b)一样吗？ </p>
+<p> 11.创建线程的方法？区别？ </p>
+<p> 12.try catch能捕获到哪些异常？ </p>
+<p> 13.说说注册登录怎么设计？ </p>
+<p> 14.为什么投<a href="">客户端</a>？ </p>
+<p>代码题 </p>
+<p> 1.判断两个<a href="">链表</a>是否相交 </p>
+<p> 2.判断一个<a href="">链表</a>是否有环，求出入环节点 </p>
+<p> 3.如果<a href="">链表</a>是有环的，那如何求两<a href="">链表</a>的相交节点？ </p>
+<h3 id="招银网络提前批（三轮技术面，挂）"><a href="#招银网络提前批（三轮技术面，挂）" class="headerlink" title="招银网络提前批（三轮技术面，挂）"></a><a href="">招银网络</a>提前批（三轮技术面，挂）</h3><p>电话面26min </p>
+<p>自我介绍 </p>
+<p> Java基础 </p>
+<p> 1.重载和重写的区别 </p>
+<p> 2.static和final会被重写吗 </p>
+<p> 3.string三姐妹 </p>
+<p> 4.jdk1.8有什么改进(没系统总结，只说了接口，hashmap，lambda) </p>
+<p> 5.集合类的流操作用过吗 </p>
+<p> 6.逻辑与的短路原则 </p>
+<p> &amp;与位运算有什么联系 </p>
+<p> &amp;&amp;如果前面为false，后面如果有空指针语句，会不会报异常？ </p>
+<p>多线程 </p>
+<p> 1.进程线程协程区别和联系 </p>
+<p> 2.多线程相关的关键字 </p>
+<p> 3.synchronized可以作用在哪些位置 </p>
+<p> 4.锁升级有哪些变化？ </p>
+<p> 5.自动升级的条件是什么？还是会自璇多少次或者其等待线程超过多少就升级？ </p>
+<p> 6.CAS怎么解决ABA问题 </p>
+<p>计网 </p>
+<p> 1.TCP和UDP区别 </p>
+<p>数据库 </p>
+<p> 2.MySQL有几种搜索引擎，区别？ </p>
+<p>框架 </p>
+<p> 1.Spring IoC和AOP的理解 </p>
+<p> 2.AOP场景 </p>
+<p> 3.AOP注解 </p>
+<p> 4.SpringBoot里面用了哪些starter? </p>
+<p> 5.<a href="">项目</a>部署有用到分布式部署吗？ </p>
+<p> 6.springcloud? </p>
+<p> 7.大数据有什么了解吗？hive和hbase的区别？ </p>
+<p>反问:还有几轮面试？两轮技术+HR </p>
+<p>视频一面30min </p>
+<p> 1.自我介绍 </p>
+<p> 2.多线程了解吗？说一下哪里用到多线程了 </p>
+<p> 3.线程池核心参数 </p>
+<p> 4.数据库查询比较慢，怎么排查？(说了explain，sql语句优化，分库分表，用<a href="">redis</a>) </p>
+<p> 5.<a href="">项目</a>用到<a href="">redis</a>了，说说<a href="">redis</a>使用场景 </p>
+<p> 6.<a href="">项目</a>用到分布式部署了嘛？ </p>
+<p> 7.分布式session存在<a href="">redis</a>哪个目录里？ </p>
+<p> 8.<a href="">redis</a>分布式锁 </p>
+<p> 9.垃圾回收机制 </p>
+<p>代码题： </p>
+<p>一张表里有:分行行号，5月和6月的绩效，让统计每个分行5月和6月的排名差？说是Java也行sql也行 </p>
+<p>懵逼了，第一次做这种题，和面试官说了思路，没写完，面试官说时间短，说说思路吧，不写了 </p>
+<p><a href="">招银网络</a>视频二面20min </p>
+<p> 1.自我介绍 </p>
+<p> 2.为什么跨专业？ </p>
+<p> 3.学过哪些计算机专业课？如何安排时间的 </p>
+<p> 4.学Java的时候，哪块感觉不好学？ </p>
+<p> 5.说说你理解的反射，应用在哪？(说了spring注解) </p>
+<p> 6.说说QPS是啥？跟啥有关？ </p>
+<p> 7.如何评价电脑的性能？ </p>
+<p> 8.双重MD5是绝对安全的吗？ </p>
+<p> 9.如何校验第一次传进来的密码？ </p>
+<p> 10.设计模式的七大原则？ </p>
+<p> 11.Es为啥能保证实时性？ </p>
+<p> 12.<a href="">redis</a>的key怎么设计？ </p>
+<p> 13.一次一例？好像意思是每个请求使用一个密钥？什么什么的保证安全？(没听懂问题) </p>
+<p> 14.类的生命周期 </p>
+<p> 15.说说知道的设计模式 </p>
+<p> 16.说说适配器模式 </p>
+<h3 id="中兴优招（两轮技术面，测评挂）"><a href="#中兴优招（两轮技术面，测评挂）" class="headerlink" title="中兴优招（两轮技术面，测评挂）"></a><a href="">中兴</a>优招（两轮技术面，测评挂）</h3><p>一面电话面20min </p>
+<p>投的上海，问考虑南京吗？我说可以 </p>
+<p>自我介绍 </p>
+<p> Java脚本写过吗？(没) </p>
+<p>计网TCP/IP四层协议 </p>
+<p>操作系统进程之间通讯 </p>
+<p>使用过Linux吗？说说常用命令 </p>
+<p>写过shell吗？ </p>
+<p>编译原理学过吗(没) </p>
+<p>了解过音视频文件的结构，有解析过嘛？(没) </p>
+<p>奖学金拿过什么？ </p>
+<p>有没有发过专利，论文？ </p>
+<p>专业排名？ </p>
+<p>有个任务，本来定6天完成，突然让你3天搞定，你怎么做？ </p>
+<p>如果遇到困难了该咋办？ </p>
+<p>反问:后续还有面试吗？说还有 </p>
+<p>二面视频面30min </p>
+<p> 1.验证身份，学生证和身份证 </p>
+<p> 2.自我介绍 </p>
+<p> 3.<a href="">项目</a>经历，挑一个熟的讲一下 </p>
+<p> 4.说一下<a href="">项目</a>架构，流程 </p>
+<p> 5.为什么做这个<a href="">项目</a>？ </p>
+<p> 6.<a href="">项目</a>单机的还是分布式部署？ </p>
+<p> 7.消息队列技术的优点 </p>
+<p> 8.消息队列放到内存还是磁盘？放磁盘为什么还这么快？(蒙了！面试官让课后了解一下) </p>
+<p> 9.md5解释一下 </p>
+<p> 10.如何保证http请求安全？(答:用https) </p>
+<p> 11.说一下https原理，加密<a href="">算法</a>解释一下 </p>
+<p> 12.意向工作地可选范围？ </p>
+<p> 13.为啥来南方读研？ </p>
+<p> 14.未来两三年工作规划？ </p>
+<p> 15.技术栈Java，能考虑换c吗？ </p>
+<p> 16.<a href="">中兴</a>能吸引你的地方？ </p>
+<p> 17.有什么爱好？ </p>
+<p> 18.三个词形容自己性格 </p>
+<p> 19.在哪了解到<a href="">中兴</a>招聘的？ </p>
+<p> 20.进公司能为公司带来什么？ </p>
+<p> 21.能接受加班的范围？ </p>
+<p> 22.反问:问了部门业务(答:路由器，机顶盒和音视频处理) </p>
+<h3 id="京东提前批（两轮技术、一轮HR，offer）"><a href="#京东提前批（两轮技术、一轮HR，offer）" class="headerlink" title="京东提前批（两轮技术、一轮HR，offer）"></a><a href="">京东</a>提前批（两轮技术、一轮HR，offer）</h3><p> 7.14号一面55min </p>
+<p> 1.自我介绍 </p>
+<p> 2.介绍<a href="">项目</a>，负责哪块，上线了吗？ </p>
+<p> 3.如何保证<a href="">redis</a>和数据库一致性？(答:延时双删) </p>
+<p> 4.延时双删的时间精度？ </p>
+<p> 5.<a href="">项目</a>有要求时间精度吗？(答:毫秒级的，没做更多要求) </p>
+<p> 6.说说mq原理，怎么保证消息接受顺序？ </p>
+<p> 7.对比其他mq，有什么区别，怎么选型？ </p>
+<p> 8.<a href="">项目</a>压测了嘛？(Jmeter) </p>
+<p> 9.arraylist，linkedlist，hashset区别和使用场景，线程安全？ </p>
+<p> 10.hashset为什么是随机的？其他两个是按存入顺序的？ </p>
+<p> 11.说说类加载过程(5步) </p>
+<p> 12.双亲委派模型好处？ </p>
+<p> 13.new子类的时候，子类和父类静态代码块，构造器的执行顺序 </p>
+<p> 14.进程和线程的区别 </p>
+<p> 15.如何创建线程？ </p>
+<p> 16.runnable和callable区别 </p>
+<p> 17.线程池相关 </p>
+<p> 18.synchronized和lock区别原理 </p>
+<p> 19.tcp三次握手四次挥手工作在哪一层？ </p>
+<p> 20.说一下三次握手过程和状态 </p>
+<p> 21.用过序列化和反序列化吗？(没用过，只知道理论) </p>
+<p> 22.设计模式了解哪些？(没深入问) </p>
+<p> 23.代码题 </p>
+<p> (1)<a href="">链表</a>反转 </p>
+<p> (2)int数组，实现偶数在前，奇数在后，不改变相对顺序 </p>
+<p> 24.反问:如果能通过面试，后续还有几轮？ </p>
+<p>答:不清楚，但肯定是有面试的 </p>
+<p> 7.16号<a href="">京东</a>二面50min </p>
+<p>面试官人超级好，打call！ </p>
+<p> 1.简单聊天 </p>
+<p> 2.说说<a href="">项目</a> </p>
+<p> 3.各种<a href="">redis</a>相关的问题，大概有15分钟 </p>
+<p> 4.线程池参数 </p>
+<p> 5.Reentrantlock原理 </p>
+<p> 6.AQS原理，里面有几个队列？(CLH+条件队列) </p>
+<p> 7.ThreadLocal原理，同时引出内存泄露 </p>
+<p> 8.事务的特性 </p>
+<p> 9.隔离级别 </p>
+<p> 10.解释一下幻读 </p>
+<p> 11.索引的结构，为啥用B+树？ </p>
+<p> 12.乐观锁CAS原理解释一下？怎么获取到内存对应的值？(说了native方法获取offset，然后偏c语言底层了，面试官也没为难) </p>
+<p>代码题 </p>
+<p> 1.二分法找<a href="">排序</a>数组中绝对值最小的元素 </p>
+<p> 2.<a href="">链表</a>两两反转 </p>
+<p>反问: </p>
+<p> 1.面试官是负责哪块业务的？ </p>
+<p>答:<a href="">京东</a>零售，推荐<a href="">算法</a>相关的，根据用户搜索智能推荐商品 </p>
+<p> 2.如果能通过面试，是加入您这边部门吗？(因为我投的是国际化业务，但是被<a href="">京东</a>零售发起的面试) </p>
+<p>答:是的 </p>
+<p> 3.后续还有几轮面试？ </p>
+<p>答:如果通过，就是HR面了 </p>
+<p><a href="">京东</a>HR面7min </p>
+<p> 1.自我介绍 </p>
+<p> 2.有实习经历吗？ </p>
+<p> 3.说一下你在其中的一个<a href="">项目</a>中最有成就感的事 </p>
+<p> 4.性格是什么样的？ </p>
+<p> 5.了解过我们这边是做什么的吗？ </p>
+<p> 6.为什么对我们这个业务比较感兴趣？ </p>
+<p> 7.在看其他校招机会吗？ </p>
+<p> 8.在北京吗？如果面试通过，能参加实习吗？ </p>
+<p> 9.反问:后续还有面试吗？ </p>
+<p>答:7.31号之前会完成所有的校招流程，之后就进入校招组HR的offer流程，本次是最后一次面试。 </p>
+<h3 id="招行总行提前批（一轮技术，一轮综合，offer）"><a href="#招行总行提前批（一轮技术，一轮综合，offer）" class="headerlink" title="招行总行提前批（一轮技术，一轮综合，offer）"></a>招行总行提前批（一轮技术，一轮综合，offer）</h3><p> 7.17号一面20min </p>
+<p>一共四位面试官，轮流提问 </p>
+<p> 1.自我介绍 </p>
+<p> 2.本科研究生成绩排名 </p>
+<p> 3.挑一个熟悉的<a href="">项目</a>介绍一下 </p>
+<p> 4.<a href="">redis</a>怎么用的？ </p>
+<p> 5.怎么保证<a href="">redis</a>和数据库一致性 </p>
+<p> 6.说一下进程通信机制 </p>
+<p> 7.说一下反射机制 </p>
+<p> 8.mysql主从复制的同步方式有几种？ </p>
+<p> 9.springboot特点？启动方式 </p>
+<p> 10.用过maven吗？pom.xml如何配置 </p>
+<p> 11.内存泄露的场景 </p>
+<p> 12.介绍一下比赛负责了哪部分？ </p>
+<p> 13.char和varchar区别？ </p>
+<p> 14.关系型数据库和非关系型数据库区别？ </p>
+<p> 15.Linux如何查看所有文件系统占多少磁盘？(只知道查看进程占用内存用top，文件系统忘了) </p>
+<p> 16.意向工作地 </p>
+<p> 8.7号二面8min </p>
+<p> 1.自我介绍 </p>
+<p> 2.笔试题感觉怎么样？有难度嘛？哪块做的不太好 </p>
+<p> 3.附加题做了吗？(没有。。。) </p>
+<p> 4.研究生保送的吗？学硕还是专硕？ </p>
+<p> 5.有实习经历吗？ </p>
+<p> 6.有投其他公司吗？ </p>
+<p> 7.为啥选择国企银行类的公司？ </p>
+<p> 8.有组织过什么学生活动吗？ </p>
+<p> 9.本科研究生排名？ </p>
+<h3 id="新浪微博提前批（两轮技术，泡池子中）"><a href="#新浪微博提前批（两轮技术，泡池子中）" class="headerlink" title="新浪微博提前批（两轮技术，泡池子中）"></a><a href="">新浪</a><a href="">微博</a>提前批（两轮技术，泡池子中）</h3><p> 7.28一面25min，面试体验贼好 </p>
+<p> 1.自我介绍 </p>
+<p> 2.说一下hashmap实现 </p>
+<p> 3.说一下线程安全的hashmap </p>
+<p> 4.虚拟内存介绍一下 </p>
+<p> 5.<a href="">redis</a>持久化机制 </p>
+<p> 6.Innodb引擎的特点 </p>
+<p> 7.还知道其他引擎不？ </p>
+<p> 8.代码题(真正的手撕代码！用笔纸写，拍照发过去) </p>
+<p>一万行文件，每行是一个int数据，统计出现次数top10 </p>
+<p> 9.<a href="">海量数据</a>top100问题 </p>
+<p> 10.能来实习吗？ </p>
+<p> 11.反问:面试官部门负责哪块业务的？ </p>
+<p>答:负责刷新<a href="">微博</a>，热搜排名top等相关业务，面试官贼有耐心，还给我讲了一些高并发的东西，受教了！ </p>
+<p> 7.31二面10min </p>
+<p> 1.自我介绍 </p>
+<p> 2.<a href="">项目</a>介绍 </p>
+<p> 3.问了问<a href="">项目</a>的细节 </p>
+<p> 4.反问:还有面试嘛？ </p>
+<p>答:HR会联系的 </p>
+<h3 id="OPPO提前批（两轮技术、一轮HR，offer）"><a href="#OPPO提前批（两轮技术、一轮HR，offer）" class="headerlink" title="OPPO提前批（两轮技术、一轮HR，offer）"></a><a href="">OPPO</a>提前批（两轮技术、一轮HR，offer）</h3><p> 8.1号<a href="">OPPO</a>一面30min </p>
+<p> 1.自我介绍 </p>
+<p> 2.<a href="">项目</a>介绍，挑一个熟悉的讲 </p>
+<p> 3.<a href="">项目</a>瓶颈，如何应对的 </p>
+<p> 4.<a href="">redis</a>用来干嘛？ </p>
+<p> 5.如何避免重复下单？ </p>
+<p> 6.mq如何实现削峰？ </p>
+<p> 7.用到了哪些<a href="">redis</a>的数据结构？ </p>
+<p> 8.String类型底层原理说一下？ </p>
+<p> 9.如果String里有多个key-value，那怎么存储？ </p>
+<p> 10.说一下set和sortedset底层结构 </p>
+<p> 11.<a href="">项目</a>里用到threadlocal了，说一下原理，这里引出了内存泄露，又问了一下内存泄露相关的 </p>
+<p> 12.前缀树了解吗？说一下结构？ </p>
+<p> 13.如果要添加到前缀树里的元素比较多，内存放不下怎么办？(说了用B+树类似的结构) </p>
+<p> 14.说一下网络三次握手的过程 </p>
+<p> 15.为什么三次握手？ </p>
+<p> 16.拥塞控制过程说一下 </p>
+<p> 17.<a href="">算法题</a>:给一个字符串，输出合法的ip地址 </p>
+<p>口述思路即可(用了三层for循环，面试官说可以) </p>
+<p> 18.有什么爱好吗？ </p>
+<p> 19.觉得计算机相关课程哪个最难？怎么学的，分数怎么样？ </p>
+<p> 20.反问:还有几轮面试？ </p>
+<p>答:一共2-3轮 </p>
+<p> 8.7号<a href="">OPPO</a>二面30min </p>
+<p> 1.自我介绍 </p>
+<p> 2.关键词搜索怎么做？说说Es </p>
+<p> 3.说说下订单的过程 </p>
+<p> 4.如何避免重复下单 </p>
+<p> 5.如果手机端和pc端同时登陆，就想下两次单，应该怎么办？ </p>
+<p> 6.面试官提示说可以不一定要在服务端生成订单，可以考虑在请求的时候，或者用一些订单生成<a href="">算法</a>？ </p>
+<p> 7.<a href="">redis</a>库存用的什么结构？ </p>
+<p> 8.如何保证库存一致性？ </p>
+<p> 9.库存多了或者少了有啥影响？ </p>
+<p> 10.分布式锁 </p>
+<p> 11.下订单和付钱的事务怎么控制？ </p>
+<p> 12.如果有人下订单未付钱如何回滚事务？ </p>
+<p> 13.那回滚库存之后，和<a href="">redis</a>不一致如何处理？ </p>
+<p> 14.如果硬要保证<a href="">redis</a>和db库存一致，如何保证？ </p>
+<p> 15.终于不问秒杀了！说说concurrenthashmap如何保证线程安全的？ </p>
+<p> 16.说说synchronized锁升级的过程 </p>
+<p> 17.自己部署过什么服务器吗？ </p>
+<p> 18.Linux用过哪些常用命令？ </p>
+<p> 19.除了concurrenthashmap还有哪些线程安全的集合？ </p>
+<p> 20.BlockingQueue的add，put和offer的区别？(懵逼了，好像只用过offer) </p>
+<p> 21.arraylist线程安全对应的集合是什么？ </p>
+<p> 22.CopyOnWriteArraylist原理说一下，如何安全的？ </p>
+<p> 8.8号HR面20min </p>
+<p> 1.用三个词介绍自己 </p>
+<p> 2.四六级多少？ </p>
+<p> 3.哪一年出生的？(面试官说我是不是提前上学了，是在暗示我年龄小吗，哈哈) </p>
+<p> 4.意向工作地？ </p>
+<p> 5.找工作考虑的因素？ </p>
+<p> 6.自己喜欢的方向？ </p>
+<p> 7.为什么转专业？ </p>
+<p> 8.为什么对计算机感兴趣？ </p>
+<p> 9.期望薪资多少？为什么这么要？ </p>
+<p> 10.还收到其他家offer了吗？别人家给了多少(说一下范围即可) </p>
+<p> 11.说一下自己团队合作的<a href="">项目</a>，自己负责什么？做了哪些成果？ </p>
+<p> 12.如果团队意见不一致怎么解决？能还原一下之前意见不一致的场景吗？ </p>
+<p> 13.自己在<a href="">项目</a>中的角色？为什么没当负责人？ </p>
+<p> 14.自己在团队中的贡献？ </p>
+<p> 15.如果再做一遍这个<a href="">项目</a>，会有什么效果？ </p>
+<p> 16.优缺点？ </p>
+<p> 17.兴趣爱好？ </p>
+<p> 18.为什么有这个爱好？ </p>
+<p> 19.最近关注的社会现象？ </p>
+<p> 20.对这个现象的看法？ </p>
+<p> 21.最欣赏的人？原因？ </p>
+<h3 id="百度提前批（三轮技术-一轮综合面，offer）"><a href="#百度提前批（三轮技术-一轮综合面，offer）" class="headerlink" title="百度提前批（三轮技术+一轮综合面，offer）"></a><a href="">百度</a>提前批（三轮技术+一轮综合面，offer）</h3><p> 8.3号<a href="">百度</a>一面电话面44min </p>
+<p> 1.自我介绍 </p>
+<p> 2.硕士方向是啥？ </p>
+<p> 3.介绍一下<a href="">项目</a>(从三个角度:解决问题、负责哪块、怎么实现) </p>
+<p> 4.<a href="">项目</a>上线了吗？ </p>
+<p> 5.有一些架构是师兄师姐们搭建好的吗？ </p>
+<p> 6.<a href="">项目</a>涉及到几个服务？怎么部署？ </p>
+<p> 7.遇到的困难？挑一个讲一下 </p>
+<p> 8.为什么转专业？ </p>
+<p> 9.为什么用ThreadLocal?(裂开！ThreadLocal这个揪着问了10分钟，后来实在说不下去了) </p>
+<p> 10.ThreadLocal能解决什么问题？ </p>
+<p> 11.ThreadLocal能解决分布式session问题吗？ </p>
+<p> 12.线程内部共享，不同线程独享，这个和分布式session矛盾吗？ </p>
+<p> 13.开始搬出ThreadLocal<a href="">源码</a>，balabala说一顿，感觉面试官还是说我理解的不对，还让我说！ </p>
+<p> 14.多线程访问一个变量有什么需要注意的？ </p>
+<p> 15.又来ThreadLocal，那ThreadLocal需要加锁吗？(崩溃！) </p>
+<p> 16.进程线程协程区别？ </p>
+<p> 17.线程的切换和协程的切换有什么区别？ </p>
+<p> 18.为什么协程切换开销少？ </p>
+<p> 19.线程进程协程在并发访问变量的时候，都有什么措施？ </p>
+<p> 20.多协程访问编程需要加锁吗？ </p>
+<p> 21.说一下DNS域名解析是哪一层？用的TCP还是UDP？ </p>
+<p> 22.说一下DNS解析过程 </p>
+<p> 23.<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a>哪个是根域名，顶级域名，权威域名 </p>
+<p> 24.TCP三次握手过程 </p>
+<p> 25.为什么三次握手 </p>
+<p> 26.如何判断<a href="">客户端</a>和服务端已经建立链接？ </p>
+<p> (答的用netstat查看，面试官说想问的不是这个，面试官提醒说可以查看数据包) </p>
+<p> 27.哪几个元素可以识别TCP连接？(从底层说，比如源IP，源端口，源mac？) </p>
+<p> 28.IP数据包如何判断是tcp还是udp连接的？ </p>
+<p> 29.Linux用过吗？ </p>
+<p> 30.如何查看进程？ </p>
+<p> 31.如何查看占用cpu最多进程？ </p>
+<p> 32.简述快排 </p>
+<p> 33.反问:学习建议？ </p>
+<p>答:要把知识点扣的细一些。 </p>
+<p> 8.5号<a href="">百度</a>二面电话面40mi </p>
+<p> 1.一面感觉怎么样？ </p>
+<p> 2.针对一面没答出来的再说一下？ </p>
+<p> 3.两个<a href="">项目</a>介绍一个能体现出来自己实力？ </p>
+<p> 4.说一下<a href="">项目</a>的技术点和难点 </p>
+<p> 5.怎么得出数据库是瓶颈的结论？(说的压测发现数据库占用cpu最多) </p>
+<p> 6.你是感觉数据库占据cpu最多就是瓶颈了吗？ </p>
+<p> 7.别的地方还有瓶颈没？ </p>
+<p> 8.<a href="">项目</a>里应该有蛮多环节，其他环节或者模块考虑过瓶颈问题吗？(没有。。。。) </p>
+<p> 9.如何应对高并发？ </p>
+<p> 10.如果没有<a href="">redis</a>，数据库如何应对高并发？(答了分库分表) </p>
+<p> 11.数据库占据cpu多，那是select语句还是update语句或者其他语句占据多？ </p>
+<p> 12.如果优化查询？(说了加索引，面试官问，加索引就行了嘛？) </p>
+<p> 13.如果把并发量再提高到1000万，如何应对？(答了negix负载均衡以及放出少量请求，负载均衡被否了，后者说可以) </p>
+<p> 14.又聊到限流降级组件 </p>
+<p> 15.说一下内存管理中的逻辑地址转换成物理地址的方法 </p>
+<p> 16.DNS解析过程？ </p>
+<p> 17.知道根域名服务器有多少个吗？(之前看过，忘了。。。) </p>
+<p> 18.如果本地DNS服务器查不到，那是所有的都要去查根域名服务器？那全球的根域名服务器压力不会很大吗？ </p>
+<p> 19.进程的调度方式？Java用的哪个？(抢占) </p>
+<p> 20.为啥要有非抢占方式？ </p>
+<p> 21.说一下arp协议的过程 </p>
+<p> 22.知道arp欺骗吗？ </p>
+<p> 23.Linux用的多吗？(不多，没追问) </p>
+<p> 23.<a href="">算法题</a> </p>
+<p>两个有序数组，找合并后的中位数 </p>
+<p>先说了O(n)的方式，后来又说了O(logn)的方式 </p>
+<p> 24.反问业务:<a href="">百度</a>智慧云相关的~ </p>
+<p> 8.12号<a href="">百度</a>三面45min </p>
+<p> 1.说说自己前两面表现怎么样？ </p>
+<p> 2.问几个Linux命令吧(我说Linux不怎么熟) </p>
+<p> (1)如何查到a.txt文本中字符b出现的行 </p>
+<p> (2)找到上述行中的最后一列 </p>
+<p> (3)如果最后一列是10 20 10 30，那么如何统计每个数字出现的次数，比如输出2<del>10 1</del>20 1~30 </p>
+<p> (4)如果系统卡顿，如何排查，为什么要查cpu占用率？如果不排查会怎样？排查之后做什么？ </p>
+<p> 3.<a href="">算法题</a>: </p>
+<p> (1)根据<a href="">二叉树</a>后序遍历和中序遍历输出前序遍历 </p>
+<p> (2)实现两种降序<a href="">排序</a>(快排，堆排) </p>
+<p> (3)上述两种<a href="">排序</a>的时间复杂度，如果已知每个数的区间是[l,u)，如何用O(n)的时间复杂度<a href="">排序</a> </p>
+<p> 4.ping是哪个协议？说一下ping的过程 </p>
+<p> 5.ping可以ping端口吗？(不可以) </p>
+<p> 6.说说<a href="">项目</a>的难点，如何解决的？ </p>
+<p> 7.如何技术选型？ </p>
+<p> 8.了解我们部门吗？(不了解。。。) </p>
+<p> 9.可以接受加班吗？ </p>
+<p> 10.未来3-5年之内的规划 </p>
+<p> 11.能提前实习吗？ </p>
+<p> 12.逻辑题:8个球，有1个是轻的，通过天平最少测几次能找出(2次) </p>
+<p> 13.目前有别的offer吗？ </p>
+<p> 14.期望工作地？ </p>
+<p> 15.反问:大概多久出结果？ </p>
+<p>答:1-2周，HR比较少，技术面进度快，HR面比较慢 </p>
+<p> 8.19四面54min </p>
+<p>类似于HR面，但又比正常的HR面聊的多很多，之前说是加面，搞不懂到底是什么面，大概涉及的问题: </p>
+<p> 1.为什么转专业？(问了好久好久。。。) </p>
+<p> 2.自己跟本硕都是计算机的同学的优势和劣势？ </p>
+<p> 3.用专业术语详细描述一下本科的一个机械类的比赛 </p>
+<p> 4.完成一个<a href="">项目</a>的流程都有哪些考虑的因素？ </p>
+<p> 5.为什么感觉互联网公司有前景？ </p>
+<p> 6.有没有持之以恒的坚持一件事？ </p>
+<p> 7.对公司的选择主要考虑哪些因素？(让实话实说) </p>
+<p> 8.如果有多个大厂offer，会怎么选？ </p>
+<p> 9.如何看待加班？ </p>
+<p> 10.互联网公司的缺点？ </p>
+<p> 11.未来3年的规划？ </p>
+<p> 12.觉得什么时候算是技术学成了？(我答的是等到leader放心把一个业务交给我的时候，哈哈哈) </p>
+<p> 13.如何看待35岁的事？ </p>
+<p> 14.压力大怎么处理？ </p>
+<p> 15.本硕成绩排名？ </p>
+<p> 16.有没有列一个清单，最近要学的东西？ </p>
+<p> 17.喜欢看书吗？ </p>
+<p> 18.家里几个孩子？父母做啥的？ </p>
+<p> 19.感觉你一直在避开一个问题，就是本科不是计算机的劣势？ </p>
+<p> 20.薪资怎么考虑的？是第一选择标准吗？ </p>
+<p> 21.又来转专业的事，看你机械的成绩也很高，为啥改行计算机？兴趣在哪？真的吗？ </p>
+<p> 22.为什么大一不转计算机！！！！ </p>
+<p> 23.除了在实验室学习，还喜欢做啥？ </p>
+<p> 24.喜欢旅游，都去过哪些地方？ </p>
+<p> 25.为什么不从事<a href="">算法</a>？ </p>
+<p> 26.<a href="">算法</a>是用来干嘛的？ </p>
+<p> 27.如果到公司了发现做的东西和自己期望不一样怎么办？ </p>
+<p> 28.为什么研究生选**学校？离家不会太远吗？ </p>
+<p> 29.研究生保研还有别的学校offer吗？为啥选**？ </p>
+<p> 30.希望从公司学到什么？ </p>
+<h3 id="猿辅导（一面挂，全程45分钟，问了30分钟计网，顶不住）"><a href="#猿辅导（一面挂，全程45分钟，问了30分钟计网，顶不住）" class="headerlink" title="猿辅导（一面挂，全程45分钟，问了30分钟计网，顶不住）"></a><a href="">猿辅导</a>（一面挂，全程45分钟，问了30分钟计网，顶不住）</h3><p> 1.自我介绍 </p>
+<p> 2.介绍一下<a href="">项目</a> </p>
+<p> 3.用到md5加密了，过程说一下？ </p>
+<p> 4.md5只用一次不行吗？ </p>
+<p> 5.md5可逆不？ </p>
+<p> 6.除了md5还了解别的加密技术吗？ </p>
+<p> 7.说说对称加密和非对称加密？ </p>
+<p> 8.说说https加密过程 </p>
+<p> 9.说一下验证证书合法性的过程(信任链) </p>
+<p> 10.一个证书只能加密一个域名吗？子域名可以不？(可以) </p>
+<p> 11.https是对请求头还是请求体加密？ </p>
+<p> 12.除了get和post，还用到别的方法了吗？ </p>
+<p> 13.put是干嘛的？它有请求体吗？ </p>
+<p> 14.请求头请求体都包括啥？ </p>
+<p> 15.content-length一定有吗？如果数据特别长，一次都能读取吗？那length表示的是每次读取的长度还是总长度？ </p>
+<p> 16.请求体的数据结构？(json,xml之类的) </p>
+<p> 17.长连接是干啥用的？举个场景说 </p>
+<p> 18.长连接的连接数有限制吗？ </p>
+<p> 19.跨域了解吗？ </p>
+<p> 20.cookie支持跨域吗？ </p>
+<p> 21.cookie可以包括哪些类型的数据？ </p>
+<p> 22.rabbitmq有几种工作模式？ </p>
+<p> 23.自己用的哪种？ </p>
+<p> 24.mq里的订单如何删掉？(设置过期时间) </p>
+<p> 25.<a href="">算法题</a> </p>
+<p>反转<a href="">链表</a>，迭代+递归两种都写 </p>
+<h3 id="网易互联网（三轮技术-一轮HR，offer）"><a href="#网易互联网（三轮技术-一轮HR，offer）" class="headerlink" title="网易互联网（三轮技术+一轮HR，offer）"></a><a href="">网易</a>互联网（三轮技术+一轮HR，offer）</h3><p> 8.18<a href="">网易有道</a>一面50min </p>
+<p>面试体验贼好，面试官很准时，先介绍了一下部门和业务 </p>
+<p> 1.自我介绍 </p>
+<p> 2.<a href="">项目</a>介绍 </p>
+<p> 3.技术栈用的什么框架？(springboot和ssm) </p>
+<p> 4.说说spring的ioc和aop </p>
+<p> 5.有自己用过aop吗？(刚好<a href="">项目</a>里有一块用到，就说了) </p>
+<p> 6.ip是什么？v4和v6的区别？ </p>
+<p> 7.子网掩码作用？ </p>
+<p> 8.tcp说一下(三次握手，四次挥手) </p>
+<p> 9.tcp滑动窗口的原理和作用？ </p>
+<p> 10.为什么三次握手？ </p>
+<p> 11.http常用的方法 </p>
+<p> 12.https和http的区别？ </p>
+<p> 13.说一下ssl/tls过程？ </p>
+<p> 14.服务端申请证书，<a href="">客户端</a>验证证书过程详细说一下 </p>
+<p> 15.知道http的长连接吗？举个场景说一下 </p>
+<p> 16.tcp三次握手四次挥手过程中<a href="">客户端</a>和服务费的状态？ </p>
+<p> 17.回到spring，说说aop的原理(动态代理) </p>
+<p> 18.说一下动态代理吧 </p>
+<p> 19.反射的原理？怎么获取到方法的？ </p>
+<p> 20.说一下类加载的过程 </p>
+<p> 21.双亲委派解释一下？为什么要用双亲委派？ </p>
+<p> 22.代码题 </p>
+<p> (1)写一个线程安全的单例模式 </p>
+<p> (2)搜索旋转数组最小值，比如在[3，4，5，1，2]中找到1最小 </p>
+<p> (3)二维数组，从左上到右下路径的最小值，只能向右和向下走 </p>
+<p>面完试一个小时，收到二面通知，许愿二面 </p>
+<p> 8.20二面40min </p>
+<p> 1.自我介绍 </p>
+<p> 2.说一下多线程了解哪些？ </p>
+<p> 3.提到了AQS，说一下原理 </p>
+<p> 4.知道哪些AQS组件？ </p>
+<p> 5.countdownlatch原理 </p>
+<p> 6.cyclicbarrier原理 </p>
+<p> 7.select,poll,epoll三连 </p>
+<p> 8.epoll的触发方式？水平触发，边缘触发区别？ </p>
+<p> 9.数据库事务隔离级别，分别产生什么问题？ </p>
+<p> 10.Innodb默认在哪个级别？如何保证事务的？ </p>
+<p> 11.NK-lock记录锁，间隙锁如何保证的？ </p>
+<p> 12.ThreadLocal工作原理？ </p>
+<p> 13.四大引用(强软弱虚)区别？ </p>
+<p> 14.内存泄露 </p>
+<p> 15.智力题:10个苹果分三堆，每堆不为空，有多少种分法？ </p>
+<p> 16.<a href="">算法题</a>:最长递增子序列，如有多个，按照字典序输出第一个。 </p>
+<p>比如:[1，2，8，4，6]要输出[1，2，4] </p>
+<p> 17.反问:一共几轮面试？ </p>
+<p>答:三轮技术面，一轮HR面 </p>
+<p>面完一小时，约明天总监面，但是明天自己有事，改到下周面，效率很高 </p>
+<p> 8.28总监面35min </p>
+<p>面试官是个北大的大佬，看着就很大佬那种 </p>
+<p> 1.自我介绍 </p>
+<p> 2.为什么转专业？ </p>
+<p> 3.计算机专业课怎么学的？ </p>
+<p> 4.技术栈是什么？ </p>
+<p> 5.实验室方向？ </p>
+<p> 6.哪块学的比较好？ </p>
+<p> 7.操作系统怎么样？进程间通信机制？ </p>
+<p> 8.通信机制自己有动手实现吗？ </p>
+<p> 9.http介绍一下，与https的区别？ </p>
+<p> 10.怎么实现持久性登录？(cookie/session) </p>
+<p> 11.建堆的时间复杂度？堆<a href="">排序</a>过程口述一下 </p>
+<p> 12.家是哪的？工作计划是什么？ </p>
+<p> 13.代码题:一个字符串里面，找出所有以”139”和”186”开头的符合长度的电话号码。 </p>
+<p>字符串里不一定都是数字，还有可能有别的字符 </p>
+<p> 14.反问学习建议？ </p>
+<p>答:可以多写代码提升自己的工程能力 </p>
+<p>面完半小时，约当天HR面 </p>
+<p> 8.28HR面15min </p>
+<p> 1.面试官介绍 </p>
+<p> 2.自我介绍 </p>
+<p> 3.为什么投Java开发？ </p>
+<p> 4.未来工作规划？ </p>
+<p> 5.还拿了哪些offer？ </p>
+<p> 6.为什么选择投递<a href="">网易</a>？ </p>
+<p> 7.期望薪资？ </p>
+<p> 8.如果多家offer，你会怎么选？ </p>
+<p> 9.别人家给多少工资？ </p>
+<p> 10.面试流程中还有哪些？ </p>
+<p> 11.选择offer的因素？ </p>
+<p> 12.反问:会被分去哪个部门？ </p>
+<p>答:现在还不清楚，然后HR给介绍了好长时间<a href="">网易</a>的工作氛围和企业文化，很耐心。 </p>
+<h3 id="快手提前批（三轮技术-一轮HR，offer）"><a href="#快手提前批（三轮技术-一轮HR，offer）" class="headerlink" title="快手提前批（三轮技术+一轮HR，offer）"></a><a href="">快手</a>提前批（三轮技术+一轮HR，offer）</h3><p> 8.29号一面50min </p>
+<p> 1.自我介绍 </p>
+<p> 2.<a href="">项目</a>介绍 </p>
+<p> 3.关于秒杀<a href="">项目</a>的一系列问题: </p>
+<p> (1)<a href="">redis</a>怎么用的，都存了什么？mq怎么用的？ </p>
+<p> (2)mq用了几个worker？如何保证顺序消费？ </p>
+<p> (3)压测的结论是什么？原因？ </p>
+<p> (4)如果持续增大并发量，哪个模块会出问题？如何解决？ </p>
+<p> (5)数据库主从复制的延时问题如何解决？ </p>
+<p> (6)mq堵塞了怎么办？ </p>
+<p> (7)多worker会不会对数据库产生压力？如何解决？ </p>
+<p> (8)如何避免重复下单？ </p>
+<p> (9)<a href="">客户端</a>如何知道自己下单成功？ </p>
+<p> 4.设计模式知道哪些？ </p>
+<p> 5.秒杀<a href="">项目</a>中用了什么设计模式？ </p>
+<p> 6.秒杀中mq的部分用到了什么设计模式？ </p>
+<p> 7.代码题:两个字符串A,B，找到A中覆盖B的最短的子串？ </p>
+<p> 8.反问:部门业务？ </p>
+<p>答:商业化部门，广告，流量变现之类的 </p>
+<p>面完十分钟，约了当天下午二面 </p>
+<p> 8.29号二面50min </p>
+<p> 1.自我介绍 </p>
+<p> 2.<a href="">项目</a>介绍 </p>
+<p> 3.自己负责的部分仔细讲一下？ </p>
+<p> 4.TrieTree前缀树结构讲一下 </p>
+<p> 5.ThreadLocal原理说一下？ </p>
+<p> 6.为什么key用弱引用？如何避免内存泄露？ </p>
+<p> 7.四种引用类型说一下 </p>
+<p> 8.美国大学生数学建模竞赛解决的问题？(大二搞的，太久了，都没准备，尴尬) </p>
+<p> 9.三次握手、四次挥手各个阶段的状态 </p>
+<p> 10.为什么关闭的时候要等2MSL时间？ </p>
+<p> 11.洪泛攻击知道吗？如何避免？ </p>
+<p> 12.GC机制和类加载机制说一下？ </p>
+<p> 13.为什么分为新生代和老年代？ </p>
+<p> 14.为什么分成e区和两个s区？比例为什么8.1.1？ </p>
+<p> 15.垃圾回收器知道哪些？更新一点的知道吗？ </p>
+<p> 16.说一下G1收集器的过程 </p>
+<p> 17.Innode引擎都知道什么？ </p>
+<p> 18.事务的底层是怎么实现的？ </p>
+<p> 19.binlog中都有啥？如何回滚，如何提交？ </p>
+<p> 20.mvcc解决了什么问题？ </p>
+<p> 21.如果只有一条select语句，它加锁吗？ </p>
+<p> 22.如果一条delete语句，如何加锁？ </p>
+<p> 23.主键加锁吗？ </p>
+<p> 24.聚簇索引和非聚簇索引如何加锁？ </p>
+<p> (蒙了蒙了，彻底蒙了。。。。) </p>
+<p>面试官笑了一下，说:没事，我就只是问问 </p>
+<p> 25.代码题 </p>
+<p> (1)一次买卖股票的最大收益 </p>
+<p> (2)多次买卖股票的最大收益 </p>
+<p> (3)打印<a href="">二叉树</a>中所有路径和为sum的集合 </p>
+<p>面完十分钟，通知二面过了，约了下周三面 </p>
+<p> 9.1号三面30min </p>
+<p> 1.自我介绍 </p>
+<p> 2.<a href="">项目</a>介绍 </p>
+<p> 3.抖音和<a href="">快手</a>的区别？ </p>
+<p> 4.有实习经历吗？ </p>
+<p> 5.挑一个锻炼自己的<a href="">项目</a>详细介绍 </p>
+<p> 6.<a href="">redis</a>为什么快？ </p>
+<p> 7.<a href="">redis</a>持久化机制？ </p>
+<p> 8.<a href="">redis</a>缺点？ </p>
+<p> 9.<a href="">redis</a>会不会造成数据丢失？ </p>
+<p> 10.<a href="">redis</a>饱和怎么办？什么策略？ </p>
+<p> 11.分数排行榜应该用<a href="">redis</a>哪个数据结构？ </p>
+<p> 12.说说跳表结构？为什么不用<a href="">哈希表</a>？时间复杂度？ </p>
+<p> 13.平时怎么学技术？ </p>
+<p> 14.最近看什么书？ </p>
+<p> 15.spring框架好用吗？说说理解的框架的优点？ </p>
+<p> 16.反问：学习建议？ </p>
+<p>答：基础很扎实，以后多参加<a href="">项目</a>锻炼更好。 </p>
+<p> 9.5号HR面25min </p>
+<p> 1.自我介绍 </p>
+<p> 2.意向工作地？ </p>
+<p> 3.选择工作的因素？ </p>
+<p> 4.拿了别人家offer吗？有谈薪吗？如何选择？ </p>
+<p> 5.有没有实习？ </p>
+<p> 6.在导师合伙的公司主要负责什么？有没有团队合作？ </p>
+<p> 7.平时用<a href="">快手</a>吗？用抖音吗？区别？ </p>
+<p> 8.用<a href="">快手</a>都来干什么？直播买货还是纯娱乐？ </p>
+<p> 9.有人说<a href="">快手</a>比较接地气，你怎么理解？ </p>
+<p> 10.保研的条件？ </p>
+<p> 11.学习路上有什么困难吗？如何解决的？ </p>
+<p> 12.可以实习吗？ </p>
+<p> 13.反问：新人培养怎么样？ </p>
+<p>答：导师制，不会立马就给需求，导师一对一带 </p>
+<h3 id="阿里本地生活（三轮技术面，又被另一个部门捞，还在池子中。。）"><a href="#阿里本地生活（三轮技术面，又被另一个部门捞，还在池子中。。）" class="headerlink" title="阿里本地生活（三轮技术面，又被另一个部门捞，还在池子中。。）"></a>阿里本地生活（三轮技术面，又被另一个部门捞，还在池子中。。）</h3><p>一面45min </p>
+<p>自我介绍  </p>
+<p><a href="">项目</a>介绍 </p>
+<p><a href="">项目</a>框架？ </p>
+<p> SpringBoot介绍一下优点？ </p>
+<p> Redis持久化机制 </p>
+<p> Redis为什么快？ </p>
+<p> TrieTree前缀树介绍一下 </p>
+<p>前缀树用来干嘛了？ </p>
+<p> CAS原理说一下？ </p>
+<p>多线程都有哪些锁？ </p>
+<p> synchronized和lock区别？ </p>
+<p>说一下生产线消费者模型的实现方式？ </p>
+<p> mvcc知道吗？解决什么问题？ </p>
+<p>数据库的题：求两张表分数唯一的name </p>
+<p>代码题：给定一些时间区间，判断一个时间点是否在区间里。（先合并区间，再<a href="">排序</a>，二分查找） </p>
+<p>回顾笔试第二题，为什么只跑了30％？我说剪枝没时间了，全排列之后就提交了。 </p>
+<p> 9月6号二面40min（没录音，好多问题忘记了） </p>
+<p>没有自我介绍，直接来<a href="">项目</a>，各种深问原理 </p>
+<p> 1.秒杀<a href="">项目</a>一系列问题（涉及到超卖，重复下单，数据不一致，交易系统，事务管理，<a href="">客户端</a>轮询反馈，第三方支付，数据库表的结构，各个表之间的关联等等） </p>
+<p> 2.数据库索引的底层实现？B+树说一下 </p>
+<p> 3.数据库如何加行锁？ </p>
+<p> 4.事务的底层原理？ </p>
+<p> 5.主键自增的底层是如何实现的？ </p>
+<p> 6.jvm内存模型 </p>
+<p> 7.GC机制 </p>
+<p> 8.类加载机制 </p>
+<p> 9.双亲委派模型 </p>
+<p>其他问题想不起来了。。。 </p>
+<p>后来面试官介绍自己部门业务介绍了好久，得有十分钟，很耐心，祈祷三面！ </p>
+<p> 9.8号总监面45min </p>
+<p>都是开放问题，涉及到并发场景下数据结构的选取，计网挖的也比较深，还有一些<a href="">项目</a>的问题 </p>
+<p>很奇怪，阿里三面是通过的，后面没有被发起第四轮面试，等了两周，被菜鸟部门捞起来，应该是之前的部门招满了，还是要早点投。 </p>
+<h3 id="美团点评（三轮技术面-一轮HR面，offer）"><a href="#美团点评（三轮技术面-一轮HR面，offer）" class="headerlink" title="美团点评（三轮技术面+一轮HR面，offer）"></a><a href="">美团点评</a>（三轮技术面+一轮HR面，offer）</h3><p> 9.10号一面1h </p>
+<p> 1.自我介绍 </p>
+<p> 2.为什么转专业？ </p>
+<p> 3.本科接触过哪些编程？ </p>
+<p> 4.本科研究生成绩排名？ </p>
+<p> 5.数学建模比赛负责什么？ </p>
+<p> 6.秒杀系统介绍一下？为什么要引入<a href="">redis</a>？ </p>
+<p> 7.还知道其他缓存吗？ </p>
+<p> 8.memcached和<a href="">redis</a>区别？ </p>
+<p> 9.<a href="">redis</a>支持多核吗？ </p>
+<p> 10.多核是啥意思？并行并发的区别？用专业术语描述一下 </p>
+<p> 11.<a href="">redis</a>的value支持多大？ </p>
+<p> 12.<a href="">redis</a>的过期策略？ </p>
+<p> 13.100k的数据适合用memcached还是<a href="">redis</a>？（应该是memcached） </p>
+<p> 14.mq有几种？区别了解吗？（rabbitmq，rocketmq，kafka区别） </p>
+<p> 15.七层网络协议都有哪些？ </p>
+<p> 16.TCP/IP五层有哪些？为什么分层？ </p>
+<p> 17.交换机，路由器是哪一层？物理层是啥？ </p>
+<p> 18.TCP和Http的区别？ </p>
+<p> 19.http是基于tcp还是udp？ </p>
+<p> 20.长连接说一下 </p>
+<p> 21.tcp的报文头？有报文长度嘛？ </p>
+<p> 22.tcp和udp区别？ </p>
+<p> 23.粘包问题怎么解决？（添加报文长度、每个报文结尾加分隔符、报文设置固定长度、发送方关闭nagle<a href="">算法</a>） </p>
+<p> 24.滑动窗口，拥塞控制说一下，窗口满了怎么办？缓冲了解吗？ </p>
+<p> 25.四次挥手状态位？<a href="">客户端</a>处于finwait1的时候还能给服务端发数据吗？ </p>
+<p> 26.int和Integer区别？ </p>
+<p> 27.定义一个Integer，存在哪？ </p>
+<p> 28.堆和栈区别？ </p>
+<p> 29.重载和重写区别？ </p>
+<p> 30.一个类中可以重写方法吗？ </p>
+<p> 31.线程池的优点？ </p>
+<p> 32.多线程解决的问题是什么？有缺点吗？ </p>
+<p> 33.死锁解释一下？如何解决？ </p>
+<p> 34.调用start和run的区别？sleep和wait区别？ </p>
+<p> 35.垃圾回收<a href="">算法</a>有哪些？在哪里进行？ </p>
+<p> 36.全局变量存在哪？ </p>
+<p> 37.代码能力怎么样？1-10打分，如何打分？ </p>
+<p> 38.跟代码能力特别强的同学的差距在哪？ </p>
+<p> 39.代码题：冒泡<a href="">排序</a> </p>
+<p>先写了个普通的冒泡，之后问如何优化一个已经排好序的数组的输出，之后又让递归写冒泡<a href="">排序</a>。 </p>
+<p> 9.16号二面1h </p>
+<p> 1.先做<a href="">算法题</a>： </p>
+<p>删除<a href="">链表</a>中节点值等于target的节点。 </p>
+<p>不创建辅助节点该怎么做？ </p>
+<p> 2.深拷贝和浅拷贝的区别？ </p>
+<p> 3.<a href="">项目</a>相关问题 </p>
+<p> 4.场景题：<a href="">微博</a>大V每次发<a href="">微博</a>，如何设计一个接口，给大V的所有粉丝进行推送消息？ </p>
+<p>刚开始说用消息队列，后来面试官说如果大V是话痨，队列满了就不行。而且按照主题监听，需要设置特别多主题，因为有很多大V也不行。 </p>
+<p>后面主要是围绕设计数据库，如何互关，如何建表，等等说的。 </p>
+<p>这块有聊了二十分钟左右。 </p>
+<p> 5.性格上有什么缺点？ </p>
+<p> 6.哪些offer，怎么选择？ </p>
+<p> 7.反问：部门业务？ </p>
+<p>答：<a href="">美团</a>平台，地图搜索组 </p>
+<p> 9.18号三面45min </p>
+<p> 1.自我介绍 </p>
+<p> 2.<a href="">项目</a>介绍？了解c++吗？ </p>
+<p> 3.秒杀系统介绍一下？为啥引入<a href="">redis</a>？ </p>
+<p> 4.为啥<a href="">redis</a>快？ </p>
+<p> 5.其他缓存了解什么？区别？ </p>
+<p> 6.在导师合作公司都干了什么？（人脸识别相关） </p>
+<p> 7.介绍一下你的人脸识别检测系统（这块说了十分钟左右） </p>
+<p> 8.秒杀系统压测了吗？如果继续增大并发量，那么接下来的瓶颈是什么？如何解决？（mq） </p>
+<p> 9.做题：字符串翻转（abc→cba） </p>
+<p>说实话，碰到这个题我惊呆了，我和面试官确认了两遍题目，面试官说对，就是反转字符串！ </p>
+<p> 10.<a href="">redis</a>和mysql区别？ </p>
+<p> 11.之前参加的比赛有没有创新点？介绍一下 </p>
+<p> 12.毕业设计方向是什么？有没有创新点？ </p>
+<p> 13.其他家offer有没有偏向的？想去哪？ </p>
+<p> 14.以后规划？ </p>
+<p> 15.面试官后面介绍说自己组里是做搜索的，有工程和<a href="">算法</a>，以后有机会也可以进去转<a href="">算法</a>之类的，面试官人很nice～ </p>
+<p> 16.面试官介绍自己部门差不多5min </p>
+<p> 9.23号HR面15min </p>
+<p> 1.自我介绍 </p>
+<p> 2.挑一个对自己挑战大的<a href="">项目</a>说一下，遇到什么问题？如何解决？ </p>
+<p> 3.团队分歧怎么看？ </p>
+<p> 4.了解我们部门业务吗？ </p>
+<p> 5.家在哪？父母做什么的？意向地？ </p>
+<p> 6.如果能拿到offer，能实习吗？ </p>
+<p> 7.还有其他offer吗？想去哪？ </p>
+<p> 8.为什么知道<a href="">美团</a>的Java比较好？ </p>
+<p> 9.反问：新人培养，公司有5天培训，之后部门有导师带，定期分享会等等～ </p>
+<p> 10.反问：什么时候有结果？答：1-2周之内 </p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  之前总以为秋招离自己很遥远，今年可算经历了一把，第一场面试连自我介绍都磕磕巴巴，到后来甚至还可以跟面试官扯扯皮，这就是成长吧。曾经也无数次担心基础不好和专硕时间短没时间准备而找不到工作，既然选择了改行，就只能咬牙坚持了，特别喜欢一句话：”努力交给自己，剩下的交给时间”。 </p>
+<p>  面试挂、笔试挂这些都不重要，还记得秋招第一家<a href="">vivo</a>提前批笔试就挂了，第二家<a href="">TP-LINK</a>简历挂，第三家<a href="">招银网络</a>提前批面试挂，大家都是从不断的挂中起来的，每次面完试做好复盘，找好自己哪块还薄弱，针对性的去复习，总会有几家面试是刚好对上眼的，就是问的都是你会的那种，如果你还没遇到，说明面的还不够多，哈哈。而且面试运气也很重要，有的面试官就特别好，会指引你一步一步来，不懂的还给讲解和提示，而且代码题也不难，相反，有的面试官就很刁钻，偏问你不会的，答不上来就说你基础不好。所以不要太在意每场面试的结果和面试官的评价，积累<a href="">面经</a>才是最重要的，这次不会的，下次保证不会错就好了。 </p>
+<p>​    好了，秋招之旅到这就彻底结束了，<a href="">面经</a>来的有点迟，同届的同学应该已经都找好工作了，就当记录一下秋招，顺便给后面的学弟学妹一点经验，不一定适合所有人，欢迎有问题的同学留言或者私聊。接下来好好准备毕设，好好享受学生时代最后一段时光，即将开始自己的北漂生活~</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wangfangxin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.wangfx.site/2018/10/23/%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" title="">https://www.wangfx.site/2018/10/23/秋招经验总结/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/08/14/Abyss's%20resume/" rel="next" title="Abyss's resume">
+                  Abyss's resume <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wangfangxin</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">640k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9:41</span>
+</div>
+
+      
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
