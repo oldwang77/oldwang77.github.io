@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.wangfx.site","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="作者：offer与我同在链接：https:&#x2F;&#x2F;www.nowcoder.com&#x2F;discuss&#x2F;534492?channel&#x3D;1009&amp;source_id&#x3D;home_feed来源：牛客网 前序  本文主要分享秋招上岸经验，不仅针对后端开发岗位，一些非技术方面的准备也是适用于所有参加校招的小伙伴的哦~    目的：分享经验给 21届的小伙伴和以后的师弟师妹们，仅针对跟我一样准备较晚，实力一般">
+<meta property="og:type" content="article">
+<meta property="og:title" content="abyss">
+<meta property="og:url" content="https://www.wangfx.site/2018/10/23/%E6%99%AE%E6%9C%AC%E7%A7%8B%E6%8B%9B%E4%B8%8A%E5%B2%B8/index.html">
+<meta property="og:site_name" content="abyss">
+<meta property="og:description" content="作者：offer与我同在链接：https:&#x2F;&#x2F;www.nowcoder.com&#x2F;discuss&#x2F;534492?channel&#x3D;1009&amp;source_id&#x3D;home_feed来源：牛客网 前序  本文主要分享秋招上岸经验，不仅针对后端开发岗位，一些非技术方面的准备也是适用于所有参加校招的小伙伴的哦~    目的：分享经验给 21届的小伙伴和以后的师弟师妹们，仅针对跟我一样准备较晚，实力一般">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://uploadfiles.nowcoder.com/images/20201009/282164873_1602256692274_AE20D95FEC0830FC7B556A78F2C84FF5">
+<meta property="og:image" content="https://uploadfiles.nowcoder.com/images/20201009/282164873_1602255708991_526CA6BF81492D796F82CBF0B6D4BDF9">
+<meta property="article:published_time" content="2018-10-22T16:11:18.000Z">
+<meta property="article:modified_time" content="2020-10-10T08:16:19.144Z">
+<meta property="article:author" content="wangfangxin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://uploadfiles.nowcoder.com/images/20201009/282164873_1602256692274_AE20D95FEC0830FC7B556A78F2C84FF5">
+
+
+<link rel="canonical" href="https://www.wangfx.site/2018/10/23/%E6%99%AE%E6%9C%AC%E7%A7%8B%E6%8B%9B%E4%B8%8A%E5%B2%B8/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | abyss</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">abyss</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">On the road.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">22</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">前序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">个人简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E5%BB%BA%E8%AE%AE-%EF%BC%9A-%E6%9C%80%E5%A5%BD%E5%9C%A8%E5%A4%A7%E4%B8%89%E5%AF%92%E5%81%87%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%82%E5%8A%A0%E5%AE%9E%E4%B9%A0%EF%BC%8C%E8%BF%99%E6%A0%B7%E5%9C%A8%E7%A7%8B%E6%8B%9B%E6%8F%90%E5%89%8D%E6%89%B9%E7%9A%84%E6%97%B6%E5%80%99-%EF%BC%8C%E4%BD%A0%E5%B0%B1%E6%8B%A5%E6%9C%89%E4%BA%86%E4%B8%80%E4%BB%BD%E5%AE%9E%E4%B9%A0%E7%BB%8F%E5%8E%86%EF%BC%8C%E5%BF%AB%E4%BA%BA%E4%B8%80%E6%AD%A5%E3%80%82%E5%BD%93%E7%84%B6%EF%BC%8C%E6%9C%80%E5%A4%A7%E5%A4%B4%E7%9A%84%E8%BF%98%E6%98%AF%E6%9A%91%E6%9C%9F%E5%AE%9E%E4%B9%A0%EF%BC%8C%E8%BF%99%E4%B8%AA%E6%97%B6%E5%80%99%E5%BE%88%E5%A4%9A%E5%85%AC%E5%8F%B8%E9%83%BD%E4%BC%9A%E6%8B%9B%E5%AE%9E%E4%B9%A0%E7%94%9F%EF%BC%8C%E4%B8%8D%E8%BF%87%E5%9C%A8%E8%BF%99%E4%B8%AA%E6%97%B6%E5%80%99%E5%AE%9E%E4%B9%A0%E5%8F%AF%E8%83%BD%E4%BC%9A%E5%92%8C%E7%A7%8B%E6%8B%9B%E5%86%B2%E7%AA%81%EF%BC%8C%E8%BF%99%E4%B8%AA%E6%97%B6%E5%80%99%E5%B0%B1%E8%A6%81%E8%87%AA%E5%B7%B1%E5%81%9A%E5%8F%96%E8%88%8D%E4%BA%86%EF%BC%8C%E5%A6%82%E6%9E%9C%E5%AE%9E%E4%B9%A0%E5%92%8C%E7%A7%8B%E6%8B%9B%E5%86%B2%E7%AA%81%E7%9A%84%E8%AF%9D%EF%BC%8C-%E4%B8%80%E5%AE%9A%E8%A6%81%E4%BB%A5%E7%A7%8B%E6%8B%9B%E4%B8%BA%E4%B8%BB%EF%BC%81-%E4%B8%80%E5%AE%9A%E8%A6%81%E4%BB%A5%E7%A7%8B%E6%8B%9B%E4%B8%BA%E4%B8%BB%EF%BC%81-%E4%B8%80%E5%AE%9A%E8%A6%81%E4%BB%A5%E7%A7%8B%E6%8B%9B%E4%B8%BA%E4%B8%BB%EF%BC%81"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">小建议**：**最好在大三寒假的时候参加实习，这样在秋招提前批的时候**，你就拥有了一份实习经历，快人一步。当然，最大头的还是暑期实习，这个时候很多公司都会招实习生，不过在这个时候实习可能会和秋招冲突，这个时候就要自己做取舍了，如果实习和秋招冲突的话，**一定要以秋招为主！**一定要以秋招为主！**一定要以秋招为主！</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%A1%E6%8B%9B%E7%9F%A5%E8%AF%86%E7%A7%91%E6%99%AE"><span class="nav-number">3.</span> <span class="nav-text">校招知识科普</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%BA%94%E5%B1%8A%E7%94%9F%EF%BC%9F"><span class="nav-number">3.0.1.</span> <span class="nav-text">什么是应届生？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFHC%EF%BC%9F"><span class="nav-number">3.0.2.</span> <span class="nav-text">什么是HC？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%98%A5%E6%8B%9B%EF%BC%8C%E7%A7%8B%E6%8B%9B%E6%8F%90%E5%89%8D%E6%89%B9%EF%BC%8C%E7%A7%8B%E6%8B%9B%EF%BC%8C%E8%A1%A5%E5%BD%95%EF%BC%9F"><span class="nav-number">3.0.3.</span> <span class="nav-text">什么是春招，秋招提前批，秋招，补录？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%84%8F%E5%90%91%E4%B9%A6%EF%BC%9F"><span class="nav-number">3.0.4.</span> <span class="nav-text">什么是意向书？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%B0%88%E8%96%AA%EF%BC%9F"><span class="nav-number">3.0.5.</span> <span class="nav-text">什么是谈薪？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E5%8E%86%E5%88%B6%E4%BD%9C%E4%B8%8E%E6%8A%95%E9%80%92"><span class="nav-number">4.</span> <span class="nav-text">简历制作与投递</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8E%86%E5%88%B6%E4%BD%9C"><span class="nav-number">4.0.1.</span> <span class="nav-text">简历制作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8E%86%E6%8A%95%E9%80%92"><span class="nav-number">4.0.2.</span> <span class="nav-text">简历投递</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%94%E8%AF%95-%E9%9D%A2%E8%AF%95%E6%B3%A8%E6%84%8F%E8%A6%81%E7%82%B9"><span class="nav-number">5.</span> <span class="nav-text">笔试&#x2F;面试注意要点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%94%E8%AF%95"><span class="nav-number">5.1.</span> <span class="nav-text">笔试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95"><span class="nav-number">5.2.</span> <span class="nav-text">面试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80-%E7%AE%97%E6%B3%95-%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87"><span class="nav-number">6.</span> <span class="nav-text">基础&#x2F;算法&#x2F;项目准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">6.1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%9F%BA%E7%A1%80"><span class="nav-number">6.1.1.</span> <span class="nav-text">Java基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%EF%BC%88%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%89"><span class="nav-number">6.1.2.</span> <span class="nav-text">并发（多线程）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">6.1.3.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C"><span class="nav-number">6.1.4.</span> <span class="nav-text">网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95"><span class="nav-number">6.1.5.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.1.6.</span> <span class="nav-text">设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6"><span class="nav-number">6.1.7.</span> <span class="nav-text">框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%80%83%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">6.1.8.</span> <span class="nav-text">计算机常考面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B8%B8%E8%80%83%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">6.1.9.</span> <span class="nav-text">数据库常考面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B8%B8%E8%80%83%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">6.1.10.</span> <span class="nav-text">操作系统常考面试题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95-1"><span class="nav-number">6.2.</span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%AE%9A%E8%A6%81%E6%AF%8F%E5%A4%A9%E9%83%BD%E8%A6%81%E5%88%B7%EF%BC%81%E4%B8%80%E5%AE%9A%E8%A6%81%E6%AF%8F%E5%A4%A9%E9%83%BD%E8%A6%81%E5%88%B7%EF%BC%81%E4%B8%80%E5%AE%9A%E8%A6%81%E6%AF%8F%E5%A4%A9%E9%83%BD%E8%A6%81%E5%88%B7%EF%BC%81"><span class="nav-number">6.2.1.</span> <span class="nav-text">一定要每天都要刷！一定要每天都要刷！一定要每天都要刷！</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE"><span class="nav-number">6.3.</span> <span class="nav-text">项目</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wangfangxin"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wangfangxin</p>
+  <div class="site-description" itemprop="description">虽不能至,然心向往之。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/oldwang77" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;oldwang77" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wangfangxin98@163.com" title="E-Mail → wangfangxin98@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://wangfx.blog.csdn.net/" title="CSDN → https:&#x2F;&#x2F;wangfx.blog.csdn.net&#x2F;" rel="noopener" target="_blank"><i class="fa fa-home fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://oldwang77.github.io/" title="Blog → https:&#x2F;&#x2F;oldwang77.github.io&#x2F;" rel="noopener" target="_blank"><i class="fa fa-file fa-fw"></i>Blog</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2018/10/23/%E6%99%AE%E6%9C%AC%E7%A7%8B%E6%8B%9B%E4%B8%8A%E5%B2%B8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wangfangxin">
+      <meta itemprop="description" content="虽不能至,然心向往之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abyss">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-10-22 16:11:18" itemprop="dateCreated datePublished" datetime="2018-10-22T16:11:18Z">2018-10-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-10 08:16:19" itemprop="dateModified" datetime="2020-10-10T08:16:19Z">2020-10-10</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="far fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>作者：offer与我同在<br>链接：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/534492?channel=1009&amp;source_id=home_feed">https://www.nowcoder.com/discuss/534492?channel=1009&amp;source_id=home_feed</a><br>来源：牛客网</p>
+<h1 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h1><p>  本文主要分享秋招上岸经验，不仅针对后端开发岗位，一些非技术方面的准备也是适用于所有参加校招的小伙伴的哦~ </p>
+<p>  目的：分享经验给 <strong>21届的小伙伴和以后的师弟师妹们</strong>，仅针对跟我一样准备较晚，实力一般的 <strong>普通选手</strong>， <strong>不适用大佬哈</strong> 🤣，如果文中有任何措辞不妥或知识性的错误，请大家斧正 😂 😂 </p>
+<h1 id="个人简介"><a href="#个人简介" class="headerlink" title="个人简介"></a>个人简介</h1><p>  <strong>渣本</strong>，计算机专业，后端开发方向， <strong>无实习</strong>，没有大厂实习，连小公司的实习我都没有，大学期间也是 <strong>没有参加任何计算机相关的比赛的</strong>，所以作为一个三无选手，在秋招中可以说是裸奔了。 </p>
+<p>  <strong>强烈推荐下一届的师弟师妹一定要参加实习，不管大公司还是小公司，有一段实习经历，你的简历上面就会好看很多，简历过关的概率也会大大提高！</strong> </p>
+<p>  去实习，还能有转正的机会，像阿里的转正率也是很高的，当别人在为秋招忙碌时，你就拿到转正offer，岂不是很爽对吧！！ </p>
+<h4 id="小建议-：-最好在大三寒假的时候参加实习，这样在秋招提前批的时候-，你就拥有了一份实习经历，快人一步。当然，最大头的还是暑期实习，这个时候很多公司都会招实习生，不过在这个时候实习可能会和秋招冲突，这个时候就要自己做取舍了，如果实习和秋招冲突的话，-一定要以秋招为主！-一定要以秋招为主！-一定要以秋招为主！"><a href="#小建议-：-最好在大三寒假的时候参加实习，这样在秋招提前批的时候-，你就拥有了一份实习经历，快人一步。当然，最大头的还是暑期实习，这个时候很多公司都会招实习生，不过在这个时候实习可能会和秋招冲突，这个时候就要自己做取舍了，如果实习和秋招冲突的话，-一定要以秋招为主！-一定要以秋招为主！-一定要以秋招为主！" class="headerlink" title="小建议**：**最好在大三寒假的时候参加实习，这样在秋招提前批的时候**，你就拥有了一份实习经历，快人一步。当然，最大头的还是暑期实习，这个时候很多公司都会招实习生，不过在这个时候实习可能会和秋招冲突，这个时候就要自己做取舍了，如果实习和秋招冲突的话，**一定要以秋招为主！**一定要以秋招为主！**一定要以秋招为主！"></a><strong>小建议**</strong>：**<strong>最好在大三寒假的时候参加实习，这样在秋招提前批的时候**</strong>，你就拥有了一份实习经历，快人一步。当然，最大头的还是暑期实习，这个时候很多公司都会招实习生，不过在这个时候实习可能会和秋招冲突，这个时候就要自己做取舍了，如果实习和秋招冲突的话，**<strong>一定要以秋招为主！**</strong>一定要以秋招为主！**<strong>一定要以秋招为主！</strong></h4><h1 id="校招知识科普"><a href="#校招知识科普" class="headerlink" title="校招知识科普"></a>校招知识科普</h1><h3 id="什么是应届生？"><a href="#什么是应届生？" class="headerlink" title="什么是应届生？"></a>什么是应届生？</h3><p>  <a href="">百度</a>百科的解是：应届毕业生是指在应该毕业的年份毕业的毕业生。通俗来讲，一般情况下就是明年毕业的大学生。（ 海外学生和研究生有些不是这种情况）比如我是2021年7月毕业，那么现在我就是应届生（2021届），我参加的就是2020年的秋招。 </p>
+<h3 id="什么是HC？"><a href="#什么是HC？" class="headerlink" title="什么是HC？"></a>什么是HC？</h3><p>  HC = head count，江湖人称 <strong>招聘人数</strong>。 </p>
+<h3 id="什么是春招，秋招提前批，秋招，补录？"><a href="#什么是春招，秋招提前批，秋招，补录？" class="headerlink" title="什么是春招，秋招提前批，秋招，补录？"></a>什么是春招，秋招提前批，秋招，补录？</h3><ul>
+<li>春招：一般在3~5月份，面向应届生，主要是在秋招时，公司没有招够，进行少量的补招。 </li>
+<li>秋招提前批：一般6~7月份下旬，中大厂对简历优秀（学历+含金量高的比赛+大厂实习）的选手进行选拔。 </li>
+<li>秋招：一般在8<del>10月份，常说的金九银十，其实十月份的机会（名企）就比较少了，主要面试还是集中在8月下旬</del>9月份。 </li>
+<li>补录：一般在10~11月份，拿了很多个offer的同学只能选择一个，就会释放很多hc，这个时候企业就会进行补录，第二次大规模补录是在第二年的春招。 </li>
+</ul>
+<h3 id="什么是意向书？"><a href="#什么是意向书？" class="headerlink" title="什么是意向书？"></a>什么是意向书？</h3><p>  意向书：企业在对候选人（应聘人）的所有考核都通过之后，就会发放录用意向书，正式录用的邮件会在沟通薪资福利之后发送。接收到意向书不代表稳了，还有很多未知因素的存在（可能被毁），所以最好能拿3+个意向书比较稳。 </p>
+<h3 id="什么是谈薪？"><a href="#什么是谈薪？" class="headerlink" title="什么是谈薪？"></a>什么是谈薪？</h3><p>  HR给收到录用意向书的候选人打电话沟通薪资福利，如果候选人接受，那么过后就会收到带薪资福利的正式录用offer，后续候选人就等着签约了。  </p>
+<p>  有些公司没有谈薪的环节，直接发送带薪资福利的邮件。 </p>
+<p>  如果手上有更好的offer，就可以跟HR谈条件，尝试提高薪资，也是我们平时所说的argue。听说现在一般要有阿里/字节的sp才能argue动battmdjkw这种级别的公司。一般argue成功的概率不大。 </p>
+<p>  今年的情况是，阿里字节<a href="">美团</a><a href="">滴滴</a><a href="">快手</a><a href="">拼多多</a>等公司都是在10月中下旬开始谈薪，<a href="">京东</a><a href="">小米</a><a href="">携程</a>顺丰等公司在国庆节之前就已经发送带薪邮件了。 </p>
+<h1 id="简历制作与投递"><a href="#简历制作与投递" class="headerlink" title="简历制作与投递"></a>简历制作与投递</h1><h3 id="简历制作"><a href="#简历制作" class="headerlink" title="简历制作"></a>简历制作</h3><p>  一份漂亮的简历，可以弥补其他方面的劣势，帮助你更大概率地通过简历筛选和获得面试机会。 </p>
+<ol>
+<li><p><strong>必要信息一定要写</strong>：姓名，学校，毕业时间，年龄，邮箱，手机号码。这几个信息一定要写在简历的开头，方便HR和面试官的快速获得最重要的信息，并且HR后续将笔试/面试通知发送给你也是通过发邮件/打电话来进行的。 </p>
+</li>
+<li><p><strong>最好要写的信息</strong>：求职意向（如：后端开发工程师），当前所在城市等。求职意向方便HR快速判断你是否和相应岗位匹配，当前所在地可以对你进行远程视频/电话面试还是现场面试的选择，今年疫情影响，大部分公司都采取了无接触远程视频/电话面试了。 </p>
+</li>
+<li><p><strong>不要写有多余的信息</strong>：一份好的简历，不应该有多余的信息，比如技术岗最好不要写学生社团经历和CET4，通过CET6可以写上去，如果分比较高，可以标注一下分数。关于学生社团经历要不要写在简历上，技术岗最好不要写，非技术岗可以写，这一方面不同人有不同的观点，你可以投递几家公司对比试试就知道了。 </p>
+</li>
+<li><p><strong>重点</strong>：技术栈，<a href="">项目</a>经历一定要写，实习经历如果没有那就没办法了。面试的时候，主要是在二面和三面，面试对你的提问就是怼<a href="">项目</a>/实习。<strong>注意</strong>：这三个模块有些内容如果是重点/亮点的话，就加粗字体！ </p>
+<p>强烈推荐 <strong>超级简历，</strong>在这个网站上面进行简历的制作，简单大方，不会花里胡哨！！ </p>
+</li>
+</ol>
+<h3 id="简历投递"><a href="#简历投递" class="headerlink" title="简历投递"></a>简历投递</h3><p>  你所知道的知名企业招聘都可以在牛客网的求职/校招版/校招日程中查找到： <a target="_blank" rel="noopener" href="https://www.nowcoder.com/school/schedule">https://www.nowcoder.com/school/schedule</a> </p>
+<p>  根据上面的日程信息，可以避免错过投递简历的时间！ </p>
+<p>  还可以在笔试日历中看到每一个月的笔试时间： <a target="_blank" rel="noopener" href="https://www.nowcoder.com/school/calendar">https://www.nowcoder.com/school/calendar</a>   </p>
+<p>  当然，也可以自己关注一些求职类的公众号，上面每一天都推送开放招聘的公司（自己去找吧，不是推广的）。 </p>
+<p>  <strong>内推？</strong>说实话，现在内推与否已经没有多大的意义了，牛客网上面遍地都是内推，人均内推，免笔试还是想想就好了，还是要经过笔试-面试的流程的（大佬除外）。 </p>
+<p>  tips：可以使用 <strong>牛客网的简历助手</strong>，先把一些必要信息填写完毕，当你在网申的时候就可以使用一键填充的功能，爽爆了！！招聘软件上面也可以投递，成功率似乎不大？</p>
+<p>作者：offer与我同在<br>链接：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/534492?channel=1009&amp;source_id=home_feed">https://www.nowcoder.com/discuss/534492?channel=1009&amp;source_id=home_feed</a><br>来源：牛客网</p>
+<h1 id="笔试-面试注意要点"><a href="#笔试-面试注意要点" class="headerlink" title="笔试/面试注意要点"></a>笔试/面试注意要点</h1><h2 id="笔试"><a href="#笔试" class="headerlink" title="笔试"></a>笔试</h2><p>  技术岗的笔试内容组成：选择题+填空题+编程题。这三项都是可选项，不一定同时出现，但是大部分都是有2~3道编程题的，<a href="">腾讯</a>字节<a href="">网易</a>等公司只有编程题，而且不止3道！ </p>
+<p>  笔试时间：一般90分钟，视情况而定。 </p>
+<p>  笔试一般在牛客网或者另一个测评平台（到时候你就知道了）进行，有的公司会使用自家的网站。一般牛客网的在线测评系统比较友好，我还没遇到过卡顿的现象。</p>
+<p>  记得有一次，360笔试在某测评平台最后10分钟出现网站崩溃的现象，最后的解决方法是进行重新考试（个人自由选择是否重新考，取两个最高分计入总分）。 </p>
+<p>  有些使用自家平台的，就是白板编程，没有代码智能提示，需要一个符号一个字母的打上去，而且不能评测你的代码是否能够通过测试用例，一般比较坑…… </p>
+<p>  【注意】一般笔试的过程中，需要全程视频监控，牛客网还需要屏幕和*<strong>控，防止作弊！建议大家还是 **诚信考试</strong>为好！ </p>
+<h2 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h2><p>  面试过程：面试开始会有自我介绍，最好控制在1分钟左右，姓名+学校+<a href="">项目</a>/实习经历即可，这也是给面试官看你简历的时间。面试时，表达要尽量做到逻辑清晰，思路完整。 </p>
+<p>  面试结束：一般会有反问，这个时候可以向面试官询问公司内部和所在部门的工作氛围和技术栈等，或者对你的建议等，最好不要问面试结果。 </p>
+<p>  一般面试的时候，多多少少都会有一点紧张，或者面试时突然某个知识点忘记了，这种情况是很正常的。平时，我们可以和共同作战的朋友进行<a href="">模拟面试</a>，互相问问题，加深记忆的同时还能训练思维和表达！ </p>
+<p>  【注意】不要抢话， <strong>注意礼貌</strong>，不要怼面试官，当然也有些面试官比较咄咄逼人，这个时候就看你自己怎么应对了。 </p>
+<p>​    </p>
+<h1 id="基础-算法-项目准备"><a href="#基础-算法-项目准备" class="headerlink" title="基础/算法/项目准备"></a>基础/<a href="">算法</a>/<a href="">项目</a>准备</h1><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>  基础知识是一面的重头戏，研发岗一般必须掌握：计算机网络+数据库+操作系统+中间件Redis（最好有）。 </p>
+<p>  如果你面试的是Java开发工程师，那就会问到Java语言特性相关，如Java关键字，JVM，SSM等。这也是一个很大的内容。 </p>
+<p>  这方面可以通过经典书籍、极客时间专栏、掘金小册、B站进行学习。 </p>
+<h3 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h3><p> 《Java核心技术（上册）》《疯狂Java讲义》《EffectiveJava中文版》 《深入理解JVM（第二版）》 </p>
+<h3 id="并发（多线程）"><a href="#并发（多线程）" class="headerlink" title="并发（多线程）"></a>并发（多线程）</h3><p> 《Java多线程编程实战指南（核心篇）》《Java并发编程的艺术》《并发编程实战》 </p>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p> 《MySql必知必会》《高性能MySql》《MySql技术内幕InnoDB存储引擎》《Redis设计与实现》 </p>
+<h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><p> 《计算机网络》《图解HTTP》 </p>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a><a href="">算法</a></h3><p> 《<a href="">剑指offer</a>》《程序员代码面试指南-IT名企<a href="">算法</a>与数据结构题目最优解》ps：多刷LeetCode </p>
+<h3 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h3><p> 《HeadFirst设计模式》《大话设计模式》 </p>
+<h3 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h3><p> 《SpringMVC学习指南》《看透SpringMVC》《Spring技术内幕》 </p>
+<h3 id="计算机常考面试题"><a href="#计算机常考面试题" class="headerlink" title="计算机常考面试题"></a>计算机常考面试题</h3><p> 1.OSI七层模型与TCP/IP 五层模型。 </p>
+<p> 2.常见应用层协议和运输层、网络层协议，以及硬件如路由器交换机之类在哪一层。 </p>
+<p> 3.TCP与UDP区别和应用场景，基于TCP的协议有哪些，基于UDP的有哪些。 </p>
+<p> 4.TCP可靠传输的保证，拥塞控制目和过程。 </p>
+<p> 5.TCP粘包现象原因和解决方法。 </p>
+<p> 6.TCP三次握手过程以及每次握手后的状态改变，为什么三次？为什么两次不行？如果你的答案是防止已失效的请求报文又传送到了服务端，建立了多余的链接，浪费资源，但这个答案被否定了，你还能给出什么答案？ </p>
+<p> 7.TCP四次挥手过程以及状态改变，为什么四次？CLOSE-WAIT和TIME-WAIT存在的意义？如何查看TIME-WAIT状态的链接数量？为什么会TIME-WAIT过多？解决方法是怎样的？ </p>
+<p> 8.TCP、UDP、IP、以太网报文格式以及重要字段，报文从一端到另一端传递的过程。 </p>
+<p> 9.浏览器输入URL并回车的过程以及相关协议，DNS查询过程。 </p>
+<p> 10.HTTP1.0、1.1、2.0之间的区别。 </p>
+<p> 11.HTTP与HTTPS之间的区别，HTTPS建立连接的过程，对称加密和非对称加密等。 </p>
+<p> 12.HTTP请求有哪些，post和get区别。 </p>
+<p> 13.HTTP常见响应状态码。 </p>
+<p>   14.重定向和转发区别。    </p>
+<h3 id="数据库常考面试题"><a href="#数据库常考面试题" class="headerlink" title="数据库常考面试题"></a>数据库常考面试题</h3><p>   1.关系型和非关系型数据库的区别。  </p>
+<p>   2.常用SQL语句（DDL,DML,DCL,<a href="">TCL</a>）。   </p>
+<p> 3.数据库中join的类型与区别（inner join, outer join, cross join, natural join, self join），注意适用场景和sql语句的编写。   </p>
+<p> \4. 数据库的索引类型。   </p>
+<p> 5.聚集索引和非聚集索引的区别（叶节点存储内容）。   </p>
+<p> 6.唯一性索引和主码索引的区别。   </p>
+<p> 7.索引的优缺点，什么时候使用索引，什么时候不能使用索引。<br>   8.索引的底层实现（B+树，为何不采用<a href="">红黑树</a>，B树）。   </p>
+<p>   \9. B树和B+树具体实现。   </p>
+<p> 10.索引最左前缀问题。   </p>
+<p> 11.MySQL的优化（高频，索引优化，性能优化）。   </p>
+<p> 12.数据库引擎介绍，Innodb和MyISAM的特点与区别。   </p>
+<p> 13.数据库中事务的ACID（四大特性都要能够举例说明，理解透彻，比如原子性和一致性的关联，隔离性不好会出现的问题）。   </p>
+<p> 14.数据库隔离性设置不同会出现的问题（脏读、不可重复读、丢失修改、幻读）。   </p>
+<p> 15.数据库的隔离级别。   </p>
+<p> 16.数据库连接池的作用。   </p>
+<p> 17.分布式事务。   </p>
+<p> 18.数据的锁的种类，加锁的方式。   </p>
+<p> 19.分库分表，主从复制，读写分离。   </p>
+<p>   20.<a href="">项目</a>中哪里用到了数据库，怎么用的。   </p>
+<h3 id="操作系统常考面试题"><a href="#操作系统常考面试题" class="headerlink" title="操作系统常考面试题"></a>操作系统常考面试题</h3><pre><code> 1.虚拟内存解决了什么问题？（分页，分段，段页的区别） </code></pre>
+<p>​     2.进程间通信的方式<br>​     3.死锁产生的必要条件？如何解决死锁的问题？<br>​     4.linux的各种IO模型？（重点掌握epoll，底层结构<a href="">红黑树</a> + <a href="">链表</a>，ET模式和LT模式）<br>​     5.内核态和用户态的区别以及转换？中断及其分类。<br>​     6.linux底层的零拷贝技术<br>​     7.操作系统大内核和微内核之间的区别以及各自的好处？<br>​     8.僵尸进程和孤儿进程产生的原因以及解决方式？<br>​     9.操作系统的各自调度方式  </p>
+<p>​    10.进程和线程的区别，协程。     </p>
+<p>​    11.操作系统内存管理方式，分页分段以及段页式的优缺点 </p>
+<p>​    12.页面置换<a href="">算法</a>有哪些，FIFO为什么不好？如何改进? LRU思想，手写LRU </p>
+<p>  其他的面试题可以在牛客网搜索<a href="">面经</a>，自行整理，只有自己整理的东西才是属于自己的。 </p>
+<p>  可以自己在云笔记或本地整理，方便自己查看，下面是我自己整理的面试题，有的时候整理一个模块就需要花两天的时间，我还是推荐大家自己整理，自己的东西才是最好的！ </p>
+<p>  <img src="https://uploadfiles.nowcoder.com/images/20201009/282164873_1602256692274_AE20D95FEC0830FC7B556A78F2C84FF5" alt="img"> </p>
+<h2 id="算法-1"><a href="#算法-1" class="headerlink" title="算法"></a><a href="">算法</a></h2><p>  我不是竞赛选手，所以前期连层序遍历也不会写，属实拉跨！学习<a href="">算法</a>，可以看看B站上面的视频，看看书籍，《大话数据结构》等。 </p>
+<p>  <strong><a href="">刷题</a>网站</strong>：Leetcode，牛客网。 </p>
+<p>  如果时间不够，刷hot 100就好了，时间充足，就刷高频题，牛客网上面有人总结过！我三个月时间前前后后刷了350多道题（包括剑指66题）。 </p>
+<p>  不是刷了一遍就过了，有些重点题目我刷了好几遍了，没办法，勤能补拙~ </p>
+<p>  <a href="">刷题</a>方法： <strong>按照标签刷</strong>，效率会高点，可以先刷树，你就学会了递归。 </p>
+<p>  <strong>最重要的是，每天都要刷，给自己定一个目标，每天刷几道，新题老题一起刷。</strong> </p>
+<h3 id="一定要每天都要刷！一定要每天都要刷！一定要每天都要刷！"><a href="#一定要每天都要刷！一定要每天都要刷！一定要每天都要刷！" class="headerlink" title="一定要每天都要刷！一定要每天都要刷！一定要每天都要刷！"></a>一定要每天都要刷！一定要每天都要刷！一定要每天都要刷！</h3><p>  <a href="">算法题</a>是必须的，要想通过笔试，就得会写<a href="">算法题</a>，不过有些公司的笔试题超级难，佛系就好了，大部分还是不难的，面试的时候也会写一两道<a href="">算法题</a>，一般比笔试简单一点。 </p>
+<p>  像字节，<a href="">算法题</a>写不出来直接感谢信！ </p>
+<p>​    <img src="https://uploadfiles.nowcoder.com/images/20201009/282164873_1602255708991_526CA6BF81492D796F82CBF0B6D4BDF9" alt="img"> </p>
+<h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a><a href="">项目</a></h2><p>  <a href="">项目</a>是重头戏，基本上一个crud<a href="">项目</a>+一个小轮子就可以过大部分公司的简历关了。 </p>
+<p>  <a href="">项目</a>推荐：慕课网上面一些课程，牛客网也有<a href="">项目</a>课，可以跟着做，但是自己要想好为什么使用这个技术，难点是什么，怎么解决问题的，面试必问！ </p>
+<p>  这一块以后想到再做补充~ </p>
+<p>  【温馨提示】<a href="">项目</a>不要准备秒杀系统，别问为什么  要是真的没有的话，那就上秒杀吧，要想搞懂秒杀，还是不简单的，从头到会做完一个秒杀系统还是可以学到很多东西的。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wangfangxin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.wangfx.site/2018/10/23/%E6%99%AE%E6%9C%AC%E7%A7%8B%E6%8B%9B%E4%B8%8A%E5%B2%B8/" title="">https://www.wangfx.site/2018/10/23/普本秋招上岸/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/10/23/%E8%8F%9C%E8%8F%9C%E7%9A%84java%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/10/23/%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wangfangxin</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">16:58</span>
+</div>
+
+      
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
