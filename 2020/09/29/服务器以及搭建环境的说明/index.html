@@ -22,17 +22,26 @@
     var CONFIG = {"hostname":"www.wangfx.site","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="Hey, password is required here.           78bd7b5c018c8025f8917dc0085c8e339b6904716fd7ea0e3718f2c1463f3d64ec10a108d9db39351334e4fc66f56f23585c39b49d72ab28cd4b116ed2fcc295a3b025367c67d5091a5">
+  <meta name="description" content="服务器相关知识为什么需要服务器自己的远程仓库、远程tomcat、搭建在服务器上 Linux练习环境部署。 服务器如何购买学生机：如果是学生机可以打折便宜 购买香港的机器可以免除备案，但是不要挂VPN，会被封  买完服务器干什么服务器就是一个远程的Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务器以及搭建环境的说明">
 <meta property="og:url" content="https://www.wangfx.site/2020/09/29/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A5%E5%8F%8A%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83%E7%9A%84%E8%AF%B4%E6%98%8E/index.html">
 <meta property="og:site_name" content="abyss">
-<meta property="og:description" content="Hey, password is required here.           78bd7b5c018c8025f8917dc0085c8e339b6904716fd7ea0e3718f2c1463f3d64ec10a108d9db39351334e4fc66f56f23585c39b49d72ab28cd4b116ed2fcc295a3b025367c67d5091a5">
+<meta property="og:description" content="服务器相关知识为什么需要服务器自己的远程仓库、远程tomcat、搭建在服务器上 Linux练习环境部署。 服务器如何购买学生机：如果是学生机可以打折便宜 购买香港的机器可以免除备案，但是不要挂VPN，会被封  买完服务器干什么服务器就是一个远程的Linux">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200928233249.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200928234233.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200928234629.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200928235323.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200928235426.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200929080011.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200929080124.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200929081126.png">
 <meta property="article:published_time" content="2020-09-28T23:16:12.000Z">
-<meta property="article:modified_time" content="2020-09-29T00:17:22.103Z">
+<meta property="article:modified_time" content="2021-05-22T04:05:05.520Z">
 <meta property="article:author" content="wangfangxin">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200928233249.png">
 
 
 <link rel="canonical" href="https://www.wangfx.site/2020/09/29/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A5%E5%8F%8A%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83%E7%9A%84%E8%AF%B4%E6%98%8E/">
@@ -140,7 +149,7 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -192,7 +201,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -204,6 +213,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">服务器相关知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">为什么需要服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A6%82%E4%BD%95%E8%B4%AD%E4%B9%B0"><span class="nav-number">1.2.</span> <span class="nav-text">服务器如何购买</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%B0%E5%AE%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B2%E4%BB%80%E4%B9%88"><span class="nav-number">1.3.</span> <span class="nav-text">买完服务器干什么</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -226,7 +236,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -315,8 +325,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-29 00:17:22" itemprop="dateModified" datetime="2020-09-29T00:17:22Z">2020-09-29</time>
+                <time title="修改时间：2021-05-22 04:05:05" itemprop="dateModified" datetime="2021-05-22T04:05:05Z">2021-05-22</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">项目开发</span></a>
+                </span>
+            </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -331,14 +350,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.8k</span>
+              <span>593</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -348,15 +367,44 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <div class="hbe-input-container">
-  <input type="password" id="hbePass" placeholder="" />
-    <label for="hbePass">Hey, password is required here.</label>
-    <div class="bottom-line"></div>
-  </div>
-  <script id="hbeData" type="hbeData" data-hmacdigest="9e7ef76f581780daad45ce917720cd7639c494b9c6d611e9615be046a6195a46">78bd7b5c018c8025f8917dc0085c8e339b6904716fd7ea0e3718f2c1463f3d64ec10a108d9db39351334e4fc66f56f23585c39b49d72ab28cd4b116ed2fcc295a3b025367c67d5091a56d3b91d96e0f121e71e941b6d092aa5a29934215675a9cd7b51b7b34aa51a7cfa4adc825f6ea04f164f2c8632cad1952cf768c74e9d72740f53d18953417ec35fda218d6f16b346bb7e9001f87dceddc87324f84f7f6662fef76dd044bb5101edb6f830b56f117dbf6886085c15f9ee8fbf56e4ff6d593ba33d9f1882b5fcac352f28e847482d545522590fc9bccdf9701a434f26669ade87b37cc1d0a35b19500731519d8d76a33a221e480be107549b68a594ccda54744cb9f86971ea0214267472941ffb34f3ae3c9af9f1d14f59d0967bf9bf4aaaf13ec19c2b3aee9c763e5b004516ecb31651058a8fbdfbf72762a05187c4db1cc0caa8b60c7015af02a3fa97c6bf9389899ec3fc0a086c5080b274d356d02a59f9b004c062b51ce29b9ccf1f6fd1d7037af37ab76c1ae580684e8e9357228d5d8068ff5210a216a4e1ce72e73e11a181f05f3efeaa11a126b57961ae6d4eddb8fd6fe5776f31db1b16dec53ff6de7c8457b7ba27496b36541a6128188f0b9375b1117fb5ec4ccf4db77d31308a1a8420769b3edecb84d43af21790d3ead96dcfa8b959d3204033e477ec1159145fe6433f33748a5487242a1dbf25a5084534d335e5fca38bbd188770ff7f5ed68206377791617e0e09c8f424bbecd00d9ea1d7de82888ce66a74d7bb4d8a12b9b6d8341ad3a79c5b5e07a61d178b846be16d77d7f00d5b7340c2fcefe16d653cd83243a58f05e9fdc37ef24076d60a55c4728804530dfbf703dafe5031d2d49006a730d7bc26d9fb12d8282aec398627d151c0568635a578c3ea555319a41eed22c25b779051517febb0de32ea9298b4becceaad58ce5e0c5e1dababb4bec3506783fca2cd0ebd53ca26d4bcc36eabb9461f57f682ab1cac4f5ef8f5dab697fada0834ee93fa64917b6350af876a9a9b04564022581d5ca16543efc8453693c2d3e4dc1a85a1d41f346e10eef2fda7ab38eb95f82ed14f54d35e9ab7135355e3b82fb648b2000abc77db33d99b89447dfdee0a4e1bbe236af9e28fd617699ebe7164d1e01c511aa70fc1fc2878298ec1f01b77b46e60bc6e59b898c0f0f64388c6d6905789ee8ac496807b4d5ec531677fb2437951e41f16b26696e9cf3ae349fe05d88671415d4da291fcaa72ccc3ccbf356a01ac39c6851346d493fa9bc6d7262b24cf3299f0fd90599d1c8a1da89e5a2f7a9b83347fcad37d4910d64499929c21162c57864642ae2400f0140aec9673704428405a9e138bcca6ecfed059686a9b602e884fe50399911fcadb7f0ef0a47d8b67cb6b5ef36c05968ace5ded6d93c061c39dacbd74c882963fc0a562d53ecf70cac62b021c9315e80d30c40cd68f14e6c42de654cef89dcd9b38a794803da82299b0cf1e218fb5902300d664f381a8c086639946892e5e116e98adb6af5956b06e559a555d0b583c9d3a511db3150771a2fa4f340937f2ef06ab15d17c63fa8d75f438bd7dee16f29e4037fcc67eaefadd76e798ea1d9d1b62dba09a1baa7c56ed52ee9d87035b60066535532aaecf4315dad41d5cfb7ec00ae37f987ba70d546e04918b27ea6a24b33349941199f5cd02f9b360f565dbbfdfe29ffb6fd7c0f7c33fbb5fbce02c7806677b209c7dd614ec4e032395b9f9726669db5cf8ee8a5463bf726f3996bc13b851ebaede8b36b4bbb9062ee5dd340f12ffb8b6ef8034b2f3fb122b58524ff6a10156b82caf57debf36ff6275d303943d4c18a6a508c2592d8db50cb12be05d8cca17f1c208e0481cdc9cf61ded2e93f3e7b63c72d7037dd0fdbd581ed3df00100a39454ff39c8b9303345e71a699709f7a5a5f703ce20a51fb35e7bff095ae64a350604df4c6f576b8025d72eec3991afd2394b5513bce4c5607889249c22a837124cb55b419ece95b95b46430baabccf8e58225596dd4db265bf1f65d5e2341f376b968db490710b4fa3df6b962289bd261f5387c7f281acccc6649eabe9882ffc049c2031c0ae8ed21523f925fe767369150e2a28c5aa6434d27246d80c0a6b09069db5f4bc8cefef271ca217dac02818f9992265994f3f62d4f583a72e8035c2dfbb7029f66222f004a29865abab2a7966bfa8cb0138dc16b393004fd5a11e5372b1d54759a6d32e3d589f148616bf1c4cb4e6d1c49be92f3ccb3561093ca9a9ea88fc4559a119223fe76b7f805c3b203e6bb470c2364ff7e639479679ee66b81c11296b2a5ab6ae62f3cb4fcbc699ce2eb3e954db5a6a9574f5126352131cc84b6491fde0062b9682e6002a81433afa7116bda904a7190a8f50f76115dac75a20fc4f22eed85725207db45a819e8222353966545f838a366665049f13559ea656a811da27f49a07586fa748d79b81951503542a7edb52a77cf88cb7a413de67b84e1361b53cbeb542e0f2269984b2f37e7b949a7a1b4b90655f96dee2d73cc5618bfc08b011856de4568a20c5e87621e5c37949aca6650f105c1a18f7fab10a8b296b367d4801a587ab69666d78bf8675b66042b19b6b81961df2b3b857b2051c7f503c8a954c5dfd7c958c8dda30e882e7ad7284a9703c8a6a11717989b44455670e5cf21f82be6e9563f513c032a03463b1c7c55eec660842032d563ed06dc8fcaa009f1872001dfbec55ac1d04e2a15000f1ed90c9e9ddc675703602d04cc3b396b7c5a8c02aa49f10d9318e039bead06ce8f0eb3b087c95670a4c6443f42133a4450944a68cc077986c991dece7c2e482f7c73d9a90dcda529eed399e4fde0ddd734338e00340b7fd4087bcc5445a73bec2e3ea87f2e42b7e8ae80cb5621fd00effe9b080eaf2217dfc18b0147b85dbe9f8558d6606c0e5968aa5e335e463de007198d3daa1f587f0c3a2ee3e7373b9f65200beb0ef2cdd0213e19684efc04e9dfc65d44657a0f379bfc90e89f801886a38941923fa2e27b4a1e2302514d2fa1adad7aeeba15ff5b33f9d8ffdabefb2b2ffcb9f12771977f1c3b4ab57848cdd7611d3e550e56d7406f787f474c410deb1b355ab7babf4438e5b7754913e695c5d533249fb6b1501b2a9fad1ba0c0da2b5dc459f7c8b0cad947a021b6b67ba26d0e3e3969c2b236c1be300a9d08e322e1463526be66d4b15b4e21dd91383da440c718fceb8c45c9ecd00345d130cc01998feede632beb3ed156754716c31a7d1a245f335d8cd58a7a3562c8207535dfdefb90518c26f0f91dff5a5792e9ada96afe2913abb475538dfd8f1a70e8762e25d7c1c88d3cc3a933f0963f82c9fa186c569cb6f3bb8a4536efbc6a5f0b20d7deb8698e96984cddfa6ff86f138de5fb0b976ff7b1d591ea4fc6c813bb0beab5c7dd2fd7087fe091a2cb4b51f761398e0d9ffa73866b6a9c89821b7cf40419a93b60baa7ce61d5cb7a00e323a1ae08c1aa9e5ab2df5499edacae48eb320b4155fb057eaa21dcb9f817018f25c34cd3978b438c9a685be08d8750ef2f5690218659ada2e2ced855cbc456757e26e6bbe839d445a4cd066e7c5619c0f0af00d652339104d4a6fed33cf1fd94bdbd2e4a443da14faf1dda0c41a865907903d2fd84769c1a249147b37d95c76a92afbb2730992451ce7b811c1e7f55ee17ee23cd9715bf733fbf7a4bd017c215aa20de8d3c7f277965f815b9fbba04d213f5f0a9d37652b3f06a87b8eb4f8e8529eb1afdc23eee296841d919d15aee90f696312c7760205b2da88f9eeb2ba4b86354d486524d72a69269fb3427a98d52e31067f98c664129a3676e390d769d1d863576d7375ffd461d059c6d5cca1c1aebab6175981064b617d509cd8204195a9c2f84c6591a65f9b774d69a70e6fa37beab4d20ee33f8669fb2fed1ae247ab471b69865b0cae5340593b0274f0a7396de1475ac9551ed74b4d50683a01a8867d078c2c652c854d9f7703a85b0460be1c63e48f846c7ff21696dacc5fb2fc5876c3dd4abb925a491ce313b8bb42f77949e53a38ad450b2c7d3a1d43d87c4619b886e5f678b7e1d1afe7b19f981cbbe278487a0a62d4720ebda6964d3555711977d0dbf7c93e2101ee68f0decdb0e4579deeb0f43f7e4c6600fe3eea373eb1c86da5436b59a25db5ef7d96d731e517faaff3736a7a05cff791f0a79bf3782ae7d8bd1833f4b60ff69c3adfd86da542ae963f1c9a89bb6007e3a6c1bd6829b4b5a83c9286d49def5be56cf13d9558bca7a1873675ec70e31ce904d2ee82d1b180b17d5a2ea20d40c767f60971cbc8cf0f0794b6afdf126db45fb956921f5065e4b23ae98c877cb219b0c1f58dc18fe2d27aefefde04385e58fcb0a10645ef294ac139d2d219f76602c3ef51feafad47e96fdb1fd95189e2c73cdf283d91794dc27360304f1dff74d4be8cef045fcab9c34bb749a631860b5155fe5aa8108450937f84a0ff51a918b9c06cd1b6ec0561d73cde64ee17f2427a4d694930235d2e2d444a201dbd1a7ba212cfed6fdf0e6b4e9166f0b7afa0b2ffdb56f0d83b077ffb717258e1d9a6f726faff02a8439acf4ee92c23f6c85b1f947cd2be7ac893f13107a85b4aebe190032d1d99043b1d5d3aa56e8b19dc81c1e373aadc70ed2f1bbf4e902ac2eee1c7bda91cc2b287edb1870c8c16e346269a3e86503d97a0b876c4b62a20b6a5aec73782d02d5c8867005085d32abf8ddae3511d93a1ac925671836f629e25877f63f977c</script>
-</div>
-<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
+        <h2 id="服务器相关知识"><a href="#服务器相关知识" class="headerlink" title="服务器相关知识"></a>服务器相关知识</h2><h3 id="为什么需要服务器"><a href="#为什么需要服务器" class="headerlink" title="为什么需要服务器"></a>为什么需要服务器</h3><p>自己的远程仓库、远程tomcat、搭建在服务器上</p>
+<p>Linux练习环境部署。</p>
+<h3 id="服务器如何购买"><a href="#服务器如何购买" class="headerlink" title="服务器如何购买"></a>服务器如何购买</h3><p>学生机：如果是学生机可以打折便宜</p>
+<p>购买香港的机器可以免除备案，但是不要挂VPN，会被封</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200928233249.png" alt="image-20200928233247632"></p>
+<h3 id="买完服务器干什么"><a href="#买完服务器干什么" class="headerlink" title="买完服务器干什么"></a>买完服务器干什么</h3><p>服务器就是一个远程的Linux</p>
+<p>1 在阿里云购买的，需要配置一个安全组件（端口映射都需要在阿里云安装）</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200928234233.png" alt="image-20200928234231411"></p>
+<p>2 购买完服务器后，可以获取服务器的公网IP地址，修改实例名称和密码，第一次修改需要重启，这个时候就可以用xshell进行远程连接，开22端口就可以了</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200928234629.png" alt="image-20200928234627372"></p>
+<p>连接到服务器之后，我们需要搭建环境！</p>
+<p>1、傻瓜式（宝塔面板）</p>
+<p>宝塔面板安装教学：<a target="_blank" rel="noopener" href="https://www.bt.cn/bbs/thread-19376-1-1.html">https://www.bt.cn/bbs/thread-19376-1-1.html</a></p>
+<p>下载完毕后，就可以得到一个地址：宝塔的管理地址</p>
+<ul>
+<li>url</li>
+<li>username</li>
+<li>password</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200928235323.png" alt="image-20200928235321696"></p>
+<p>进入管理页面</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200928235426.png" alt="image-20200928235425379"></p>
+<p>自定义安装服务器环境：可以直接进入软件商店就可以安装了</p>
+<p>一件部署应用</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200929080011.png" alt="image-20200929080009466"></p>
+<p>服务器的端口开启！</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200929080124.png" alt="image-20200929080122860"></p>
+<p>放入网站进行访问</p>
+<p>比如tomcat，就直接放在webapps目录下。你访问本机的tomcat和访问服务器上的tomcat是一样的</p>
+<p>特殊的网站：开源项目，就按照自己的操作来</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200929081126.png" alt="image-20200929081125438"></p>
+<p>war直接丢到tomcat即可</p>
+<p>jar直接使用java -jar执行即可访问</p>
+<p><strong>上传文件尽量使用xftp</strong></p>
+<p>2、命令式</p>
+<p>之后在B站公开课，从0入门Linux使用</p>
+<p><font color=red>网站访问测试失败，一定是防火墙（Linux服务器，阿里云安全测试面板）</font></p>
+
     </div>
 
     
@@ -459,7 +507,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">17:54</span>
+    <span title="站点阅读时长">17:29</span>
 </div>
 
       
