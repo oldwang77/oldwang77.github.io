@@ -22,28 +22,23 @@
     var CONFIG = {"hostname":"www.wangfx.site","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="第1章 秒杀业务接口设计与实现1-1 开发前的说明1-2 Service接口设计DTO数据传输层：用于Web层和Service层之间传递的数据封装。 entity：用于业务数据的封装，比如数据库中的数据。 1-3 秒杀Service接口实现里面有一个枚举数据类型 第2章 基于Spring托管Service实现类2-1 使用Spring托管Service依赖理论">
+  <meta name="description" content="常见的用法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java高并发秒杀API之Service层">
-<meta property="og:url" content="https://www.wangfx.site/2020/09/02/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BService%E5%B1%82/index.html">
+<meta property="og:title" content="keras学习笔记">
+<meta property="og:url" content="https://www.wangfx.site/2020/10/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/keras%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="abyss">
-<meta property="og:description" content="第1章 秒杀业务接口设计与实现1-1 开发前的说明1-2 Service接口设计DTO数据传输层：用于Web层和Service层之间传递的数据封装。 entity：用于业务数据的封装，比如数据库中的数据。 1-3 秒杀Service接口实现里面有一个枚举数据类型 第2章 基于Spring托管Service实现类2-1 使用Spring托管Service依赖理论">
+<meta property="og:description" content="常见的用法">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904204953.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205132.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205301.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205513.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205709.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904212301.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904212542.png">
-<meta property="article:published_time" content="2020-09-02T10:10:09.000Z">
-<meta property="article:modified_time" content="2020-09-08T12:48:33.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201024113013.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201024112805.png">
+<meta property="article:published_time" content="2020-10-24T11:22:32.000Z">
+<meta property="article:modified_time" content="2021-05-22T04:07:43.068Z">
 <meta property="article:author" content="wangfangxin">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904204953.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201024113013.png">
 
 
-<link rel="canonical" href="https://www.wangfx.site/2020/09/02/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BService%E5%B1%82/">
+<link rel="canonical" href="https://www.wangfx.site/2020/10/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/keras%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
 
 <script class="page-configurations">
@@ -56,7 +51,7 @@
   };
 </script>
 
-  <title>Java高并发秒杀API之Service层 | abyss</title>
+  <title>keras学习笔记 | abyss</title>
   
 
 
@@ -212,7 +207,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC1%E7%AB%A0-%E7%A7%92%E6%9D%80%E4%B8%9A%E5%8A%A1%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">第1章 秒杀业务接口设计与实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%BC%80%E5%8F%91%E5%89%8D%E7%9A%84%E8%AF%B4%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">1-1 开发前的说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Service%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.2.</span> <span class="nav-text">1-2 Service接口设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E7%A7%92%E6%9D%80Service%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.</span> <span class="nav-text">1-3 秒杀Service接口实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC2%E7%AB%A0-%E5%9F%BA%E4%BA%8ESpring%E6%89%98%E7%AE%A1Service%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">第2章 基于Spring托管Service实现类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E4%BD%BF%E7%94%A8Spring%E6%89%98%E7%AE%A1Service%E4%BE%9D%E8%B5%96%E7%90%86%E8%AE%BA"><span class="nav-number">2.1.</span> <span class="nav-text">2-1 使用Spring托管Service依赖理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E4%BD%BF%E7%94%A8Spring%E6%89%98%E7%AE%A1service%E4%BE%9D%E8%B5%96%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">2-2 使用Spring托管service依赖配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC3%E7%AB%A0-%E9%85%8D%E7%BD%AE%E5%B9%B6%E4%BD%BF%E7%94%A8spring%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="nav-number">3.</span> <span class="nav-text">第3章 配置并使用spring声明式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E4%BD%BF%E7%94%A8Spring%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%90%86%E8%AE%BA"><span class="nav-number">3.1.</span> <span class="nav-text">3-1 使用Spring声明式事务理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E4%BD%BF%E7%94%A8Spring%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">3-2 使用Spring声明式事务配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC4%E7%AB%A0-%E5%AE%8C%E6%88%90Service%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">第4章 完成Service集成测试</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">常见的用法</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -291,7 +286,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/09/02/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BService%E5%B1%82/">
+    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/10/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/keras%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -307,7 +302,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Java高并发秒杀API之Service层
+          keras学习笔记
         </h1>
 
         <div class="post-meta">
@@ -317,15 +312,24 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-09-02 10:10:09" itemprop="dateCreated datePublished" datetime="2020-09-02T10:10:09Z">2020-09-02</time>
+              <time title="创建时间：2020-10-24 11:22:32" itemprop="dateCreated datePublished" datetime="2020-10-24T11:22:32Z">2020-10-24</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-08 12:48:33" itemprop="dateModified" datetime="2020-09-08T12:48:33Z">2020-09-08</time>
+                <time title="修改时间：2021-05-22 04:07:43" itemprop="dateModified" datetime="2021-05-22T04:07:43Z">2021-05-22</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -340,7 +344,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>323</span>
+              <span>63</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -357,21 +361,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="第1章-秒杀业务接口设计与实现"><a href="#第1章-秒杀业务接口设计与实现" class="headerlink" title="第1章 秒杀业务接口设计与实现"></a>第1章 秒杀业务接口设计与实现</h2><h3 id="1-1-开发前的说明"><a href="#1-1-开发前的说明" class="headerlink" title="1-1 开发前的说明"></a>1-1 开发前的说明</h3><h3 id="1-2-Service接口设计"><a href="#1-2-Service接口设计" class="headerlink" title="1-2 Service接口设计"></a>1-2 Service接口设计</h3><p>DTO数据传输层：用于Web层和Service层之间传递的数据封装。</p>
-<p>entity：用于业务数据的封装，比如数据库中的数据。</p>
-<h3 id="1-3-秒杀Service接口实现"><a href="#1-3-秒杀Service接口实现" class="headerlink" title="1-3 秒杀Service接口实现"></a>1-3 秒杀Service接口实现</h3><p>里面有一个枚举数据类型</p>
-<h2 id="第2章-基于Spring托管Service实现类"><a href="#第2章-基于Spring托管Service实现类" class="headerlink" title="第2章 基于Spring托管Service实现类"></a>第2章 基于Spring托管Service实现类</h2><h3 id="2-1-使用Spring托管Service依赖理论"><a href="#2-1-使用Spring托管Service依赖理论" class="headerlink" title="2-1 使用Spring托管Service依赖理论"></a>2-1 使用Spring托管Service依赖理论</h3><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904204953.png" alt="image-20200904204952610"></p>
-<a id="more"></a>
+        <h1 id="常见的用法"><a href="#常见的用法" class="headerlink" title="常见的用法"></a>常见的用法</h1><a id="more"></a>
 
-<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205132.png" alt="image-20200904205131786"></p>
-<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205301.png" alt="image-20200904205259937"></p>
-<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205513.png" alt="image-20200904205512546"></p>
-<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904205709.png" alt="image-20200904205708497"></p>
-<h3 id="2-2-使用Spring托管service依赖配置"><a href="#2-2-使用Spring托管service依赖配置" class="headerlink" title="2-2 使用Spring托管service依赖配置"></a>2-2 使用Spring托管service依赖配置</h3><h2 id="第3章-配置并使用spring声明式事务"><a href="#第3章-配置并使用spring声明式事务" class="headerlink" title="第3章 配置并使用spring声明式事务"></a>第3章 配置并使用spring声明式事务</h2><h3 id="3-1-使用Spring声明式事务理论"><a href="#3-1-使用Spring声明式事务理论" class="headerlink" title="3-1 使用Spring声明式事务理论"></a>3-1 使用Spring声明式事务理论</h3><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904212301.png" alt="image-20200904212300228"></p>
-<p>​    将开启事务，事务的提交，回滚等交给Spring去做</p>
-<p>​    <img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20200904212542.png" alt="image-20200904212539823"></p>
-<p><strong>声明式事务独有的概念，和mysql事务无关，事务方法的嵌套</strong></p>
-<h3 id="3-2-使用Spring声明式事务配置"><a href="#3-2-使用Spring声明式事务配置" class="headerlink" title="3-2 使用Spring声明式事务配置"></a>3-2 使用Spring声明式事务配置</h3><h2 id="第4章-完成Service集成测试"><a href="#第4章-完成Service集成测试" class="headerlink" title="第4章 完成Service集成测试"></a>第4章 完成Service集成测试</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012969412/article/details/70882296/">https://blog.csdn.net/u012969412/article/details/70882296/</a></p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201024113013.png" alt="image-20201024113010922"></p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201024112805.png" alt="image-20201024112802596"></p>
+
     </div>
 
     
@@ -388,7 +383,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.wangfx.site/2020/09/02/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BService%E5%B1%82/" title="Java高并发秒杀API之Service层">https://www.wangfx.site/2020/09/02/Java高并发秒杀API之Service层/</a>
+    <a href="https://www.wangfx.site/2020/10/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/keras%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="keras学习笔记">https://www.wangfx.site/2020/10/24/深度学习/keras学习笔记/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -403,13 +398,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/08/31/%E6%9D%AD%E5%B7%9E%E5%80%BC%E5%BE%97%E4%B8%80%E5%90%83%E7%9A%84%E5%9C%B0%E6%96%B9/" rel="prev" title="杭州值得一吃的地方">
-                  <i class="fa fa-chevron-left"></i> 杭州值得一吃的地方
+                <a href="/2020/10/21/%E7%BB%8F%E9%AA%8C%E8%B4%B4/%E8%99%8E%E6%89%91%E8%80%81%E5%93%A5%E7%9A%84%E7%BB%8F%E9%AA%8C-%E5%85%B3%E4%BA%8EJava%E5%BC%80%E5%8F%91%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" rel="prev" title="秋招经验6">
+                  <i class="fa fa-chevron-left"></i> 秋招经验6
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/09/05/%E5%89%91%E6%8C%87Offer%E7%9B%B4%E9%80%9A%E8%BD%A6/" rel="next" title="剑指Offer直通车">
-                  剑指Offer直通车 <i class="fa fa-chevron-right"></i>
+                <a href="/2020/10/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%8B%82%E7%A5%9E%E8%AF%B4Java/" rel="next" title="设计模式-狂神说Java">
+                  设计模式-狂神说Java <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

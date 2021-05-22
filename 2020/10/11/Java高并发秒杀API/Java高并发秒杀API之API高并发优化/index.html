@@ -25,7 +25,7 @@
   <meta name="description" content="1 秒杀系统高并发分析 高并发在系统的什么位置  商品详情页  红色部分可能出现高并发的情况。 我们系统的详情页实际上应该部署到CDN上，CDN里面包括detail、css、js等静态资源  CDN是什么东西？ ​        CDN的全称是Content Delivery Network，即内容分发网络。CDN是构建在现有网络基础之上的智能虚拟网络，依靠部署在各地的边缘服务器，通过中心平台的负">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java高并发秒杀API之API高并发优化">
-<meta property="og:url" content="https://www.wangfx.site/2020/10/11/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BAPI%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:url" content="https://www.wangfx.site/2020/10/11/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BAPI%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96/index.html">
 <meta property="og:site_name" content="abyss">
 <meta property="og:description" content="1 秒杀系统高并发分析 高并发在系统的什么位置  商品详情页  红色部分可能出现高并发的情况。 我们系统的详情页实际上应该部署到CDN上，CDN里面包括detail、css、js等静态资源  CDN是什么东西？ ​        CDN的全称是Content Delivery Network，即内容分发网络。CDN是构建在现有网络基础之上的智能虚拟网络，依靠部署在各地的边缘服务器，通过中心平台的负">
 <meta property="og:locale" content="zh_CN">
@@ -54,7 +54,7 @@
 <meta name="twitter:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011115334.png">
 
 
-<link rel="canonical" href="https://www.wangfx.site/2020/10/11/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BAPI%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96/">
+<link rel="canonical" href="https://www.wangfx.site/2020/10/11/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BAPI%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96/">
 
 
 <script class="page-configurations">
@@ -302,7 +302,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/10/11/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BAPI%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/10/11/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BAPI%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -490,7 +490,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.wangfx.site/2020/10/11/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BAPI%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96/" title="Java高并发秒杀API之API高并发优化">https://www.wangfx.site/2020/10/11/Java高并发秒杀API之API高并发优化/</a>
+    <a href="https://www.wangfx.site/2020/10/11/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BAPI%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96/" title="Java高并发秒杀API之API高并发优化">https://www.wangfx.site/2020/10/11/Java高并发秒杀API/Java高并发秒杀API之API高并发优化/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -510,7 +510,7 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/10/13/%E8%8F%9C%E8%8F%9C%E7%9A%84java%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/" rel="next" title="秋招经验1">
+                <a href="/2020/10/13/%E7%BB%8F%E9%AA%8C%E8%B4%B4/%E8%8F%9C%E8%8F%9C%E7%9A%84java%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/" rel="next" title="秋招经验1">
                   秋招经验1 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
