@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.wangfx.site","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="1 秒杀系统高并发分析 高并发在系统的什么位置  商品详情页  红色部分可能出现高并发的情况。 我们系统的详情页实际上应该部署到CDN上，CDN里面包括detail、css、js等静态资源  CDN是什么东西？ ​        CDN的全称是Content Delivery Network，即内容分发网络。CDN是构建在现有网络基础之上的智能虚拟网络，依靠部署在各地的边缘服务器，通过中心平台的负">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java高并发秒杀API之API高并发优化">
+<meta property="og:url" content="https://www.wangfx.site/2020/10/11/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BAPI%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="abyss">
+<meta property="og:description" content="1 秒杀系统高并发分析 高并发在系统的什么位置  商品详情页  红色部分可能出现高并发的情况。 我们系统的详情页实际上应该部署到CDN上，CDN里面包括detail、css、js等静态资源  CDN是什么东西？ ​        CDN的全称是Content Delivery Network，即内容分发网络。CDN是构建在现有网络基础之上的智能虚拟网络，依靠部署在各地的边缘服务器，通过中心平台的负">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011115334.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011115543.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011115930.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011184623.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011185155.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011185256.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011190105.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011190007.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011212904.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011222643.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201101222139.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201101222416.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201101222813.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201102191847.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201102191716.png">
+<meta property="og:image" content="https://github.com/lewky/MarkdownImages/blob/master/resource/seckill/%E5%A4%A7%E5%9E%8B%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2%E6%9E%B6%E6%9E%84.jpg?raw=true">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201102200301.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201102200318.png">
+<meta property="article:published_time" content="2020-10-11T11:44:30.000Z">
+<meta property="article:modified_time" content="2020-11-02T13:21:08.565Z">
+<meta property="article:author" content="wangfangxin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011115334.png">
+
+
+<link rel="canonical" href="https://www.wangfx.site/2020/10/11/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BAPI%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java高并发秒杀API之API高并发优化 | abyss</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">abyss</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">On the road.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E9%AB%98%E5%B9%B6%E5%8F%91%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">1 秒杀系统高并发分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-redis%E5%90%8E%E7%AB%AF%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96%E7%BC%96%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">2 redis后端缓存优化编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">3 并发优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%961"><span class="nav-number">3.1.</span> <span class="nav-text">并发优化1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%962"><span class="nav-number">3.2.</span> <span class="nav-text">并发优化2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%963"><span class="nav-number">3.3.</span> <span class="nav-text">并发优化3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2%E6%9E%B6%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">4 系统部署架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">5 课程总结</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wangfangxin"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wangfangxin</p>
+  <div class="site-description" itemprop="description">虽不能至,然心向往之。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/oldwang77" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;oldwang77" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wangfangxin98@163.com" title="E-Mail → wangfangxin98@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://wangfx.blog.csdn.net/" title="CSDN → https:&#x2F;&#x2F;wangfx.blog.csdn.net&#x2F;" rel="noopener" target="_blank"><i class="fa fa-home fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://oldwang77.github.io/" title="Blog → https:&#x2F;&#x2F;oldwang77.github.io&#x2F;" rel="noopener" target="_blank"><i class="fa fa-file fa-fw"></i>Blog</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/10/11/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BAPI%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wangfangxin">
+      <meta itemprop="description" content="虽不能至,然心向往之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abyss">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java高并发秒杀API之API高并发优化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-11 11:44:30" itemprop="dateCreated datePublished" datetime="2020-10-11T11:44:30Z">2020-10-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-02 13:21:08" itemprop="dateModified" datetime="2020-11-02T13:21:08Z">2020-11-02</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="far fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-秒杀系统高并发分析"><a href="#1-秒杀系统高并发分析" class="headerlink" title="1 秒杀系统高并发分析"></a>1 秒杀系统高并发分析</h2><ul>
+<li>高并发在系统的什么位置</li>
+</ul>
+<p>商品详情页</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011115334.png" alt="image-20201011115333019"></p>
+<p>红色部分可能出现高并发的情况。</p>
+<p>我们系统的详情页实际上应该部署到CDN上，CDN里面包括detail、css、js等静态资源</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011115543.png" alt="image-20201011115542347"></p>
+<p>CDN是什么东西？</p>
+<p>​        CDN的全称是Content Delivery Network，即<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91%E7%BB%9C/4034265">内容分发网络</a>。CDN是构建在现有网络基础之上的智能虚拟网络，依靠部署在各地的边缘服务器，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络拥塞，提高用户访问响应速度和命中率。CDN的关键技术主要有内容存储和分发技术。</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011115930.png" alt="image-20201011115929300"></p>
+<p>也就是说，获取秒杀系统详情页的一些静态资源是不用访问我们的秒杀系统服务器的。</p>
+<p><strong>获取系统时间不用优化</strong>，因为访问一次内存大约只需要10ns，完全不用优化</p>
+<ul>
+<li>秒杀地址接口分析</li>
+</ul>
+<p>无法使用CDN缓存，因为秒杀地址接口是变化的，CDN适合放一些静态不变的资源</p>
+<p>适合放在服务器端缓存，redis等</p>
+<p>一致性维护成本较低</p>
+<ul>
+<li>秒杀操作优化分析</li>
+</ul>
+<p>无法使用CDN缓存</p>
+<p>后端缓存困难，库存问题，我们不能在缓存里面减库存，这样会产生不一致问题，我们必须通过mysql的事务保证一致性</p>
+<p>一行数据竞争：热点商品</p>
+<ul>
+<li>其他方案分析</li>
+</ul>
+<p>执行秒杀</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011184623.png" alt="image-20201011184621617"></p>
+<ul>
+<li>瓶颈分析</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011185155.png" alt="image-20201011185153716"></p>
+<p>Mysql和java并不是慢，java和数据库通信的过程中的网络延迟和GC花费了很多时间。</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011185256.png" alt="image-20201011185255721"></p>
+<p>如果我们的java服务器和mysql服务器不在一起，比如一个在上海，一个在北京，那么光网络延迟就会达到20毫秒</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011190105.png" alt="image-20201011190104843"></p>
+<ul>
+<li>优化分析</li>
+</ul>
+<p>行级锁是在commit之后释放的，优化的方向就是减少行级锁持有的时间</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011190007.png" alt="image-20201011190005311"></p>
+<p>那么如何放到mysql客户端呢？</p>
+<p>一共有两种解决方案</p>
+<p>​        一种是修改mysql的底层源码，在update语句后直接auto_commit，减少客户端和服务器之间通信的网络延迟，但是这个要很大的公司才能做到</p>
+<p>​        另外一种是使用存储过程，整个事务在mysql客户端完成</p>
+<ul>
+<li>优化总结</li>
+</ul>
+<p>前端：</p>
+<pre><code> 动静态数据做分离，减少请求与响应时间；</code></pre>
+<p>​    按钮防重复，防止用户发送无效的重复请求，因为秒杀活动一般都会有购买数量的限制，敲的次数再多，最后还是要查看是否已购。影响了效率，可有前端代为处理并优化</p>
+<p>后端：</p>
+<p>​    使用CDN换存重要的静态资源等；</p>
+<p>​    在后端对活动结束时间、商品选购时间、业务的相关逻辑要求都放在后端代码中，并调用缓存来进行暂存</p>
+<p>​    事务竞争优化：减少事务锁的时间，减少网络延迟消耗</p>
+<h2 id="2-redis后端缓存优化编码"><a href="#2-redis后端缓存优化编码" class="headerlink" title="2 redis后端缓存优化编码"></a>2 redis后端缓存优化编码</h2><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011212904.png" alt="image-20201011212902424"></p>
+<p>详情页主要依靠CDN进行优化，但是不同公司的CDN设置不太相同，就不优化了</p>
+<p><strong>获取系统时间不用优化</strong>，因为访问一次内存大约只需要10ns，完全不用优化</p>
+<p>地址暴露接口，是根据判断当前系统时间，秒杀开始时间和结束时间判断的，是动态的，不太适合放在cdn，我们不希望它频繁的访问数据库，所以我们用<font color='red'>redis优化地址暴露接口</font></p>
+<p>如何使用redis优化</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201011222643.png" alt="image-20201011222641397"></p>
+<p>redis后端缓存优化编码</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201101222139.png" alt="image-20201101222137402"></p>
+<h2 id="3-并发优化"><a href="#3-并发优化" class="headerlink" title="3 并发优化"></a>3 并发优化</h2><h3 id="并发优化1"><a href="#并发优化1" class="headerlink" title="并发优化1"></a>并发优化1</h3><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201101222416.png" alt="image-20201101222415628"></p>
+<p>怎么优化，只需要调整update和insert的执行顺序就可以</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201101222813.png" alt="image-20201101222812037"></p>
+<p>因为update操作需要拿到行级锁，，调换顺序则减少了持有锁的时间</p>
+<p>原来执行的流程</p>
+<p>update(发送在mysql网络时间+gc时间） + insert(发送在mysql网络时间+gc时间)</p>
+<p>因为update同一行会导致行级锁，而insert是可以并行执行的。</p>
+<p>1.如果先update, update在前面会加锁</p>
+<p>锁 + update(发送在mysql网络时间+gc时间） + insert(发送在mysql网络时间+gc时间) + 提交锁</p>
+<p>其实的线程就要等，这个锁提交才能执行。</p>
+<p>2.如果先insert,</p>
+<p>insert(发送在mysql网络时间+gc时间） +  锁+ update(发送在mysql网络时间+gc时间) + 提交锁</p>
+<p><strong>其实的线程可以并发insert. 这样子会减少锁的时长</strong></p>
+<p>通过这一步，可以降低一倍的网络延迟的时间！！</p>
+<h3 id="并发优化2"><a href="#并发优化2" class="headerlink" title="并发优化2"></a>并发优化2</h3><p>深度优化，事务再MySQL端执行（存储过程）</p>
+<p>我们优化的方向就是降低行级锁到commit的时间</p>
+<p>显示我们定义的存储过程</p>
+<p>show create procedure execute_seckill\G</p>
+<p>存储过程是在本地执行的，这样可以大大降低行级锁持有的时间，因为sql语句执行的速度很快</p>
+<h3 id="并发优化3"><a href="#并发优化3" class="headerlink" title="并发优化3"></a>并发优化3</h3><p>开发存储过程阶段的秒杀逻辑</p>
+<p>在seckillDao层</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201102191847.png" alt="image-20201102191846037"></p>
+<p>mybatis调用存储过程</p>
+<p>![image-20201102192001817](/Users/oldwong/Library/Application Support/typora-user-images/image-20201102192001817.png)</p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201102191716.png" alt="image-20201102191715411"></p>
+<h2 id="4-系统部署架构"><a href="#4-系统部署架构" class="headerlink" title="4 系统部署架构"></a>4 系统部署架构</h2><p>谈一谈大型系统部署架构</p>
+<p>系统可能用到哪些服务</p>
+<p>CDN：可以加速静态资源的访问，用户通过CDN获取到的数据，就不需要到我们的服务器端进行获取了</p>
+<p>WebServer:Nginx+Jetty</p>
+<p>Mysql</p>
+<p><img src="https://github.com/lewky/MarkdownImages/blob/master/resource/seckill/%E5%A4%A7%E5%9E%8B%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2%E6%9E%B6%E6%9E%84.jpg?raw=true" alt="img"></p>
+<p>大型系统部署架构，逻辑集群就是开发的部分。</p>
+<ol>
+<li>Nginx做负载均衡</li>
+<li>分库分表：在秒杀系统中，一般通过关键的秒杀商品id取模进行分库分表，以512为一张表，1024为一张表。分库分表一般采用开源架构，如阿里巴巴的tddl分库分表框架。</li>
+<li>统计分析：一般使用hadoop等架构进行分析</li>
+</ol>
+<h2 id="5-课程总结"><a href="#5-课程总结" class="headerlink" title="5 课程总结"></a>5 课程总结</h2><p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201102200301.png" alt="image-20201102200259813"></p>
+<p><img src="https://raw.githubusercontent.com/oldwang77/cloudimg/master/data/20201102200318.png" alt="image-20201102200316628"></p>
+<p>![image-20201102200511036](/Users/oldwong/Library/Application Support/typora-user-images/image-20201102200511036.png)</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wangfangxin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.wangfx.site/2020/10/11/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API%E4%B9%8BAPI%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96/" title="Java高并发秒杀API之API高并发优化">https://www.wangfx.site/2020/10/11/Java高并发秒杀API之API高并发优化/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/10/07/JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="prev" title="JUC并发编程">
+                  <i class="fa fa-chevron-left"></i> JUC并发编程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/10/24/keras%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="keras学习笔记">
+                  keras学习笔记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wangfangxin</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">18:01</span>
+</div>
+
+      
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
