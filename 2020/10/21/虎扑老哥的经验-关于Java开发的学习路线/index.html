@@ -22,20 +22,20 @@
     var CONFIG = {"hostname":"www.wangfx.site","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="MicroservicesIn short, the microservice architectural style [1] is an approach to developing a single application as a suite of small services, each running in its own process and communicating with l">
+  <meta name="description" content="我个人推荐的学习路线： Java Java 基础：b站上非常多资源，黑马和尚硅谷的都可，书的话我觉得《Java核心卷》和《Java程序设计语言》都可。 Java 并发：我看了《并发编程的艺术》这本书，还不错的，重点就是 volatile、synchronized、JMM、各种锁、并发工具包、CAS。 Java 虚拟机：感觉理论偏多，我主要看了《深入理解JVM》，感觉面试重点就是运行时数据区和类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微服务论文-狂神说Java">
-<meta property="og:url" content="https://www.wangfx.site/2020/09/17/Microservices/index.html">
+<meta property="og:title" content="秋招经验6">
+<meta property="og:url" content="https://www.wangfx.site/2020/10/21/%E8%99%8E%E6%89%91%E8%80%81%E5%93%A5%E7%9A%84%E7%BB%8F%E9%AA%8C-%E5%85%B3%E4%BA%8EJava%E5%BC%80%E5%8F%91%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/index.html">
 <meta property="og:site_name" content="abyss">
-<meta property="og:description" content="MicroservicesIn short, the microservice architectural style [1] is an approach to developing a single application as a suite of small services, each running in its own process and communicating with l">
+<meta property="og:description" content="我个人推荐的学习路线： Java Java 基础：b站上非常多资源，黑马和尚硅谷的都可，书的话我觉得《Java核心卷》和《Java程序设计语言》都可。 Java 并发：我看了《并发编程的艺术》这本书，还不错的，重点就是 volatile、synchronized、JMM、各种锁、并发工具包、CAS。 Java 虚拟机：感觉理论偏多，我主要看了《深入理解JVM》，感觉面试重点就是运行时数据区和类">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-09-17T10:36:46.000Z">
-<meta property="article:modified_time" content="2020-09-17T02:37:22.000Z">
+<meta property="article:published_time" content="2020-10-20T20:10:03.000Z">
+<meta property="article:modified_time" content="2021-05-22T03:54:26.695Z">
 <meta property="article:author" content="wangfangxin">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://www.wangfx.site/2020/09/17/Microservices/">
+<link rel="canonical" href="https://www.wangfx.site/2020/10/21/%E8%99%8E%E6%89%91%E8%80%81%E5%93%A5%E7%9A%84%E7%BB%8F%E9%AA%8C-%E5%85%B3%E4%BA%8EJava%E5%BC%80%E5%8F%91%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">
 
 
 <script class="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>微服务论文-狂神说Java | abyss</title>
+  <title>秋招经验6 | abyss</title>
   
 
 
@@ -192,7 +192,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -204,7 +204,6 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Microservices"><span class="nav-number">1.</span> <span class="nav-text">Microservices</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -283,7 +282,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/09/17/Microservices/">
+    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/10/21/%E8%99%8E%E6%89%91%E8%80%81%E5%93%A5%E7%9A%84%E7%BB%8F%E9%AA%8C-%E5%85%B3%E4%BA%8EJava%E5%BC%80%E5%8F%91%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -299,7 +298,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          微服务论文-狂神说Java
+          秋招经验6
         </h1>
 
         <div class="post-meta">
@@ -308,9 +307,24 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-09-17 10:36:46 / 修改时间：02:37:22" itemprop="dateCreated datePublished" datetime="2020-09-17T10:36:46Z">2020-09-17</time>
+              <time title="创建时间：2020-10-20 20:10:03" itemprop="dateCreated datePublished" datetime="2020-10-20T20:10:03Z">2020-10-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-22 03:54:26" itemprop="dateModified" datetime="2021-05-22T03:54:26Z">2021-05-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BB%8F%E9%AA%8C%E8%B4%B4/" itemprop="url" rel="index"><span itemprop="name">经验贴</span></a>
+                </span>
             </span>
 
           
@@ -326,14 +340,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>214</span>
+              <span>2.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -343,7 +357,38 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="Microservices"><a href="#Microservices" class="headerlink" title="Microservices"></a>Microservices</h1><p>In short, the microservice architectural style [<a target="_blank" rel="noopener" href="https://martinfowler.com/articles/microservices.html#footnote-etymology">1]</a> is an approach to developing a single application as a suite of small services, each running in its own process and communicating with lightweight mechanisms, often an HTTP resource API.</p>
+        <a id="more"></a>
+
+<p>我个人推荐的学习路线：</p>
+<p>Java</p>
+<p>Java 基础：b站上非常多资源，黑马和尚硅谷的都可，书的话我觉得《Java核心卷》和《Java程序设计语言》都可。</p>
+<p>Java 并发：我看了《并发编程的艺术》这本书，还不错的，重点就是 volatile、synchronized、JMM、各种锁、并发工具包、CAS。</p>
+<p>Java 虚拟机：感觉理论偏多，我主要看了《深入理解JVM》，感觉面试重点就是运行时数据区和类加载机制、GC。</p>
+<p>Spring 框架：黑马和尚硅谷的视频都不错，不过我是看了”楠哥教你学Java“的SSM，感觉更加简洁易懂。</p>
+<p>Java 的话，个人推荐先动手，多看视频多操作，要面试深入理解知识点再看书。前期主要以视频为主，多动手，后期以自己的总结和书为主，多背题。像我整理基础知识点的时候，都是同时看五六本书+CSDN+牛客来总结的，特别麻烦。</p>
+<p>数据库</p>
+<p>MySQL：这个应该是基础必学的，我主要看的是尚硅谷李玉婷老师的MySQL视频，b站也可以搜到，感觉很不错。书的话看的就是《高性能MySQL》，重点我只看了前几章，就是锁、存储引擎、索引、优化这些。</p>
+<p>Redis：这个对于想去好一点互联网的同学来说应该也是必需的，b站黑马程序员的redis课程蛮不错的，书的话《Redis开发与运维》我觉得非常不错，知识点很清晰。</p>
+<p>计算机基础</p>
+<p>计算机网络：这个算是我最拿得出手的部分了，硬背就完事了..主要看了谢希仁的《计算机网络第七版》，感觉足够了，重点就是TCP和HTTP了。</p>
+<p>操作系统：我主要看的就是王道的操作系统，感觉对我来说算足够了，重点就是进程、线程、死锁。有的公司可能会问页面调度算法，FIFO、LRU 啥的。</p>
+<p>数据结构：感觉直接刷算法就可，leetcode 搞起来，我一开始第一题都不会做，熟能生巧吧，虽然现在也菜，但比当时好多了，这个就是靠天赋，没有天赋就是积少成多了。</p>
+<p>计算机组成原理：没看过。</p>
+<p>面试的话，说实话主要就是靠背，毕竟运气啥的咱不能决定，背的话我还有个绝技，就是自己录音，然后睡觉的时候一直听，当时考研靠这个一周背过了肖四2万字的大题。。技术的话大概就这么多了，之后都是我的无用吐槽，可以不看哈哈哈哈。</p>
+<p>心态<br>心态是个很重要的东西，怎么说呢，活着不就是为了生活好吗，生活好不就是为了开心些吗。。当我看到这种话的时候我感觉这就是废话，确实，别人也对我说过类似的话，我心里想，我找不到工作，我心情踏马能好吗？淦。</p>
+<p>刚来牛客的时候，我觉得这里都是神一样的人物，这里就是个学习圣地，我每天不刷几个小时都难受，我从来没想过我这样的废物也能混到个红名。。。还有1000个粉丝我真的超级惭愧。。以后我也没啥技术贡献了，所以可以安心取关我了。。我可是本科考研前i++和++i不分的人啊，话说之前压根就没想做这一行，在虎扑发帖问计算机专业不会编程能做什么被人疯狂嘲讽，我考研还是专业第一，但我确实不会编程，所以决定走这行也下了蛮大决心（好像也没啥决心，我其它也不会啥）。</p>
+<p>在去年的8月27日，我参加了某不知名小厂（一个月工资1千）的招聘，一问三不知，面向对象的特性，不知道。。说几个你知道的排序？堆排序（其它全忘了，堆排序还是想了很久）。。你这是学计算机的吗？我说我没好好学。。真尴尬得要命，当场回家，下楼就买了两本书，C#的，后来又卖了- -</p>
+<p>在同学的”教唆”下选择了Java，现在来看也不后悔，对于基础薄弱的人来说，Java确实是不错的选择，很容易上手。本科入学不是C语言和C++我真觉得我能再抢救一下的，淦腻🐎的指针。。。</p>
+<p>一开始我跟所有人一样焦虑，大概是从9月15日开始学Java的..由于自己相当于半个零基础，真的很慌，我连个publict int add(int a,int b) return a + b;这种方法都不会写。。当初的梦想就是一年10万，10万我都觉得多了，我感觉自己就是个废物啥都不会，凭啥给我发10万工资哈哈哈哈。然后反正就一听学长去中兴，一听谁去浦发，一听20万一听钱就脑子很热。。感觉脑子里就只有工资，觉得自己一定要赚20万啥的。</p>
+<p>每天就狂学，脑子疼，是真的每天脑子疼，太焦虑了，不停地掉头发。。跟同学去网吧，别人打游戏我刷牛客选择题；跟同学吃烧烤，别人吃东西，我刷牛客选择题；跟同学去酒吧，别人聊天，我刷牛客选择题。。好像做这些能换来一点心安似的。。9-12月大概都是这个心态吧。。</p>
+<p>1月的时候，疫情来了，我这人很怕死，当时就觉得还是命最重要，家里还来了武汉的，每天吓得也没心情学习了，好多天一天就光做一道算法题。。然后我就一直想着去个银行得了，也没咋学，这算是第二个阶段吧，1-3月都这样。</p>
+<p>第三个阶段是4-6月，一开始没准备投简历的，因为就想去银行国企了，也没啥实习可参加。后来boss直聘上的阿里和华为疯狂轰炸我，我就参加了阿里。。第一次笔试面试就是阿里的，笔试0分还面我了，还进了2面，可能我因此膨胀了，就开始疯狂投简历，开始了自己的春招实习。。反正后面一共投了20多家，就过了2个，哈哈。这段时间边面试边学习，感觉也是自己最强的时候了。</p>
+<p>最后一个阶段，7月到现在，没咋学习了，每天就看看自己的总结，不断地缩减，添加，也没背，反正天天看来看去多少也有记忆了。直到今天签约了农行，开始还是蛮纠结的，后来觉得也就罢了，自己学那么多为了钱为什么不去互联网呢，不就是为了轻松点吗。。看别人都签了，下午最后我也就签了，其实自己不缺钱，有房，但都是家里给的，家里啥也不剩，开始想去浙商也是想多给家里点钱。</p>
+<p>反正我觉得吧，弄清楚自己想要什么真的是非常重要的一件事情，不要像我一开始一样，一看别人都去互联网赚大钱，一看见钱，一听见几十万什么的就迷失了自己，就跟着瞎搞，就跟着瞎焦虑。。无论是去哪里，定好自己的目标，按部就班，朝着那个目标不断努力，结果是不会让你后悔的。</p>
+<p>最后想说什么，就是真的不要做无畏的焦虑，付出多少就会收获多少，烦恼无用，劳逸结合，弄清楚自己想要什么，然后朝着这个方向努力就是了，不要受外界过多影响了。</p>
+<p>最后再说一句，湖人总冠军。</p>
+<p>最后再说一句，祝2021届都拿到自己想要的offer，2022届及之后明年秋招都顺利。</p>
+<p>最后再说一句，农行永远的神，明年请不要挂我转正再给我个S+绩效吧哈哈哈！</p>
 
     </div>
 
@@ -361,7 +406,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.wangfx.site/2020/09/17/Microservices/" title="微服务论文-狂神说Java">https://www.wangfx.site/2020/09/17/Microservices/</a>
+    <a href="https://www.wangfx.site/2020/10/21/%E8%99%8E%E6%89%91%E8%80%81%E5%93%A5%E7%9A%84%E7%BB%8F%E9%AA%8C-%E5%85%B3%E4%BA%8EJava%E5%BC%80%E5%8F%91%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" title="秋招经验6">https://www.wangfx.site/2020/10/21/虎扑老哥的经验-关于Java开发的学习路线/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -376,13 +421,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/09/15/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%8B%82%E7%A5%9E%E8%AF%B4Java/" rel="prev" title="SpringBoot学习笔记-狂神说Java">
-                  <i class="fa fa-chevron-left"></i> SpringBoot学习笔记-狂神说Java
+                <a href="/2020/10/18/%E5%90%8E%E7%AB%AF%E5%B2%97%E4%B8%8A%E5%B2%B8%E7%BB%8F%E5%8E%86%E5%88%86%E4%BA%AB/" rel="prev" title="秋招经验5">
+                  <i class="fa fa-chevron-left"></i> 秋招经验5
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/09/27/SpringCloud%E6%95%99%E7%A8%8B/" rel="next" title="SpringCloud教程">
-                  SpringCloud教程 <i class="fa fa-chevron-right"></i>
+                <a href="/2020/10/24/keras%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="keras学习笔记">
+                  keras学习笔记 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.wangfx.site","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="说在前头收到了意向公司的offer，特来还愿，也将我自己的经历讲出来给普通人提供一下方法论。我知道牛客的大佬很多，大厂offer拿到手软，该贴就看个乐子儿，图个乐呵就行了，希望大佬们能够知道自己是多么的幸运和强大，待你们实现财富自由的时候，推动推动社会进步，让我们这种普通人粘一粘时代进步的光就万分感谢了。 我也是一个牛客刷帖小透明，没怎么许过愿也没发过贴，但是今年我觉得大家面临找工作的压力都挺">
+<meta property="og:type" content="article">
+<meta property="og:title" content="秋招经验3">
+<meta property="og:url" content="https://www.wangfx.site/2020/10/14/%E6%99%AE%E9%80%9AJava%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="abyss">
+<meta property="og:description" content="说在前头收到了意向公司的offer，特来还愿，也将我自己的经历讲出来给普通人提供一下方法论。我知道牛客的大佬很多，大厂offer拿到手软，该贴就看个乐子儿，图个乐呵就行了，希望大佬们能够知道自己是多么的幸运和强大，待你们实现财富自由的时候，推动推动社会进步，让我们这种普通人粘一粘时代进步的光就万分感谢了。 我也是一个牛客刷帖小透明，没怎么许过愿也没发过贴，但是今年我觉得大家面临找工作的压力都挺">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-13T20:10:03.000Z">
+<meta property="article:modified_time" content="2021-05-22T03:53:11.657Z">
+<meta property="article:author" content="wangfangxin">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.wangfx.site/2020/10/14/%E6%99%AE%E9%80%9AJava%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>秋招经验3 | abyss</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">abyss</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">On the road.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">27</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E5%9C%A8%E5%89%8D%E5%A4%B4"><span class="nav-number">1.</span> <span class="nav-text">说在前头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%A5%BC%E4%B8%BB%E8%83%8C%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">1. 楼主背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%8E%86%EF%BC%88%E6%88%AA%E6%AD%A2%E8%87%B32020-09-21%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">2. 面试经历（截止至2020&#x2F;09&#x2F;21）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF"><span class="nav-number">4.</span> <span class="nav-text">3. 学习路线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Java%E5%9F%BA%E7%A1%80"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 Java基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-MySQL"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Spring-SpringMVC-MyBatis"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 Spring + SpringMVC + MyBatis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-SpringBoot"><span class="nav-number">4.4.</span> <span class="nav-text">3.4 SpringBoot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-JVM"><span class="nav-number">4.5.</span> <span class="nav-text">3.5 JVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="nav-number">4.6.</span> <span class="nav-text">3.6 Java并发编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95"><span class="nav-number">4.7.</span> <span class="nav-text">3.7 数据结构和算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="nav-number">4.8.</span> <span class="nav-text">3.8 计算机网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-9-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80"><span class="nav-number">4.9.</span> <span class="nav-text">3.9 计算机基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-10-%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF"><span class="nav-number">4.10.</span> <span class="nav-text">3.10 其他技术</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%9D%A2%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">4. 面试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E7%AE%80%E5%8E%86"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 简历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E9%A1%B9%E7%9B%AE"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E9%9D%A2%E8%AF%95%E6%8A%80%E5%B7%A7"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 面试技巧</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wangfangxin"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wangfangxin</p>
+  <div class="site-description" itemprop="description">虽不能至,然心向往之。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/oldwang77" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;oldwang77" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wangfangxin98@163.com" title="E-Mail → wangfangxin98@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://wangfx.blog.csdn.net/" title="CSDN → https:&#x2F;&#x2F;wangfx.blog.csdn.net&#x2F;" rel="noopener" target="_blank"><i class="fa fa-home fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://oldwang77.github.io/" title="Blog → https:&#x2F;&#x2F;oldwang77.github.io&#x2F;" rel="noopener" target="_blank"><i class="fa fa-file fa-fw"></i>Blog</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/10/14/%E6%99%AE%E9%80%9AJava%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wangfangxin">
+      <meta itemprop="description" content="虽不能至,然心向往之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abyss">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          秋招经验3
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-13 20:10:03" itemprop="dateCreated datePublished" datetime="2020-10-13T20:10:03Z">2020-10-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-22 03:53:11" itemprop="dateModified" datetime="2021-05-22T03:53:11Z">2021-05-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BB%8F%E9%AA%8C%E8%B4%B4/" itemprop="url" rel="index"><span itemprop="name">经验贴</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="far fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <a id="more"></a>
+
+<h2 id="说在前头"><a href="#说在前头" class="headerlink" title="说在前头"></a>说在前头</h2><p>收到了意向公司的offer，特来还愿，也将我自己的经历讲出来给普通人提供一下方法论。我知道牛客的大佬很多，大厂offer拿到手软，该贴就看个乐子儿，图个乐呵就行了，希望大佬们能够知道自己是多么的幸运和强大，待你们实现财富自由的时候，推动推动社会进步，让我们这种普通人粘一粘时代进步的光就万分感谢了。</p>
+<p>我也是一个牛客刷帖小透明，没怎么许过愿也没发过贴，但是今年我觉得大家面临找工作的压力都挺大，偶尔都会刷到<strong>“深夜崩溃”</strong>的帖子，我虽然没有崩溃过，但是也会难过，只不过有同学把这些东西发出来了罢了，我希望大家最后都能找到满意的工作，尽早躺平，愿顺遂。</p>
+<hr>
+<h2 id="1-楼主背景"><a href="#1-楼主背景" class="headerlink" title="1. 楼主背景"></a>1. 楼主背景</h2><ul>
+<li>某211院校机械电子工程专业，绩点前25% </li>
+<li>没拿过任何竞赛证书，拿过两次奖学金和优秀学生干部（其实用处不大，占下简历篇幅罢了） </li>
+<li>大学专业课中修过C++，拿了计算机等级考试的三级证书（没用），除此之外，再无任何编程相关经验 </li>
+<li>今年二月底彻底放弃读研的念头，自学Java，到七月底整理完<a href="">项目</a>（<a href="">项目</a>后面说），八月初开始投简历，一共投了53家，没有投过阿里<a href="">腾讯</a><a href="">百度</a><a href="">美团</a>等头部大厂，可能是自视甚低吧，收到满意的offer后，彻底躺平。 </li>
+</ul>
+<hr>
+<h2 id="2-面试经历（截止至2020-09-21）"><a href="#2-面试经历（截止至2020-09-21）" class="headerlink" title="2. 面试经历（截止至2020/09/21）"></a>2. 面试经历（截止至2020/09/21）</h2><ol>
+<li>8.27 <a href="">经纬恒润</a>，<strong>HR口头Offer</strong> </li>
+<li>9.1 <a href="">小米</a>一面 9.4 <a href="">小米</a>二面 <strong>已过</strong> </li>
+<li>9.2 <a href="">快手</a>一面<strong>挂</strong> </li>
+<li>9.5 <a href="">滴滴</a>打车（国际化事业部） 一二面连着，二面<strong>挂</strong>（被<a href="">红黑树</a>按在了地上） </li>
+<li>9.21 天津一外企 <strong>已发意向</strong> </li>
+<li>笔试后能面试却没面的：360，<a href="">融360</a>，<a href="">同程艺龙</a> </li>
+<li>做过笔试的：<a href="">贝壳</a>（提前批与正式批全没过）、<a href="">爱奇艺</a>、<a href="">滴滴</a>打车、<a href="">老虎集团</a>、<a href="">小红书</a>、<a href="">奇安信</a>、<a href="">拼多多</a>、<a href="">好未来</a>、<a href="">网易互娱</a>、<a href="">搜狗</a>阅读、<a href="">融360</a>、bigo、58同城、<a href="">巨人网络</a>、<a href="">金山云</a>、<a href="">便利蜂</a>、恒生、<a href="">大华</a>、<a href="">度小满</a> </li>
+</ol>
+<hr>
+<h2 id="3-学习路线"><a href="#3-学习路线" class="headerlink" title="3. 学习路线"></a>3. 学习路线</h2><p>开始我在选语言的时候也浪费了不少时间，因为自己有一些c++基础，准备直接投入c++的坑，但是在某乎和某些论坛推荐Java较多，就业需求更大（现在才知道会这么内卷），后来便c++转了Java。</p>
+<h3 id="3-1-Java基础"><a href="#3-1-Java基础" class="headerlink" title="3.1 Java基础"></a>3.1 Java基础</h3><p>开始我是在b站上看的<strong>黑马程序员的课</strong>，我印象中是四百多集的那个，它用的是JDK9，当时以为版本学的越高越好，后来才知道原来JDK8才是最香的。也是趁着在疫情期间，网课后台静音挂机，一边看视频一边跟课跑代码，其中的例子我全跑过一边。但是光看视频是不够的，而且其中有一些课时是很水，只是带着过一遍API，学习起来碎片化又不成体系。后来读了两本书来巩固基础知识。</p>
+<ul>
+<li><p><strong>《Java核心技术 卷I（第十一版）》</strong>：虽然我看过一遍视频后，书里的一些概念还是看不明白，不过大家如果有同样的情况，不要纠结，接着向下看，当以后回来再翻一遍的时候，会觉得也不过如此。这本书里边没有写到IO，所以我这方面知识还是比较薄弱。 </p>
+</li>
+<li><p>《Head First Java（第三版）》</p>
+<p>：读完卷I我读的这一本，但是这一本更应该在读卷I之前，因为它的行文风格非常轻松，也可以说是有些啰嗦，基本上它其中的所涉及到的知识，我基本上都能读懂，也许是我有了读上一本书的基础。  </p>
+<blockquote>
+<p>注：这两本书中的Swing图形化界面编程部分我都跳过了，此外，里边的<strong>例题代码全都需要自己跑一遍。</strong></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="3-2-MySQL"><a href="#3-2-MySQL" class="headerlink" title="3.2 MySQL"></a>3.2 MySQL</h3><p>MySQL我看的是b站狂神的公开课，他现在的b站id叫做<strong>遇见狂神说</strong>。我心里还是非常感激狂神的，无偿的出了这么多的课程，在我学习的路上是非常好的指引，也让我这个无头苍蝇有了学习的方向。他写的全栈开发学习路线，很有借鉴意义，希望大家能去看一看。</p>
+<ul>
+<li>【狂神说Java】MySQL最新教程通俗易懂 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1NJ411J79W">https://www.bilibili.com/video/BV1NJ411J79W</a> </li>
+</ul>
+<p>看过的书：</p>
+<ul>
+<li><strong>《MySQL必知必会》</strong>：一本非常小的小册子，罗列了一下简单的知识点和SQL语句，一天就能读完，可以当做零食书消遣看看看 </li>
+<li><strong>《高性能MySQL》</strong>：<code>非常厚</code>的一本大部头，不推荐去读，其中涉及到的索引部分写的还行，如果时间充裕的话，我觉得还是一本比较好的参考，啃不动大部头的话，可以不读。如果想看索引部分，我自己写过博客儿，做过总结，大家可以参考一下。<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46225886/article/details/105959634">https://blog.csdn.net/qq_46225886/article/details/105959634</a> </li>
+<li>掘金小册：<strong>《MySQL是怎样运行的：从跟上理解MySQL》</strong>：强烈推荐，强烈推荐，强烈推荐呐！真的很不错，写的很深，如果能全掌握的话，cover面试真的是没什么问题了。（这个作者也写过基础篇的MySQL教程，我觉得两本一起看，不看实体书，效果一样会很好，而且也能省下一些小钱钱）,<a target="_blank" rel="noopener" href="https://www.juejin.im/book/6844733769996304392">https://www.juejin.im/book/6844733769996304392</a> </li>
+</ul>
+<h3 id="3-3-Spring-SpringMVC-MyBatis"><a href="#3-3-Spring-SpringMVC-MyBatis" class="headerlink" title="3.3 Spring + SpringMVC + MyBatis"></a>3.3 Spring + SpringMVC + MyBatis</h3><p>我觉得这部分是让我学起来最快乐的了，原来网站是这么搭的呀！原来是这个样子的呀！当我第一次在网页上写出我自己的名字的时候，异常的兴奋；自己搭完一个简单的图书管理系统（简单的CRUD）的时候，我居然高兴的给自己拍手，可能这就是我这个男人的快乐吧！这个部分也主要是看的狂神的视频。</p>
+<ul>
+<li><strong>Spring5</strong> ：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1WE411d7Dv">https://www.bilibili.com/video/BV1WE411d7Dv</a> </li>
+<li><strong>SpringMVC</strong>： <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1aE41167Tu">https://www.bilibili.com/video/BV1aE41167Tu</a> </li>
+<li><strong>MyBatis</strong> ：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1NE411Q7Nx">https://www.bilibili.com/video/BV1NE411Q7Nx</a> </li>
+</ul>
+<p>看过的书：</p>
+<ul>
+<li><strong>《Spring实战（第四版）》</strong>：注意版号，第四版。 </li>
+<li>掘金小册<strong>《从0开始深入学习Spring》</strong>：这个可看可不看，因为它还没写完，应该在今年年底更完，我在九月初买的，看了看个人感觉还行。<a target="_blank" rel="noopener" href="https://www.juejin.im/book/6857911863016390663">https://www.juejin.im/book/6857911863016390663</a> </li>
+</ul>
+<h3 id="3-4-SpringBoot"><a href="#3-4-SpringBoot" class="headerlink" title="3.4 SpringBoot"></a>3.4 SpringBoot</h3><p>现在这个不会可真的不行了，至少标配了，SpringCloud可以不会，这个还是得好好学一学。而且其中两个经常被问到的面试题，@SpringBootApplication的作用和它的启动流程。</p>
+<ul>
+<li><strong>【狂神说Java】SpringBoot最新教程IDEA版通俗易懂</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PE411i7CV">https://www.bilibili.com/video/BV1PE411i7CV</a> </li>
+</ul>
+<h3 id="3-5-JVM"><a href="#3-5-JVM" class="headerlink" title="3.5 JVM"></a>3.5 JVM</h3><p>这个我可是太会了，面试自我介绍过程中我会强调我很熟悉这个。看过视频也看过书，我觉得这部分主要基于理论，理解不了背它咱也背过来，总行吧？</p>
+<ul>
+<li><strong>【狂神说Java】JVM快速入门篇</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iJ411d7jS">https://www.bilibili.com/video/BV1iJ411d7jS</a> </li>
+</ul>
+<p>看过的书：</p>
+<ul>
+<li><strong>《深入理解Java虚拟机（第三版）》</strong>：紫皮儿的这本，实在是太有名了，也实在太用有了！这本是我是在八月份才看的，看过两遍，其中调优和字节码相关的可以跳过，其他的部分尽最大的能力全部掌握，记一些调优的参数，和一些Demo的实例，面试很好用。其中最后一个章节，讲的Synchronized的优化，这个努力给它记一记。 </li>
+</ul>
+<h3 id="3-6-Java并发编程"><a href="#3-6-Java并发编程" class="headerlink" title="3.6 Java并发编程"></a>3.6 Java并发编程</h3><p>我的第二个杀手锏，同样自我介绍的时候会主要强调，我也很会啊！同样也看过视频和书。</p>
+<ul>
+<li><strong>【狂神说Java】JUC并发编程最新版通俗易懂</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1B7411L7tE">https://www.bilibili.com/video/BV1B7411L7tE</a> </li>
+<li>某课上：<strong>玩转Java并发工具，精通JUC，成为并发多面手</strong>（请大家善用搜索引擎，不会的可以私信我，我只能这么说了） </li>
+</ul>
+<p>看过的书：</p>
+<ul>
+<li><strong>《Java并发编程实战》</strong>：一本很不错的书，看完视频再看书会很轻松，不过我觉得这本书倒着看反而更流畅。 </li>
+</ul>
+<h3 id="3-7-数据结构和算法"><a href="#3-7-数据结构和算法" class="headerlink" title="3.7 数据结构和算法"></a>3.7 数据结构和<a href="">算法</a></h3><p>这一部分我觉得没有什么发言权，学的比较烂，在<a href="">滴滴</a>二面的时候被<a href="">红黑树</a>按在地上摩擦，不过我也给大家提供一下我的<strong>野路子</strong>吧，仅供参考。《剑指Offer》我刷过三遍，基本上拿出一道题来能随便手撕，算上剑指Offer的题目数，我一共刷了LeetCode上142道题，也是刷了三遍，这个我是参考某大佬的GitHub<a href="">刷题</a>路线，我自己也写了博客做了汇总，大家可以参考下，不过我需要再完善完善，之前忙于面试无心汇总。</p>
+<ul>
+<li><strong>秋招<a href="">刷题</a>汇总</strong>：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46225886/article/details/108720536">https://blog.csdn.net/qq_46225886/article/details/108720536</a> </li>
+</ul>
+<p>看过的书：</p>
+<ul>
+<li><strong>《<a href="">算法</a>图解》</strong>：一本入门级别的<a href="">算法</a>书，一天我就看完了，建议大家系统找找其他书籍学习一下，<a href="">算法</a>很重要啊！ </li>
+</ul>
+<h3 id="3-8-计算机网络"><a href="#3-8-计算机网络" class="headerlink" title="3.8 计算机网络"></a>3.8 计算机网络</h3><p>这一部分我学的不够深入，仅是看过两本书和一些大佬整理的<a href="">面经</a>。</p>
+<p>看过的书：</p>
+<ul>
+<li><strong>《图解HTTP》</strong>：同样是一本轻松的小零食书，能很快刷完。 </li>
+<li><strong>《图解TCP/IP》</strong>：个人感觉这本还是不错的，因为我在简历上没有写过计网相关的内容，所以被问的比较少，一般问题也都能cover住了。 </li>
+</ul>
+<h3 id="3-9-计算机基础"><a href="#3-9-计算机基础" class="headerlink" title="3.9 计算机基础"></a>3.9 计算机基础</h3><p>我这里学的不行，大家可以参考下别的大佬是怎么学的，这部分放在最后学习就可以，相对来说还比较枯燥。</p>
+<h3 id="3-10-其他技术"><a href="#3-10-其他技术" class="headerlink" title="3.10 其他技术"></a>3.10 其他技术</h3><ul>
+<li><strong>【狂神说Java】Redis最新超详细版教程通俗易懂</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1S54y1R7SB">https://www.bilibili.com/video/BV1S54y1R7SB</a> </li>
+<li><strong>【狂神说Java】Linux最通俗易懂的教程<a href="">阿里云</a>真实环境学习</strong> ：楼主买了一个<a href="">阿里云</a>的服务器，学生机，也不是很贵，建议入手一个学习使用<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV187411y7hF">https://www.bilibili.com/video/BV187411y7hF</a> </li>
+<li><strong>【狂神说Java】Git最新教程通俗易懂</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1FE411P7B3">https://www.bilibili.com/video/BV1FE411P7B3</a> </li>
+<li><strong>【狂神说Java】通俗易懂的23种设计模式教学（停更）</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1mc411h719">https://www.bilibili.com/video/BV1mc411h719</a> </li>
+</ul>
+<p>看过的书：</p>
+<ul>
+<li><strong>《Head First 设计模式》</strong>：还没读完，但是读起来很轻松 </li>
+</ul>
+<hr>
+<h2 id="4-面试"><a href="#4-面试" class="headerlink" title="4. 面试"></a>4. 面试</h2><h3 id="4-1-简历"><a href="#4-1-简历" class="headerlink" title="4.1 简历"></a>4.1 简历</h3><p>推荐使用《超级简历》的学生求职模板，我个人感觉写出来非常精简，也很清爽。<br>首先，<strong>基础信息</strong>就写上名字、手机、邮箱和求职意向就好了；<strong>教育经历</strong>写上学校，绩点高的把绩点也写上，在学校获得的<strong>荣誉单拿出一个栏目</strong>来写。<strong>专业技能</strong>，Java相关的写上边，数据结构写中间，其他技术栈往后排，对于技术的栏目可以具体写上一些内容，一方面是让面试官能照着你的简历问，比如你写上了熟悉JVM，并了解垃圾机制和调优，这样他问咱这些，咱是不是就能游刃有余了？**<a href="">项目</a>经历<strong>，这个主要写写你做了什么，做了这个之后产生了什么样的优化效果，比如秒杀系统可以写上优化的QPS。</strong>自我评价<strong>：因为楼主非科班出身嘛，所以我就写了我读过的技术书籍；我自己也在写博客儿，把这些也写在了简历里，因为这些东西不是一蹴而就的，至少能体现我有一个认真学习的态度，另外我觉得，虽然写博客儿会花很多时间，但是也能抵挡时间对我们知识的冲刷。还有一个非常重要的点就是，简历是</strong>限制面试官的提问范围**，咱往上边写，就一定要搞的很懂，他问就基本上问不到咱，如果写的技术栈太杂，反而让我们比较难发挥了。</p>
+<ul>
+<li><strong>博客</strong>：我汇总了一些面试知识，还有我学习过程中的笔记，<a href="">项目</a>笔记（我觉得这个还是比较有参考意义的，写的比较细），<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46225886">https://blog.csdn.net/qq_46225886</a> </li>
+</ul>
+<h3 id="4-2-项目"><a href="#4-2-项目" class="headerlink" title="4.2 项目"></a>4.2 <a href="">项目</a></h3><p>非科班没<a href="">项目</a>是真的不太行，因为我看<a href="">面经</a>的时候，大家都有聊<a href="">项目</a>这一部分，咱没有也不行啊！这两个<a href="">项目</a>都是在七月份才做的，相当于发育的后期了，之前做过小的CRUD<a href="">项目</a>。</p>
+<p>我做的第一个<a href="">项目</a>是烂大街的秒杀系统，某课上，<strong>Java秒杀系统方案优化 高性能高并发实战</strong>（还是那句话，请大家善用搜索引擎，不会的私信我），我在我博客儿上做了比较详细的笔记，大家可以参考我的笔记，给大家节省一些时间。<br>我做的第二个<a href="">项目</a>仍然是在某课上找的，<strong>一站式学习Java网络编程 全面理解BIO/NIO/AIO</strong>，这个学透了，面试聊聊网络IO模型还是可以的，我也做了详细的笔试。</p>
+<p>不过有<a href="">项目</a>了，一定要非常了解才行，简单的跟一边是记不住多少的，还需要不断的复盘和在面试中被锤才能游刃有余，咱不能在面试的时候被问傻！</p>
+<h3 id="4-3-面试技巧"><a href="#4-3-面试技巧" class="headerlink" title="4.3 面试技巧"></a>4.3 面试技巧</h3><p>我觉得我的技巧一般，属于比较常规的套路，从自我介绍开始说<br>我叫XXX，是XX大学的应届生，我做过两个<a href="">项目</a>，分别介绍自己做了什么，但是不要说的太长，<strong>拿重要的说</strong>，因为面试官大多不会记住你说了什么，还是主要会照着简历问。这之后我会<strong>重点强调</strong>我很会并发编程和JVM（你问我就行了，问我就上了我的套儿），最后几句做一个总结，其实我觉得自我介绍更多的还是面试的一个开场白，一定要<strong>非常流利</strong>。</p>
+<p>另外我面试的时候属于主动交代型，这样有时候好，有时候不好，不好的时候就是会让面试官觉得你在引导他，他反而不会这么去问也不会太开心。什么叫主动交代型？咱比如说，面试官让我说说HashMap，我基本上就会一通说好多，而且说完我还会说我比较了解ConcurrentHashMap，就是把面试官围在我会的东西里与他切磋，有时效果很好，有时不太好，还得是大家自己考量。</p>
+<p>另一方面就是<strong>自信</strong>，这个我没办法教大家，我自身相对来说是一个比较自信的人，但是请大家一定要表现出自己很可以的样子，这样也给面试官留一个好的印象。</p>
+<p>再说说实习，我是没有实习经历的，六月份我们学校已经宣布返校考试了，基本上整个六月在奋战考试周，还欠下的债，如果有很好的大厂实习的机会还是要找、要去，哪怕倒贴，小厂的话，还是需要自己协调，个人拙见。没找到实习现在看来也是比较幸运的一件事儿吧，因为这给了我在家里充足的时间写<a href="">项目</a>，看书，当时因为没有实习经历也焦虑过，不过，现在看来，也是福分吧！</p>
+<p><strong>祝好！</strong></p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wangfangxin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.wangfx.site/2020/10/14/%E6%99%AE%E9%80%9AJava%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" title="秋招经验3">https://www.wangfx.site/2020/10/14/普通Java秋招经验总结/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/10/13/%E8%8F%9C%E8%8F%9C%E7%9A%84java%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/" rel="prev" title="秋招经验1">
+                  <i class="fa fa-chevron-left"></i> 秋招经验1
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/10/14/%E6%99%AE%E6%9C%AC%E7%A7%8B%E6%8B%9B%E4%B8%8A%E5%B2%B8/" rel="next" title="秋招经验2">
+                  秋招经验2 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wangfangxin</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">17:54</span>
+</div>
+
+      
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
