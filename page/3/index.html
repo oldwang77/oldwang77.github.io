@@ -138,7 +138,7 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -224,7 +224,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -275,6 +275,113 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/08/29/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wangfangxin">
+      <meta itemprop="description" content="虽不能至,然心向往之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abyss">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/29/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API/" class="post-title-link" itemprop="url">Java高并发秒杀API之dao层</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-29 09:43:24" itemprop="dateCreated datePublished" datetime="2020-08-29T09:43:24Z">2020-08-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-02 02:07:42" itemprop="dateModified" datetime="2020-09-02T02:07:42Z">2020-09-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">项目开发</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="DAO层"><a href="#DAO层" class="headerlink" title="DAO层"></a>DAO层</h1><h2 id="第二章-技术和搭建工程"><a href="#第二章-技术和搭建工程" class="headerlink" title="第二章 技术和搭建工程"></a>第二章 技术和搭建工程</h2><h3 id="2-1-相关技术介绍"><a href="#2-1-相关技术介绍" class="headerlink" title="2-1 相关技术介绍"></a>2-1 相关技术介绍</h3><ul>
+<li>MySQL：表设计-SQL技巧-事务和行级锁</li>
+<li>MyBatis: Dao层设计与开发-Mybatis合理使用-MyBatis与Spring整合</li>
+<li>Spring：Spring IOC整合Service-声明式事务</li>
+<li>SpringMVC：Restful接口的设计和使用-框架运作流程-Controller设计</li>
+<li>前端：交互设计-BootStrap-jQuery</li>
+<li>高并发：高并发和高并发分析-优化思路和实现</li>
+</ul>
+<h3 id="2-2-创建项目和依赖"><a href="#2-2-创建项目和依赖" class="headerlink" title="2-2 创建项目和依赖"></a>2-2 创建项目和依赖</h3><p>创建mvn项目</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate -DgroupId=com.lewis.seckill -DartifactId=seckill -Dpackage=com.lewis.seckill -Dversion=1.0-SNAPSHOT -DarchetypeArtifactId=maven-archetype-webapp</span><br></pre></td></tr></table></figure>
+
+<p>添加依赖pom.xml</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/29/Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A7%92%E6%9D%80API/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -573,109 +680,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2018/10/23/%E8%8F%9C%E8%8F%9C%E7%9A%84java%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wangfangxin">
-      <meta itemprop="description" content="虽不能至,然心向往之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="abyss">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/10/23/%E8%8F%9C%E8%8F%9C%E7%9A%84java%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-10-22 16:11:18" itemprop="dateCreated datePublished" datetime="2018-10-22T16:11:18Z">2018-10-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-10 08:18:20" itemprop="dateModified" datetime="2020-10-10T08:18:20Z">2020-10-10</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>作者：大姑娘划船、<br>链接：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/534330?channel=1009&amp;source_id=home_feed">https://www.nowcoder.com/discuss/534330?channel=1009&amp;source_id=home_feed</a><br>来源：牛客网</p>
-<h1 id="关于校招"><a href="#关于校招" class="headerlink" title="关于校招"></a>关于校招</h1><p>  大家都知道每年都有春招和秋招两次招聘 ，春招一般在2月中旬就陆续开始了，面向的是 本届应届生招聘 和 次届的暑期实习生招聘，对于应届生招聘，可能春招的招聘力度与hc是没有秋招多的，据我了解大多数应该是大佬们秋招拒了很多offer后的补录名额，可能竞争会相比与秋招更加激烈（楼主盲猜，欢迎指正）？但是春招对于次届毕业生而言，个人觉得是进入大厂的好机会，各大公司会招聘暑期实习生， 面试难度会比秋招小一些，转正的概率还是很大的，也就是说人家还在忙于秋招，你已经转正结束秋招了（身边有几个朋友就是转正在大厂了）！当然有很多大佬会选择 鱼与熊掌兼得🤣边忙于实习转正答辩边秋招面试。 </p>
-<p>  关于春招楼主之前也写过一篇<a href>面经</a>分享：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/420580?source_id=profile_create&amp;channel=1009">https://www.nowcoder.com/discuss/420580?source_id=profile_create&amp;channel=1009</a>  </p>
-<p>  秋招的话，是应届生最好的招聘机会，提前批有的公司7月份就已经开始了，8月中旬可能陆陆续续开始正式批，个人觉得如果准备充分，就大胆的投提前批吧，一般提前批都是免笔试直接面试的，况且SP的几率挺大的应该，但是竞争会激烈一些，都是大神，还有要注意有的公司声称提前批与正式批不冲突，但其实往往都会有你的面试表现的，提前批如果表现不好的话，可能就凉凉了🤣，我今年就没敢投，也有部分原因是在实习一天很忙，也没能抽出时间复习。 </p>
-<p>  个人的春招秋招面试感受：面试可以很快的提升自己，每一次面试都要找一下自己的不足，最好手机录音，之后review一下自己答的不好的地方，避免下次面试答不出来，我第一次面试是在大三找寒假日常实习，记得那时面试很紧张，说话有些语无伦次，没有任何面试技巧，后来随着面试场次的增多，自己也变得能“白话”（东北话，就是能说会道的意思吧 🤣）了，秋招的时候每次都能和面试官聊的比较好！除了技术面之外还有就是有些公司hr也有决定权，所以提前准备一些hr常问的，不至于现场答不好，被hr PASS掉。下面举例一些我认为比较难答的问题： </p>
-<ol>
-<li>说三个优点？ </li>
-<li>说三个缺点？ </li>
-<li>你认为你是怎样的人？ </li>
-<li>与其他同学相比，你的优势？ </li>
-<li>你在实习中遇到的最大困难或者挑战？（技术终面也常问） </li>
-<li>在校园时最困难的时候？ </li>
-<li>遇到过最大的挫折？ </li>
-<li>看过哪些非技术书，能讲讲这本书大概讲了什么吗？等等问题吧 </li>
-</ol>
-<h1 id="关于准备"><a href="#关于准备" class="headerlink" title="关于准备"></a>关于准备</h1><p>  下面分享一下楼主秋招前的准备吧（仅供参考哈）！ </p>
-<p>  首先Java开发，我个人主要是先BFS，再DFS，针对不同面试官有不同的收获吧，有的就比较考察知识面的广度，有的就比较喜欢深挖一个点，挖到你不会为止🤐！总之多多准备是没有坏处的哈。 </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/10/23/%E8%8F%9C%E8%8F%9C%E7%9A%84java%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2018/10/23/%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -918,7 +922,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">18:01</span>
+    <span title="站点阅读时长">18:30</span>
 </div>
 
       
