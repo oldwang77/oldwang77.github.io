@@ -143,7 +143,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">29</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -217,7 +217,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -275,6 +275,91 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2021/05/26/leetcode/215.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AC%ACK%E4%B8%AA%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wangfangxin">
+      <meta itemprop="description" content="虽不能至,然心向往之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="abyss">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/26/leetcode/215.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AC%ACK%E4%B8%AA%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0/" class="post-title-link" itemprop="url">leetcode215数组中的第K个最大元素-堆排序</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-26 11:52:34 / 修改时间：03:52:24" itemprop="dateCreated datePublished" datetime="2021-05-26T11:52:34Z">2021-05-26</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <a id="more"></a>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">https://leetcode-cn.com/problems/kth-largest-element-in-an-array/</a></p>
+<p>推荐先去看一下图解堆排序的分析：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/chengxiao/p/6129630.html">https://www.cnblogs.com/chengxiao/p/6129630.html</a></p>
+<img src="https://gitee.com/oldwong77/cloudimg/raw/master/img/20210526114955.png" alt="image-20210526114955134" style="zoom:50%;" />
+
+<p>简单总结下堆排序的基本思路：</p>
+<p>　　<strong>a.将无需序列构建成一个堆，根据升序降序需求选择大顶堆或小顶堆;</strong></p>
+<p>　　<strong>b.将堆顶元素与末尾元素交换，将最大元素”沉”到数组末端;</strong></p>
+<p>　　<strong>c.重新调整结构，使其满足堆定义，然后继续交换堆顶元素与当前末尾元素，反复执行调整+交换步骤，直到整个序列有序。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 堆排序</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        heapSport(nums,<span class="number">0</span>,nums.length,k);</span><br><span class="line">        <span class="comment">//System.out.println(Arrays.toString(nums));</span></span><br><span class="line">        <span class="keyword">return</span> nums[nums.length-k];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">heapSport</span><span class="params">(<span class="keyword">int</span>[] nums,<span class="keyword">int</span> start,<span class="keyword">int</span> end,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = end/<span class="number">2</span>-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">            <span class="comment">// 从最后一个非叶子节点开始调整顺序</span></span><br><span class="line">            adjustHeap(nums,i,end);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 第k大的元素已经排好序</span></span><br><span class="line">        <span class="keyword">if</span>(end==nums.length-k) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(end==<span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">// 每次交换第一个元素和最后一个元素</span></span><br><span class="line">        swap(nums,<span class="number">0</span>,end-<span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 继续递归</span></span><br><span class="line">        heapSport(nums,start,end-<span class="number">1</span>,k);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">adjustHeap</span><span class="params">(<span class="keyword">int</span>[] nums,<span class="keyword">int</span> i,<span class="keyword">int</span> end)</span></span>&#123; </span><br><span class="line">        <span class="comment">// 当前节点的序号为i，则左节点需要为2*i+1 右节点序号为2*1+2</span></span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">2</span>*i+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = <span class="number">2</span>*i+<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(left&lt;end&amp;&amp;nums[left]&gt;nums[i]) swap(nums,i,left);</span><br><span class="line">        <span class="keyword">if</span>(right&lt;end&amp;&amp;nums[right]&gt;nums[i]) swap(nums,i,right);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 交换两元素</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] nums,<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        nums[i] = nums[i]+nums[j];</span><br><span class="line">        nums[j] = nums[i] - nums[j];</span><br><span class="line">        nums[i] = nums[i] - nums[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1881,208 +1966,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/10/14/%E7%BB%8F%E9%AA%8C%E8%B4%B4/%E6%99%AE%E9%80%9AJava%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wangfangxin">
-      <meta itemprop="description" content="虽不能至,然心向往之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="abyss">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/14/%E7%BB%8F%E9%AA%8C%E8%B4%B4/%E6%99%AE%E9%80%9AJava%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">秋招经验3</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-13 20:10:03" itemprop="dateCreated datePublished" datetime="2020-10-13T20:10:03Z">2020-10-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-22 03:53:11" itemprop="dateModified" datetime="2021-05-22T03:53:11Z">2021-05-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BB%8F%E9%AA%8C%E8%B4%B4/" itemprop="url" rel="index"><span itemprop="name">经验贴</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <a id="more"></a>
-
-<h2 id="说在前头"><a href="#说在前头" class="headerlink" title="说在前头"></a>说在前头</h2><p>收到了意向公司的offer，特来还愿，也将我自己的经历讲出来给普通人提供一下方法论。我知道牛客的大佬很多，大厂offer拿到手软，该贴就看个乐子儿，图个乐呵就行了，希望大佬们能够知道自己是多么的幸运和强大，待你们实现财富自由的时候，推动推动社会进步，让我们这种普通人粘一粘时代进步的光就万分感谢了。</p>
-<p>我也是一个牛客刷帖小透明，没怎么许过愿也没发过贴，但是今年我觉得大家面临找工作的压力都挺大，偶尔都会刷到<strong>“深夜崩溃”</strong>的帖子，我虽然没有崩溃过，但是也会难过，只不过有同学把这些东西发出来了罢了，我希望大家最后都能找到满意的工作，尽早躺平，愿顺遂。</p>
-<hr>
-<h2 id="1-楼主背景"><a href="#1-楼主背景" class="headerlink" title="1. 楼主背景"></a>1. 楼主背景</h2><ul>
-<li>某211院校机械电子工程专业，绩点前25% </li>
-<li>没拿过任何竞赛证书，拿过两次奖学金和优秀学生干部（其实用处不大，占下简历篇幅罢了） </li>
-<li>大学专业课中修过C++，拿了计算机等级考试的三级证书（没用），除此之外，再无任何编程相关经验 </li>
-<li>今年二月底彻底放弃读研的念头，自学Java，到七月底整理完<a href="">项目</a>（<a href="">项目</a>后面说），八月初开始投简历，一共投了53家，没有投过阿里<a href="">腾讯</a><a href="">百度</a><a href="">美团</a>等头部大厂，可能是自视甚低吧，收到满意的offer后，彻底躺平。 </li>
-</ul>
-<hr>
-<h2 id="2-面试经历（截止至2020-09-21）"><a href="#2-面试经历（截止至2020-09-21）" class="headerlink" title="2. 面试经历（截止至2020/09/21）"></a>2. 面试经历（截止至2020/09/21）</h2><ol>
-<li>8.27 <a href="">经纬恒润</a>，<strong>HR口头Offer</strong> </li>
-<li>9.1 <a href="">小米</a>一面 9.4 <a href="">小米</a>二面 <strong>已过</strong> </li>
-<li>9.2 <a href="">快手</a>一面<strong>挂</strong> </li>
-<li>9.5 <a href="">滴滴</a>打车（国际化事业部） 一二面连着，二面<strong>挂</strong>（被<a href="">红黑树</a>按在了地上） </li>
-<li>9.21 天津一外企 <strong>已发意向</strong> </li>
-<li>笔试后能面试却没面的：360，<a href="">融360</a>，<a href="">同程艺龙</a> </li>
-<li>做过笔试的：<a href="">贝壳</a>（提前批与正式批全没过）、<a href="">爱奇艺</a>、<a href="">滴滴</a>打车、<a href="">老虎集团</a>、<a href="">小红书</a>、<a href="">奇安信</a>、<a href="">拼多多</a>、<a href="">好未来</a>、<a href="">网易互娱</a>、<a href="">搜狗</a>阅读、<a href="">融360</a>、bigo、58同城、<a href="">巨人网络</a>、<a href="">金山云</a>、<a href="">便利蜂</a>、恒生、<a href="">大华</a>、<a href="">度小满</a> </li>
-</ol>
-<hr>
-<h2 id="3-学习路线"><a href="#3-学习路线" class="headerlink" title="3. 学习路线"></a>3. 学习路线</h2><p>开始我在选语言的时候也浪费了不少时间，因为自己有一些c++基础，准备直接投入c++的坑，但是在某乎和某些论坛推荐Java较多，就业需求更大（现在才知道会这么内卷），后来便c++转了Java。</p>
-<h3 id="3-1-Java基础"><a href="#3-1-Java基础" class="headerlink" title="3.1 Java基础"></a>3.1 Java基础</h3><p>开始我是在b站上看的<strong>黑马程序员的课</strong>，我印象中是四百多集的那个，它用的是JDK9，当时以为版本学的越高越好，后来才知道原来JDK8才是最香的。也是趁着在疫情期间，网课后台静音挂机，一边看视频一边跟课跑代码，其中的例子我全跑过一边。但是光看视频是不够的，而且其中有一些课时是很水，只是带着过一遍API，学习起来碎片化又不成体系。后来读了两本书来巩固基础知识。</p>
-<ul>
-<li><p><strong>《Java核心技术 卷I（第十一版）》</strong>：虽然我看过一遍视频后，书里的一些概念还是看不明白，不过大家如果有同样的情况，不要纠结，接着向下看，当以后回来再翻一遍的时候，会觉得也不过如此。这本书里边没有写到IO，所以我这方面知识还是比较薄弱。 </p>
-</li>
-<li><p>《Head First Java（第三版）》</p>
-<p>：读完卷I我读的这一本，但是这一本更应该在读卷I之前，因为它的行文风格非常轻松，也可以说是有些啰嗦，基本上它其中的所涉及到的知识，我基本上都能读懂，也许是我有了读上一本书的基础。  </p>
-<blockquote>
-<p>注：这两本书中的Swing图形化界面编程部分我都跳过了，此外，里边的<strong>例题代码全都需要自己跑一遍。</strong></p>
-</blockquote>
-</li>
-</ul>
-<h3 id="3-2-MySQL"><a href="#3-2-MySQL" class="headerlink" title="3.2 MySQL"></a>3.2 MySQL</h3><p>MySQL我看的是b站狂神的公开课，他现在的b站id叫做<strong>遇见狂神说</strong>。我心里还是非常感激狂神的，无偿的出了这么多的课程，在我学习的路上是非常好的指引，也让我这个无头苍蝇有了学习的方向。他写的全栈开发学习路线，很有借鉴意义，希望大家能去看一看。</p>
-<ul>
-<li>【狂神说Java】MySQL最新教程通俗易懂 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1NJ411J79W">https://www.bilibili.com/video/BV1NJ411J79W</a> </li>
-</ul>
-<p>看过的书：</p>
-<ul>
-<li><strong>《MySQL必知必会》</strong>：一本非常小的小册子，罗列了一下简单的知识点和SQL语句，一天就能读完，可以当做零食书消遣看看看 </li>
-<li><strong>《高性能MySQL》</strong>：<code>非常厚</code>的一本大部头，不推荐去读，其中涉及到的索引部分写的还行，如果时间充裕的话，我觉得还是一本比较好的参考，啃不动大部头的话，可以不读。如果想看索引部分，我自己写过博客儿，做过总结，大家可以参考一下。<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46225886/article/details/105959634">https://blog.csdn.net/qq_46225886/article/details/105959634</a> </li>
-<li>掘金小册：<strong>《MySQL是怎样运行的：从跟上理解MySQL》</strong>：强烈推荐，强烈推荐，强烈推荐呐！真的很不错，写的很深，如果能全掌握的话，cover面试真的是没什么问题了。（这个作者也写过基础篇的MySQL教程，我觉得两本一起看，不看实体书，效果一样会很好，而且也能省下一些小钱钱）,<a target="_blank" rel="noopener" href="https://www.juejin.im/book/6844733769996304392">https://www.juejin.im/book/6844733769996304392</a> </li>
-</ul>
-<h3 id="3-3-Spring-SpringMVC-MyBatis"><a href="#3-3-Spring-SpringMVC-MyBatis" class="headerlink" title="3.3 Spring + SpringMVC + MyBatis"></a>3.3 Spring + SpringMVC + MyBatis</h3><p>我觉得这部分是让我学起来最快乐的了，原来网站是这么搭的呀！原来是这个样子的呀！当我第一次在网页上写出我自己的名字的时候，异常的兴奋；自己搭完一个简单的图书管理系统（简单的CRUD）的时候，我居然高兴的给自己拍手，可能这就是我这个男人的快乐吧！这个部分也主要是看的狂神的视频。</p>
-<ul>
-<li><strong>Spring5</strong> ：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1WE411d7Dv">https://www.bilibili.com/video/BV1WE411d7Dv</a> </li>
-<li><strong>SpringMVC</strong>： <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1aE41167Tu">https://www.bilibili.com/video/BV1aE41167Tu</a> </li>
-<li><strong>MyBatis</strong> ：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1NE411Q7Nx">https://www.bilibili.com/video/BV1NE411Q7Nx</a> </li>
-</ul>
-<p>看过的书：</p>
-<ul>
-<li><strong>《Spring实战（第四版）》</strong>：注意版号，第四版。 </li>
-<li>掘金小册<strong>《从0开始深入学习Spring》</strong>：这个可看可不看，因为它还没写完，应该在今年年底更完，我在九月初买的，看了看个人感觉还行。<a target="_blank" rel="noopener" href="https://www.juejin.im/book/6857911863016390663">https://www.juejin.im/book/6857911863016390663</a> </li>
-</ul>
-<h3 id="3-4-SpringBoot"><a href="#3-4-SpringBoot" class="headerlink" title="3.4 SpringBoot"></a>3.4 SpringBoot</h3><p>现在这个不会可真的不行了，至少标配了，SpringCloud可以不会，这个还是得好好学一学。而且其中两个经常被问到的面试题，@SpringBootApplication的作用和它的启动流程。</p>
-<ul>
-<li><strong>【狂神说Java】SpringBoot最新教程IDEA版通俗易懂</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PE411i7CV">https://www.bilibili.com/video/BV1PE411i7CV</a> </li>
-</ul>
-<h3 id="3-5-JVM"><a href="#3-5-JVM" class="headerlink" title="3.5 JVM"></a>3.5 JVM</h3><p>这个我可是太会了，面试自我介绍过程中我会强调我很熟悉这个。看过视频也看过书，我觉得这部分主要基于理论，理解不了背它咱也背过来，总行吧？</p>
-<ul>
-<li><strong>【狂神说Java】JVM快速入门篇</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iJ411d7jS">https://www.bilibili.com/video/BV1iJ411d7jS</a> </li>
-</ul>
-<p>看过的书：</p>
-<ul>
-<li><strong>《深入理解Java虚拟机（第三版）》</strong>：紫皮儿的这本，实在是太有名了，也实在太用有了！这本是我是在八月份才看的，看过两遍，其中调优和字节码相关的可以跳过，其他的部分尽最大的能力全部掌握，记一些调优的参数，和一些Demo的实例，面试很好用。其中最后一个章节，讲的Synchronized的优化，这个努力给它记一记。 </li>
-</ul>
-<h3 id="3-6-Java并发编程"><a href="#3-6-Java并发编程" class="headerlink" title="3.6 Java并发编程"></a>3.6 Java并发编程</h3><p>我的第二个杀手锏，同样自我介绍的时候会主要强调，我也很会啊！同样也看过视频和书。</p>
-<ul>
-<li><strong>【狂神说Java】JUC并发编程最新版通俗易懂</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1B7411L7tE">https://www.bilibili.com/video/BV1B7411L7tE</a> </li>
-<li>某课上：<strong>玩转Java并发工具，精通JUC，成为并发多面手</strong>（请大家善用搜索引擎，不会的可以私信我，我只能这么说了） </li>
-</ul>
-<p>看过的书：</p>
-<ul>
-<li><strong>《Java并发编程实战》</strong>：一本很不错的书，看完视频再看书会很轻松，不过我觉得这本书倒着看反而更流畅。 </li>
-</ul>
-<h3 id="3-7-数据结构和算法"><a href="#3-7-数据结构和算法" class="headerlink" title="3.7 数据结构和算法"></a>3.7 数据结构和<a href="">算法</a></h3><p>这一部分我觉得没有什么发言权，学的比较烂，在<a href="">滴滴</a>二面的时候被<a href="">红黑树</a>按在地上摩擦，不过我也给大家提供一下我的<strong>野路子</strong>吧，仅供参考。《剑指Offer》我刷过三遍，基本上拿出一道题来能随便手撕，算上剑指Offer的题目数，我一共刷了LeetCode上142道题，也是刷了三遍，这个我是参考某大佬的GitHub<a href="">刷题</a>路线，我自己也写了博客做了汇总，大家可以参考下，不过我需要再完善完善，之前忙于面试无心汇总。</p>
-<ul>
-<li><strong>秋招<a href="">刷题</a>汇总</strong>：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46225886/article/details/108720536">https://blog.csdn.net/qq_46225886/article/details/108720536</a> </li>
-</ul>
-<p>看过的书：</p>
-<ul>
-<li><strong>《<a href="">算法</a>图解》</strong>：一本入门级别的<a href="">算法</a>书，一天我就看完了，建议大家系统找找其他书籍学习一下，<a href="">算法</a>很重要啊！ </li>
-</ul>
-<h3 id="3-8-计算机网络"><a href="#3-8-计算机网络" class="headerlink" title="3.8 计算机网络"></a>3.8 计算机网络</h3><p>这一部分我学的不够深入，仅是看过两本书和一些大佬整理的<a href="">面经</a>。</p>
-<p>看过的书：</p>
-<ul>
-<li><strong>《图解HTTP》</strong>：同样是一本轻松的小零食书，能很快刷完。 </li>
-<li><strong>《图解TCP/IP》</strong>：个人感觉这本还是不错的，因为我在简历上没有写过计网相关的内容，所以被问的比较少，一般问题也都能cover住了。 </li>
-</ul>
-<h3 id="3-9-计算机基础"><a href="#3-9-计算机基础" class="headerlink" title="3.9 计算机基础"></a>3.9 计算机基础</h3><p>我这里学的不行，大家可以参考下别的大佬是怎么学的，这部分放在最后学习就可以，相对来说还比较枯燥。</p>
-<h3 id="3-10-其他技术"><a href="#3-10-其他技术" class="headerlink" title="3.10 其他技术"></a>3.10 其他技术</h3><ul>
-<li><strong>【狂神说Java】Redis最新超详细版教程通俗易懂</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1S54y1R7SB">https://www.bilibili.com/video/BV1S54y1R7SB</a> </li>
-<li><strong>【狂神说Java】Linux最通俗易懂的教程<a href="">阿里云</a>真实环境学习</strong> ：楼主买了一个<a href="">阿里云</a>的服务器，学生机，也不是很贵，建议入手一个学习使用<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV187411y7hF">https://www.bilibili.com/video/BV187411y7hF</a> </li>
-<li><strong>【狂神说Java】Git最新教程通俗易懂</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1FE411P7B3">https://www.bilibili.com/video/BV1FE411P7B3</a> </li>
-<li><strong>【狂神说Java】通俗易懂的23种设计模式教学（停更）</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1mc411h719">https://www.bilibili.com/video/BV1mc411h719</a> </li>
-</ul>
-<p>看过的书：</p>
-<ul>
-<li><strong>《Head First 设计模式》</strong>：还没读完，但是读起来很轻松 </li>
-</ul>
-<hr>
-<h2 id="4-面试"><a href="#4-面试" class="headerlink" title="4. 面试"></a>4. 面试</h2><h3 id="4-1-简历"><a href="#4-1-简历" class="headerlink" title="4.1 简历"></a>4.1 简历</h3><p>推荐使用《超级简历》的学生求职模板，我个人感觉写出来非常精简，也很清爽。<br>首先，<strong>基础信息</strong>就写上名字、手机、邮箱和求职意向就好了；<strong>教育经历</strong>写上学校，绩点高的把绩点也写上，在学校获得的<strong>荣誉单拿出一个栏目</strong>来写。<strong>专业技能</strong>，Java相关的写上边，数据结构写中间，其他技术栈往后排，对于技术的栏目可以具体写上一些内容，一方面是让面试官能照着你的简历问，比如你写上了熟悉JVM，并了解垃圾机制和调优，这样他问咱这些，咱是不是就能游刃有余了？**<a href="">项目</a>经历<strong>，这个主要写写你做了什么，做了这个之后产生了什么样的优化效果，比如秒杀系统可以写上优化的QPS。</strong>自我评价<strong>：因为楼主非科班出身嘛，所以我就写了我读过的技术书籍；我自己也在写博客儿，把这些也写在了简历里，因为这些东西不是一蹴而就的，至少能体现我有一个认真学习的态度，另外我觉得，虽然写博客儿会花很多时间，但是也能抵挡时间对我们知识的冲刷。还有一个非常重要的点就是，简历是</strong>限制面试官的提问范围**，咱往上边写，就一定要搞的很懂，他问就基本上问不到咱，如果写的技术栈太杂，反而让我们比较难发挥了。</p>
-<ul>
-<li><strong>博客</strong>：我汇总了一些面试知识，还有我学习过程中的笔记，<a href="">项目</a>笔记（我觉得这个还是比较有参考意义的，写的比较细），<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46225886">https://blog.csdn.net/qq_46225886</a> </li>
-</ul>
-<h3 id="4-2-项目"><a href="#4-2-项目" class="headerlink" title="4.2 项目"></a>4.2 <a href="">项目</a></h3><p>非科班没<a href="">项目</a>是真的不太行，因为我看<a href="">面经</a>的时候，大家都有聊<a href="">项目</a>这一部分，咱没有也不行啊！这两个<a href="">项目</a>都是在七月份才做的，相当于发育的后期了，之前做过小的CRUD<a href="">项目</a>。</p>
-<p>我做的第一个<a href="">项目</a>是烂大街的秒杀系统，某课上，<strong>Java秒杀系统方案优化 高性能高并发实战</strong>（还是那句话，请大家善用搜索引擎，不会的私信我），我在我博客儿上做了比较详细的笔记，大家可以参考我的笔记，给大家节省一些时间。<br>我做的第二个<a href="">项目</a>仍然是在某课上找的，<strong>一站式学习Java网络编程 全面理解BIO/NIO/AIO</strong>，这个学透了，面试聊聊网络IO模型还是可以的，我也做了详细的笔试。</p>
-<p>不过有<a href="">项目</a>了，一定要非常了解才行，简单的跟一边是记不住多少的，还需要不断的复盘和在面试中被锤才能游刃有余，咱不能在面试的时候被问傻！</p>
-<h3 id="4-3-面试技巧"><a href="#4-3-面试技巧" class="headerlink" title="4.3 面试技巧"></a>4.3 面试技巧</h3><p>我觉得我的技巧一般，属于比较常规的套路，从自我介绍开始说<br>我叫XXX，是XX大学的应届生，我做过两个<a href="">项目</a>，分别介绍自己做了什么，但是不要说的太长，<strong>拿重要的说</strong>，因为面试官大多不会记住你说了什么，还是主要会照着简历问。这之后我会<strong>重点强调</strong>我很会并发编程和JVM（你问我就行了，问我就上了我的套儿），最后几句做一个总结，其实我觉得自我介绍更多的还是面试的一个开场白，一定要<strong>非常流利</strong>。</p>
-<p>另外我面试的时候属于主动交代型，这样有时候好，有时候不好，不好的时候就是会让面试官觉得你在引导他，他反而不会这么去问也不会太开心。什么叫主动交代型？咱比如说，面试官让我说说HashMap，我基本上就会一通说好多，而且说完我还会说我比较了解ConcurrentHashMap，就是把面试官围在我会的东西里与他切磋，有时效果很好，有时不太好，还得是大家自己考量。</p>
-<p>另一方面就是<strong>自信</strong>，这个我没办法教大家，我自身相对来说是一个比较自信的人，但是请大家一定要表现出自己很可以的样子，这样也给面试官留一个好的印象。</p>
-<p>再说说实习，我是没有实习经历的，六月份我们学校已经宣布返校考试了，基本上整个六月在奋战考试周，还欠下的债，如果有很好的大厂实习的机会还是要找、要去，哪怕倒贴，小厂的话，还是需要自己协调，个人拙见。没找到实习现在看来也是比较幸运的一件事儿吧，因为这给了我在家里充足的时间写<a href="">项目</a>，看书，当时因为没有实习经历也焦虑过，不过，现在看来，也是福分吧！</p>
-<p><strong>祝好！</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/10/14/%E7%BB%8F%E9%AA%8C%E8%B4%B4/%E6%99%AE%E6%9C%AC%E7%A7%8B%E6%8B%9B%E4%B8%8A%E5%B2%B8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2285,7 +2168,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/10/13/%E7%BB%8F%E9%AA%8C%E8%B4%B4/%E8%8F%9C%E8%8F%9C%E7%9A%84java%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="https://www.wangfx.site/2020/10/14/%E7%BB%8F%E9%AA%8C%E8%B4%B4/%E6%99%AE%E9%80%9AJava%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -2302,7 +2185,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/10/13/%E7%BB%8F%E9%AA%8C%E8%B4%B4/%E8%8F%9C%E8%8F%9C%E7%9A%84java%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">秋招经验1</a>
+            <a href="/2020/10/14/%E7%BB%8F%E9%AA%8C%E8%B4%B4/%E6%99%AE%E9%80%9AJava%E7%A7%8B%E6%8B%9B%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">秋招经验3</a>
         </h2>
 
         <div class="post-meta">
@@ -2312,14 +2195,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-10-12 20:10:03" itemprop="dateCreated datePublished" datetime="2020-10-12T20:10:03Z">2020-10-12</time>
+              <time title="创建时间：2020-10-13 20:10:03" itemprop="dateCreated datePublished" datetime="2020-10-13T20:10:03Z">2020-10-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-22 03:53:18" itemprop="dateModified" datetime="2021-05-22T03:53:18Z">2021-05-22</time>
+                <time title="修改时间：2021-05-22 03:53:11" itemprop="dateModified" datetime="2021-05-22T03:53:11Z">2021-05-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -2356,157 +2239,118 @@
     <div class="post-body" itemprop="articleBody">
           <a id="more"></a>
 
-<h1 id="关于校招"><a href="#关于校招" class="headerlink" title="关于校招"></a>关于校招</h1><p>  大家都知道每年都有春招和秋招两次招聘 ，春招一般在2月中旬就陆续开始了，面向的是 本届应届生招聘 和 次届的暑期实习生招聘，对于应届生招聘，可能春招的招聘力度与hc是没有秋招多的，据我了解大多数应该是大佬们秋招拒了很多offer后的补录名额，可能竞争会相比与秋招更加激烈（楼主盲猜，欢迎指正）？但是春招对于次届毕业生而言，个人觉得是进入大厂的好机会，各大公司会招聘暑期实习生， 面试难度会比秋招小一些，转正的概率还是很大的，也就是说人家还在忙于秋招，你已经转正结束秋招了（身边有几个朋友就是转正在大厂了）！当然有很多大佬会选择 鱼与熊掌兼得🤣边忙于实习转正答辩边秋招面试。 </p>
-<p>  关于春招楼主之前也写过一篇<a href="">面经</a>分享：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/420580?source_id=profile_create&amp;channel=1009">https://www.nowcoder.com/discuss/420580?source_id=profile_create&amp;channel=1009</a>  </p>
-<p>  秋招的话，是应届生最好的招聘机会，提前批有的公司7月份就已经开始了，8月中旬可能陆陆续续开始正式批，个人觉得如果准备充分，就大胆的投提前批吧，一般提前批都是免笔试直接面试的，况且SP的几率挺大的应该，但是竞争会激烈一些，都是大神，还有要注意有的公司声称提前批与正式批不冲突，但其实往往都会有你的面试表现的，提前批如果表现不好的话，可能就凉凉了🤣，我今年就没敢投，也有部分原因是在实习一天很忙，也没能抽出时间复习。 </p>
-<p>  个人的春招秋招面试感受：面试可以很快的提升自己，每一次面试都要找一下自己的不足，最好手机录音，之后review一下自己答的不好的地方，避免下次面试答不出来，我第一次面试是在大三找寒假日常实习，记得那时面试很紧张，说话有些语无伦次，没有任何面试技巧，后来随着面试场次的增多，自己也变得能“白话”（东北话，就是能说会道的意思吧 🤣）了，秋招的时候每次都能和面试官聊的比较好！除了技术面之外还有就是有些公司hr也有决定权，所以提前准备一些hr常问的，不至于现场答不好，被hr PASS掉。下面举例一些我认为比较难答的问题： </p>
-<ol>
-<li>说三个优点？ </li>
-<li>说三个缺点？ </li>
-<li>你认为你是怎样的人？ </li>
-<li>与其他同学相比，你的优势？ </li>
-<li>你在实习中遇到的最大困难或者挑战？（技术终面也常问） </li>
-<li>在校园时最困难的时候？ </li>
-<li>遇到过最大的挫折？ </li>
-<li>看过哪些非技术书，能讲讲这本书大概讲了什么吗？等等问题吧 </li>
+<h2 id="说在前头"><a href="#说在前头" class="headerlink" title="说在前头"></a>说在前头</h2><p>收到了意向公司的offer，特来还愿，也将我自己的经历讲出来给普通人提供一下方法论。我知道牛客的大佬很多，大厂offer拿到手软，该贴就看个乐子儿，图个乐呵就行了，希望大佬们能够知道自己是多么的幸运和强大，待你们实现财富自由的时候，推动推动社会进步，让我们这种普通人粘一粘时代进步的光就万分感谢了。</p>
+<p>我也是一个牛客刷帖小透明，没怎么许过愿也没发过贴，但是今年我觉得大家面临找工作的压力都挺大，偶尔都会刷到<strong>“深夜崩溃”</strong>的帖子，我虽然没有崩溃过，但是也会难过，只不过有同学把这些东西发出来了罢了，我希望大家最后都能找到满意的工作，尽早躺平，愿顺遂。</p>
+<hr>
+<h2 id="1-楼主背景"><a href="#1-楼主背景" class="headerlink" title="1. 楼主背景"></a>1. 楼主背景</h2><ul>
+<li>某211院校机械电子工程专业，绩点前25% </li>
+<li>没拿过任何竞赛证书，拿过两次奖学金和优秀学生干部（其实用处不大，占下简历篇幅罢了） </li>
+<li>大学专业课中修过C++，拿了计算机等级考试的三级证书（没用），除此之外，再无任何编程相关经验 </li>
+<li>今年二月底彻底放弃读研的念头，自学Java，到七月底整理完<a href="">项目</a>（<a href="">项目</a>后面说），八月初开始投简历，一共投了53家，没有投过阿里<a href="">腾讯</a><a href="">百度</a><a href="">美团</a>等头部大厂，可能是自视甚低吧，收到满意的offer后，彻底躺平。 </li>
+</ul>
+<hr>
+<h2 id="2-面试经历（截止至2020-09-21）"><a href="#2-面试经历（截止至2020-09-21）" class="headerlink" title="2. 面试经历（截止至2020/09/21）"></a>2. 面试经历（截止至2020/09/21）</h2><ol>
+<li>8.27 <a href="">经纬恒润</a>，<strong>HR口头Offer</strong> </li>
+<li>9.1 <a href="">小米</a>一面 9.4 <a href="">小米</a>二面 <strong>已过</strong> </li>
+<li>9.2 <a href="">快手</a>一面<strong>挂</strong> </li>
+<li>9.5 <a href="">滴滴</a>打车（国际化事业部） 一二面连着，二面<strong>挂</strong>（被<a href="">红黑树</a>按在了地上） </li>
+<li>9.21 天津一外企 <strong>已发意向</strong> </li>
+<li>笔试后能面试却没面的：360，<a href="">融360</a>，<a href="">同程艺龙</a> </li>
+<li>做过笔试的：<a href="">贝壳</a>（提前批与正式批全没过）、<a href="">爱奇艺</a>、<a href="">滴滴</a>打车、<a href="">老虎集团</a>、<a href="">小红书</a>、<a href="">奇安信</a>、<a href="">拼多多</a>、<a href="">好未来</a>、<a href="">网易互娱</a>、<a href="">搜狗</a>阅读、<a href="">融360</a>、bigo、58同城、<a href="">巨人网络</a>、<a href="">金山云</a>、<a href="">便利蜂</a>、恒生、<a href="">大华</a>、<a href="">度小满</a> </li>
 </ol>
-<h1 id="关于准备"><a href="#关于准备" class="headerlink" title="关于准备"></a>关于准备</h1><p>  下面分享一下楼主秋招前的准备吧（仅供参考哈）！ </p>
-<p>  首先Java开发，我个人主要是先BFS，再DFS，针对不同面试官有不同的收获吧，有的就比较考察知识面的广度，有的就比较喜欢深挖一个点，挖到你不会为止🤐！总之多多准备是没有坏处的哈。 </p>
-<p>  个人主要分为以下几个模块准备的： </p>
-<h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a><a href="">项目</a></h2><p>   有一个好的<a href="">项目</a>可以对我们面试有很大的帮助，也会提起面试官的兴趣，因为很多问题是随着<a href="">项目</a>展开问的。并且我觉得最好是有落地<a href="">项目</a>的支撑，有一个实习经历是很好的，当然如果是大厂实习就更棒了！没有当然也没有关系，  现在有很多开源<a href="">项目</a>，或者教学视频，可以跟着动手做一做，或者自己添加一些可以唠嗑的亮点🤣切记要多问自己为什么，为什么要用这个技术？解决了什么问题？以及用到的技术与其他技术点的对比等等。且要考虑健壮性与特殊情况吧，很多面试官会当场对你的<a href="">项目</a>给你抛出问题，问你解决方案等。我们也可以适当留出空隙等他问（但是一定要会解决哦🤣）。当然场景题我们能提前准备，且解决方案越多越好被，择优选择，不单单是我们自己的<a href="">项目</a>，也可以多参考别人的问题（<a href="">面经</a>啦，同事的难点啦什么的），解决问题多了，自然大部分场景题都不至于没有思路回答不上来了。关于<a href="">项目</a>就不再多说啦，每个人有每个人的理解，但是网上资源很多的也，如果没有好<a href="">项目</a>可以自己寻找感兴趣的做一个两个哈。  </p>
-<h2 id="算法（ACM大神直接划过吧🤣）"><a href="#算法（ACM大神直接划过吧🤣）" class="headerlink" title="算法（ACM大神直接划过吧🤣）"></a><a href="">算法</a>（ACM大神直接划过吧🤣）</h2><p>   由于本人<a href="">算法</a>比较薄弱，<a href="">算法</a>实在给不出什么建议，就说说我自己准备了哪些吧，前期是看了牛客推出的   <strong>左神大佬的<a href="">算法</a>视频</strong> 讲的通俗易懂（有需要我可以帮忙翻一翻资料  😅  ），之后就是着手每天强制自己<a href="">刷题</a>做总结，感觉笨笨的我，随着日积月累，还是有所成长的  🤣，  面试中<a href="">算法题</a>大部分还是可以秒出来的，本人主要刷了 <a href="">剑指offer</a> 3-4遍 + <a href="">leetcode</a> 前450道 2-3遍左右的样子，主要是太笨了  😅刷了忘，忘了刷，没办法，那我就多做几遍好了。  </p>
-<p>   如果时间不够，我建议还分类去准备一些常见的题目比较好，8大<a href="">排序</a><a href="">算法</a>一定是要会的，然后就是可以针对<a href="">链表</a>、树分别找出常考的20-30道题目去做去吸收，还有一些DP、贪心、排列组合经典题目，图的话可能code的不多，但是图的<a href="">算法</a>还是要掌握的，必要时讲出来，拓扑、迪杰斯特拉、普利姆和克鲁斯卡尔啥的。  </p>
-<h2 id="操作系统、计算机网络、数据结构"><a href="#操作系统、计算机网络、数据结构" class="headerlink" title="操作系统、计算机网络、数据结构"></a>操作系统、计算机网络、数据结构</h2><p>   个人觉得这三类基础知识无论是<a href="">前端</a>、后端任何语言还是测开应该都会考的吧  </p>
-<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>   数据结构    ，无非就是数组、<a href="">链表</a>、栈、队列、树、图这几类，最重要的应该是对他们的使用场景和区别要有所了解。比如树的话，搜索树、平衡搜索树、<a href="">红黑树</a>、前缀树、B、B+这些。  </p>
-<p>   可以多看<a href="">面经</a>和博客或者抽时间读一本书比较好，关于数据结构，我有读过  <strong>《大话数据结构》</strong>个人觉得还不错，适合入门。  </p>
-<h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><p>   关于计算机网络，  <strong>《计算机网络自顶向下》</strong>  还是比较不错的，还有就是可以针对性看一看<a href="">面经</a>与牛友分享的文章，其实常问的就是那几个问题而已，例如：  </p>
-<ol>
-<li><p>说一说七层模型，各层都是干什么的？有哪些协议？ </p>
+<hr>
+<h2 id="3-学习路线"><a href="#3-学习路线" class="headerlink" title="3. 学习路线"></a>3. 学习路线</h2><p>开始我在选语言的时候也浪费了不少时间，因为自己有一些c++基础，准备直接投入c++的坑，但是在某乎和某些论坛推荐Java较多，就业需求更大（现在才知道会这么内卷），后来便c++转了Java。</p>
+<h3 id="3-1-Java基础"><a href="#3-1-Java基础" class="headerlink" title="3.1 Java基础"></a>3.1 Java基础</h3><p>开始我是在b站上看的<strong>黑马程序员的课</strong>，我印象中是四百多集的那个，它用的是JDK9，当时以为版本学的越高越好，后来才知道原来JDK8才是最香的。也是趁着在疫情期间，网课后台静音挂机，一边看视频一边跟课跑代码，其中的例子我全跑过一边。但是光看视频是不够的，而且其中有一些课时是很水，只是带着过一遍API，学习起来碎片化又不成体系。后来读了两本书来巩固基础知识。</p>
+<ul>
+<li><p><strong>《Java核心技术 卷I（第十一版）》</strong>：虽然我看过一遍视频后，书里的一些概念还是看不明白，不过大家如果有同样的情况，不要纠结，接着向下看，当以后回来再翻一遍的时候，会觉得也不过如此。这本书里边没有写到IO，所以我这方面知识还是比较薄弱。 </p>
 </li>
-<li><p>TCP和UDP区别，各自的组成部分，基于TCP和UDP的应用层协议？各自应用场景？ </p>
+<li><p>《Head First Java（第三版）》</p>
+<p>：读完卷I我读的这一本，但是这一本更应该在读卷I之前，因为它的行文风格非常轻松，也可以说是有些啰嗦，基本上它其中的所涉及到的知识，我基本上都能读懂，也许是我有了读上一本书的基础。  </p>
+<blockquote>
+<p>注：这两本书中的Swing图形化界面编程部分我都跳过了，此外，里边的<strong>例题代码全都需要自己跑一遍。</strong></p>
+</blockquote>
 </li>
-<li><p>TCP三次握手、四次挥手、为什么三次握手？四次挥手？，三次挥手行不行，连接后<a href="">客户端</a>出现故障怎么办? </p>
-</li>
-<li><p>TCP如何保证可靠，拥塞控制过程？ </p>
-</li>
-<li><p>TCP粘包、拆包出现原因场景及如何解决？</p>
-</li>
-<li><p>CLOSE-WAIT 和 TIME-WAIT ？ </p>
-</li>
-<li><p>TIME-WAIT连接过多什么原因？解决？ </p>
-</li>
-<li><p>浏览器输入URL并回车的过程发生了什么？DNS查询过程？DNS什么时候用TCP，什么时候用UDP？CDN知道吗？ </p>
-</li>
-<li><p>HTTP1.0、1.1、2.0区别？ </p>
-</li>
-<li><p>HTTP报文格式？常用字段？强缓存和协商缓存？ </p>
-</li>
-<li><p>HTTP和HTTPS的区别？HTTPS的建立过程？对称加密和非u对称加密？ </p>
-</li>
-<li><p>HTTP请求方式？GET和POST区别？ </p>
-</li>
-<li><p>常见状态码？301和302区别？502和504区别?</p>
-</li>
-<li><p>cookie和session区别？ </p>
-</li>
-<li><p>跨域？怎样解决跨域？ </p>
-</li>
-<li><p>SYN泛洪攻击？XSS脚本攻击？csrf跨站请求伪造？解决方式？ </p>
-</li>
-<li><p>ARP欺骗？DNS劫持？傻瓜窗口？等等。。。 </p>
-</li>
-</ol>
-<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><p>   个人觉得OS这块还是比较好准备的，考的主要就是进程线程、虚拟内存这两大块比较多。Linux考的更多的是常用命令，以及给你个问题怎么排查什么的。  </p>
-<p>   先分享两篇大佬写的文章：  </p>
-<p>​    进程、线程全家桶   </p>
-<p>​    <a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/450511?source_id=profile_create&amp;channel=2002">https://www.nowcoder.com/discuss/450511?source_id=profile_create&amp;channel=2002</a>   </p>
-<p>​    内存管理   </p>
-<p>​    <a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/445401?source_id=profile_create&amp;channel=2002">https://www.nowcoder.com/discuss/445401?source_id=profile_create&amp;channel=2002</a>   </p>
-<p>   面试题举例：  </p>
-<ol>
-<li>进程由什么组成？进程的几种状态？低地址到高地址都存放哪些东西？ </li>
-<li>进程与线程的区别？ </li>
-<li>进程通信方式有哪些，对比优缺点？ </li>
-<li>用户态和内核态？ </li>
-<li>上下文是什么？进程线程上下文切换？ </li>
-<li>进程调度<a href="">算法</a>？产生死锁必要条件？解决方式？ </li>
-<li>分页和分段，页面置换<a href="">算法</a>？ </li>
-<li>swap分区？fork函数？僵尸进程？孤儿进程？ </li>
-<li>CPU缓存？MESI了解吗?等等 </li>
-<li>IO模型？多路复用select、poll、epoll？ </li>
-</ol>
-<h2 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h2><p>   Java基础个人觉得主要看一些<a href="">源码</a>吧，例如Hashmap（可以1.7和1.8都看一下）、List的实现、ThreadLocal、Iterator、String、Integer、Java8的新特性、NIO相关的等等，且像集合类一般都会继续问线程安全的实现类也需要看，例如CurconrentHashMap、CopyOnWriteArrayList等等。其他基础常问问题网上都有总结，很好找的，且比较全面。我就不多说了哈！  </p>
-<h2 id="Java多线程"><a href="#Java多线程" class="headerlink" title="Java多线程"></a>Java多线程</h2><p>   关于多线程，  <strong>《Java并发编程的艺术》</strong>这本书比较不错，话不多说直接举例一些面试题吧：  </p>
-<ol>
-<li>Java中线程通信方式 </li>
-<li>Java中乐观锁？CAS问题？什么时候用乐观锁？ </li>
-<li>volatile关键字？如何防止重<a href="">排序</a>？底层指令？ </li>
-<li>Sychronized 与 ReentrentLock 对比？ </li>
-<li>Sychronized底层怎么实现？MarkWord是什么？偏向锁、轻量级锁、重量级锁？自旋参数怎么设置？ </li>
-<li>AQS原理？如何实现的公平锁，非公平锁？ </li>
-<li>读写锁？锁降级？变量的高16位低16位分别保存什么信息？ </li>
-<li>CountDownLatch、CyclicBarrier、Semaphore？ </li>
-<li>线程池？7大参数？线程池工作过程？自带的线程池为什么不建议用？核心数量应该怎么设置？ </li>
-<li>手写个生产者消费者、阻塞队列、多线程轮流打印ABC？等等吧 </li>
-</ol>
-<h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><p>   关于JVM部门，建议阅读  <strong>《深入理解JVM》</strong>  这本书，首先主要掌握就是JVM的内存划分，各部分存储什么，干什么的，堆的划分、对象分配原则（对象在老年代还是新生代，怎么移动什么的）、垃圾回收<a href="">算法</a>、如何标记对象（引用计数法的缺点？GCroots法都哪些对象可以当作根）、对象由哪几部分组成、垃圾回收器（就是G1、CMS可以主要看看，再者可以看下ZGC收集器）、双亲委派原则及破坏、类的加载过程（可以从.java生成.class过程说起，JIT编译器）等等。  </p>
-<p>   大多数比较常见的题目，再者就是JVM调优相关，这个怎么说，就是按自己理解和<a href="">项目</a>的不同来说吧。之前有看过这篇博客，介绍的还比较全：  <a target="_blank" rel="noopener" href="https://blog.csdn.net/wisgood/article/details/52634852">https://blog.csdn.net/wisgood/article/details/52634852</a>  </p>
-<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><p>   这个怎么说，我个人就是看书和看这个  <a target="_blank" rel="noopener" href="https://refactoringguru.cn/design-patterns">https://refactoringguru.cn/design-patterns</a>  来学习，看完后用自己的话总结，写个demo理解。另外就是发现各大框架有哪些地方用到过，各类模式的好处（本菜鸡在<a href="">项目</a>中还没用过  🤣）。  </p>
-<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><p>   框架部分我也就是主要学了Spring、SpringMVC、Mybatis、SpringBoot、Netty和Dubbo吧，SpringCloud只是了解了解。  </p>
-<p>   <a href="">传智播客</a>、黑马、慕课网、B站都能找到相应的视频，面试的话可能也是主要看一看各个框架的原理和理解吧，例如Spring的IOC，AOP？循环依赖怎么解决的？bean的生命周期？SpringBoot的启动流程？RPC框架都包含哪几部分？  </p>
-<p>   我在面试中框架问的还是不多的，问也都是一些特性原理，常见的一些问题，花点时间准备下应该问题不大。  </p>
-<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>   数据库方面我只学习了MySQL,也是比较常问的，书的话我个人觉得  <strong>《高性能MySQL》</strong>和  <strong>《深入了解InnoDB引擎》</strong>还不错，举例：  </p>
-<ol>
-<li>引擎的区别？ </li>
-<li>索引（失效？联合索引？索引建立原则？） </li>
-<li>锁（行锁？表锁？间隙锁？） </li>
-<li>事务（隔离级别，RR怎么避免不可重复读（MVCC）？又怎么避免幻读（MVCC+间隙锁）？） </li>
-<li>B+树索引和哈希索引、聚集索引和非聚集索引？ </li>
-<li>回表查询和索引覆盖？ </li>
-<li>一条SQL执行过程是怎样的？ </li>
-<li>数据过大怎么优化分页？ </li>
-<li>各个日志，都干什么的？ </li>
-<li>SQL过慢怎么排查？Explain的关键字段？ </li>
-<li>MySQL中LUR怎么改造的？为啥这么改？等等。 </li>
-<li>主从复制？分库分表依据？ </li>
-</ol>
-<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>   现在缓存可能也是很常问的了，  <strong>《Redis的设计与实现》</strong>这本书还是很适合读的，通俗易懂，最好深入学习一下例如说下底层命令什么的，常见面试题举例：  </p>
-<ol>
-<li>Redis为什么快？ </li>
-<li>Redis持久化方式？ </li>
-<li>数据类型？底层数据结构？ </li>
-<li>过期策略和内存淘汰策略? </li>
-<li>Redis 应用场景？ </li>
-<li>pipeline批量处理的优点？ </li>
-<li>主从复制原理？cluster了解吗？怎么确定一个key落在哪个节点？一致性哈希了解吗？有什么缺点？怎么解决？ </li>
-<li>缓存雪崩、缓存穿透 </li>
-<li>如何保证缓存与数据库数据一致性？等等。 </li>
-</ol>
-<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p>​    关于中间件，我了解的可能首先就是消息队列，我最常使用的就是   RabbitMq，但是也要对其他的产品特性与应用场景有所了解，例如Kafka、RocketMq的对比。消息队列常问的问题例如：   </p>
-<ol>
-<li><p>消息队列应用场景，作用？ </p>
-</li>
-<li><p>如何保证消息可靠？ </p>
-</li>
-<li><p>如何保证消费者幂等？ </p>
-</li>
-<li><p>如何保证消息顺序性？ </p>
-</li>
-<li><p>MQ积压了很多怎么办？等 。 </p>
-<p>然后我就是学习来ZK、搜索引擎ES和Solr、ngnix与LVS   </p>
-</li>
-</ol>
-<p>​    ZK可以掌握它的应用场景以及ZAB原子广播协议和崩溃协调，   </p>
-<p>​    搜索的话可以学习下倒排索引，以及二者的区别和ES写入原理之类的。   </p>
-<p>​    负载均衡可以对比ngnix和LVS区别，以及LVS的三种模式，ngnix的话我们经常使用ngnix+<a href="">keep</a>alive一起使用，避免ngnix的单点故障，当然还要知道一些负载均衡<a href="">算法</a>。   </p>
-<h2 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h2><p>​    分布式相关的知识还是要掌握的，毕竟我们以后的系统都不可能是单点部署的，这就可以看下CAP理论？BASE理论？分布式事务？限流的方案？分布式id生成策略？分布式锁？或者常用的Hystrix组件等。楼主也是简单的学习了一下，面试时还是考的居多的。   </p>
-<h2 id="大数据类型"><a href="#大数据类型" class="headerlink" title="大数据类型"></a>大数据类型</h2><p>   这类题可以多看几个，思路大多大同小异，还是比较好准备的，例如：  </p>
-<ol>
-<li><a href="">海量数据</a>整数，内存受限找中位数？ </li>
-<li>如何在100亿URL中快速判断某URL是否存在？ </li>
-<li><a href="">海量数据</a>找次数TOP100？等等， </li>
-</ol>
-<h2 id="智力题"><a href="#智力题" class="headerlink" title="智力题"></a>智力题</h2><p>   关于智力题，可能就要多看一些了，这题没看过的话一般现场很难想出来，这里推荐一下这位牛客大佬整理的智力题：  <a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/526897">https://www.nowcoder.com/discuss/526897</a>  </p>
+</ul>
+<h3 id="3-2-MySQL"><a href="#3-2-MySQL" class="headerlink" title="3.2 MySQL"></a>3.2 MySQL</h3><p>MySQL我看的是b站狂神的公开课，他现在的b站id叫做<strong>遇见狂神说</strong>。我心里还是非常感激狂神的，无偿的出了这么多的课程，在我学习的路上是非常好的指引，也让我这个无头苍蝇有了学习的方向。他写的全栈开发学习路线，很有借鉴意义，希望大家能去看一看。</p>
+<ul>
+<li>【狂神说Java】MySQL最新教程通俗易懂 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1NJ411J79W">https://www.bilibili.com/video/BV1NJ411J79W</a> </li>
+</ul>
+<p>看过的书：</p>
+<ul>
+<li><strong>《MySQL必知必会》</strong>：一本非常小的小册子，罗列了一下简单的知识点和SQL语句，一天就能读完，可以当做零食书消遣看看看 </li>
+<li><strong>《高性能MySQL》</strong>：<code>非常厚</code>的一本大部头，不推荐去读，其中涉及到的索引部分写的还行，如果时间充裕的话，我觉得还是一本比较好的参考，啃不动大部头的话，可以不读。如果想看索引部分，我自己写过博客儿，做过总结，大家可以参考一下。<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46225886/article/details/105959634">https://blog.csdn.net/qq_46225886/article/details/105959634</a> </li>
+<li>掘金小册：<strong>《MySQL是怎样运行的：从跟上理解MySQL》</strong>：强烈推荐，强烈推荐，强烈推荐呐！真的很不错，写的很深，如果能全掌握的话，cover面试真的是没什么问题了。（这个作者也写过基础篇的MySQL教程，我觉得两本一起看，不看实体书，效果一样会很好，而且也能省下一些小钱钱）,<a target="_blank" rel="noopener" href="https://www.juejin.im/book/6844733769996304392">https://www.juejin.im/book/6844733769996304392</a> </li>
+</ul>
+<h3 id="3-3-Spring-SpringMVC-MyBatis"><a href="#3-3-Spring-SpringMVC-MyBatis" class="headerlink" title="3.3 Spring + SpringMVC + MyBatis"></a>3.3 Spring + SpringMVC + MyBatis</h3><p>我觉得这部分是让我学起来最快乐的了，原来网站是这么搭的呀！原来是这个样子的呀！当我第一次在网页上写出我自己的名字的时候，异常的兴奋；自己搭完一个简单的图书管理系统（简单的CRUD）的时候，我居然高兴的给自己拍手，可能这就是我这个男人的快乐吧！这个部分也主要是看的狂神的视频。</p>
+<ul>
+<li><strong>Spring5</strong> ：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1WE411d7Dv">https://www.bilibili.com/video/BV1WE411d7Dv</a> </li>
+<li><strong>SpringMVC</strong>： <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1aE41167Tu">https://www.bilibili.com/video/BV1aE41167Tu</a> </li>
+<li><strong>MyBatis</strong> ：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1NE411Q7Nx">https://www.bilibili.com/video/BV1NE411Q7Nx</a> </li>
+</ul>
+<p>看过的书：</p>
+<ul>
+<li><strong>《Spring实战（第四版）》</strong>：注意版号，第四版。 </li>
+<li>掘金小册<strong>《从0开始深入学习Spring》</strong>：这个可看可不看，因为它还没写完，应该在今年年底更完，我在九月初买的，看了看个人感觉还行。<a target="_blank" rel="noopener" href="https://www.juejin.im/book/6857911863016390663">https://www.juejin.im/book/6857911863016390663</a> </li>
+</ul>
+<h3 id="3-4-SpringBoot"><a href="#3-4-SpringBoot" class="headerlink" title="3.4 SpringBoot"></a>3.4 SpringBoot</h3><p>现在这个不会可真的不行了，至少标配了，SpringCloud可以不会，这个还是得好好学一学。而且其中两个经常被问到的面试题，@SpringBootApplication的作用和它的启动流程。</p>
+<ul>
+<li><strong>【狂神说Java】SpringBoot最新教程IDEA版通俗易懂</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PE411i7CV">https://www.bilibili.com/video/BV1PE411i7CV</a> </li>
+</ul>
+<h3 id="3-5-JVM"><a href="#3-5-JVM" class="headerlink" title="3.5 JVM"></a>3.5 JVM</h3><p>这个我可是太会了，面试自我介绍过程中我会强调我很熟悉这个。看过视频也看过书，我觉得这部分主要基于理论，理解不了背它咱也背过来，总行吧？</p>
+<ul>
+<li><strong>【狂神说Java】JVM快速入门篇</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iJ411d7jS">https://www.bilibili.com/video/BV1iJ411d7jS</a> </li>
+</ul>
+<p>看过的书：</p>
+<ul>
+<li><strong>《深入理解Java虚拟机（第三版）》</strong>：紫皮儿的这本，实在是太有名了，也实在太用有了！这本是我是在八月份才看的，看过两遍，其中调优和字节码相关的可以跳过，其他的部分尽最大的能力全部掌握，记一些调优的参数，和一些Demo的实例，面试很好用。其中最后一个章节，讲的Synchronized的优化，这个努力给它记一记。 </li>
+</ul>
+<h3 id="3-6-Java并发编程"><a href="#3-6-Java并发编程" class="headerlink" title="3.6 Java并发编程"></a>3.6 Java并发编程</h3><p>我的第二个杀手锏，同样自我介绍的时候会主要强调，我也很会啊！同样也看过视频和书。</p>
+<ul>
+<li><strong>【狂神说Java】JUC并发编程最新版通俗易懂</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1B7411L7tE">https://www.bilibili.com/video/BV1B7411L7tE</a> </li>
+<li>某课上：<strong>玩转Java并发工具，精通JUC，成为并发多面手</strong>（请大家善用搜索引擎，不会的可以私信我，我只能这么说了） </li>
+</ul>
+<p>看过的书：</p>
+<ul>
+<li><strong>《Java并发编程实战》</strong>：一本很不错的书，看完视频再看书会很轻松，不过我觉得这本书倒着看反而更流畅。 </li>
+</ul>
+<h3 id="3-7-数据结构和算法"><a href="#3-7-数据结构和算法" class="headerlink" title="3.7 数据结构和算法"></a>3.7 数据结构和<a href="">算法</a></h3><p>这一部分我觉得没有什么发言权，学的比较烂，在<a href="">滴滴</a>二面的时候被<a href="">红黑树</a>按在地上摩擦，不过我也给大家提供一下我的<strong>野路子</strong>吧，仅供参考。《剑指Offer》我刷过三遍，基本上拿出一道题来能随便手撕，算上剑指Offer的题目数，我一共刷了LeetCode上142道题，也是刷了三遍，这个我是参考某大佬的GitHub<a href="">刷题</a>路线，我自己也写了博客做了汇总，大家可以参考下，不过我需要再完善完善，之前忙于面试无心汇总。</p>
+<ul>
+<li><strong>秋招<a href="">刷题</a>汇总</strong>：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46225886/article/details/108720536">https://blog.csdn.net/qq_46225886/article/details/108720536</a> </li>
+</ul>
+<p>看过的书：</p>
+<ul>
+<li><strong>《<a href="">算法</a>图解》</strong>：一本入门级别的<a href="">算法</a>书，一天我就看完了，建议大家系统找找其他书籍学习一下，<a href="">算法</a>很重要啊！ </li>
+</ul>
+<h3 id="3-8-计算机网络"><a href="#3-8-计算机网络" class="headerlink" title="3.8 计算机网络"></a>3.8 计算机网络</h3><p>这一部分我学的不够深入，仅是看过两本书和一些大佬整理的<a href="">面经</a>。</p>
+<p>看过的书：</p>
+<ul>
+<li><strong>《图解HTTP》</strong>：同样是一本轻松的小零食书，能很快刷完。 </li>
+<li><strong>《图解TCP/IP》</strong>：个人感觉这本还是不错的，因为我在简历上没有写过计网相关的内容，所以被问的比较少，一般问题也都能cover住了。 </li>
+</ul>
+<h3 id="3-9-计算机基础"><a href="#3-9-计算机基础" class="headerlink" title="3.9 计算机基础"></a>3.9 计算机基础</h3><p>我这里学的不行，大家可以参考下别的大佬是怎么学的，这部分放在最后学习就可以，相对来说还比较枯燥。</p>
+<h3 id="3-10-其他技术"><a href="#3-10-其他技术" class="headerlink" title="3.10 其他技术"></a>3.10 其他技术</h3><ul>
+<li><strong>【狂神说Java】Redis最新超详细版教程通俗易懂</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1S54y1R7SB">https://www.bilibili.com/video/BV1S54y1R7SB</a> </li>
+<li><strong>【狂神说Java】Linux最通俗易懂的教程<a href="">阿里云</a>真实环境学习</strong> ：楼主买了一个<a href="">阿里云</a>的服务器，学生机，也不是很贵，建议入手一个学习使用<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV187411y7hF">https://www.bilibili.com/video/BV187411y7hF</a> </li>
+<li><strong>【狂神说Java】Git最新教程通俗易懂</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1FE411P7B3">https://www.bilibili.com/video/BV1FE411P7B3</a> </li>
+<li><strong>【狂神说Java】通俗易懂的23种设计模式教学（停更）</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1mc411h719">https://www.bilibili.com/video/BV1mc411h719</a> </li>
+</ul>
+<p>看过的书：</p>
+<ul>
+<li><strong>《Head First 设计模式》</strong>：还没读完，但是读起来很轻松 </li>
+</ul>
+<hr>
+<h2 id="4-面试"><a href="#4-面试" class="headerlink" title="4. 面试"></a>4. 面试</h2><h3 id="4-1-简历"><a href="#4-1-简历" class="headerlink" title="4.1 简历"></a>4.1 简历</h3><p>推荐使用《超级简历》的学生求职模板，我个人感觉写出来非常精简，也很清爽。<br>首先，<strong>基础信息</strong>就写上名字、手机、邮箱和求职意向就好了；<strong>教育经历</strong>写上学校，绩点高的把绩点也写上，在学校获得的<strong>荣誉单拿出一个栏目</strong>来写。<strong>专业技能</strong>，Java相关的写上边，数据结构写中间，其他技术栈往后排，对于技术的栏目可以具体写上一些内容，一方面是让面试官能照着你的简历问，比如你写上了熟悉JVM，并了解垃圾机制和调优，这样他问咱这些，咱是不是就能游刃有余了？**<a href="">项目</a>经历<strong>，这个主要写写你做了什么，做了这个之后产生了什么样的优化效果，比如秒杀系统可以写上优化的QPS。</strong>自我评价<strong>：因为楼主非科班出身嘛，所以我就写了我读过的技术书籍；我自己也在写博客儿，把这些也写在了简历里，因为这些东西不是一蹴而就的，至少能体现我有一个认真学习的态度，另外我觉得，虽然写博客儿会花很多时间，但是也能抵挡时间对我们知识的冲刷。还有一个非常重要的点就是，简历是</strong>限制面试官的提问范围**，咱往上边写，就一定要搞的很懂，他问就基本上问不到咱，如果写的技术栈太杂，反而让我们比较难发挥了。</p>
+<ul>
+<li><strong>博客</strong>：我汇总了一些面试知识，还有我学习过程中的笔记，<a href="">项目</a>笔记（我觉得这个还是比较有参考意义的，写的比较细），<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46225886">https://blog.csdn.net/qq_46225886</a> </li>
+</ul>
+<h3 id="4-2-项目"><a href="#4-2-项目" class="headerlink" title="4.2 项目"></a>4.2 <a href="">项目</a></h3><p>非科班没<a href="">项目</a>是真的不太行，因为我看<a href="">面经</a>的时候，大家都有聊<a href="">项目</a>这一部分，咱没有也不行啊！这两个<a href="">项目</a>都是在七月份才做的，相当于发育的后期了，之前做过小的CRUD<a href="">项目</a>。</p>
+<p>我做的第一个<a href="">项目</a>是烂大街的秒杀系统，某课上，<strong>Java秒杀系统方案优化 高性能高并发实战</strong>（还是那句话，请大家善用搜索引擎，不会的私信我），我在我博客儿上做了比较详细的笔记，大家可以参考我的笔记，给大家节省一些时间。<br>我做的第二个<a href="">项目</a>仍然是在某课上找的，<strong>一站式学习Java网络编程 全面理解BIO/NIO/AIO</strong>，这个学透了，面试聊聊网络IO模型还是可以的，我也做了详细的笔试。</p>
+<p>不过有<a href="">项目</a>了，一定要非常了解才行，简单的跟一边是记不住多少的，还需要不断的复盘和在面试中被锤才能游刃有余，咱不能在面试的时候被问傻！</p>
+<h3 id="4-3-面试技巧"><a href="#4-3-面试技巧" class="headerlink" title="4.3 面试技巧"></a>4.3 面试技巧</h3><p>我觉得我的技巧一般，属于比较常规的套路，从自我介绍开始说<br>我叫XXX，是XX大学的应届生，我做过两个<a href="">项目</a>，分别介绍自己做了什么，但是不要说的太长，<strong>拿重要的说</strong>，因为面试官大多不会记住你说了什么，还是主要会照着简历问。这之后我会<strong>重点强调</strong>我很会并发编程和JVM（你问我就行了，问我就上了我的套儿），最后几句做一个总结，其实我觉得自我介绍更多的还是面试的一个开场白，一定要<strong>非常流利</strong>。</p>
+<p>另外我面试的时候属于主动交代型，这样有时候好，有时候不好，不好的时候就是会让面试官觉得你在引导他，他反而不会这么去问也不会太开心。什么叫主动交代型？咱比如说，面试官让我说说HashMap，我基本上就会一通说好多，而且说完我还会说我比较了解ConcurrentHashMap，就是把面试官围在我会的东西里与他切磋，有时效果很好，有时不太好，还得是大家自己考量。</p>
+<p>另一方面就是<strong>自信</strong>，这个我没办法教大家，我自身相对来说是一个比较自信的人，但是请大家一定要表现出自己很可以的样子，这样也给面试官留一个好的印象。</p>
+<p>再说说实习，我是没有实习经历的，六月份我们学校已经宣布返校考试了，基本上整个六月在奋战考试周，还欠下的债，如果有很好的大厂实习的机会还是要找、要去，哪怕倒贴，小厂的话，还是需要自己协调，个人拙见。没找到实习现在看来也是比较幸运的一件事儿吧，因为这给了我在家里充足的时间写<a href="">项目</a>，看书，当时因为没有实习经历也焦虑过，不过，现在看来，也是福分吧！</p>
+<p><strong>祝好！</strong></p>
 
       
     </div>
@@ -2582,7 +2426,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">17:31</span>
+    <span title="站点阅读时长">17:32</span>
 </div>
 
       
