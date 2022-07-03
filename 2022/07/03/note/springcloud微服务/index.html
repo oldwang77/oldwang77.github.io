@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangfx.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="springcloud微服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springcloud微服务">
+<meta property="og:url" content="http://wangfx.top/2022/07/03/note/springcloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/index.html">
+<meta property="og:site_name" content="qGuang">
+<meta property="og:description" content="springcloud微服务">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image002.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image004.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image006.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image008.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image010.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image012.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image014.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image016.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image018.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image020.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image022.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image024.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image026.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image028.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image030.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image032.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image034.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image036.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image038.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image040.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image042.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image044.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image046.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image048.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image050.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image052.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image054.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image056.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image058.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image060.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image062.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image064.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image066.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image068.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image070.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image072.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image074.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image076.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image078.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image080.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image082.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image084.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image086.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image088.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image090.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image092.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image094.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image096.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image098.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image100.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image102.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image104.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image106.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image108.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image110.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image112.jpg">
+<meta property="article:published_time" content="2022-07-03T03:06:28.829Z">
+<meta property="article:modified_time" content="2022-07-03T03:11:30.439Z">
+<meta property="article:author" content="qianguang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image002.png">
+
+<link rel="canonical" href="http://wangfx.top/2022/07/03/note/springcloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>springcloud微服务 | qGuang</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">qGuang</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">简简单单，安安静静</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wangfx.top/2022/07/03/note/springcloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="qianguang">
+      <meta itemprop="description" content="浅光的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qGuang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          springcloud微服务
+        </h1>
+
+        <div class="post-meta">
+		  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-07-03 11:06:28 / 修改时间：11:11:30" itemprop="dateCreated datePublished" datetime="2022-07-03T11:06:28+08:00">2022-07-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">web后端</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">springcloud微服务</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="springcloud微服务"><a href="#springcloud微服务" class="headerlink" title="springcloud微服务"></a>springcloud微服务</h1><p>参考教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1S5411c7hM?p=13">https://www.bilibili.com/video/BV1S5411c7hM?p=13</a></p>
+<h2 id="0-四种参数传递的方式"><a href="#0-四种参数传递的方式" class="headerlink" title="0 四种参数传递的方式"></a>0 四种参数传递的方式</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image002.png" alt="img"></p>
+<p>@ResponseBody：将控制器方法返回值转换成json格式字符串，并响应请求</p>
+<p>@RequestBosy：将请求中json格式字符串自动转为java中的对象</p>
+<h2 id="1-什么是微服务"><a href="#1-什么是微服务" class="headerlink" title="1 什么是微服务"></a>1 什么是微服务</h2><p>​    微服务是一种<strong>架构</strong>，基于单个应用开发出一系列微小的服务，每个服务<strong>基于项目中业务</strong>进行拆分，拆分出来的服务<strong>独立部署，</strong>这些服务基于<strong>分布式管理</strong></p>
+<h2 id="2-为什么是微服务"><a href="#2-为什么是微服务" class="headerlink" title="2 为什么是微服务"></a>2 为什么是微服务</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image004.png" alt="img"></p>
+<p>优点：</p>
+<p>1 服务专注于自己的职责，服务之间松耦合，避免一个模块的问题导致服务崩溃</p>
+<p>2 将服务拆分成单独的小服务，单独部署，高度自治</p>
+<p>缺点：<strong>服务治理和服务监控是关键</strong></p>
+<h2 id="3-微服务解决方案"><a href="#3-微服务解决方案" class="headerlink" title="3 微服务解决方案"></a>3 微服务解决方案</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image006.png" alt="img"></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image008.png" alt="img"></p>
+<h2 id="4-什么是SpringCloud"><a href="#4-什么是SpringCloud" class="headerlink" title="4 什么是SpringCloud"></a>4 什么是SpringCloud</h2><h3 id="官方定义和核心组件"><a href="#官方定义和核心组件" class="headerlink" title="官方定义和核心组件"></a>官方定义和核心组件</h3><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image010.png" alt="img"></p>
+<p>springcloud和springboot的对应关系</p>
+<p><strong>注意：springcloud<strong><strong>和boot</strong></strong>的版本号，必须要对应！强制规定了版本必须对应</strong></p>
+<p>我们选取的</p>
+<p>springcloud的Hoxton</p>
+<p>springboot的2.2.5</p>
+<p>jdk1.8</p>
+<p>maven3.x</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image012.png" alt="img"></p>
+<h2 id="5服务注册中心"><a href="#5服务注册中心" class="headerlink" title="5服务注册中心"></a>5服务注册中心</h2><h4 id="什么是服务注册中心"><a href="#什么是服务注册中心" class="headerlink" title="什么是服务注册中心"></a>什么是服务注册中心</h4><p>​    整个微服务架构中单独抽取出来的一个服务，这个服务不完成项目中任何业务的功能，仅仅在微服务中记录微服务健康状况的检查，让服务元数据信息存储</p>
+<p>​    存储所有微服务信息，<strong>比如服务名称、<strong><strong>IP</strong></strong>、端口等等</strong></p>
+<h4 id="常用的注册中心"><a href="#常用的注册中心" class="headerlink" title="常用的注册中心"></a>常用的注册中心</h4><p>Eureka</p>
+<p>springcloud做了基础springcloud-netflix-eureka，包含两个组件，<strong>eureka-server****和eureka-client</strong></p>
+<p>eureka开发完成后，访问<a href="http://localhost:8761，可以访问可视化界面">http://localhost:8761，可以访问可视化界面</a></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image014.png" alt="img"></p>
+<p>服务名称不能有下划线并且推荐使用大写</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image016.png" alt="img"></p>
+<p>我们注册一个eureka-client看一下结果</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image018.png" alt="img"></p>
+<p>这个client，日后就是一个个我们开发的服务</p>
+<p><strong>eureka****自我保护机制</strong></p>
+<p>​    并不会因为某一次或者某几次心跳没有收到回复就直接移除</p>
+<p>​    心跳出现问题的时候，我先不认为你是宕机了，我先认为是网络等原因出现了问题，先不清楚这个服务在eureka中注册的服务列表</p>
+<p>​    自我保护机制默认是开启的，在自我保护模式下，eureka将停止移除实例</p>
+<p> <strong>那什么时候会清除呢？</strong></p>
+<p>1 心跳的次数高于预期的阈值</p>
+<p>​    没有开启自我保护机制：如果实在90秒内我们没有接收到微服务实例的心跳。30s可以发送一次心跳请求。15分钟可以按照30s分成很多组</p>
+<p>​    自我保护机制：Eureka会在运行期间，15分钟内丢失心跳比例是否在15%以上，如果低于85%，Eureka会把他们保护起来，这些实例不会过期</p>
+<p>​    我们可以自己设置参数的值，来减少移除实例的时间</p>
+<p><strong>eureka****集群搭建</strong></p>
+<p>目前我们还是推荐使用eureka1版本</p>
+<p><strong><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image020.jpg" alt="img"></strong></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image022.jpg" alt="img"></p>
+<p>Consul</p>
+<p> <strong>eureka****的问题</strong></p>
+<p>1 最新版本停止更新</p>
+<p>2 每次我们必须手动开发服务注册中心</p>
+<p> <strong>consul****简介</strong></p>
+<p>​    基于go语言开发的服务注册中心，轻量级的注册中心google</p>
+<p>​    相当于开发了一个程序，我们不用自己开发，直接把我们有的微服务注册进去就可以了，我们只需要下载、安装启动即可</p>
+<h4 id="不同服务注册中心区别"><a href="#不同服务注册中心区别" class="headerlink" title="不同服务注册中心区别"></a>不同服务注册中心区别</h4><p>后面将nacos的时候会讲</p>
+<h2 id="6服务之间通信方式"><a href="#6服务之间通信方式" class="headerlink" title="6服务之间通信方式"></a>6服务之间通信方式</h2><h4 id="基于RestTemplate的服务调用"><a href="#基于RestTemplate的服务调用" class="headerlink" title="基于RestTemplate的服务调用"></a>基于RestTemplate的服务调用</h4><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image024.jpg" alt="img"></p>
+<p>​    springcloud采用HTTP协议传输数据，用户服务向订单服务发送HTTP 请求，订单服务将结果进行返回；使用http rest方式传输数据</p>
+<p>​    RPC采用TCP进行通信，直接使用二进制传输数据；</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image026.png" alt="img"></p>
+<p><strong>如何用java<strong><strong>代码发起http</strong></strong>请求</strong></p>
+<p>​    spring框架提供了HttpClient对象，<strong>RestTemplate</strong> <strong>（可以理解为java****代码中的浏览器）</strong>发起一个Http请求</p>
+<h4 id="基于Ribbon的服务调用"><a href="#基于Ribbon的服务调用" class="headerlink" title="基于Ribbon的服务调用"></a>基于Ribbon的服务调用</h4><p>​    restTemplate的问题，直接去调用了订单服务，调用的时候指明了IP+端口，如果订单服务是一个集群，我们每次调用的都是同一个服务。没有办法实现请求的负载均衡。此外由于路径是写死的，如果服务提供者路径一变，那么不利于后续处理</p>
+<p>​    <strong>使用springcloud<strong><strong>提供组件Ribbon</strong></strong>解决负载均衡调用，用来实现请求调用时的负载均衡。Ribbon****是一个负载均衡的客户端组件，但是发送请求还是需要依赖于RestTemplate</strong></p>
+<p>  <strong>ribbon****的原理</strong></p>
+<p>​    用户服务调用订单服务的时候，不再具体指定调用的url:端口，而是告诉ribbon调用服务的名称，ribbon会根据服务名去注册中心找订单列表，然后ribbon会去做一个负载均衡，默认采用轮询的策略</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image028.jpg" alt="img"></p>
+<p>ribbon是客户端负载均衡的组件，因为是把订单服务的列表拉取到客户端然后再次进行负载均衡</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image030.png" alt="img"></p>
+<p>当然也可以用注解</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image032.png" alt="img"></p>
+<p>总结：我们日后就会使用<strong>restTemplate+ribbon****的方式实现通信</strong></p>
+<h4 id="ribbon负载均衡的策略"><a href="#ribbon负载均衡的策略" class="headerlink" title="ribbon负载均衡的策略"></a>ribbon负载均衡的策略</h4><p>​    通过源码可以知道Ribbon底层<strong>负载均衡策略父接口****IRule</strong>，这个父接口有很多负载均衡策略的实现</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image034.jpg" alt="img"></p>
+<p>如何修改负载均衡策略</p>
+<p>比如用户服务调用订单服务，我们修改用户服务的配置文件</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image036.jpg" alt="img"></p>
+<p>总结：</p>
+<p>restTemplate+ribbon可以实现服务间通信，但是路径写死，不够灵活</p>
+<h4 id="openFeign"><a href="#openFeign" class="headerlink" title="openFeign"></a>openFeign</h4><p>​    springcloud现在还是推荐我们使用openFeign作为通信组件；openFeign和RestTemplate作用一样，都是http客户端。open<strong>Fegin<strong><strong>底层也是用的RestTemplate</strong></strong>，经过封装，是得服务间的通信变得更加简单。</strong></p>
+<p>​    <strong>openFeign<strong><strong>底层集成了Ribbon</strong></strong>组件，可以实现负载均衡的功能</strong></p>
+<p> <strong>openFeign****简单</strong></p>
+<p>1 使用写一个接口，加一个注解</p>
+<p>2 调用服务代码更加简洁</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image038.jpg" alt="img"></p>
+<p> openFeign组件的使用</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image040.png" alt="img"></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image042.png" alt="img"></p>
+<h4 id="参数传递和响应处理"><a href="#参数传递和响应处理" class="headerlink" title="参数传递和响应处理"></a>参数传递和响应处理</h4><h4 id="openFeign默认的超时处理"><a href="#openFeign默认的超时处理" class="headerlink" title="openFeign默认的超时处理"></a>openFeign默认的超时处理</h4><p>​    使用openFeign组件在服务间通信时要求被调用的服务必须在1s内给出响应，如果超出1s，那么openFeign将直接报错</p>
+<p>修改openFeign调用一个服务的超时时间</p>
+<p>​    比如类别服务调用商品服务，我们可以在类别服务配置：调用openFeign调用商品服务的超时时间</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image044.jpg" alt="img"></p>
+<p> 修改openFeign调用所有服务的超时时间</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image046.jpg" alt="img"></p>
+<h4 id="openFeign的日志显示"><a href="#openFeign的日志显示" class="headerlink" title="openFeign的日志显示"></a>openFeign的日志显示</h4><p>​    为了更好的方便我们开发过程中调试openFeign的数据传递和响应处理，openFeign在设计的时候添加了日志功能</p>
+<h2 id="9-Hystrix组件的使用"><a href="#9-Hystrix组件的使用" class="headerlink" title="9 Hystrix组件的使用"></a>9 Hystrix组件的使用</h2><h4 id="服务雪崩"><a href="#服务雪崩" class="headerlink" title="服务雪崩"></a>服务雪崩</h4><p> <strong>现象</strong>：同一个时刻，所有的微服务都不可用的情况的现象，称之为服务雪崩</p>
+<p> <strong>引发</strong></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image048.jpg" alt="img"></p>
+<h4 id="服务熔断"><a href="#服务熔断" class="headerlink" title="服务熔断"></a>服务熔断</h4><p> 如何解决微服务的雪崩问题</p>
+<p>（1）服务熔断&#x3D;&gt;springcloud提供了<strong>hystrix</strong></p>
+<p>作用：所有的微服务都需要引入Hystrix组件，相当于是一个监控器，这个组件具有服务熔断的功能</p>
+<p>熔断相当于保险丝，有了Hystrix相当于给微服务加上了保险丝</p>
+<p>只要发现服务器处理不掉了，就立刻熔断掉，是一种保护机制</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image050.jpg" alt="img"></p>
+<p>（2）Hystrix的执行流程</p>
+<p>是对调用链路的保护，是解决服务雪崩的重要手段</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image052.png" alt="img"></p>
+<h4 id="服务降级"><a href="#服务降级" class="headerlink" title="服务降级"></a>服务降级</h4><p>（1）定义:当服务压力剧增的时候，根据当前的业务状况以及流量，<strong>对一些服务和页面进行有策略的降级</strong>，以缓解服务器的压力，<strong>保证核心组件的运行</strong>，同时保证大部分用户可以收到响应。</p>
+<p>​    比如说双十一期间，我们可以关闭退款这个服务，保证支付下单这几个核心服务的运行</p>
+<h4 id="降级和熔断总结"><a href="#降级和熔断总结" class="headerlink" title="降级和熔断总结"></a>降级和熔断总结</h4><p>（1）共同点：目的一致，都是从可靠性的角度考虑，为了防止系统的整体缓慢甚至是崩溃，采用的技术手段</p>
+<p>（2）不同点：服务熔断一般是某个服务故障引发，服务降级一般是从整体负荷考虑</p>
+<p>​    服务熔断必定会触发降级，所以熔断也是降级的一种，<strong>区别在于熔断是对链路的保护，降级是系统过载的一种保护过程</strong></p>
+<h4 id="服务熔断的实现Hystrix"><a href="#服务熔断的实现Hystrix" class="headerlink" title="服务熔断的实现Hystrix"></a>服务熔断的实现Hystrix</h4><p>（1）防雪崩利器sentinel，可以用来替换hystrix</p>
+<p>（2）如何在项目中使用Hystrix组件</p>
+<p>a 在所有的微服务模块中引入Hystrix依赖</p>
+<p>b 在入口类上加上注解</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image054.png" alt="img"></p>
+<p>我们还要告诉熔断之后的快速响应处理</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image056.png" alt="img"></p>
+<p>我们看一下熔断后的状态</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image058.jpg" alt="img"></p>
+<p>​    我们这样处理仅仅是服务端的一个处理，我们还希望openFeign在调用这个服务的时候也能拿到熔断之后的处理结果</p>
+<p>​    因为我们openFeign访问的url不是这个url，我们openFeign不会拿到这个结果，而是拿到是个不友好的页面，直接是一个异常页面</p>
+<p>​    我们这个仅仅是服务提供方的熔断策略，我们还需要处理服务调用方openFegin一个处理方案</p>
+<h4 id="Hystrix和OpenFeign的组合"><a href="#Hystrix和OpenFeign的组合" class="headerlink" title="Hystrix和OpenFeign的组合"></a>Hystrix和OpenFeign的组合</h4><p><strong>1 Hystrix****断路器打开的条件</strong></p>
+<p>当满足一定的阈值条件（默认10s内20个请求失败）</p>
+<p>当失败率到达一定的条件（默认10s内超过50%的请求失败）</p>
+<p><strong>2</strong> <strong>触发熔断机制流程</strong></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image060.jpg" alt="img"></p>
+<p>整个流程：当Hystrix监控到该服务接口出发1，2两个阈值的时候，会在系统中自动触发断路器，在熔断器打开的过程中，任何访问这个接口的请求都不可用，同时在断路器打开5s后会进入到半开状态，此时允许一个请求到达服务接口。如果请求成功，断路器彻底关闭，如果请求失败，断路器重新打开</p>
+<p><strong>3</strong> <strong>实战过程中断路器的调用</strong></p>
+<p>有自定义的和默认的两种方案</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image062.jpg" alt="img"></p>
+<p>4 openFeign如何和Hystrix集成使用</p>
+<p>在我们写openFeign调用对象的接口的时候，给出熔断的处理</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image064.png" alt="img"></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image066.png" alt="img"></p>
+<p>最后，我们在配置文件开启openFeign支持降级</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image068.png" alt="img"></p>
+<p><strong>总结：</strong></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image070.jpg" alt="img"></p>
+<h4 id="Hystrix-Dashboard"><a href="#Hystrix-Dashboard" class="headerlink" title="Hystrix Dashboard"></a>Hystrix Dashboard</h4><p>作用：hystrix提供了可视化的工具，看到什么时候断路器的开启和关闭</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image072.jpg" alt="img"></p>
+<p>hystrix Dashboard需要我们自己编写代码</p>
+<p>仪表盘组件不需要注册到中心，它只是一个监控，没有任何业务代码，也可以注册到中心</p>
+<p><strong>@EnableDiscoveryClient****会自动注册到consul zk nacos</strong></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image074.jpg" alt="img"></p>
+<p>@EnableHystrixDashboard可以开启仪表盘应用</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image076.jpg" alt="img"></p>
+<p><strong>DashBoard<strong><strong>存在一些bug</strong></strong>，需要修改一下</strong></p>
+<p><strong>DashBoard<strong><strong>应该监控被调用的微服务，而不是放在dashboardl</strong></strong>类上</strong></p>
+<p><strong><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image078.jpg" alt="img"></strong></p>
+<h4 id="Hystrix和Hystrix-Board"><a href="#Hystrix和Hystrix-Board" class="headerlink" title="Hystrix和Hystrix Board"></a>Hystrix和Hystrix Board</h4><p>​    Hystrix目前不处于积极开发中，目前处于维护模式；官方也说明<strong>Hystrix1.5.18</strong>目前hystrix已经足够的稳定</p>
+<p>​    Springcloud提供了一个替换的组件，*<em>resillence4j,<strong><strong>用来替换Hystrix</strong></strong>，实时自适应系统熔断，但是目前流行度并不高。sentinel</em><em><strong>，是阿里提供的一个解决方案，被称作为流量卫兵，可以做流量控制，降级策略，我们推荐用sentinel</strong></em><em>解决服务熔断的问题</em>*</p>
+<p>​    Hystrix的问题是熔断的规则过于单一，并不是实时的操作</p>
+<h4 id="组件的快速回顾"><a href="#组件的快速回顾" class="headerlink" title="组件的快速回顾"></a>组件的快速回顾</h4><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image080.jpg" alt="img"></p>
+<h2 id="10-Gateway组件的使用"><a href="#10-Gateway组件的使用" class="headerlink" title="10 Gateway组件的使用"></a>10 Gateway组件的使用</h2><h4 id="什么是服务网关"><a href="#什么是服务网关" class="headerlink" title="什么是服务网关"></a>什么是服务网关</h4><p>1 统一了微服务的入口，方便对平台众多服务的管控</p>
+<p>2 可以实现路由转发，也可以实现负载均衡</p>
+<p>3 可以身份认证，响应数据的脱敏，流量和并发控制，基于API调用的计量或者计费</p>
+<p><strong><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image082.jpg" alt="img"></strong></p>
+<h4 id="服务网管组件"><a href="#服务网管组件" class="headerlink" title="服务网管组件"></a>服务网管组件</h4><p>1 netflix zuul1.x（效率低） zuul2.x</p>
+<p>zuul不推荐使用了</p>
+<p>2 springcloud gateway组件<strong>（推荐）</strong></p>
+<p>动态路由</p>
+<p>gateway &#x3D; 路由转发router+请求过滤filter</p>
+<h4 id="网关使用"><a href="#网关使用" class="headerlink" title="网关使用"></a>网关使用</h4><p><strong>网关中不能引入springmvc<strong><strong>的模型，pom</strong></strong>文件中不能引入spring-cloud-starter-web!!</strong></p>
+<p>*<em>网关中一定要去掉spring-cloud-starter-web!!<strong><strong>因为gateway</strong></strong>采用的是webflux</em>*</p>
+<p><strong>路由</strong></p>
+<p><strong><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image084.jpg" alt="img"></strong></p>
+<p><strong><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image086.jpg" alt="img"></strong></p>
+<h4 id="网关配置细节"><a href="#网关配置细节" class="headerlink" title="网关配置细节"></a>网关配置细节</h4><p>上面的这种写法不能做到负载均衡，只能转发到一个固定的机器</p>
+<p>gateway也是借助ribbon实现负载均衡的</p>
+<p>uri 必须按照这个规则写：uri: lb:&#x2F;&#x2F;category ，也就是loadbalance，然后去服务注册中心去拉取服务id是category</p>
+<p>以后我们就用这种方法实现负载均衡的方式</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image088.jpg" alt="img"></p>
+<h4 id="网关的断言和过滤"><a href="#网关的断言和过滤" class="headerlink" title="网关的断言和过滤"></a>网关的断言和过滤</h4><p><strong>1</strong> **断言(predicate)**<strong>和过滤(filter)</strong></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image090.png" alt="img"></p>
+<p>断言：当请求到达网关的时候的<strong>前置处理</strong>，满足需求，那么就放行处理</p>
+<p>官方提供了很多断言的方法，比如说基于cookie的断言等等，<strong>这里没有细看</strong><strong>…..</strong></p>
+<p><strong>2</strong> <strong>内置的filter</strong></p>
+<p><strong>这里没有细看，先跳过了…..</strong></p>
+<h2 id="11-config组件"><a href="#11-config组件" class="headerlink" title="11 config组件"></a>11 config组件</h2><h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><p>config server组件，统一配置中心</p>
+<p><strong>用来实现微服务系统中服务配置统一管理组件netflix config</strong></p>
+<h4 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h4><p>​    统一配置中心服务端（集中管理配置文件），统一配置中心客户端client</p>
+<p>统一配置中心，管理全局微服务的配置</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image092.jpg" alt="img"></p>
+<p>​    这样又产生了问题，每个配置中心之间还要同步。于是我们把配置文件<strong>交给远程仓库进行管理，统一配置中心的功能就是拉取到本地仓库</strong></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image094.jpg" alt="img"></p>
+<p>​    如果我们现在修改了新的版本，只需要在github修改好配置，然后让所有的服务重新启动，重新拉取配置就可以了</p>
+<h4 id="统一配置中心"><a href="#统一配置中心" class="headerlink" title="统一配置中心"></a>统一配置中心</h4><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image096.jpg" alt="img"></p>
+<p>客户端client先导入pom依赖</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image098.png" alt="img"></p>
+<p>客户端开启获取config-server，配置远端配置中心server的id</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image100.jpg" alt="img"></p>
+<p>我们得指定获取的是哪一个配置文件</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image102.png" alt="img"></p>
+<p>我们在config-server端去配置</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image104.png" alt="img"></p>
+<p><strong>注册中心的配置不能放在远端的仓库，其他的配置文件可以放在远端仓库！</strong></p>
+<p> <strong>坑点</strong></p>
+<p>​    **如果我们通过远端配置文件，这个配置文件不能命名为application.yaml!!!**<strong>我们需要修改配置文件的名字bootstrap.yaml</strong></p>
+<p>​    bootstrap代表启动的意思</p>
+<p><strong><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image106.png" alt="img"></strong></p>
+<p><strong>总结：</strong></p>
+<p><strong><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image108.jpg" alt="img"></strong></p>
+<h4 id="手动设置刷新"><a href="#手动设置刷新" class="headerlink" title="手动设置刷新"></a>手动设置刷新</h4><p>​    先前我们通过远端配置设置信息，但是一旦配置修改了，我们必须重新启动全部微服务，比较麻烦。</p>
+<p>​    springcloud给我们提供了两个解决方案：1 手动配置刷新 2 自动配置刷新</p>
+<h2 id="12-Bus组件"><a href="#12-Bus组件" class="headerlink" title="12 Bus组件"></a>12 Bus组件</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image110.jpg" alt="img"></p>
+<p> <strong>SpringCloud Bus</strong></p>
+<p>​    利用bus广播特性，当一个状态（配置文件）发生改变时，通知到bus中所有服务节点更新当前状态</p>
+<p><strong>自动配置没有细看….</strong></p>
+<h2 id="13-springcloud总结"><a href="#13-springcloud总结" class="headerlink" title="13 springcloud总结"></a>13 springcloud总结</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/clip_image112.jpg" alt="img"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/03/note/kafka%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="kafka学习笔记">
+      <i class="fa fa-chevron-left"></i> kafka学习笔记
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#springcloud%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">springcloud微服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%9B%9B%E7%A7%8D%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">0 四种参数传递的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.2.</span> <span class="nav-text">1 什么是微服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.3.</span> <span class="nav-text">2 为什么是微服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.4.</span> <span class="nav-text">3 微服务解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E4%BB%80%E4%B9%88%E6%98%AFSpringCloud"><span class="nav-number">1.5.</span> <span class="nav-text">4 什么是SpringCloud</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%98%E6%96%B9%E5%AE%9A%E4%B9%89%E5%92%8C%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6"><span class="nav-number">1.5.1.</span> <span class="nav-text">官方定义和核心组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">1.6.</span> <span class="nav-text">5服务注册中心</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">1.6.0.1.</span> <span class="nav-text">什么是服务注册中心</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">1.6.0.2.</span> <span class="nav-text">常用的注册中心</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.0.3.</span> <span class="nav-text">不同服务注册中心区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="nav-number">1.7.</span> <span class="nav-text">6服务之间通信方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8ERestTemplate%E7%9A%84%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8"><span class="nav-number">1.7.0.1.</span> <span class="nav-text">基于RestTemplate的服务调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8ERibbon%E7%9A%84%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8"><span class="nav-number">1.7.0.2.</span> <span class="nav-text">基于Ribbon的服务调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%9A%84%E7%AD%96%E7%95%A5"><span class="nav-number">1.7.0.3.</span> <span class="nav-text">ribbon负载均衡的策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#openFeign"><span class="nav-number">1.7.0.4.</span> <span class="nav-text">openFeign</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E5%92%8C%E5%93%8D%E5%BA%94%E5%A4%84%E7%90%86"><span class="nav-number">1.7.0.5.</span> <span class="nav-text">参数传递和响应处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#openFeign%E9%BB%98%E8%AE%A4%E7%9A%84%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86"><span class="nav-number">1.7.0.6.</span> <span class="nav-text">openFeign默认的超时处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#openFeign%E7%9A%84%E6%97%A5%E5%BF%97%E6%98%BE%E7%A4%BA"><span class="nav-number">1.7.0.7.</span> <span class="nav-text">openFeign的日志显示</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Hystrix%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.8.</span> <span class="nav-text">9 Hystrix组件的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E9%9B%AA%E5%B4%A9"><span class="nav-number">1.8.0.1.</span> <span class="nav-text">服务雪崩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD"><span class="nav-number">1.8.0.2.</span> <span class="nav-text">服务熔断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7"><span class="nav-number">1.8.0.3.</span> <span class="nav-text">服务降级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%99%8D%E7%BA%A7%E5%92%8C%E7%86%94%E6%96%AD%E6%80%BB%E7%BB%93"><span class="nav-number">1.8.0.4.</span> <span class="nav-text">降级和熔断总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD%E7%9A%84%E5%AE%9E%E7%8E%B0Hystrix"><span class="nav-number">1.8.0.5.</span> <span class="nav-text">服务熔断的实现Hystrix</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hystrix%E5%92%8COpenFeign%E7%9A%84%E7%BB%84%E5%90%88"><span class="nav-number">1.8.0.6.</span> <span class="nav-text">Hystrix和OpenFeign的组合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hystrix-Dashboard"><span class="nav-number">1.8.0.7.</span> <span class="nav-text">Hystrix Dashboard</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hystrix%E5%92%8CHystrix-Board"><span class="nav-number">1.8.0.8.</span> <span class="nav-text">Hystrix和Hystrix Board</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E7%9A%84%E5%BF%AB%E9%80%9F%E5%9B%9E%E9%A1%BE"><span class="nav-number">1.8.0.9.</span> <span class="nav-text">组件的快速回顾</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Gateway%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.9.</span> <span class="nav-text">10 Gateway组件的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3"><span class="nav-number">1.9.0.1.</span> <span class="nav-text">什么是服务网关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%BD%91%E7%AE%A1%E7%BB%84%E4%BB%B6"><span class="nav-number">1.9.0.2.</span> <span class="nav-text">服务网管组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E5%85%B3%E4%BD%BF%E7%94%A8"><span class="nav-number">1.9.0.3.</span> <span class="nav-text">网关使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E5%85%B3%E9%85%8D%E7%BD%AE%E7%BB%86%E8%8A%82"><span class="nav-number">1.9.0.4.</span> <span class="nav-text">网关配置细节</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E5%85%B3%E7%9A%84%E6%96%AD%E8%A8%80%E5%92%8C%E8%BF%87%E6%BB%A4"><span class="nav-number">1.9.0.5.</span> <span class="nav-text">网关的断言和过滤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-config%E7%BB%84%E4%BB%B6"><span class="nav-number">1.10.</span> <span class="nav-text">11 config组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-number">1.10.0.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6"><span class="nav-number">1.10.0.2.</span> <span class="nav-text">组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">1.10.0.3.</span> <span class="nav-text">统一配置中心</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E8%AE%BE%E7%BD%AE%E5%88%B7%E6%96%B0"><span class="nav-number">1.10.0.4.</span> <span class="nav-text">手动设置刷新</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-Bus%E7%BB%84%E4%BB%B6"><span class="nav-number">1.11.</span> <span class="nav-text">12 Bus组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-springcloud%E6%80%BB%E7%BB%93"><span class="nav-number">1.12.</span> <span class="nav-text">13 springcloud总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">qianguang</p>
+  <div class="site-description" itemprop="description">浅光的博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qianguang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='34,34,34' opacity='0.5' zIndex='-1' count='120' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

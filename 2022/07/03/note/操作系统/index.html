@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangfx.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="操作系统-小林coding读书笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统-小林coding读书笔记">
+<meta property="og:url" content="http://wangfx.top/2022/07/03/note/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="qGuang">
+<meta property="og:description" content="操作系统-小林coding读书笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210510200602.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210510195954.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210510203440.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210510204202.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210511160645.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210510205305.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210511162205.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210511201534.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210511210724.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210511212245.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210511213938.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512201135.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512204526.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512204732.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512201115.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210511221447.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512201109.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512201100.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512205738.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512205522.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512211612.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512211638.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512211743.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512212001.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210513102857.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210513104001.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210513105411.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210513110254.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210513202312.png">
+<meta property="article:published_time" content="2022-07-03T03:04:39.257Z">
+<meta property="article:modified_time" content="2022-07-03T03:49:46.368Z">
+<meta property="article:author" content="qianguang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210510200602.png">
+
+<link rel="canonical" href="http://wangfx.top/2022/07/03/note/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>操作系统-小林coding读书笔记 | qGuang</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">qGuang</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">简简单单，安安静静</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wangfx.top/2022/07/03/note/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="qianguang">
+      <meta itemprop="description" content="浅光的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qGuang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          操作系统-小林coding读书笔记
+        </h1>
+
+        <div class="post-meta">
+		  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-07-03 11:04:39 / 修改时间：11:49:46" itemprop="dateCreated datePublished" datetime="2022-07-03T11:04:39+08:00">2022-07-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">web后端</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">操作系统-小林coding读书笔记</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="操作系统-小林coding读书笔记"><a href="#操作系统-小林coding读书笔记" class="headerlink" title="操作系统-小林coding读书笔记"></a>操作系统-小林coding读书笔记</h1><h2 id="CPU缓存一致性"><a href="#CPU缓存一致性" class="headerlink" title="CPU缓存一致性"></a>CPU缓存一致性</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210510200602.png" alt="image-20210510200600952"></p>
+<p>CPU一般都是多核的，L1L2缓存都是各自独自有的，那么就会带来缓存一致性的问题。</p>
+<p>要想实现缓存一致性，必须做到以下两点：<br>1 某个CPU核心的cache数据更新的时候，必须要传播到其他cache里，这个就是&#x3D;&#x3D;写传播&#x3D;&#x3D;<br>2 某个CPU核心里对数据的操作顺序，必须在其他核心里看起来顺序是一致的，被称为&#x3D;&#x3D;事务的串行化&#x3D;&#x3D;</p>
+<h3 id="总线嗅探"><a href="#总线嗅探" class="headerlink" title="总线嗅探"></a>总线嗅探</h3><p>某个CPU核心的cache数据更新的时候，必须要传播到其他cache里，最常见的实现方式就是总线嗅探。</p>
+<h2 id="软中断"><a href="#软中断" class="headerlink" title="软中断"></a>软中断</h2><p>​		中断是用来响应硬件设备 请求的一种机制，操作系统收到硬件的中断请求，会打断正在执行的进程，然后调用内核中的中断处理程序来响应中断请求</p>
+<p>​		一定要保证中断程序快速能处理，因为当CPU在处理中断时，是不能响应其他中断请求的，那么就会导致其他中断请求丢失。所以中断会分为两个阶段：<br>​		第一阶段(上半部请求)：接受硬件中断请求(从硬件中取完数据后发送一次软断请求，复杂逻辑交给下半部分请求，称为硬中断，特点是处理速度快<br>​		第二阶段(下半部请求)： 内核线程接受到上半部分软中断请求，就会异步的继续执行上半部未完成的请求， 称为软中断，特点延迟执行</p>
+<h2 id="内核"><a href="#内核" class="headerlink" title="内核"></a>内核</h2><h3 id="能力"><a href="#能力" class="headerlink" title="能力"></a>能力</h3><p>内核管理进程、线程；<br>管理内存，决定内存的回收；<br>管理硬件设备，为进程和硬件设备提供通信能力；<br>提供系统调用</p>
+<h3 id="内核是如何工作的"><a href="#内核是如何工作的" class="headerlink" title="内核是如何工作的"></a>内核是如何工作的</h3><p>内核具有很高的权限，可以控制CPU、内存、硬盘等；但是应用程序的权限比较低，所以内核分为两个区域，用户空间和内核空间</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210510195954.png" alt="image-20210510195949778"></p>
+<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p>​		要想在内存中同时运行两个程序是不可能的。如果第一个程序在2000的位置写入一个新的值，将会擦掉第二个程序放在相同位置上的所有内容，这样程序会崩溃。为了解决这个问题，是因为两个程序都使用了&#x3D;&#x3D;绝对物理地址&#x3D;&#x3D;，这个是要避免的。操作系统引入了&#x3D;&#x3D;虚拟地址&#x3D;&#x3D;</p>
+<p>​		操作系统提供了一种机制，将不同进程的虚拟地址和不同的物理地址映射起来。如果程序要访问虚拟地址的时候，由操作系统转换为不同的物理地址，这样不同的进程运行的时候，写入不同的物理地址，这样就不会发生冲突了</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210510203440.png" alt="image-20210510203438086" style="zoom:33%;" />
+
+<h3 id="os如何管理虚拟地址和物理地址的关系"><a href="#os如何管理虚拟地址和物理地址的关系" class="headerlink" title="os如何管理虚拟地址和物理地址的关系"></a>os如何管理虚拟地址和物理地址的关系</h3><p>主要是两种方式，分别是&#x3D;&#x3D;内存分段和内存分页&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;内存分段&#x3D;&#x3D;<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210510204202.png" alt="image-20210510204200431"></p>
+<p>内存分段会带来问题，比如内存碎片的问题</p>
+<p>&#x3D;&#x3D;内存分页&#x3D;&#x3D;<br>内存分段的好处是可以产生连续的内存空间，但是会出现内存碎片的问题</p>
+<p>分页就是把整个虚拟和物理内存空间切成一段段固定尺寸的大小。这样一个连续且尺寸固定的内存空间，我们称之为页，每一个页的大小为4KB</p>
+<p>虚拟地址和真实地址通过页表进行转换<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210511160645.png" alt="image-20210511160625804" style="zoom: 33%;" /></p>
+<p>总结一下，对于一个地址的转换，大致可以分为以下几个步骤：<br>1 把虚拟的内存地址，切割成页号和页偏移量<br>2 根据页号，从页表里里面查询对应的物理页号<br>3 直接拿物理页号，加上偏移量，就得到了物理地址</p>
+<p>&#x3D;&#x3D;单级分页和多级分页&#x3D;&#x3D;<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210510205305.png" alt="image-20210510205302883"></p>
+<p>利用程序的局限性，某一个时间段内，会局限在某个特定的内存区域。我们可以利用这个特性，把这些频繁访问的页表放在cache中，这个cache就是TLB，通常称之为页表缓存。</p>
+<h3 id="段页式内存管理"><a href="#段页式内存管理" class="headerlink" title="段页式内存管理"></a>段页式内存管理</h3><p>内存分段和分页并不是对立的，可以进行组合使用</p>
+<ul>
+<li>先把程序分成多个有意义的段，也就是前面提到的段分页</li>
+<li>接着把每个段划分成多个页，也就是对分段分出来的连续空间，再划分固定大小的页</li>
+</ul>
+<p>这样地址就是由段号、段内页号、段内位移三部分组成</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210511162205.png" alt="image-20210511162203462"></p>
+<p>段页式地址变换中得到物理地址需要三次内存访问</p>
+<ul>
+<li>第一访问段表，得到页的起始地址</li>
+<li>第二次访问页表，得到物理页号</li>
+<li>第三次段号和页内偏移结合，得到物理地址</li>
+</ul>
+<h2 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h2><p>我们编写的代码是静态文件，通过编译后生成可以执行的二进制码文件，当我们运行这个可执行文件的时候，CPU就会执行程序中的每一个指令，我们把运行的程序称之为进程</p>
+<h3 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h3><p>初始状态，就绪，运行，阻塞，阻塞挂起，就绪挂起，运行结束</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210511201534.png" alt="image-20210511201533271"></p>
+<h3 id="PCB"><a href="#PCB" class="headerlink" title="PCB"></a>PCB</h3><p>进程控制块，用来描述进程的。PCB是进程的唯一标识符，这意味着一个进程存在，必然会有一个PCB，如果进程消失了，那么PCB也会消失</p>
+<h3 id="进程的上下文切换"><a href="#进程的上下文切换" class="headerlink" title="进程的上下文切换"></a>进程的上下文切换</h3><p>CPU要想知道下一个指令从哪里开始执行，操作系统需要事先设置好&#x3D;&#x3D;CPU寄存器和程序计数器&#x3D;&#x3D;<br>所谓的上下文切换说的就是把先前一个程序的CPU寄存器和程序计数器保存起来，然后加载新的</p>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>线程相当于是进程当中一个执行的流程。进程包含多个线程，线程可以并发的执行<br>进程和线程最大的区别是：&#x3D;&#x3D;线程是调度的基本单位，进程是资源拥有的基本单位&#x3D;&#x3D;</p>
+<h2 id="CPU调度算法"><a href="#CPU调度算法" class="headerlink" title="CPU调度算法"></a>CPU调度算法</h2><h3 id="先来先服务"><a href="#先来先服务" class="headerlink" title="先来先服务"></a>先来先服务</h3><p>每次从就绪队列选择最先进⼊队列的进程，然后⼀直运⾏，直到进程退出或被阻塞，才会继续从队列中选择第⼀个进程接着运⾏</p>
+<h3 id="最短优先调度算法"><a href="#最短优先调度算法" class="headerlink" title="最短优先调度算法"></a>最短优先调度算法</h3><p>优先选择运行时间最短的进程来运行</p>
+<h3 id="时间片轮转"><a href="#时间片轮转" class="headerlink" title="时间片轮转"></a>时间片轮转</h3><p>每个进程被分配一个时间段，称之为是时间片，即允许进程在该时间段中运行</p>
+<h3 id="最高优先级调度算法"><a href="#最高优先级调度算法" class="headerlink" title="最高优先级调度算法"></a>最高优先级调度算法</h3><p>等等…</p>
+<h2 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h2><h3 id="进程通信的方式"><a href="#进程通信的方式" class="headerlink" title="进程通信的方式"></a>进程通信的方式</h3><p>管道，消息队列，共享内存，信号量，socket…</p>
+<p>&#x3D;&#x3D;每个进程的用户空间都是相互独立的，一般不能相互访问，但是内核空间是共享的，所以进程通信必须通过内核。&#x3D;&#x3D;</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210511210724.png" alt="image-20210511210722352" style="zoom:33%;" />
+
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><p>我们可以通过makefifo来创建一个管道<br>管道的数据传输是&#x3D;&#x3D;单向&#x3D;&#x3D;</p>
+<p>管道的好处在于简单，很容易知道数据已经被另外一个进程读取了<br>缺点是：通信方式效率比较低，不适合频繁的交换数据</p>
+<h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><p>消息队列的通信通信效率高于管道，A进程要给B进程发送消息，只需要把对应的消息放在消息队列。B进程需要的时候直接去取数据即可<br>消息队列是保存在&#x3D;&#x3D;内核中的消息列表&#x3D;&#x3D;</p>
+<p>消息队列的缺点在于不适合大数据的传输，因为内核中的每个消息体都有最大长度的限制<br>消息在通信的过程中，存在用户态和内核态频繁切换的开销</p>
+<h3 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h3><p>消息队列的读取和写入，都会有用户态和内核态消息拷贝的过程。&#x3D;&#x3D;共享内存&#x3D;&#x3D;很好的解决了问题<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210511212245.png" alt="image-20210511212243012" style="zoom:33%;" /></p>
+<h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><p>主要实现进程间的互斥同步，而不是用于缓存进程间的通信数据<br>pv操作，p信号量-1，v信号量+1</p>
+<h3 id="socket"><a href="#socket" class="headerlink" title="socket"></a>socket</h3><p>前面提到的管道，消息队列，共享内存，信号量和信号都是在同一个主机上进行线程间通信，如果想要跨网络与在不同进程之间通信，就需要socket通信了</p>
+<p>根据创建socket的不同，通信方式也不同，分为TCP通信，UDP通信，本地进程通信</p>
+<h2 id="os三大调度机制"><a href="#os三大调度机制" class="headerlink" title="os三大调度机制"></a>os三大调度机制</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210511213938.png" alt="image-20210511213936172"></p>
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><p>linux文件系统会给每个文件分配两个数据结构，&#x3D;&#x3D;索引节点和目录项&#x3D;&#x3D;</p>
+<ul>
+<li><p>索引节点：记录文件的元信息，比如说innode编号，文件大小，访问权限，创建时间等</p>
+</li>
+<li><p>目录项：用来记录目录项之间的层级关系</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512201135.png" alt="image-20210511220004604" style="zoom: 50%;" /></li>
+</ul>
+<h2 id="软链接和硬链接"><a href="#软链接和硬链接" class="headerlink" title="软链接和硬链接"></a>软链接和硬链接</h2><p>有的时候我们希望给某个文件取别名，那么Linux可以通过硬链接和软链接的方式来实现，它们都是比较特殊的文件</p>
+<h3 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h3><p>多个目录项的索引节点指向一个文件，也就是指向同一个innode，但是innode是不可以跨越文件系统的</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512204526.png" alt="image-20210512204526113"></p>
+<h3 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h3><p>相当于重建了一个新的innode，但是&#x3D;&#x3D;这个文件的内容是另外一个文件的路径&#x3D;&#x3D;，所以访问软链接的时候，相当于访问到另外一个文件，所以软链接是可以跨越文件系统的</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512204732.png" alt="image-20210512204732936"></p>
+<h2 id="IO多路复用三个API之-select-x2F-poll-x2F-epoll"><a href="#IO多路复用三个API之-select-x2F-poll-x2F-epoll" class="headerlink" title="IO多路复用三个API之 select&#x2F;poll&#x2F;epoll"></a>IO多路复用三个API之 select&#x2F;poll&#x2F;epoll</h2><p>首先我们介绍一下最简单的基于TCP的socket程序</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512201115.png" alt="image-20210511220949531" style="zoom: 25%;" />
+
+<p>这种方式只能一对一通信，因为使用的是同步阻塞，当服务器还没有处理完一个客户端的IO时，其他客户端是不能和服务器连接的</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210511221447.png" alt="image-20210511221446058"></p>
+<h3 id="多进程模型"><a href="#多进程模型" class="headerlink" title="多进程模型"></a>多进程模型</h3><p>如果一个服务器端要支持多个客户端连接，其中比较传统的方式就是通过多进程模型，也就是为每个客户端分配一个进程来处理连接请求。</p>
+<p>主进程负责监听客户的连接，一旦与客户的连接完成，accept()函数会返回一个已经连接的socket，这个时候fork一个子进程，把父进程所有东西都复制一份。</p>
+<p>可以发现父进程只负责监听socket，不需要关注连接socket；子进程需要关注连接socket，不需要关注监听socket</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512201109.png" alt="image-20210512200638724" style="zoom:50%;" />
+
+<h3 id="多线程模型"><a href="#多线程模型" class="headerlink" title="多线程模型"></a>多线程模型</h3><p>因为进程上下文切换的消耗很重，那么我们就选择轻量级的模型应对多用户的请求</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512201100.png" alt="image-20210512201058865"></p>
+<h3 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h3><p>既然为每个请求分配一个线程或者进程的方法不合适，是否&#x3D;&#x3D;可以只使用一个进程维护多个socket&#x3D;&#x3D;呢？可以使用IO多路复用技术</p>
+<p>select、poll、epoll是如何获取网络事件的呢？在获取事件的时候，先把所有的连接传递给内核，再由内核返回产生事情的连接，然后在用户态中对这些链接事情进行处理即可</p>
+<h3 id="socket和poll"><a href="#socket和poll" class="headerlink" title="socket和poll"></a>socket和poll</h3><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512205738.png" alt="image-20210512205727689"></p>
+<p>select和poll没有本质区别，都是使用&#x3D;&#x3D;线性结构&#x3D;&#x3D;存储关注的socket集合。</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512205522.png" alt="image-20210512205522653"></p>
+<h3 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h3><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512211612.png" alt="image-20210512211612294"></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512211638.png" alt="image-20210512211638552"></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512211743.png" alt="image-20210512211743711"></p>
+<p>总结来说：</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210512212001.png" alt="image-20210512212001600"></p>
+<h3 id="IO多路复用-1"><a href="#IO多路复用-1" class="headerlink" title="IO多路复用"></a>IO多路复用</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1qJ411w7du?from=search&amp;seid=851111987744563735">https://www.bilibili.com/video/BV1qJ411w7du?from=search&amp;seid=851111987744563735</a></p>
+<p>设计一个&#x3D;&#x3D;高性能的服务器&#x3D;&#x3D;，可以同时响应多个客户端的连接<br>我们可以想到写一个多线程的程序，每个线程对应一个连接，但是多线程涉及到频繁的上下文切换，需要消耗大量的资源，因此我们考虑单线程</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210513102857.png" alt="image-20210513102857796" style="zoom: 33%;" />
+
+<h3 id="我们看一下select是如何操作的？"><a href="#我们看一下select是如何操作的？" class="headerlink" title="我们看一下select是如何操作的？"></a>我们看一下select是如何操作的？</h3><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210513104001.png" alt="image-20210513104001633"></p>
+<p>select把&#x3D;&#x3D;文件描述符集合&#x3D;&#x3D;从用户态交给内核态处理，我们知道直接交给内核态处理速度是会有所提升的。内核态完成的功能就是，对那些有数据的进行FD置位，标记这个地方有数据，然后select返回，返回之后用户态遍历文件描述符集合，判断状态</p>
+<p>select中使用bitmap存储关注的文件描述符</p>
+<p>select方式的缺点在于：<br>1 bitmap默认最大值为1024，只能监听0-1023的文件描述符<br>2 用户态拷贝到内核态，需要花费开销。但是肯定比单个拷贝开销小一点<br>3 时间复杂度较高，需要遍历rset两遍</p>
+<h3 id="我们看下poll是如何操作的？"><a href="#我们看下poll是如何操作的？" class="headerlink" title="我们看下poll是如何操作的？"></a>我们看下poll是如何操作的？</h3><p>poll中没有使用1024位的bitmap，而是使用了数组来存储，解决了存储大小的问题<br>剩下的和select差不多</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210513105411.png" alt="image-20210513105411733"></p>
+<h3 id="我们看下epoll是如何操作的？"><a href="#我们看下epoll是如何操作的？" class="headerlink" title="我们看下epoll是如何操作的？"></a>我们看下epoll是如何操作的？</h3><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210513110254.png" alt="image-20210513110254773"></p>
+<p>epoll的优点：</p>
+<p>1 epoll采用了事件驱动的方式，内核中维护了一个链表记录发生事件的文件描述符。当有事件发生的时候，epoll_wait会返回有事件发生的文件描述符的个数，这样就不要像之前select或者poll一样遍历整合循环</p>
+<p>2 epoll内部采用了红黑树来跟踪待检测的文件描述字</p>
+<p>&#x3D;&#x3D;redis、nginx、java NIO也都是使用epoll实现的&#x3D;&#x3D;。当今一般的linux服务器，也是使用的epoll实现的</p>
+<h3 id="为什么epoll底层使用红黑树呢？"><a href="#为什么epoll底层使用红黑树呢？" class="headerlink" title="为什么epoll底层使用红黑树呢？"></a>为什么epoll底层使用红黑树呢？</h3><p>epoll和poll的一个很大的区别在于，poll每次调用时都会存在一个将pollfd结构体数组中的每个结构体元素从用户态向内核态中的一个链表节点拷贝的过程，而内核中的这个链表并不会一直保存，当poll运行一次就会重新执行一次上述的拷贝过程，这说明一个问题：&#x3D;&#x3D;poll并不会在内核中为要监听的文件描述符长久的维护一个数据结构来存放他们，而epoll内核中维护了一个内核事件表，它是将所有的文件描述符全部都存放在内核中，&#x3D;&#x3D;系统去检测有事件发生的时候触发回调，当你要添加新的文件描述符的时候也是调用epoll_ctl函数使用EPOLL_CTL_ADD宏来插入，&#x3D;&#x3D;epoll_wait也不是每次调用时都会重新拷贝一遍所有的文件描述符到内核态&#x3D;&#x3D;。当我现在要在内核中长久的维护一个数据结构来存放文件描述符，并且时常会有插入，查找和删除的操作发生，这对内核的效率会产生不小的影响，因此需要一种插入，查找和删除效率都不错的数据结构来存放这些文件描述符，那么红黑树当然是不二的人选。<br>————————————————<br>版权声明：本文为CSDN博主「Mr_H9527」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Mr_H9527/article/details/99745659">https://blog.csdn.net/Mr_H9527/article/details/99745659</a></p>
+<h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><p>​		跟大家分享一下我的理解（应对面试），面试官问红黑树怎么旋转调整的，一般能问到这么细的就看真本事了，要我我选择放弃。</p>
+<p>​		但是问我红黑树是什么，有什么意义还是可以回答的：排序二叉树有不平衡的问题，可能左子树很长但是右子树很短，造成查询时性能不佳（logn退化成n），完全平衡的二叉树能保证层数平均，从而查询效率高，但是维护又很麻烦，每次插入和删除有很大的可能要大幅调整树结构。</p>
+<p>​		红黑树就是介于完全不平衡和完全平衡之间的一种二叉树，通过每个节点有红黑两种颜色、从节点到任意叶子节点会经过相同数量的黑色节点等一系列规则，实现了&#x3D;&#x3D;树的层数最大也只会有两倍的差距&#x3D;&#x3D;，这样既能提高插入和删除的效率，又能让树相对平衡从而有还不错的查询效率。从整体上讲，红黑树就是一种中庸之道的二叉树</p>
+<h3 id="二叉搜索树BST"><a href="#二叉搜索树BST" class="headerlink" title="二叉搜索树BST"></a>二叉搜索树BST</h3><p>任意一个节点的左子树小于这个节点，右子树大于这个节点<br>BST的搜索和插入的时间复杂度是0(logn)</p>
+<p>BST的问题在于可能会退化成一个链表，那么我们一个解决方法就是AVL树</p>
+<h3 id="AVL平衡树"><a href="#AVL平衡树" class="headerlink" title="AVL平衡树"></a>AVL平衡树</h3><p>本身就是二叉搜索树，此外左子树和右子树深度差不差过1<br>AVL最差情况下，时间复杂度也是o(logn)</p>
+<h3 id="红黑树-1"><a href="#红黑树-1" class="headerlink" title="红黑树"></a>红黑树</h3><ul>
+<li>&#x3D;&#x3D;红黑树的特征&#x3D;&#x3D;</li>
+</ul>
+<p>每个节点要么红，要么黑<br>root节点是黑<br>叶子结点必须是黑；<br>&#x3D;&#x3D;红节点的子节点必须是黑的&#x3D;&#x3D;</p>
+<p>新插入的节点是红节点<br>从任意一个节点出发，到叶子节点的任意路径上，拥有的黑节点的数量是&#x3D;&#x3D;相同&#x3D;&#x3D;的</p>
+<ul>
+<li>红黑树确保了左右树的深度最多相差一倍</li>
+</ul>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210513202312.png" alt="image-20210513202312765"></p>
+<h3 id="Java中HashMap的底层当链表长度超过8了为什么选取红黑树这种结构？为什么不用AVL和BST"><a href="#Java中HashMap的底层当链表长度超过8了为什么选取红黑树这种结构？为什么不用AVL和BST" class="headerlink" title="Java中HashMap的底层当链表长度超过8了为什么选取红黑树这种结构？为什么不用AVL和BST"></a>Java中HashMap的底层当链表长度超过8了为什么选取红黑树这种结构？为什么不用AVL和BST</h3><p>BST极端情况下会退还成链表；<br>AVL树对树的平衡要求更加严格，要求左树和右树的高度差不超过1，而红黑树保证了差距最多是一倍。这样的效果就是在插入数据的时候，红黑树需要的代价小一些</p>
+<p>红黑树的时间复杂度也是o(logn)</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/03/note/vue%E6%95%99%E5%AD%A6/" rel="prev" title="vue.js学习笔记">
+      <i class="fa fa-chevron-left"></i> vue.js学习笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/07/03/note/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="next" title="设计模式入门">
+      设计模式入门 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%B0%8F%E6%9E%97coding%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">操作系统-小林coding读书笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">CPU缓存一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BA%BF%E5%97%85%E6%8E%A2"><span class="nav-number">1.1.1.</span> <span class="nav-text">总线嗅探</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%B8%AD%E6%96%AD"><span class="nav-number">1.2.</span> <span class="nav-text">软中断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%A0%B8"><span class="nav-number">1.3.</span> <span class="nav-text">内核</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%BD%E5%8A%9B"><span class="nav-number">1.3.1.</span> <span class="nav-text">能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84"><span class="nav-number">1.3.2.</span> <span class="nav-text">内核是如何工作的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#os%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E5%92%8C%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.4.1.</span> <span class="nav-text">os如何管理虚拟地址和物理地址的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AE%B5%E9%A1%B5%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">1.4.2.</span> <span class="nav-text">段页式内存管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.5.</span> <span class="nav-text">进程和线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%8A%B6%E6%80%81"><span class="nav-number">1.5.1.</span> <span class="nav-text">进程的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB"><span class="nav-number">1.5.2.</span> <span class="nav-text">PCB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2"><span class="nav-number">1.5.3.</span> <span class="nav-text">进程的上下文切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.5.4.</span> <span class="nav-text">线程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-number">1.6.</span> <span class="nav-text">CPU调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E6%9D%A5%E5%85%88%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.6.1.</span> <span class="nav-text">先来先服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E4%BC%98%E5%85%88%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-number">1.6.2.</span> <span class="nav-text">最短优先调度算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E7%89%87%E8%BD%AE%E8%BD%AC"><span class="nav-number">1.6.3.</span> <span class="nav-text">时间片轮转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E9%AB%98%E4%BC%98%E5%85%88%E7%BA%A7%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-number">1.6.4.</span> <span class="nav-text">最高优先级调度算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-number">1.7.</span> <span class="nav-text">进程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">1.7.1.</span> <span class="nav-text">进程通信的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E9%81%93"><span class="nav-number">1.7.2.</span> <span class="nav-text">管道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-number">1.7.3.</span> <span class="nav-text">消息队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98"><span class="nav-number">1.7.4.</span> <span class="nav-text">共享内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="nav-number">1.7.5.</span> <span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#socket"><span class="nav-number">1.7.6.</span> <span class="nav-text">socket</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#os%E4%B8%89%E5%A4%A7%E8%B0%83%E5%BA%A6%E6%9C%BA%E5%88%B6"><span class="nav-number">1.8.</span> <span class="nav-text">os三大调度机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.9.</span> <span class="nav-text">文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5"><span class="nav-number">1.10.</span> <span class="nav-text">软链接和硬链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AC%E9%93%BE%E6%8E%A5"><span class="nav-number">1.10.1.</span> <span class="nav-text">硬链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E9%93%BE%E6%8E%A5"><span class="nav-number">1.10.2.</span> <span class="nav-text">软链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E4%B8%89%E4%B8%AAAPI%E4%B9%8B-select-x2F-poll-x2F-epoll"><span class="nav-number">1.11.</span> <span class="nav-text">IO多路复用三个API之 select&#x2F;poll&#x2F;epoll</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.11.1.</span> <span class="nav-text">多进程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.11.2.</span> <span class="nav-text">多线程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="nav-number">1.11.3.</span> <span class="nav-text">IO多路复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#socket%E5%92%8Cpoll"><span class="nav-number">1.11.4.</span> <span class="nav-text">socket和poll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epoll"><span class="nav-number">1.11.5.</span> <span class="nav-text">epoll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8-1"><span class="nav-number">1.11.6.</span> <span class="nav-text">IO多路复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E4%BB%AC%E7%9C%8B%E4%B8%80%E4%B8%8Bselect%E6%98%AF%E5%A6%82%E4%BD%95%E6%93%8D%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="nav-number">1.11.7.</span> <span class="nav-text">我们看一下select是如何操作的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E4%BB%AC%E7%9C%8B%E4%B8%8Bpoll%E6%98%AF%E5%A6%82%E4%BD%95%E6%93%8D%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="nav-number">1.11.8.</span> <span class="nav-text">我们看下poll是如何操作的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E4%BB%AC%E7%9C%8B%E4%B8%8Bepoll%E6%98%AF%E5%A6%82%E4%BD%95%E6%93%8D%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="nav-number">1.11.9.</span> <span class="nav-text">我们看下epoll是如何操作的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88epoll%E5%BA%95%E5%B1%82%E4%BD%BF%E7%94%A8%E7%BA%A2%E9%BB%91%E6%A0%91%E5%91%A2%EF%BC%9F"><span class="nav-number">1.11.10.</span> <span class="nav-text">为什么epoll底层使用红黑树呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-number">1.12.</span> <span class="nav-text">红黑树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91BST"><span class="nav-number">1.12.1.</span> <span class="nav-text">二叉搜索树BST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AVL%E5%B9%B3%E8%A1%A1%E6%A0%91"><span class="nav-number">1.12.2.</span> <span class="nav-text">AVL平衡树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91-1"><span class="nav-number">1.12.3.</span> <span class="nav-text">红黑树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E4%B8%ADHashMap%E7%9A%84%E5%BA%95%E5%B1%82%E5%BD%93%E9%93%BE%E8%A1%A8%E9%95%BF%E5%BA%A6%E8%B6%85%E8%BF%878%E4%BA%86%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E5%8F%96%E7%BA%A2%E9%BB%91%E6%A0%91%E8%BF%99%E7%A7%8D%E7%BB%93%E6%9E%84%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8AVL%E5%92%8CBST"><span class="nav-number">1.12.4.</span> <span class="nav-text">Java中HashMap的底层当链表长度超过8了为什么选取红黑树这种结构？为什么不用AVL和BST</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">qianguang</p>
+  <div class="site-description" itemprop="description">浅光的博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qianguang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='34,34,34' opacity='0.5' zIndex='-1' count='120' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

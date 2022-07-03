@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangfx.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="MySQL体系和存储引擎">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL体系和存储引擎">
+<meta property="og:url" content="http://wangfx.top/2022/07/03/note/MySQL%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E-%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="qGuang">
+<meta property="og:description" content="MySQL体系和存储引擎">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403171939.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403193856.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403194713.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403200721.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403200857.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403200927.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403201945.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405161100.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403202811.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403203120.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403203932.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403204925.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403205111.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403211006.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403215750.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403220229.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405135936.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405140011.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405143501.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405155009.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405155127.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405161648.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405161648.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405161648.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405163948.png">
+<meta property="article:published_time" content="2022-07-03T03:04:48.883Z">
+<meta property="article:modified_time" content="2022-07-03T03:54:04.545Z">
+<meta property="article:author" content="qianguang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403171939.png">
+
+<link rel="canonical" href="http://wangfx.top/2022/07/03/note/MySQL%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E-%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MySQL体系和存储引擎 | qGuang</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">qGuang</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">简简单单，安安静静</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wangfx.top/2022/07/03/note/MySQL%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95-InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E-%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="qianguang">
+      <meta itemprop="description" content="浅光的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qGuang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL体系和存储引擎
+        </h1>
+
+        <div class="post-meta">
+		  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-07-03 11:04:48 / 修改时间：11:54:04" itemprop="dateCreated datePublished" datetime="2022-07-03T11:04:48+08:00">2022-07-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">web后端</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%90%8E%E7%AB%AF/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">MySQL体系和存储引擎</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="MySQL体系和存储引擎"><a href="#MySQL体系和存储引擎" class="headerlink" title="MySQL体系和存储引擎"></a>MySQL体系和存储引擎</h2><p>1 MySQL被设计为一个单进程多线程的数据库，mysql数据库在系统表现就是一个进程</p>
+<p>2 mysql会读取配置文件，根据配置文件来启动数据库实例。&#x2F;etc&#x2F;my.cnf</p>
+<p>3 mysql的体系结构</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403171939.png" alt="image-20210403171939423" style="zoom:50%;" />
+
+<p>mysql数据库区别其他数据库的一大特点就是插件式的存储引擎，我们应该认识到mysql的核心在于存储引擎</p>
+<p>4 innodb存储引擎<br>innodb存储引擎支持事务，mysql从5.5.8开始，使用innodb作为默认的存储引擎<br>innodb使用MVCC（多版本并发控制）来获得高并发性，并且实现了4中默认级别，默认是repeatable级别（可重复读），并且使用next-key locking的方式避免了幻读现象的产生<br>innodb存储引擎采用了聚集的方式，每张表的存储都是按照主键的顺序存放，如果没有显式的在表中指定主键，innodb会为每行生成一个6个字节的rowid，并作为主键</p>
+<p>5 myisam存储引擎<br>不支持事务，因为并不是所有的场景都需要支持事务<br>它的缓冲池只缓存索引文件，而不缓冲数据文件，这点和大多数数据库不同</p>
+<p>6 我们可以通过show engines查看当前使用的mysql数据库支持的存储引擎</p>
+<h2 id="InnoDB存储引擎"><a href="#InnoDB存储引擎" class="headerlink" title="InnoDB存储引擎"></a>InnoDB存储引擎</h2><p>1 innodb是针对OLTP（针对事务处理）应用中的首选存储引擎</p>
+<p>2 其特点是行锁设计，支持MVCC，支持外键，提供一致性非锁定读，同时被设计最有效的利用内存和CPU</p>
+<p>3 体系结构<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403193856.png" alt="image-20210403193856598" style="zoom: 33%;" /></p>
+<p>内存池的作用：缓存磁盘上的文件，方便快速读取；重做日志缓存</p>
+<p>4 缓冲池<br>（1）对于数据库中页的修改操作，首先修改在 缓冲池中的页，然后再以一定的频率刷新到磁盘上。这里注意的是页从缓冲池刷新回磁盘的操作并不是在每次页发生更新的时候触发，而是通过一种checkPoint的机制<br>（2）体系结构<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403194713.png" alt="image-20210403194713088" style="zoom:50%;" /></p>
+<p>​	缓冲索引是通过LRU的方式进行管理的，最频繁使用的页放在LRU列表的前端。当缓冲池不能存放最新读取到的页时，首先释放LRU尾端的页。LRU中还引入了midpoint的机制，就是说新读取到的页，并不是放在LRU的前端，而是插入到midpoint的位置。<br>​	重做日志缓冲，innodb存储引擎先把重做日志放到这个缓冲区，然后一定的频率刷回缓存。</p>
+<p>5 checkpoint技术<br>目的是为了缩短数据库的恢复时间；<br>当数据库发生了宕机的时候，数据库不需要重做所有的日志，只需要对checkpoint点之后的日志进行重做，大大缩短了恢复时间</p>
+<p>6 master thread的工作方式<br>（1）innodb存储引擎的主要工作都是在一个单独的后台线程master thread中完成的<br>（2）每一秒钟的操作<br>日志缓存刷新到磁盘，即使这个事务还没有提交<br>合并到插入缓冲（可能）<br>至多刷新100个innodb的缓冲池脏页到磁盘<br>loop<br>这里插入100个，是一个硬编码，在后面的版本进行了修改升级</p>
+<p><strong>7 innodb的关键特征</strong><br>插入缓冲、两次写、子适应哈希索引、异步IO、刷新临接页<br>（1）插入缓冲<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403200721.png" alt="image-20210403200721383" style="zoom:50%;" /></p>
+<p>当插入聚集索引的列时，是按照主键的顺序进行插入的，不需要进行页的切换，所以不需要插入索引<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403200857.png" alt="image-20210403200857731" style="zoom:50%;" /></p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403200927.png" alt="image-20210403200927607" style="zoom:50%;" />
+
+<p>​	innodb存储引擎开创性的设计了插入缓存，对于非聚集索引的插入或者更新，并不是直接更新到索引页中，而是先判断插入的非聚集缩影是否在缓冲池中，如果在就直接插入，如果不在，就先放在一个INSERT BUFFER对象中，好似欺骗，然后再以一定频率进行insert buffer和辅助索引叶子节点的merge操作，这个时候通过将多个插入合并到一个插入中，大大提高了对非聚集索引的插入性能。<br>​	比如INSERT BUFFER中1，99，2，100非聚集索引，合并前需要四次插入，合并之后，1和2是同一个数据页内的，99和100是同一个数据页的，减少了插入的时间花费</p>
+<p>（2）两次写<br>插入缓冲给INNODB带来了存储引擎上的提升，double write带来了数据页的可靠性<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403201945.png" alt="image-20210403201945765" style="zoom:50%;" /></p>
+<p>（3）自适应的哈希索引<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405161100.png" alt="image-20210403202139140"></p>
+<p>（4）异步IO<br>用户可以在发出一次IO请求后，立即再次发一次IO请求</p>
+<p>（5）刷新临接页<br>当刷新一个脏页时，Innodb会自动检测该页所在的区，如果是脏页，那么将一起刷新（脏页就是页面数据发生了更新，磁盘还没更新，数据不同步的页面）</p>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>1 日志文件<br>错误日志：错误信息<br>二进制日志(binary log)<br>记录了所有对数据库的更改操作，但是不包括SELECT和SHOW的操作</p>
+<p>慢查询日志</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403202811.png" alt="image-20210403202811311" style="zoom:50%;" />
+
+<p>重做日志文件<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403203120.png" alt="image-20210403203120452" style="zoom: 50%;" /></p>
+<h2 id="索引和算法"><a href="#索引和算法" class="headerlink" title="索引和算法"></a>索引和算法</h2><p>1 索引太多，应用程序的性能可能受到影响；索引太少，对查询性能又会产生影响</p>
+<p>2 innodb支持的索引<br>B+树索引，全文索引，自适应哈希索引<br>自适应哈希索引不能人为的建立，会自动根据表的情况进行建立<br>B+树索引并不能找到键值对应的行，而是找到键值所在的页，然后把页加载到内存中进行查找对应的数据</p>
+<p>3 B+树</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403203932.png" alt="image-20210403203932428" style="zoom:50%;" />
+
+<p>4 B+树索引<br>    B+树索引分为聚集索引和非聚集索引（辅助索引），无论哪种，都是B+树结构，都是高度平衡的。<br>    B+树的每个节点都是一个页，大小固定位16KB</p>
+<p>（1）聚集索引<br>        聚集索引就是按照每张表的主键构造一个B+树，同时叶子节点存放的就是整张表的行记录，也将聚集索引的叶子节点称之为数据页<br>        聚集索引支持范围查找，哈希索引不支持范围查找</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403204925.png" alt="image-20210403204925846" style="zoom: 33%;" />
+
+<p>（2）辅助索引<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403205111.png" alt="image-20210403205111811" style="zoom:33%;" /></p>
+<p>5 什么时候需要用索引<br>    并不是什么时候都需要用索引，如果某个字段选择性较少，比如说性别，男女，这个时候使用B+树索引完全没有必要。相反，当某个字段取值范围非常广，几乎没有重复，具有高选择性，那么此时是最合适的。比如说姓名字段。如何判断是否具有高选择性呢？我们可以通过show index查看cardinality列，当这个值越靠近1，说明有必要建立这个索引</p>
+<p>6 联合索引<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403211006.png" alt="image-20210403211006678" style="zoom: 33%;" /></p>
+<p>最左前缀匹配原则<br>联合索引的第二个好处是已经对第二个键值进行了排序处理，这样在某些情况我们用联合索引可以避免一次排序操作，因为索引本身在叶子节点已经排序了</p>
+<p>7 覆盖索引<br>innodb支持覆盖索引，即从辅助索引就可以拿到查询的记录，不需要查询索引中的记录（不用再回表查询 ）</p>
+<p>8 全文索引<br>是将存储在数据库中的整本书或整篇文章中的任意内容信息查找出来的技术</p>
+<h2 id="innodb存储引擎中的锁"><a href="#innodb存储引擎中的锁" class="headerlink" title="innodb存储引擎中的锁"></a>innodb存储引擎中的锁</h2><p>1 锁的类型</p>
+<p>作者：发条地精<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/51513268/answer/127777478">https://www.zhihu.com/question/51513268/answer/127777478</a><br>来源：知乎</p>
+<p>①在mysql中有表锁，</p>
+<p>LOCK TABLE my_tabl_name READ;  用读锁锁表，会阻塞其他事务修改表数据。<br>LOCK TABLE my_table_name WRITe; 用写锁锁表，会阻塞其他事务读和写。</p>
+<p>②Innodb引擎又支持行锁，行锁分为<br>共享锁，一个事务对一行的共享只读锁。<br>排它锁，一个事务对一行的排他读写锁。</p>
+<p>③这两中类型的锁共存的问题</p>
+<p>考虑这个例子：<br>事务A锁住了表中的<strong>一行</strong>，让这一行只能读，不能写。<br>之后，事务B申请<strong>整个表</strong>的写锁。</p>
+<p>如果事务B申请成功，那么理论上它就能修改表中的任意一行，这与A持有的行锁是冲突的。<br>数据库需要避免这种冲突，就是说要让B的申请被阻塞，直到A释放了行锁。<br>数据库要怎么判断这个冲突呢？</p>
+<p>step1：判断表是否已被其他事务用表锁锁表<br>step2：判断表中的每一行是否已被行锁锁住。</p>
+<p>注意step2，这样的判断方法效率实在不高，因为需要遍历整个表。<br>于是就有了意向锁。</p>
+<p>在&#x3D;&#x3D;意向锁&#x3D;&#x3D;存在的情况下，事务A必须先申请表的意向共享锁，成功后再申请一行的行锁。<br>在意向锁存在的情况下，上面的判断可以改成</p>
+<p>step1：不变<br>step2：发现表上有意向共享锁，说明表中有些行被共享行锁锁住了，因此，事务B申请表的写锁会被阻塞。<br>注意：申请意向锁的动作是数据库完成的，就是说，事务A申请一行的行锁的时候，数据库会自动先开始申请表的意向锁，不需要我们程序员使用代码来申请。</p>
+<p>2 一致性非锁定读和MVCC多版本控制<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403215750.png" alt="image-20210403215750274" style="zoom:50%;" /></p>
+<p>快照数据是该行的之前版本的数据，该实现是通过undo段来完成的。而undo用来在事务中回滚数据，因此快照数据本身是没有额外的开销。此外，读取快照数据是不需要上锁的，因为我们没有必要对历史版本数据进行修改</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210403220229.png" alt="image-20210403220229743" style="zoom:50%;" />
+
+<p>3 锁的算法</p>
+<p>innodb有三种行锁的算法，分别是</p>
+<p>record lock：行锁，锁定单个行记录的内容<br>gap lock：间隙锁，锁定一个范围，但是不包含记录本身<br>next-key lock：record lock+ gap lock，锁定一个范围并且锁定记录本身</p>
+<p>Q:知乎上关于间隙锁的疑问</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405135936.png" alt="image-20210405135936723" style="zoom: 33%;" />
+
+<p>回答：</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405140011.png" alt="image-20210405140011758" style="zoom:33%;" />
+
+<p>间隙锁(Gap Lock)<br>当我们在查询语句时，条件为范围查询时，InnoDB不管这个区间是否有数据，都会将其锁住，向这个区间的“间隙”（不存在的行）插入或删除数据都会阻塞。</p>
+<p>&#x3D;&#x3D;间隙锁的作用会阻止多个事务将记录插入到同一范围内，而这会导致幻读问题的产生&#x3D;&#x3D;</p>
+<p>Next-Key Lock<br>Next-Key Lock &#x3D; Record Lock + Gap Lock InnoDB在默认隔离级别（Repeated Read）下，使用Next-Key Lock的方案解决了幻读的问题。<br>即在进行范围性的SELECT时，我们先对已经存在的Records加上Record Lock，再对此区间的间隙加上Gap<br>Lock，从而解决了幻读的问题。</p>
+<p>&#x3D;&#x3D;当查询的索引有唯一的属性时（聚集索引），innodb引擎会对next-key lock进行优化，将其降级为record lock，即锁住索引本身，而不是范围&#x3D;&#x3D;</p>
+<p>4 幻读<br>    幻读是指在同一事务下，连续两次同样的SQL语句会导致不同的结果，第二次SQL语句可能返回之前不存在的行</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405143501.png" alt="image-20210405143501881" style="zoom: 33%;" />
+
+<p>5 锁问题<br>脏读：一个事务读取到另外一个事务没有提交的数据<br>不可重复读：一个事务中读取同一个数据，相同的SQL，两次读取的结果不一样<br>幻读：在一个事务中用同一个SQL两次读取，第二次读到了其他事务插入的行</p>
+<p>不可重复读解决：在innodb中，用repeatable read隔离下的mvcc来解决，因为历史版本的数据不会被修改<br>幻读：对当前读用next-key lock，解决幻读问题</p>
+<p>6 死锁<br>    死锁是指两个或者两个以上的事务在执行过程中，因争夺资源而造成的一种相互等待的现象<br>    解决死锁的办法之一就是设置&#x3D;&#x3D;超时时间&#x3D;&#x3D;，两个资源相互等待时，设置一个阈值，当超过时间后，其中一个事务进行回滚。<br>    除了超时，当前数据库普遍采用&#x3D;&#x3D;等待图&#x3D;&#x3D;的方法来进行死锁检测，这个是一种更为主动的死锁检测方案，innodb存储引擎就是用这个方式进行死锁检测。innodb存储引擎选择&#x3D;&#x3D;回滚undo量最小的事务&#x3D;&#x3D;</p>
+<p>7 锁升级<br>    锁升级是指当前锁的粒度降低，举例可以把页锁升级为表锁</p>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>1 ACID<br>    原子性：要么全做，要么全不做<br>    隔离性：事务提交前，对其他事务都不可见。通常通过锁来实现<br>    一致性：在事务开始和事务结束以后，数据库的完整性约束没有被破坏。例如一个字段比如身份证ID，是唯一约束。当前有一个事物对身份证ID进行了修改，事务提交失败进行回滚，如果此时身份证ID变成非唯一了，就破坏了事务的一致性要求<br>    持久性：事务提交之后，所有的变化都是永久的</p>
+<ul>
+<li>数据库事务的一致性是指：保证事务只能把数据库从一个有效（正确）的状态“转移”到另一个有效（正确）的状态。那么，什么是数据库的有效(正确）的状态？满足给这个数据库pred-defined的一些规则的状态都是 valid 的。这些规则有哪些呢，比如说<a href="https://link.zhihu.com/?target=https://en.wikipedia.org/wiki/Integrity_constraints">constraints</a>, <a href="https://link.zhihu.com/?target=https://en.wikipedia.org/wiki/Cascading_rollback">cascades</a>,<a href="https://link.zhihu.com/?target=https://en.wikipedia.org/wiki/Database_trigger">triggers</a> 及它们的组合等。具体到某个表的某个字段，比如你在定义表的时候，给这个字段的类型是number类型，并且它的值不能小于0，那么你在某个 transaction 中给这个字段插入（更改）为一个 String 值或者是负值是不可以的，这不是一个“合法”的transaction，也就是说它不满足我们给数据库定义的一些规则（约束条件）。</li>
+</ul>
+<p>2 事务的实现<br>事务的隔离性通过之前说的锁来实现，原子性和 持久性通过redo log来保证，一致性通过undo log来保证<br>&#x3D;&#x3D;redo恢复事务提交的页操作，undo用来回滚行记录到某个特定的版本。redo通常是物理日志，记录的是页的物流修改信息。undo是逻辑日志，根据每行记录进行记录，保证事务的回滚和MVCC功能，&#x3D;&#x3D;<br>（1）redo<br>    innodb是事务的存储引擎，其通过force log at commit机制实现事务的持久化，即事务提交时，必须先将事务的所有日志写入重做日志进行持久化，待事务commit操作完成才算完成。innodb中重做日志由两个部分组成，也就是redo log和undo log<br>（2）undo<br>    redo记录了事务的行为，可以很好地通过对页进行重做操作。但是有的时候需要进行回滚操作，这个时候就需要undo。因此在对数据库进行修改的时候，不仅会产生redo日志，还会产生一定量的undo日志</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405155009.png" alt="image-20210405155009287" style="zoom:33%;" />
+
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405155127.png" alt="image-20210405155127423" style="zoom:33%;" />
+
+<p>3 事务的隔离级别</p>
+<ul>
+<li><strong>未提交读Read Uncommitted</strong>：最低级别，只能避免不读到物理修改数据过程的数据，数据的逻辑修改的中间态依然存在，破坏了数据一致性，上述问题同时存在。</li>
+<li><strong>已提交读Read Committed</strong>：语句级，保证了语句的原子性，只能读到已经提交的内容，但是在修改数据过程中并没有加锁，为什么只会读到已经提交的数据内容呢？，这是使用了“快照读”的方式优化了，使得我们在修改数据的同时，查询不会被阻塞，可以完成高并发的查询，大大提高了效率；但是因为修改的过程中没有加锁，则会出现两次查询数据的过程中，数据中间被其他事务修改或者增添数据了，造成不可重复读和幻读。</li>
+<li><strong>可重复读Repeated Read</strong>：事务级，MySQL默认隔离级别，从名字看就知道了，避免了不可重复读的问题。普通的查询同样是通过“快照读”的方式，来避免脏读的出现，在此基础上又加入了一个在事务开启的同时，不能对涉及到的数据行进行修改，从而避免了“同一次事务中读到的数据不一致”的不可重复读的问题，但是没有避免幻读。</li>
+<li><strong>可序列号Serializable</strong>：最高级别，事务级，串行执行事务，即一个一个排队执行事务，这种级别下，所有的并发事务问题都会被避免，但是由于从并行操作变成了串行排队操作，效率大大降低。</li>
+</ul>
+<p>已提交读与可重复读是实际开发中最经常使用到的两种事务隔离级别</p>
+<ul>
+<li><code>Read Commited</code>的做法是在事务的每一条SQL语句执行前生成一个快照，此时其他并发事务去读取这个数据时，避免了脏读的出现。</li>
+<li><code>Repeated Read</code>的做法是在事务的第一次查询前生成一个快照，之后在这一次事务的读取过程中，都去读取这一次快照，从而避免了脏读和不可重复读。</li>
+</ul>
+<h3 id="面试官：你说熟悉MySQL，那来谈谈InnoDB怎么解决幻读的？"><a href="#面试官：你说熟悉MySQL，那来谈谈InnoDB怎么解决幻读的？" class="headerlink" title="面试官：你说熟悉MySQL，那来谈谈InnoDB怎么解决幻读的？"></a>面试官：你说熟悉MySQL，那来谈谈InnoDB怎么解决幻读的？</h3><p>​	首先说结论，在RR的隔离级别下，Innodb使用MVCC和next-key locks解决幻读，MVCC解决的是普通读（快照读）的幻读，next-key locks解决的是当前读情况下的幻读。</p>
+<p>&#x3D;&#x3D;当前读&#x3D;&#x3D;</p>
+<p>​	所谓当前读，指的是加锁的select(S或者X), update, delete等语句。在RR的事务隔离级别下，数据库会使用next-key locks来锁住本条记录以及索引区间。</p>
+<p>​	拿上面那个例子来说，在RR的情况下，假设使用的是当前读，加锁了的读</p>
+<p><code>select * from table where id&gt;3</code> 锁住的就是id&#x3D;3这条记录以及id&gt;3这个区间范围，锁住索引记录之间的范围，避免范围间插入记录，以避免产生幻影行记录。</p>
+<p>&#x3D;&#x3D;普通读&#x3D;&#x3D;</p>
+<p>​	因为普通读是不会加锁的读，故不会有next-key locks的使用，解决幻读的手段是MVCC<br>​	MVCC会给每行元组加一些辅助字段，记录创建版本号和删除版本号。<br>​	而每一个事务在启动的时候，都有一个唯一的递增的版本号。每开启一个新事务，事务的版本号就会递增。<br>​	默认的隔离级别（REPEATABLE READ）下，增删查改变成了这样：</p>
+<p>SELECT</p>
+<ul>
+<li>读取创建版本小于或等于当前事务版本号，并且删除版本为空或大于当前事务版本号的记录。这样可以保证在读取之前记录是存在的</li>
+</ul>
+<p>INSERT</p>
+<ul>
+<li>将当前事务的版本号保存至行的创建版本号</li>
+</ul>
+<p>UPDATE</p>
+<ul>
+<li>新插入一行，并以当前事务的版本号作为新行的创建版本号，同时将原记录行的删除版本号设置为当前事务版本号</li>
+</ul>
+<p>DELETE</p>
+<ul>
+<li>将当前事务的版本号保存至行的删除版本号</li>
+</ul>
+<p>比如我插入一条记录, 事务id 假设是1 ，那么记录如下：也就是说，创建版本号就是事务版本号。</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405161648.jpg" alt="img" style="zoom: 67%;" />
+
+<p>如果我更新的话，事务id假设是2</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405161648.jpg" alt="img" style="zoom: 67%;" />
+
+<p>这里是把name更新为taotao，原来的元组deleteversion版本号为这个事务的id，并且新增一条<br>如果我删除的话，假设事务是id&#x3D;3</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405161648.jpg" alt="img" style="zoom:67%;" />
+就变成现在这个样子
+
+<p>&#x3D;&#x3D;现在我读取的话，必须同时满足两个条件的&#x3D;&#x3D;</p>
+<ul>
+<li>读取创建版本小于或等于当前事务版本号 这意味着数据在这个事务之前被创建</li>
+<li>删除版本为空或大于当前事务版本号的记录。 这意味着删除操作在这个事务之后发生</li>
+</ul>
+<p>&#x3D;&#x3D;在RC的模式下，MVCC解决不了幻读和不可重复读，因为每次读都会读它自己刷新的快照版本，简单来说就是另一个事务提交，他就刷新一次，去读最新的&#x3D;&#x3D;</p>
+<p>多数数据库都实现了多版本并发控制，并且都是靠保存数据快照来实现的。<br>以 <code>InnoDB</code> 为例，每一行中都冗余了两个字段。一个是行的创建版本，一个是行的删除（过期）版本。<br>具体的版本号（trx_id）存在 <code>information_schema.INNODB_TRX</code> 表中。<br>版本号（trx_id）随着每次事务的开启自增。<br>事务每次取数据的时候都会取创建版本小于当前事务版本的数据，以及过期版本大于当前版本的数据。<br>普通的 select 就是快照读。</p>
+<p>4 在serialiable隔离级别的条件下，innodb引擎会给每个select语句后自动加上lock in share mode，即为每一个<br>读取操作加上一个共享锁，在这种隔离情况下，读占用了锁，对一致性的非锁定读不再支持</p>
+<p>5 分布式事务<br>在使用分布式事务时，innodb引擎的事务隔离级别必须设置为serializable</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210405163948.png" alt="image-20210405163948339" style="zoom:50%;" />
+
+<h2 id="备份与恢复"><a href="#备份与恢复" class="headerlink" title="备份与恢复"></a>备份与恢复</h2><p>1 根据方法的不同可以分为<br>热备份：数据库运行中直接备份<br>冷备份：备份操作是在数据库停止的情况下<br>温备份：同样是数据库运行的时候备份，但是对当前数据库的操作会有影响，如加一个全局读锁保证备份数据的一致性</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/03/note/LVS+Nginx/" rel="prev" title="LVS+Nginx集群">
+      <i class="fa fa-chevron-left"></i> LVS+Nginx集群
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/07/03/note/Nginx%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/" rel="next" title="Nginx-狂神说Java">
+      Nginx-狂神说Java <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E4%BD%93%E7%B3%BB%E5%92%8C%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="nav-number">1.</span> <span class="nav-text">MySQL体系和存储引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="nav-number">2.</span> <span class="nav-text">InnoDB存储引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%92%8C%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">索引和算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#innodb%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84%E9%94%81"><span class="nav-number">5.</span> <span class="nav-text">innodb存储引擎中的锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">6.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9A%E4%BD%A0%E8%AF%B4%E7%86%9F%E6%82%89MySQL%EF%BC%8C%E9%82%A3%E6%9D%A5%E8%B0%88%E8%B0%88InnoDB%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E5%B9%BB%E8%AF%BB%E7%9A%84%EF%BC%9F"><span class="nav-number">6.1.</span> <span class="nav-text">面试官：你说熟悉MySQL，那来谈谈InnoDB怎么解决幻读的？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="nav-number">7.</span> <span class="nav-text">备份与恢复</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">qianguang</p>
+  <div class="site-description" itemprop="description">浅光的博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qianguang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='34,34,34' opacity='0.5' zIndex='-1' count='120' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
