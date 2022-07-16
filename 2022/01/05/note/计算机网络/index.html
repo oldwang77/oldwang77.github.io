@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangfx.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Spring入门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络-小林coding读书笔记">
+<meta property="og:url" content="http://wangfx.top/2022/01/05/note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="qGuang">
+<meta property="og:description" content="Spring入门">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20220703113007143.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409143422.jpg">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20220703113021691.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409145754.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409154829.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409155048.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409155519.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409155553.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409155942.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409161033.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409162446.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409163403.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409163850.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409204015.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409210401.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409212454.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409212639.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409212807.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409214313.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409214341.png">
+<meta property="og:image" content="e:/house/typora/img/20210409215604.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409215103.png">
+<meta property="article:published_time" content="2022-01-05T13:59:04.000Z">
+<meta property="article:modified_time" content="2022-07-16T14:39:48.388Z">
+<meta property="article:author" content="qianguang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20220703113007143.png">
+
+<link rel="canonical" href="http://wangfx.top/2022/01/05/note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>计算机网络-小林coding读书笔记 | qGuang</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">qGuang</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">简简单单，安安静静</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wangfx.top/2022/01/05/note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="qianguang">
+      <meta itemprop="description" content="浅光的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qGuang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算机网络-小林coding读书笔记
+        </h1>
+
+        <div class="post-meta">
+		  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-05 21:59:04" itemprop="dateCreated datePublished" datetime="2022-01-05T21:59:04+08:00">2022-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-16 22:39:48" itemprop="dateModified" datetime="2022-07-16T22:39:48+08:00">2022-07-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">web后端</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%90%8E%E7%AB%AF/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">Spring入门</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="计算机网络-小林coding读书笔记"><a href="#计算机网络-小林coding读书笔记" class="headerlink" title="计算机网络-小林coding读书笔记"></a>计算机网络-小林coding读书笔记</h1><p>小林coding微信公众号可以下载pdf</p>
+<h2 id="Http"><a href="#Http" class="headerlink" title="Http"></a>Http</h2><h3 id="常见的状态码"><a href="#常见的状态码" class="headerlink" title="常见的状态码"></a>常见的状态码</h3><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20220703113007143.png" alt="image-20220703113007143"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">1xx 类状态码属于提示信息，是协议处理中的一种中间状态，实际用到的比较少。</span><br><span class="line"></span><br><span class="line">2xx 类状态码表示服务器成功处理了客户端的请求，也是我们最愿意看到的状态。</span><br><span class="line">「200 OK」是最常见的成功状态码，表示一切正常。如果是非 HEAD 请求，服务器返回的响应头都会有 body 数据。</span><br><span class="line">「204 No Content」也是常见的成功状态码，与 200 OK 基本相同，但响应头没有 body 数据。</span><br><span class="line">「206 Partial Content」是应用于 HTTP 分块下载或断电续传，表示响应返回的 body 数据并不是资源的全部，而是其中的一部分，也是服务器处理成功的状态。</span><br><span class="line"></span><br><span class="line">3xx 类状态码表示客户端请求的资源发送了变动，需要客户端用新的 URL 重新发送请求获取资源，也就是重定向。</span><br><span class="line">「301 Moved Permanently」表示永久重定向，说明请求的资源已经不存在了，需改用新的 URL 再次访问。</span><br><span class="line">「302 Moved Permanently」表示临时重定向，说明请求的资源还在，但暂时需要用另一个 URL 来访问。</span><br><span class="line">301 和 302 都会在响应头里使用字段 Location，指明后续要跳转的 URL，浏览器会自动重定向新的 URL。</span><br><span class="line">「304 Not Modified」不具有跳转的含义，表示资源未修改，重定向已存在的缓冲文件，也称缓存重定向，用于缓存控制。</span><br><span class="line"></span><br><span class="line">4xx 类状态码表示客户端发送的报文有误，服务器无法处理，也就是错误码的含义。</span><br><span class="line">「400 Bad Request」表示客户端请求的报文有错误，但只是个笼统的错误。</span><br><span class="line">「403 Forbidden」表示服务器禁止访问资源，并不是客户端的请求出错。</span><br><span class="line">「404 Not Found」表示请求的资源在服务器上不存在或未找到，所以无法提供给客户端。</span><br><span class="line"></span><br><span class="line">5xx 类状态码表示客户端请求报文正确，但是服务器处理时内部发生了错误，属于服务器端的错误码。</span><br><span class="line">「500 Internal Server Error」与 400 类型，是个笼统通用的错误码，服务器发生了什么错误，我们并不知道。</span><br><span class="line">「501 Not Implemented」表示客户端请求的功能还不支持，类似“即将开业，敬请期待”的意思。</span><br><span class="line">「502 Bad Gateway」通常是服务器作为网关或代理时返回的错误码，表示服务器自身工作正常，访问后端服务器发生了错误。</span><br><span class="line">「503 Service Unavailable」表示服务器当前很忙，暂时无法响应服务器，类似“网络服务正忙，请稍后重试”的意思。</span><br></pre></td></tr></table></figure>
+
+<h3 id="http常见的字段"><a href="#http常见的字段" class="headerlink" title="http常见的字段"></a>http常见的字段</h3><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409143422.jpg" alt="wKiom1MphduAsu6XAAM_loPLbc0713.jpg"></p>
+<p>get|post、host、keep-alive、user-agent、accept-encoding、accept-language、accept</p>
+<h3 id="get和post的区别"><a href="#get和post的区别" class="headerlink" title="get和post的区别"></a>get和post的区别</h3><p><code>Get</code> 方法的含义是请求<strong>从服务器获取资源</strong>，这个资源可以是静态的文本、页面、图片视频等。而<code>POST</code> 方法则是相反操作，它向 <code>URI</code> 指定的资源提交数据，数据就放在报文的 body 里。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">先说明下安全和幂等的概念：</span><br><span class="line"></span><br><span class="line">在 HTTP 协议里，所谓的「安全」是指请求方法不会「破坏」服务器上的资源。</span><br><span class="line"></span><br><span class="line">所谓的「幂等」，意思是多次执行相同的操作，结果都是「相同」的。</span><br><span class="line"></span><br><span class="line">那么很明显 GET 方法就是安全且幂等的，因为它是「只读」操作，无论操作多少次，服务器上的数据都是安全的，且每次的结果都是相同的。</span><br><span class="line"></span><br><span class="line">POST 因为是「新增或提交数据」的操作，会修改服务器上的资源，所以是不安全的，且多次提交数据就会创建多个资源，所以不是幂等的。</span><br></pre></td></tr></table></figure>
+
+<h3 id="http的缺点"><a href="#http的缺点" class="headerlink" title="http的缺点"></a>http的缺点</h3><p>1 无状态协议，比如说网上购物，解决方法就是采用cookie技术，记录用户登录的状态<br>2 明文传输并不安全，不验证通信方的身份，因此有可能遭遇伪装。无法证明报文的完整性，所以有可能已遭篡改。HTTP 的安全问题，可以用 HTTPS 的方式解决，也就是通过引入 SSL&#x2F;TLS 层，使得在安全上达到了极致。</p>
+<h3 id="http和https"><a href="#http和https" class="headerlink" title="http和https"></a>http和https</h3><h3 id="HTTP-与-HTTPS-有哪些区别？"><a href="#HTTP-与-HTTPS-有哪些区别？" class="headerlink" title="HTTP 与 HTTPS 有哪些区别？"></a>HTTP 与 HTTPS 有哪些区别？</h3><ol>
+<li>HTTP 是超文本传输协议，信息是明文传输，存在安全风险的问题。HTTPS 则解决 HTTP 不安全的缺陷，在 TCP 和 HTTP 网络层之间加入了 SSL&#x2F;TLS 安全协议，使得报文能够加密传输。</li>
+<li>HTTP 连接建立相对简单， TCP 三次握手之后便可进行 HTTP 的报文传输。而 HTTPS 在 TCP 三次握手之后，还需进行 SSL&#x2F;TLS 的握手过程，才可进入加密报文传输。</li>
+<li>HTTP 的端口号是 80，HTTPS 的端口号是 443。</li>
+<li>HTTPS 协议需要向 CA（证书权威机构）申请数字证书，来保证服务器的身份是可信的。</li>
+</ol>
+<h3 id="HTTPS-解决了-HTTP-的哪些问题？"><a href="#HTTPS-解决了-HTTP-的哪些问题？" class="headerlink" title="HTTPS 解决了 HTTP 的哪些问题？"></a>HTTPS 解决了 HTTP 的哪些问题？</h3><p>HTTP 由于是明文传输，所以安全上存在以下三个风险：</p>
+<ul>
+<li><strong>窃听风险</strong>，比如通信链路上可以获取通信内容，用户号容易没。</li>
+<li><strong>篡改风险</strong>，比如强制入垃圾广告，视觉污染，用户眼容易瞎。</li>
+<li><strong>冒充风险</strong>，比如冒充淘宝网站，用户钱容易没。</li>
+</ul>
+<p>HTTP<strong>S</strong> 在 HTTP 与 TCP 层之间加入了 <code>SSL/TLS</code> 协议。</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20220703113021691.png" alt="image-20220703113021691"></p>
+<h3 id="HTTPS-是如何解决上面的三个风险的？"><a href="#HTTPS-是如何解决上面的三个风险的？" class="headerlink" title="HTTPS 是如何解决上面的三个风险的？"></a>HTTPS 是如何解决上面的三个风险的？</h3><ul>
+<li><strong>混合加密</strong>的方式实现信息的<strong>机密性</strong>，解决了窃听的风险。</li>
+<li><strong>摘要算法</strong>的方式来实现<strong>完整性</strong>，它能够为数据生成独一无二的「指纹」，指纹用于校验数据的完整性，解决了篡改的风险。</li>
+<li>将服务器公钥放入到<strong>数字证书</strong>中，解决了冒充的风险。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTPS 采用的是对称加密和非对称加密结合的「混合加密」方式：</span><br><span class="line">在通信建立前采用非对称加密的方式交换「会话秘钥」，后续就不再使用非对称加密。</span><br><span class="line">在通信过程中全部使用对称加密的「会话秘钥」的方式加密明文数据。</span><br><span class="line"></span><br><span class="line">采用「混合加密」的方式的原因：</span><br><span class="line">对称加密只使用一个密钥，运算速度快，密钥必须保密，无法做到安全的密钥交换。</span><br><span class="line">非对称加密使用两个密钥：公钥和私钥，公钥可以任意分发而私钥保密，解决了密钥交换问题但速度慢。</span><br></pre></td></tr></table></figure>
+
+<h3 id="数字证书CA"><a href="#数字证书CA" class="headerlink" title="数字证书CA"></a>数字证书CA</h3><p>客户端先向服务器端索要公钥，然后用公钥加密信息，服务器收到密文后，用自己的私钥解密。<br>这就存在些问题，如何保证公钥不被篡改和信任度？<br>所以这里就需要借助第三方权威机构 <code>CA</code> （数字证书认证机构），将<strong>服务器公钥放在数字证书</strong>（由数字证书认证机构颁发）中，只要证书是可信的，公钥就是可信的。</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409145754.png" alt="image-20210409145754732"></p>
+<p>通过数字证书的方式保证服务器公钥的身份，解决冒充的风险。</p>
+<p>其实说白了，就是CA可信第三方用自己的私钥给服务器的公钥进行加密，然后颁发一个数字证书，而每个人都可以获取CA的公钥（因为CA的公钥内置在浏览器或者服务器中）</p>
+<h3 id="HTTPS-是如何建立连接的？"><a href="#HTTPS-是如何建立连接的？" class="headerlink" title="HTTPS  是如何建立连接的？"></a>HTTPS  是如何建立连接的？</h3><p>SSL&#x2F;TLS 协议基本流程：</p>
+<ul>
+<li>客户端向服务器索要并验证服务器的公钥。</li>
+<li>双方协商生产「会话秘钥」。</li>
+<li>双方采用「会话秘钥」进行加密通信。</li>
+</ul>
+<p>前两步也就是 SSL&#x2F;TLS 的建立过程，也就是握手阶段。</p>
+<p>SSL&#x2F;TLS 协议建立的详细流程：</p>
+<p><em>1. ClientHello</em></p>
+<p>首先，由客户端向服务器发起加密通信请求，也就是 <code>ClientHello</code> 请求。</p>
+<p>在这一步，客户端主要向服务器发送以下信息：</p>
+<p>（1）客户端支持的 SSL&#x2F;TLS 协议版本，如 TLS 1.2 版本。</p>
+<p>（2）客户端生产的随机数（<code>Client Random</code>），后面用于生产「会话秘钥」。</p>
+<p>（3）客户端支持的密码套件列表，如 RSA 加密算法。</p>
+<p><em>2. SeverHello</em></p>
+<p>服务器收到客户端请求后，向客户端发出响应，也就是 <code>SeverHello</code>。服务器回应的内容有如下内容：</p>
+<p>（1）确认 SSL&#x2F; TLS 协议版本，如果浏览器不支持，则关闭加密通信。</p>
+<p>（2）服务器生产的随机数（<code>Server Random</code>），后面用于生产「会话秘钥」。</p>
+<p>（3）确认的密码套件列表，如 RSA 加密算法。</p>
+<p>（4）服务器的数字证书。</p>
+<p><em>3.客户端回应</em></p>
+<p>客户端收到服务器的回应之后，首先通过浏览器或者操作系统中的 CA 公钥，确认服务器的数字证书的真实性。</p>
+<p>如果证书没有问题，客户端会从数字证书中取出服务器的公钥，然后使用它加密报文，向服务器发送如下信息：</p>
+<p>（1）一个随机数（<code>pre-master key</code>）。该随机数会被服务器公钥加密。</p>
+<p>（2）加密通信算法改变通知，表示随后的信息都将用「会话秘钥」加密通信。</p>
+<p>（3）客户端握手结束通知，表示客户端的握手阶段已经结束。这一项同时把之前所有内容的发生的数据做个摘要，用来供服务端校验。</p>
+<p>上面第一项的随机数是整个握手阶段的第三个随机数，这样服务器和客户端就同时有三个随机数，接着就用双方协商的加密算法，<strong>各自生成</strong>本次通信的「会话秘钥」。</p>
+<p><em>4. 服务器的最后回应</em></p>
+<p>服务器收到客户端的第三个随机数（<code>pre-master key</code>）之后，通过协商的加密算法，计算出本次通信的「会话秘钥」。然后，向客户端发生最后的信息：</p>
+<p>（1）加密通信算法改变通知，表示随后的信息都将用「会话秘钥」加密通信。</p>
+<p>（2）服务器握手结束通知，表示服务器的握手阶段已经结束。这一项同时把之前所有内容的发生的数据做个摘要，用来供客户端校验。</p>
+<p>至此，整个 SSL&#x2F;TLS 的握手阶段全部结束。接下来，客户端与服务器进入加密通信，就完全是使用普通的 HTTP 协议，只不过用「会话秘钥」加密内容。</p>
+<h2 id="浏览器输入地址后，发生了什么？"><a href="#浏览器输入地址后，发生了什么？" class="headerlink" title="浏览器输入地址后，发生了什么？"></a>浏览器输入地址后，发生了什么？</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409154829.png" alt="image-20210409154829511"></p>
+<h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>1 浏览器第一步做的事解析URL，对URL进行解析，从而生成发送给Web服务器的请求信息</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409155048.png" alt="image-20210409155048795"></p>
+<h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><p>2 浏览器解析URL生成HTTP消息后，需要委托操作系统将消息发送给web服务器<br>但发送前，我们还需要获取域名对应的IP地址，这个时候我们需要请求DNS服务器<br><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409155519.png" alt="image-20210409155519698"></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409155553.png" alt="image-20210409155553399"></p>
+<h3 id="协议栈"><a href="#协议栈" class="headerlink" title="协议栈"></a>协议栈</h3><p>3 DNS解析得到IP后，我们就可以把HTTP传输工作交给操作系统中的协议栈。</p>
+<p>协议栈的内部分为几个部分，分别承担不同的工作。上下关系是有一定的规则的，上面的部分会向下面的部分委托工作，下面的部分收到委托的工作并执行。</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409155942.png" alt="image-20210409155942881" style="zoom:50%;" />
+
+<p>​		应用程序（浏览器）通过调用 Socket 库，来委托协议栈工作。协议栈的上半部分有两块，分别是负责收发数据的 TCP 和 UDP 协议，它们两会接受应用层的委托执行收发数据的操作。</p>
+<p>​		协议栈的下面一半是用 IP 协议控制网络包收发操作，在互联网上传数据时，数据会被切分成一块块的网络包，而将网络包发送给对方的操作就是由 IP 负责的。</p>
+<p>​		此外 IP 中还包括 ICMP 协议和 ARP 协议。ICMP 用于告知网络包传送过程中产生的错误以及各种控制信息。ARP 用于根据 IP 地址查询相应的以太网 MAC 地址。</p>
+<p>​		IP 下面的网卡驱动程序负责控制网卡硬件，而最下面的网卡则负责完成实际的收发操作，也就是对网线中的信号执行发送和接收操作。</p>
+<h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><p>4 HTTP 是基于 TCP 协议传输的，那么根据上面的图，先进行TCP的三次握手连接，进行在双方建立了连接后，TCP 报文中的数据部分就是存放 HTTP 头部 + 数据，组装好 TCP 报文之后，就需交给下面的网络层处理。</p>
+<h3 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h3><p>5 远程定位IP，TCP 模块在执行连接、收发、断开等各阶段操作时，都需要委托 IP 模块将数据封装成<strong>网络包</strong>发送给通信对象。此时生成了IP报文</p>
+<h3 id="MAC"><a href="#MAC" class="headerlink" title="MAC"></a>MAC</h3><p>6 生成MAC头部。生成了 IP 头部之后，接下来网络包还需要在 IP 头部的前面加上 <strong>MAC</strong> <strong>头部</strong>。 </p>
+<p><strong>发送方</strong>的 MAC 地址获取就比较简单了，MAC 地址是在网卡生产时写入到 ROM 里的，只要将这个值读取出来写入到 MAC 头部就可以了。</p>
+<p><strong>接收方</strong>的 MAC 地址就有点复杂了，只要告诉以太网对方的 MAC 的地址，以太网就会帮我们把包发送过去，那么很显然这里应该填写对方的 MAC 地址。</p>
+<p>那么如何获取mac地址呢？<br>此时就需要 ARP 协议帮我们找到路由器的 MAC 地址。</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409161033.png" alt="image-20210409161033045" style="zoom:50%;" />
+
+<p>ARP 协议会在以太网中以<strong>广播</strong>的形式，对以太网所有的设备喊出：“这个 IP 地址是谁的？请把你的MAC 地址告诉我”。</p>
+<p>然后就会有人回答：“这个 IP 地址是我的，我的 MAC 地址是 XXXX”。如果对方和自己处于同一个子网中，那么通过上面的操作就可以得到对方的 MAC 地址。然后，我们将这个 MAC 地址写入 MAC 头部，MAC 头部就完成了。</p>
+<p>显然，为了防止每次都需要发送广播，我们设置了ARP缓存机制<br>此时这个报文的组成MAC头部 &#x3D;&gt; IP头部 &#x3D;&gt; TCP头部 &#x3D;&gt; HTTP报文</p>
+<h3 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h3><p>IP 生成的网络包只是存放在内存中的一串二进制数字信息，没有办法直接发送给对方。因此，我们需要将<strong>数字信息转换为电信号</strong>，才能在网线上传输，也就是说，这才是真正的数据发送过程。</p>
+<p>负责执行这一操作的是<strong>网卡</strong>，要控制网卡还需要靠<strong>网卡驱动程序</strong>。网卡驱动从 IP 模块获取到包之后，会将其<strong>复制</strong>到网卡内的缓存区中，接着会在其<strong>开头加上报头和起始帧分界符，在末尾加上用于检测错误的帧校验序列</strong>。最后网卡会将包转为电信号，通过网线发送出去。</p>
+<h3 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h3><p>下面来看一下包是如何通过交换机的。交换机的设计是将网络包<strong>原样</strong>转发到目的地。交换机工作在MAC 层，也称为<strong>二层网络设备</strong>。<strong>交换机根据</strong> <strong>MAC</strong> <strong>地址表查找</strong> <strong>MAC</strong> <strong>地址，然后将信号发送到相应的端口</strong>。</p>
+<blockquote>
+<p>如果此时mac地址表找不到指定的mac地址怎么办？</p>
+</blockquote>
+<p>地址表中找不到指定的 MAC 地址。这可能是因为具有该地址的设备还没有向交换机发送过包，或者这个设备一段时间没有工作导致地址被从地址表中删除了。</p>
+<p>这种情况下，交换机无法判断应该把包转发到哪个端口，只能将包转发到除了源端口之外的所有端口上，无论该设备连接在哪个端口上都能收到这个包。这样做不会产生什么问题，因为以太网的设计本来就是将包发送到整个网络的，然后<strong>只有相应的接收者才接收包，而其他设备则会忽略这个包</strong>。</p>
+<h3 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h3><p>​		网络包经过交换机之后，现在到达了<strong>路由器</strong>，并在此被转发到下一个路由器或目标设备。这一步转发的工作原理和交换机类似，也是通过查表判断包转发的目标。当转发包时，首先路由器端口会接收发给自己的以太网包，然后<strong>路由表</strong>查询转发目标，再由相应的端口作为发送方将以太网包发送出去。</p>
+<p>​		检查 MAC 头部中的<strong>接收方</strong> <strong>MAC</strong> 地址，看看是不是发给自己的包，如果是就放到接收缓冲区中，否则就丢弃这个包。总的来说，路由器的端口都具有 MAC 地址，只接收与自身地址匹配的包，遇到不匹配的包则直接丢弃。</p>
+<p>​		完成包接收操作之后，路由器就会<strong>去掉</strong>包开头的 MAC 头部。<strong>MAC</strong> <strong>头部的作用就是将包送达路由器</strong>，其中的接收方 MAC 地址就是路由器端口的 MAC 地址。因此，当包到达路由器之后，MAC 头部的任务就完成了，于是 MAC 头部就会<strong>被丢弃</strong>。接下来，路由器会根据 MAC 头部后方的 IP 头部中的内容进行包的转发操作。</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409162446.png" alt="image-20210409162446673" style="zoom:50%;" />
+
+<p>知道对方的 IP 地址之后，接下来需要通过 ARP 协议根据 IP 地址查询 MAC 地址，并将查询的结果作为接收方 MAC 地址。</p>
+<p>下一个路由器会将包转发给再下一个路由器，经过层层转发之后，网络包就到达了最终的目的地。</p>
+<p>不知你发现了没有，在网络包传输的过程中，<strong>源</strong> <strong>IP</strong> <strong>和目标</strong> <strong>IP</strong> <strong>始终是不会变的，一直变化的是</strong> <strong>MAC</strong> <strong>地</strong> 址<strong>，因为需要 MAC 地址在以太网内进行</strong>两个设备之间的包传输。</p>
+<h3 id="互相扒皮"><a href="#互相扒皮" class="headerlink" title="互相扒皮"></a>互相扒皮</h3><p>数据包抵达了服务器，服务器肯定高兴呀，正所谓有朋自远方来，不亦乐乎？服务器高兴的不得了，于是开始扒数据包的皮！就好像你收到快递，能不兴奋吗？</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409163403.png" alt="image-20210409163403047"></p>
+<p>数据包抵达服务器后，服务器会先扒开数据包的 MAC 头部，查看是否和服务器自己的 MAC 地址符合，符合就将包收起来。<br>接着继续扒开数据包的 IP 头，发现 IP 地址符合，根据 IP 头中协议项，知道自己上层是 TCP 协议。<br>。。。。<br>于是，客户端开始扒皮，把收到的数据包的皮扒剩 HTTP 响应报文后，交给浏览器去渲染页面，一份特别的数据包快递，就这样显示出来了！最后，客户端要离开了，向服务器发起了 TCP 四次挥手，至此双方的连接就断开了。</p>
+<h3 id="路由转发的说明"><a href="#路由转发的说明" class="headerlink" title="路由转发的说明"></a>路由转发的说明</h3><p>mac地址经过路由或路由主机是都是发生改变的，源发送主机是不知道目的主机的MAC地址的，但是知道IP。而Ｐ地址一般是不会发生变化的。网上有一幅图很好的表明了这个规则</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409163850.png" alt="image-20210409163850107"></p>
+<h2 id="TCP-1"><a href="#TCP-1" class="headerlink" title="TCP"></a>TCP</h2><h3 id="什么是TCP"><a href="#什么是TCP" class="headerlink" title="什么是TCP"></a>什么是TCP</h3><p>面向连接：一定是一对一才能连接，不像UDP可以一对多进行连接<br>可靠：无论的网络链路中出现了怎样的链路变化，TCP 都可以保证一个报文一定能够到达接收端；<br>基于字节流的传输协议</p>
+<h3 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h3><p>1 连接：TCP是面向连接的传输协议，传输数据前需要建立连接；UDP不需要建立连接<br>2 服务对象：TCP是一对一的两点服务，UDP是一对多的服务<br>3 可靠性：TCP保证连接的可靠性，UDP尽最大可能进行交付<br>4 拥塞控制和流量控制：TCP具有拥塞控制，UDP没有<br>5 分片大小不同：TCP 的数据大小如果大于 MSS 大小，则会在传输层进行分片，目标主机收到后，也同样在传输层组装 TCP 数据包，如果中途丢失了一个分片，只需要传输丢失的这个分片。UDP 的数据大小如果大于 MTU 大小，则会在 IP 层进行分片，目标主机收到后，在 IP 层组装完数据，接着再传给传输层，但是如果中途丢了一个分片，则就需要重传所有的数据包，这样传输效率非常差，所以通常 UDP 的报文应该小于 MTU。</p>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>由于 TCP 是面向连接，能保证数据的可靠性交付，因此经常用于：<br>FTP 文件传输；HTTP &#x2F; HTTPS</p>
+<p>由于 UDP 面向无连接，它可以随时发送数据，再加上UDP本身的处理既简单又高效，因此经常用于：包总量较少的通信，如 DNS 、 SNMP 等；视频、音频等多媒体通信；广播通信</p>
+<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p>tcp是面向连接的协议，所以使用TCP连接的时候必须先建立连接</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409204015.png" alt="image-20210409204015706" style="zoom:50%;" />
+
+<p>从上面的过程可以发现第三次握手是可以携带数据的，前两次握手是不可以携带数据的，这也是面试常问的题。</p>
+<p>1 客户端和服务器都处于close状态，显示服务器主动监听某个端口，处于listen状态<br>2 客户端向服务器发送序列号client_num，SYN &#x3D; 1的TCP报文，此时客户端处于SYN_SENT状态，服务器端接受报文处于SYN_RECEIVE状态<br>3 服务器向客户端发送SYN&#x3D;1，ACK&#x3D;1，ack &#x3D; client_num+1,seq &#x3D; server_num的报文<br>4 客户端处于established状态，发送ACK&#x3D;1,ack &#x3D; server_num+1的报文，客户端服务器端连接建立</p>
+<h3 id="为什么三次握手，不是两次或者四次"><a href="#为什么三次握手，不是两次或者四次" class="headerlink" title="为什么三次握手，不是两次或者四次"></a>为什么三次握手，不是两次或者四次</h3><p>比较常见的回答是因为三次握手才能保证双方具有接受和发送的能力<br>这个回答是片面的，其实参考一些官方文档上写的，三次握手的首要原因是为了防止旧的重复连接初始化造成混乱</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409210401.png" alt="image-20210409210401147"></p>
+<p>客户端连续发送多次 SYN 建立连接的报文，在<strong>网络拥堵</strong>情况下：<br>一个「旧 SYN 报文」比「最新的 SYN 」 报文早到达了服务端；</p>
+<p>那么此时服务端就会回一个 SYN + ACK 报文给客户端；<br>客户端收到后可以根据自身的上下文，判断这是一个历史连接（序列号过期或超时），那么客户端就会发送 RST 报文给服务端，表示中止这一次连接。</p>
+<p>我个人的理解是服务器没法通过两次握手确定客户端是否收到正确的报文</p>
+<h3 id="什么是SYN攻击，如何避免"><a href="#什么是SYN攻击，如何避免" class="headerlink" title="什么是SYN攻击，如何避免"></a>什么是SYN攻击，如何避免</h3><p>我们都知道 TCP 连接建立是需要三次握手，假设攻击者短时间伪造不同 IP 地址的 SYN 报文，服务端每接收到一个 SYN 报文，就进入 SYN_RCVD 状态，但服务端发送出去的 ACK + SYN 报文，无法得到未知 IP 主机的 ACK 应答，久而久之就会<strong>占满服务端的</strong> <strong>SYN</strong> <strong>接收队列（未连接队列）</strong>，使得服务器不能为正常用户服务。</p>
+<p>解决方案：</p>
+<p>1 超出处理能时，对新的 SYN 直接回报 RST，丢弃连接<br>2 采用syn_cookie的方法，如果此时队列还没有满，就正常的进行三次握手，如果队列满了，启动syn cookie方法</p>
+<p>当 SYN 队列满之后，后续服务器收到 SYN 包，不进入SYN 队列；<br>计算出一个 cookie 值，再以 SYN + ACK 中的序列号返回客户端，<br>服务端接收到客户端的应答报文时，服务器会检查这个 ACK 包的合法性。如果合法，直接放入到<br>Accept 队列。<br>最后应用通过调用 accpet() socket 接口，从Accept 队列取出的连接。</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409212454.png" alt="image-20210409212454674" style="zoom: 33%;" />
+
+<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409212639.png" alt="image-20210409212639466" style="zoom:50%;" />
+
+<h3 id="为什么需要四次挥手"><a href="#为什么需要四次挥手" class="headerlink" title="为什么需要四次挥手"></a>为什么需要四次挥手</h3><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409212807.png" alt="image-20210409212807364"></p>
+<h3 id="为什么需要等待2MSL"><a href="#为什么需要等待2MSL" class="headerlink" title="为什么需要等待2MSL"></a>为什么需要等待2MSL</h3><p>MSL 是 Maximum Segment Lifetime，<strong>报文最大生存时间</strong>，它是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。<br>TIME_WAIT 等待 2 倍的 MSL，比较合理的解释是： 网络中可能存在来自发送方的数据包，当这些发送方的数据包被接收方处理后又会向对方发送响应，所以<strong>一来一回需要等待</strong> <strong>2</strong> <strong>倍的时间</strong>。</p>
+<p>比如如果被动关闭方没有收到断开连接的最后的 ACK 报文，就会触发超时重发 Fin 报文，另一方接收到 FIN 后，会重发 ACK 给被动关闭方， 一来一去正好 2 个 MSL。 </p>
+<p>等待MSL的作用就是可以保证连接的关闭</p>
+<h3 id="Time-wait过多的危害"><a href="#Time-wait过多的危害" class="headerlink" title="Time_wait过多的危害"></a>Time_wait过多的危害</h3><p>过多的 TIME-WAIT 状态主要的危害有两种：</p>
+<p>第一是内存资源占用；<br>第二是对端口资源的占用，一个 TCP 连接至少消耗一个本地端口；</p>
+<p>第二个危害是会造成严重的后果的，要知道，端口资源也是有限的，一般可以开启的端口为 32768～ 61000 ，也可以通过如下参数设置指定</p>
+<h3 id="TCP重传"><a href="#TCP重传" class="headerlink" title="TCP重传"></a>TCP重传</h3><p>超时重传机制：重传机制的其中一个方式，就是在发送数据时，设定一个定时器，当超过指定的时间后，没有收到对方的 ACK 确认应答报文，就会重发该数据，也就是我们常说的<strong>超时重传</strong>。</p>
+<h3 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h3><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409214313.png" alt="image-20210409214313644"></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409214341.png" alt="image-20210409214341133"></p>
+<h3 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h3><p>发送方不能无脑的发数据给接收方，要考虑接收方处理能力。如果一直无脑的发数据给对方，但对方处理不过来，那么就会导致触发重发机制，从而导致网络流量的无端的浪费。</p>
+<p>为了解决这种现象发生，<strong>TCP</strong> 提供一种机制可以让「发送方」根据「接收方」的实际接收能力控制发送的数据量，这就是所谓的流量控制。</p>
+<h3 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h3><p>​		在网络出现拥堵时，如果继续发送大量数据包，可能会导致数据包时延、丢失等，这时 TCP 就会重传数据，但是一重传就会导致网络的负担更重，于是会导致更大的延迟以及更多的丢包，这个情况就会进入恶性循环被不断地放大</p>
+<p>​		其实只要发送方没有在规定时间内接收到 ACK 应答报文，也就是发生了超时重传，就会认为网络出现了用拥塞。</p>
+<p>​		<strong>拥塞窗口</strong> <strong>cwnd</strong>是发送方维护的一个的状态变量，它会根据<strong>网络的拥塞程度动态变化的</strong>。</p>
+<p><img src="E:/house/typora/img/20210409215604.png" alt="image-20210409215604842"></p>
+<p>​		拥塞控制主要有四个算法：慢启动、拥塞避免、拥塞发生、快速恢复<br>​		进入拥塞避免算法后，它的规则是：每当收到一个ACK 时，cwnd 增加1&#x2F;cwnd。</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210409215103.png" alt="image-20210409215103522"></p>
+<h3 id="TCP沾包"><a href="#TCP沾包" class="headerlink" title="TCP沾包"></a>TCP沾包</h3><p>发送端为了将多个发往接收端的包，更加高效的的发给接收端，于是采用了优化算法（Nagle算法），将多次间隔较小、数据量较小的数据，合并成一个数据量大的数据块，然后进行封包。</p>
+<p>TCP粘包就是指发送方发送的若干包数据到达接收方时粘成了一包，从接收缓冲区来看，后一包数据的头紧接着前一包数据的尾，出现粘包的原因是多方面的，可能是来自发送方，也可能是来自接收方。</p>
+<p>（1）发送方原因</p>
+<p>TCP默认使用Nagle算法（主要作用：减少网络中报文段的数量），而Nagle算法主要做两件事：</p>
+<p>只有上一个分组得到确认，才会发送下一个分组<br>收集多个小分组，在一个确认到来时一起发送<br>Nagle算法造成了发送方可能会出现粘包问题</p>
+<p>（2）接收方原因</p>
+<p>TCP接收到数据包时，并不会马上交到应用层进行处理，或者说应用层并不会立即处理。实际上，TCP将接收到的数据包保存在接收缓存里，然后应用程序主动从缓存读取收到的分组。这样一来，如果TCP接收数据包到缓存的速度大于应用程序从缓存中读取数据包的速度，多个包就会被缓存，应用程序就有可能读取到多个首尾相接粘到一起的包。</p>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><p>对于发送方造成的粘包问题，可以通过关闭Nagle算法来解决，使用TCP_NODELAY选项来关闭算法。</p>
+<p>接受方没有办法解决沾包问题，需要交给上层的应用层进行解决，<br>格式化数据：每条数据有固定的格式（开始符，结束符），这种方法简单易行，但是选择开始符和结束符时一定要确保每条数据的内部不包含开始符和结束符。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/29/note/Nginx%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/" rel="prev" title="Nginx-狂神说Java">
+      <i class="fa fa-chevron-left"></i> Nginx-狂神说Java
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/01/12/note/Redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0-%E7%AC%94%E8%AE%B0/" rel="next" title="Redis设计与实现-读书笔记">
+      Redis设计与实现-读书笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%B0%8F%E6%9E%97coding%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">计算机网络-小林coding读书笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Http"><span class="nav-number">1.1.</span> <span class="nav-text">Http</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">1.1.1.</span> <span class="nav-text">常见的状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AD%97%E6%AE%B5"><span class="nav-number">1.1.2.</span> <span class="nav-text">http常见的字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get%E5%92%8Cpost%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.3.</span> <span class="nav-text">get和post的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-number">1.1.4.</span> <span class="nav-text">http的缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http%E5%92%8Chttps"><span class="nav-number">1.1.5.</span> <span class="nav-text">http和https</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-%E4%B8%8E-HTTPS-%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.1.6.</span> <span class="nav-text">HTTP 与 HTTPS 有哪些区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS-%E8%A7%A3%E5%86%B3%E4%BA%86-HTTP-%E7%9A%84%E5%93%AA%E4%BA%9B%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">1.1.7.</span> <span class="nav-text">HTTPS 解决了 HTTP 的哪些问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS-%E6%98%AF%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E4%B8%8A%E9%9D%A2%E7%9A%84%E4%B8%89%E4%B8%AA%E9%A3%8E%E9%99%A9%E7%9A%84%EF%BC%9F"><span class="nav-number">1.1.8.</span> <span class="nav-text">HTTPS 是如何解决上面的三个风险的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6CA"><span class="nav-number">1.1.9.</span> <span class="nav-text">数字证书CA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS-%E6%98%AF%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E7%9A%84%EF%BC%9F"><span class="nav-number">1.1.10.</span> <span class="nav-text">HTTPS  是如何建立连接的？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5%E5%9C%B0%E5%9D%80%E5%90%8E%EF%BC%8C%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">浏览器输入地址后，发生了什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP"><span class="nav-number">1.2.1.</span> <span class="nav-text">HTTP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS"><span class="nav-number">1.2.2.</span> <span class="nav-text">DNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="nav-number">1.2.3.</span> <span class="nav-text">协议栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP"><span class="nav-number">1.2.4.</span> <span class="nav-text">TCP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP"><span class="nav-number">1.2.5.</span> <span class="nav-text">IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MAC"><span class="nav-number">1.2.6.</span> <span class="nav-text">MAC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E5%8D%A1"><span class="nav-number">1.2.7.</span> <span class="nav-text">网卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-number">1.2.8.</span> <span class="nav-text">交换机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="nav-number">1.2.9.</span> <span class="nav-text">路由器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%92%E7%9B%B8%E6%89%92%E7%9A%AE"><span class="nav-number">1.2.10.</span> <span class="nav-text">互相扒皮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%BD%AC%E5%8F%91%E7%9A%84%E8%AF%B4%E6%98%8E"><span class="nav-number">1.2.11.</span> <span class="nav-text">路由转发的说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-1"><span class="nav-number">1.3.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFTCP"><span class="nav-number">1.3.1.</span> <span class="nav-text">什么是TCP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E5%92%8CUDP%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.2.</span> <span class="nav-text">TCP和UDP的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.3.3.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="nav-number">1.3.4.</span> <span class="nav-text">三次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%8C%E4%B8%8D%E6%98%AF%E4%B8%A4%E6%AC%A1%E6%88%96%E8%80%85%E5%9B%9B%E6%AC%A1"><span class="nav-number">1.3.5.</span> <span class="nav-text">为什么三次握手，不是两次或者四次</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFSYN%E6%94%BB%E5%87%BB%EF%BC%8C%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D"><span class="nav-number">1.3.6.</span> <span class="nav-text">什么是SYN攻击，如何避免</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="nav-number">1.3.7.</span> <span class="nav-text">四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="nav-number">1.3.8.</span> <span class="nav-text">为什么需要四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E7%AD%89%E5%BE%852MSL"><span class="nav-number">1.3.9.</span> <span class="nav-text">为什么需要等待2MSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-wait%E8%BF%87%E5%A4%9A%E7%9A%84%E5%8D%B1%E5%AE%B3"><span class="nav-number">1.3.10.</span> <span class="nav-text">Time_wait过多的危害</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E9%87%8D%E4%BC%A0"><span class="nav-number">1.3.11.</span> <span class="nav-text">TCP重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="nav-number">1.3.12.</span> <span class="nav-text">滑动窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="nav-number">1.3.13.</span> <span class="nav-text">流量控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">1.3.14.</span> <span class="nav-text">拥塞控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E6%B2%BE%E5%8C%85"><span class="nav-number">1.3.15.</span> <span class="nav-text">TCP沾包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.15.1.</span> <span class="nav-text">解决方法</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">qianguang</p>
+  <div class="site-description" itemprop="description">浅光的博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qianguang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='34,34,34' opacity='0.5' zIndex='-1' count='120' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

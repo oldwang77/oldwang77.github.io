@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangfx.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="go语言入门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go语言入门">
+<meta property="og:url" content="http://wangfx.top/2022/01/19/note/go%E8%AF%AD%E8%A8%80/index.html">
+<meta property="og:site_name" content="qGuang">
+<meta property="og:description" content="go语言入门">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422181901.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422185457.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422192008.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422203308.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422204947.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422210224.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422213550.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422214718.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422215810.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423103843.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423110812.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423111522.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423113930.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423115050.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210424132945.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423160227.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423161947.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423161916.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423162900.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423163111.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423163933.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210424100841.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210424135957.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210424143211.png">
+<meta property="article:published_time" content="2022-01-19T13:59:04.000Z">
+<meta property="article:modified_time" content="2022-07-16T14:25:50.639Z">
+<meta property="article:author" content="qianguang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422181901.png">
+
+<link rel="canonical" href="http://wangfx.top/2022/01/19/note/go%E8%AF%AD%E8%A8%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>go语言入门 | qGuang</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">qGuang</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">简简单单，安安静静</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wangfx.top/2022/01/19/note/go%E8%AF%AD%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="qianguang">
+      <meta itemprop="description" content="浅光的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qGuang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          go语言入门
+        </h1>
+
+        <div class="post-meta">
+		  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-19 21:59:04" itemprop="dateCreated datePublished" datetime="2022-01-19T21:59:04+08:00">2022-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-16 22:25:50" itemprop="dateModified" datetime="2022-07-16T22:25:50+08:00">2022-07-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">web后端</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">go语言入门</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="go语言入门"><a href="#go语言入门" class="headerlink" title="go语言入门"></a>go语言入门</h1><p>课程来自于：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1gf4y1r79E?from=search&amp;seid=13460338411688795952">https://www.bilibili.com/video/BV1gf4y1r79E?from=search&amp;seid=13460338411688795952</a></p>
+<h2 id="1-课程提纲"><a href="#1-课程提纲" class="headerlink" title="1 课程提纲"></a>1 课程提纲</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422181901.png" alt="image-20210422181854722"></p>
+<h2 id="2-Golang开发环境"><a href="#2-Golang开发环境" class="headerlink" title="2 Golang开发环境"></a>2 Golang开发环境</h2><p><a target="_blank" rel="noopener" href="https://www.runoob.com/go/go-environment.html">https://www.runoob.com/go/go-environment.html</a></p>
+<p>下载golang源码：<a target="_blank" rel="noopener" href="https://golang.google.cn/dl/">https://golang.google.cn/dl/</a><br>go的bin添加到环境目录里：&#x2F;home&#x2F;oldwong&#x2F;env&#x2F;go&#x2F;bin</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422185457.png" alt="image-20210422185457965"></p>
+<p>我们选取的是go1.14.4-linux-amd64.tar.gz</p>
+<h2 id="3-golang分析"><a href="#3-golang分析" class="headerlink" title="3 golang分析"></a>3 golang分析</h2><p>1 优势：可直接编译成机器码；不依赖于其他库；可以直接运行即可部署<br>2 静态语言：编译的时候可以检查出隐藏的问题<br>3 语言层面的并发：天生的基因支持并发；充分的利用多核<br>4 强大的标准库：<br>runtime系统调度机制；高效的gc垃圾回收；丰富的标准库</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422192008.png" alt="image-20210422192008286" style="zoom: 50%;" />
+
+<h2 id="4-第一个go语言程序"><a href="#4-第一个go语言程序" class="headerlink" title="4 第一个go语言程序"></a>4 第一个go语言程序</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span>  main   </span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;hello Go!&quot;</span>)</span><br><span class="line">	time.Sleep(<span class="number">1</span>*time.Second)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-声明变量"><a href="#5-声明变量" class="headerlink" title="5 声明变量"></a>5 声明变量</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span>(</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;reflect&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> gloal_a = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="comment">// default a = 0</span></span><br><span class="line">	<span class="keyword">var</span> a <span class="type">int</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;a=&quot;</span>,a)</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">var</span> b <span class="type">int</span> = <span class="number">100</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;b=&quot;</span>,b)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> c = <span class="number">100</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;c=&quot;</span>,c)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// type of c</span></span><br><span class="line">	fmt.Println(reflect.TypeOf(c)) </span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> bb <span class="type">string</span> = <span class="string">&quot;abcd&quot;</span></span><br><span class="line">	fmt.Println(reflect.TypeOf(bb))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 最常用的写法</span></span><br><span class="line">  <span class="comment">// 这种方式不支持全局写法</span></span><br><span class="line">	e :=<span class="number">100</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;e=&quot;</span>,e)</span><br><span class="line">	</span><br><span class="line">	fmt.Println(<span class="string">&quot;ga = &quot;</span>,gloal_a)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// many var</span></span><br><span class="line">	<span class="keyword">var</span> xx,yy <span class="type">int</span> = <span class="number">100</span>,<span class="number">200</span></span><br><span class="line">	fmt.Println(xx,yy)</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-常量和iota"><a href="#6-常量和iota" class="headerlink" title="6 常量和iota"></a>6 常量和iota</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422203308.png" alt="image-20210422203308644"></p>
+<h2 id="7-函数多返回值"><a href="#7-函数多返回值" class="headerlink" title="7 函数多返回值"></a>7 函数多返回值</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span>(</span><br><span class="line"></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">fool</span><span class="params">(a <span class="type">int</span>,b <span class="type">int</span>)</span></span>  (<span class="type">int</span>,<span class="type">int</span>)&#123;</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">	<span class="keyword">return</span> a+b,a</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo2</span><span class="params">(a <span class="type">int</span>,b <span class="type">int</span>)</span></span>  (r1 <span class="type">int</span>,r2 <span class="type">int</span>)&#123;</span><br><span class="line">	r1 = <span class="number">100</span></span><br><span class="line">	r2 = a+b</span><br><span class="line">	<span class="keyword">return</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo3</span><span class="params">(a <span class="type">int</span>,b <span class="type">int</span>)</span></span> (r1,r2 <span class="type">int</span>)&#123;</span><br><span class="line">	r1 = <span class="number">1000</span></span><br><span class="line">	r2 = <span class="number">2000</span></span><br><span class="line">	<span class="keyword">return</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	</span><br><span class="line">	ret1,ret2 :=fool(<span class="number">100</span>,<span class="number">200</span>)</span><br><span class="line">	fmt.Println(ret1,ret2)</span><br><span class="line"></span><br><span class="line">	ret3,ret4 :=fool(<span class="number">200</span>,<span class="number">300</span>)</span><br><span class="line">	fmt.Println(ret3,ret4)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-init函数"><a href="#8-init函数" class="headerlink" title="8 init函数"></a>8 init函数</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422204947.png" alt="image-20210422204947328"></p>
+<p>在Go中，如果一个函数开头字母是大写，表明是一个公有方法，可以提供给其他类进行使用；如果开头字母是小写，表明是一个私有方法</p>
+<h2 id="9-import导包"><a href="#9-import导包" class="headerlink" title="9 import导包"></a>9 import导包</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422210224.png" alt="image-20210422210224469"></p>
+<h2 id="11-defer"><a href="#11-defer" class="headerlink" title="11 defer"></a>11 defer</h2><p>defer关键字类似java中的finally，就是最终一定会执行<br>它是当前程序生命周期到最后才会执行！</p>
+<ul>
+<li>defer和return谁先执行？<br>return先执行，然后才是defer执行</li>
+</ul>
+<h2 id="12-数组和切片slice"><a href="#12-数组和切片slice" class="headerlink" title="12 数组和切片slice"></a>12 数组和切片slice</h2><p>动态数组传递的是数组的地址</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printarr</span><span class="params">(arr []<span class="type">int</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> index,value := <span class="keyword">range</span> arr&#123;</span><br><span class="line">		fmt.Println(index,value)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	arr := []<span class="type">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">	printarr(arr)</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>静态数组传递并没有传递地址，因此函数不会对数组造成修改</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> slice</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printarr</span><span class="params">(arr [4]<span class="type">int</span>)</span></span>  &#123;</span><br><span class="line">	<span class="keyword">for</span> index,value :=<span class="keyword">range</span> arr&#123;</span><br><span class="line">		fmt.Println(index,value)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> arr1 [<span class="number">10</span>]<span class="type">int</span></span><br><span class="line"></span><br><span class="line">	arr2 := [<span class="number">4</span>]<span class="type">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;<span class="built_in">len</span>(arr1);i++&#123;</span><br><span class="line">		fmt.Println(arr1[i])</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> index,value :=<span class="keyword">range</span> arr2&#123;</span><br><span class="line">		fmt.Println(index,value)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	printarr(arr2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="13-slice声明的方式"><a href="#13-slice声明的方式" class="headerlink" title="13 slice声明的方式"></a>13 slice声明的方式</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422213550.png" alt="image-20210422213550744"></p>
+<h2 id="14-slice切片的追加和截取"><a href="#14-slice切片的追加和截取" class="headerlink" title="14 slice切片的追加和截取"></a>14 slice切片的追加和截取</h2><p>追加</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422214718.png" alt="image-20210422214718341"></p>
+<p>扩容<br>如果切片在追加后，容量超过了原来的长度，那么会扩容为之前的两倍</p>
+<p>切片类似于python中的截取</p>
+<h2 id="15-map定义"><a href="#15-map定义" class="headerlink" title="15 map定义"></a>15 map定义</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> map1 <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> map1 <span class="literal">nil</span>&#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;map is null&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	map1 = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>)</span><br><span class="line"></span><br><span class="line">	map1[<span class="string">&quot;one&quot;</span>] = <span class="string">&quot;java&quot;</span></span><br><span class="line">	map1[<span class="string">&quot;two&quot;</span>] = <span class="string">&quot;py&quot;</span></span><br><span class="line">	map1[<span class="string">&quot;three&quot;</span>] = <span class="string">&quot;go&quot;</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(map1)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> key,value := <span class="keyword">range</span> map1&#123;</span><br><span class="line">		fmt.Println(key,value)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="16-map使用方式"><a href="#16-map使用方式" class="headerlink" title="16 map使用方式"></a>16 map使用方式</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210422215810.png" alt="image-20210422215809966"></p>
+<h2 id="17-struct定义和使用"><a href="#17-struct定义和使用" class="headerlink" title="17 struct定义和使用"></a>17 struct定义和使用</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">type</span> myint <span class="type">int</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Book <span class="keyword">struct</span>&#123;</span><br><span class="line">	title <span class="type">string</span></span><br><span class="line">	auth <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">changeBook</span><span class="params">(book *Book)</span></span> &#123;</span><br><span class="line">	book.auth = <span class="string">&quot;666&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">var</span> book1 Book</span><br><span class="line">	book1.title = <span class="string">&quot;Golang&quot;</span></span><br><span class="line">	book1.auth = <span class="string">&quot;zhangsan&quot;</span></span><br><span class="line">	changeBook(&amp;book1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="18-go中面向对象的表示和封装"><a href="#18-go中面向对象的表示和封装" class="headerlink" title="18 go中面向对象的表示和封装"></a>18 go中面向对象的表示和封装</h2><p>如果类名是字母大写，表示其他包也能访问<br>如果类的首字母大写，表示该属性对外也能够访问，否则只能在类的内部访问</p>
+<p>定义对象的时候，我们绑定方法，括号里面一定要使用指针！<br>开头字母需要设置为大写，这样外部的类才可以使用</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span>(</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Hero <span class="keyword">struct</span>&#123;</span><br><span class="line">	Name <span class="type">string</span></span><br><span class="line">	Ad <span class="type">int</span></span><br><span class="line">	Level <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *Hero)</span></span> Show()  &#123;</span><br><span class="line">	fmt.Println(this.Name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *Hero)</span></span> GetName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> this.Name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *Hero)</span></span> SetName(newName <span class="type">string</span>)  &#123;</span><br><span class="line">	this.Name = newName</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	hero := Hero&#123;Name:<span class="string">&quot;zhangsan&quot;</span>,Ad:<span class="number">100</span>,Level:<span class="number">1</span>&#125;</span><br><span class="line">	hero.Show()</span><br><span class="line">	hero.SetName(<span class="string">&quot;lisi&quot;</span>)</span><br><span class="line">	hero.Show()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="19-golang中面向对象"><a href="#19-golang中面向对象" class="headerlink" title="19 golang中面向对象"></a>19 golang中面向对象</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span>(</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Human <span class="keyword">struct</span>&#123;</span><br><span class="line">	Name <span class="type">string</span></span><br><span class="line">	Age <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> SuperMan <span class="keyword">struct</span>&#123;</span><br><span class="line">	Human</span><br><span class="line">	level <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	h := SuperMan&#123;Human&#123;<span class="string">&quot;superman&quot;</span>,<span class="number">18</span>&#125;,<span class="number">3</span>&#125;</span><br><span class="line">	fmt.Println(h)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="20-面向对象多态的实现"><a href="#20-面向对象多态的实现" class="headerlink" title="20 面向对象多态的实现"></a>20 面向对象多态的实现</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423103843.png" alt="image-20210423103842953"></p>
+<h2 id="21-interface空接口万能类型和类的断言机制"><a href="#21-interface空接口万能类型和类的断言机制" class="headerlink" title="21 interface空接口万能类型和类的断言机制"></a>21 interface空接口万能类型和类的断言机制</h2><p>interface{}是万能类型，可以接受各种不同类型参数的传参</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">myfunc</span><span class="params">(arg <span class="keyword">interface</span>&#123;&#125;)</span></span>  &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;myfunc is called&quot;</span>)</span><br><span class="line">	fmt.Println(arg)</span><br><span class="line"></span><br><span class="line">	value,ok := arg.(<span class="type">string</span>)</span><br><span class="line">	<span class="keyword">if</span> !ok&#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;arg is not string type&quot;</span>)</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;arg is string type,value = &quot;</span>,value)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Book <span class="keyword">struct</span>&#123;</span><br><span class="line">	auth <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	book :=Book&#123;<span class="string">&quot;Golang&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">	myfunc(book)</span><br><span class="line">	myfunc(<span class="number">100</span>)</span><br><span class="line">	myfunc(<span class="string">&quot;abc&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="22-变量内置的pair结构"><a href="#22-变量内置的pair结构" class="headerlink" title="22 变量内置的pair结构"></a>22 变量内置的pair结构</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423110812.png" alt="image-20210423110812807"></p>
+<h2 id="23-golang的反射机制"><a href="#23-golang的反射机制" class="headerlink" title="23 golang的反射机制"></a>23 golang的反射机制</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423111522.png" alt="image-20210423111522092"></p>
+<h2 id="26-goroutine"><a href="#26-goroutine" class="headerlink" title="26 goroutine"></a>26 goroutine</h2><p>进程&#x2F;线程的数量越多，切换成本就越大，也就是越浪费<br>多线程开发越来越复杂，如锁、竞争</p>
+<p>线程的切换需要花费过多的时间，那么我们定义一个协程，这样对CPU来说不用再次进行线程切换，可以减少开销；我们现在关注的重点就是优化协程调度器</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423113930.png" alt="image-20210423113930911"></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423115050.png" alt="image-20210423115050531"></p>
+<p>go的调度器策略</p>
+<p>1 复用线程</p>
+<p>working stealing机制，其他的P如果没有绑定G，会从其他地方拿一些G过来<br>hand off机制，某个协程处于阻塞状态，绑定的本地队列会被切换到其他线程上</p>
+<p>2 利用并行<br>Gomaxprocs可以指定最大的线程数</p>
+<p>3 抢占<br>每一个协程最多占用10ms，结束后其他协程会进行抢占</p>
+<h2 id="27-创建goroutine"><a href="#27-创建goroutine" class="headerlink" title="27 创建goroutine"></a>27 创建goroutine</h2><p>Go语言最大的特色就是从语言层面支持并发（Goroutine），Goroutine是Go中最基本的执行单元。事实上每一个Go程序至少有一个Goroutine：主Goroutine。当程序启动时，它会自动创建。<br>go创建一个协程是非常方便的</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210424132945.png" alt="image-20210424132945658"></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span>(</span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">newTask</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	i :=<span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span>&#123;</span><br><span class="line">		i++</span><br><span class="line">		fmt.Println(<span class="string">&quot;new task i = &quot;</span>,i)</span><br><span class="line">		time.Sleep(<span class="number">1</span>*time.Second)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="keyword">go</span> newTask()</span><br><span class="line"></span><br><span class="line">	i :=<span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span>&#123;</span><br><span class="line">		i++</span><br><span class="line">		fmt.Println(<span class="string">&quot;new goroutine i = &quot;</span>,i)</span><br><span class="line">		time.Sleep(<span class="number">1</span>*time.Second)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="28-channel定义和使用"><a href="#28-channel定义和使用" class="headerlink" title="28 channel定义和使用"></a>28 channel定义和使用</h2><p>两个goroutine之间如何通信交流呢？go中提供了channel来进行通信<br>我们这个距离的channel是无缓冲的</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423160227.png" alt="image-20210423160227874"></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="comment">//  define a channel</span></span><br><span class="line">	c :=<span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span> <span class="params">()</span></span>  &#123;</span><br><span class="line">		<span class="keyword">defer</span> fmt.Println(<span class="string">&quot;goroutine is over...&quot;</span>)</span><br><span class="line"></span><br><span class="line">		fmt.Println(<span class="string">&quot;goroutine is running...&quot;</span>)</span><br><span class="line"></span><br><span class="line">		c &lt;- <span class="number">666</span>	<span class="comment">// 666 send to c</span></span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	num := &lt;-c   <span class="comment">// read from c</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">&quot;num&quot;</span> , num)</span><br><span class="line">	fmt.Println(<span class="string">&quot;main goroutine is over...&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="29-channel有缓冲和无缓冲同步问题"><a href="#29-channel有缓冲和无缓冲同步问题" class="headerlink" title="29 channel有缓冲和无缓冲同步问题"></a>29 channel有缓冲和无缓冲同步问题</h2><p>无缓冲的情况</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423161947.png" alt="image-20210423161946993"></p>
+<p>有缓冲的情况</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423161916.png" alt="image-20210423161916485"></p>
+<h2 id="30-channel的关闭特点"><a href="#30-channel的关闭特点" class="headerlink" title="30 channel的关闭特点"></a>30 channel的关闭特点</h2><h2 id="31-channel与range"><a href="#31-channel与range" class="headerlink" title="31 channel与range"></a><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423162900.png" alt="image-20210423162900952">31 channel与range</h2><p>可以用range去channel中拿数据</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423163111.png" alt="image-20210423163111742"></p>
+<h2 id="32-channel与select"><a href="#32-channel与select" class="headerlink" title="32 channel与select"></a>32 channel与select</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210423163933.png" alt="image-20210423163933040"></p>
+<p>select可以监控多个channel的状态，如果chan1现在可以读取数据，那么执行第一个case；如果chan2现在可以写数据，那么执行第二个channel；如果都没有，那么执行default</p>
+<p>select具有多路channel的监控功能</p>
+<p>我们可以看channel写fabonacli</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span>(</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">fibonacli</span><span class="params">(c ,quit <span class="keyword">chan</span> <span class="type">int</span>)</span></span>  &#123;</span><br><span class="line">	x , y :=<span class="number">1</span>,<span class="number">1</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>&#123;</span><br><span class="line">		<span class="keyword">select</span>&#123;</span><br><span class="line">		<span class="keyword">case</span> c &lt;-x:</span><br><span class="line">			x=y;</span><br><span class="line">			y=x+y;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">case</span> &lt;-quit:</span><br><span class="line">			fmt.Println(<span class="string">&quot;quit&quot;</span>)</span><br><span class="line">			<span class="keyword">return</span> </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)</span><br><span class="line">	quit := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span> <span class="params">()</span></span>  &#123;</span><br><span class="line">		<span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;<span class="number">6</span>;i++&#123;</span><br><span class="line">			fmt.Println(&lt;-c)</span><br><span class="line">		&#125;</span><br><span class="line">		quit &lt;- <span class="number">0</span></span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	fibonacli(c,quit)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="33-GOPATH工作模式的弊端"><a href="#33-GOPATH工作模式的弊端" class="headerlink" title="33 GOPATH工作模式的弊端"></a>33 GOPATH工作模式的弊端</h2><p>gopath工作代码路径</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210424100841.png" alt="image-20210424100841845"></p>
+<p>没有版本控制概念<br>无法同步一致第三方的版本号<br>无法指定当前项目引用的第三方版本号</p>
+<h2 id="34-GoModules模式基础环境说明"><a href="#34-GoModules模式基础环境说明" class="headerlink" title="34 GoModules模式基础环境说明"></a>34 GoModules模式基础环境说明</h2><p>首先完成几个配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go env -w GO111MODULE=on</span><br></pre></td></tr></table></figure>
+
+<p>我们要指定代理包从哪里下载,这里指定七牛云，如果我们从github上下载，会先去源进行查找</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go env -w GOPROXY=http://goproxy.cn,direct</span><br></pre></td></tr></table></figure>
+
+<p>如果这个项目是私有项目，我们导入GOPRIVATE，表明是私有仓库，不会进行proxy下载校验</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go env -w GOPRIVATE=&quot;git.example.com,github.com/aceld/zinx&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="35-GoModules初始化项目"><a href="#35-GoModules初始化项目" class="headerlink" title="35 GoModules初始化项目"></a>35 GoModules初始化项目</h2><p>首先开启module模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go env -w GO111MODULE=on</span><br></pre></td></tr></table></figure>
+
+<p>首先初始化模块，后面部分是别人如果导入我们模块的名称</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210424135957.png" alt="image-20210424135957279"></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20210424143211.png" alt="image-20210424143211834"></p>
+<h2 id="36-改变模块依赖关系"><a href="#36-改变模块依赖关系" class="headerlink" title="36 改变模块依赖关系"></a>36 改变模块依赖关系</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/12/note/Redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0-%E7%AC%94%E8%AE%B0/" rel="prev" title="Redis设计与实现-读书笔记">
+      <i class="fa fa-chevron-left"></i> Redis设计与实现-读书笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/02/note/RabbitMq-%E7%8B%82%E7%A5%9E%E8%AF%B4Java/" rel="next" title="RabbitMq-狂神说Java">
+      RabbitMq-狂神说Java <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">go语言入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%AF%BE%E7%A8%8B%E6%8F%90%E7%BA%B2"><span class="nav-number">1.1.</span> <span class="nav-text">1 课程提纲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Golang%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">2 Golang开发环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-golang%E5%88%86%E6%9E%90"><span class="nav-number">1.3.</span> <span class="nav-text">3 golang分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%AC%AC%E4%B8%80%E4%B8%AAgo%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.4.</span> <span class="nav-text">4 第一个go语言程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%A3%B0%E6%98%8E%E5%8F%98%E9%87%8F"><span class="nav-number">1.5.</span> <span class="nav-text">5 声明变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%B8%B8%E9%87%8F%E5%92%8Ciota"><span class="nav-number">1.6.</span> <span class="nav-text">6 常量和iota</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%87%BD%E6%95%B0%E5%A4%9A%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">1.7.</span> <span class="nav-text">7 函数多返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-init%E5%87%BD%E6%95%B0"><span class="nav-number">1.8.</span> <span class="nav-text">8 init函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-import%E5%AF%BC%E5%8C%85"><span class="nav-number">1.9.</span> <span class="nav-text">9 import导包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-defer"><span class="nav-number">1.10.</span> <span class="nav-text">11 defer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E6%95%B0%E7%BB%84%E5%92%8C%E5%88%87%E7%89%87slice"><span class="nav-number">1.11.</span> <span class="nav-text">12 数组和切片slice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-slice%E5%A3%B0%E6%98%8E%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">1.12.</span> <span class="nav-text">13 slice声明的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-slice%E5%88%87%E7%89%87%E7%9A%84%E8%BF%BD%E5%8A%A0%E5%92%8C%E6%88%AA%E5%8F%96"><span class="nav-number">1.13.</span> <span class="nav-text">14 slice切片的追加和截取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-map%E5%AE%9A%E4%B9%89"><span class="nav-number">1.14.</span> <span class="nav-text">15 map定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-map%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-number">1.15.</span> <span class="nav-text">16 map使用方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-struct%E5%AE%9A%E4%B9%89%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-number">1.16.</span> <span class="nav-text">17 struct定义和使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-go%E4%B8%AD%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%B0%81%E8%A3%85"><span class="nav-number">1.17.</span> <span class="nav-text">18 go中面向对象的表示和封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-golang%E4%B8%AD%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.18.</span> <span class="nav-text">19 golang中面向对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%A4%9A%E6%80%81%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.19.</span> <span class="nav-text">20 面向对象多态的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-interface%E7%A9%BA%E6%8E%A5%E5%8F%A3%E4%B8%87%E8%83%BD%E7%B1%BB%E5%9E%8B%E5%92%8C%E7%B1%BB%E7%9A%84%E6%96%AD%E8%A8%80%E6%9C%BA%E5%88%B6"><span class="nav-number">1.20.</span> <span class="nav-text">21 interface空接口万能类型和类的断言机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-%E5%8F%98%E9%87%8F%E5%86%85%E7%BD%AE%E7%9A%84pair%E7%BB%93%E6%9E%84"><span class="nav-number">1.21.</span> <span class="nav-text">22 变量内置的pair结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-golang%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6"><span class="nav-number">1.22.</span> <span class="nav-text">23 golang的反射机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26-goroutine"><span class="nav-number">1.23.</span> <span class="nav-text">26 goroutine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#27-%E5%88%9B%E5%BB%BAgoroutine"><span class="nav-number">1.24.</span> <span class="nav-text">27 创建goroutine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#28-channel%E5%AE%9A%E4%B9%89%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-number">1.25.</span> <span class="nav-text">28 channel定义和使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#29-channel%E6%9C%89%E7%BC%93%E5%86%B2%E5%92%8C%E6%97%A0%E7%BC%93%E5%86%B2%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98"><span class="nav-number">1.26.</span> <span class="nav-text">29 channel有缓冲和无缓冲同步问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#30-channel%E7%9A%84%E5%85%B3%E9%97%AD%E7%89%B9%E7%82%B9"><span class="nav-number">1.27.</span> <span class="nav-text">30 channel的关闭特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#31-channel%E4%B8%8Erange"><span class="nav-number">1.28.</span> <span class="nav-text">31 channel与range</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32-channel%E4%B8%8Eselect"><span class="nav-number">1.29.</span> <span class="nav-text">32 channel与select</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#33-GOPATH%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%BC%8A%E7%AB%AF"><span class="nav-number">1.30.</span> <span class="nav-text">33 GOPATH工作模式的弊端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#34-GoModules%E6%A8%A1%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E"><span class="nav-number">1.31.</span> <span class="nav-text">34 GoModules模式基础环境说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#35-GoModules%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.32.</span> <span class="nav-text">35 GoModules初始化项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#36-%E6%94%B9%E5%8F%98%E6%A8%A1%E5%9D%97%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="nav-number">1.33.</span> <span class="nav-text">36 改变模块依赖关系</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">qianguang</p>
+  <div class="site-description" itemprop="description">浅光的博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qianguang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='34,34,34' opacity='0.5' zIndex='-1' count='120' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

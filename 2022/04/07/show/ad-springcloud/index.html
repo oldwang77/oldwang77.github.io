@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangfx.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="ad-springcloud背景在《美团广告实时索引的设计与实现》中写道，在线广告是互联网行业常见的商业变现方式。从工程角度看，广告索引的结构和实现方式直接决定了整个系统的服务性能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="广告推广系统">
+<meta property="og:url" content="http://wangfx.top/2022/04/07/show/ad-springcloud/index.html">
+<meta property="og:site_name" content="qGuang">
+<meta property="og:description" content="ad-springcloud背景在《美团广告实时索引的设计与实现》中写道，在线广告是互联网行业常见的商业变现方式。从工程角度看，广告索引的结构和实现方式直接决定了整个系统的服务性能。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220314145817.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220314152502.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226163345.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226110933.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226164325.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226140049.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226141246.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220315203847.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220315203922.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143308.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143311.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143304.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143300.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143255.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226224746.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226224648.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226224821.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226230456.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225137.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225156.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225223.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225310.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225518.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220314190959.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220314192010.png">
+<meta property="article:published_time" content="2022-04-07T05:08:35.000Z">
+<meta property="article:modified_time" content="2022-07-16T14:40:11.050Z">
+<meta property="article:author" content="qianguang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220314145817.png">
+
+<link rel="canonical" href="http://wangfx.top/2022/04/07/show/ad-springcloud/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>广告推广系统 | qGuang</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">qGuang</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">简简单单，安安静静</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wangfx.top/2022/04/07/show/ad-springcloud/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="qianguang">
+      <meta itemprop="description" content="浅光的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qGuang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          广告推广系统
+        </h1>
+
+        <div class="post-meta">
+		  
+			<i class="fa fa-thumb-tack"></i>
+			<font color=7D26CD>置顶</font>
+			<span class="post-meta-divider">|</span>
+		  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-07 13:08:35" itemprop="dateCreated datePublished" datetime="2022-04-07T13:08:35+08:00">2022-04-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-16 22:40:11" itemprop="dateModified" datetime="2022-07-16T22:40:11+08:00">2022-07-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="ad-springcloud"><a href="#ad-springcloud" class="headerlink" title="ad-springcloud"></a>ad-springcloud</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在《<strong>美团广告实时索引的设计与实现</strong>》中写道，在线广告是互联网行业常见的商业变现方式。从工程角度看，广告索引的结构和实现方式直接决定了整个系统的服务性能。</p>
+<span id="more"></span>
+
+<h2 id="领域问题"><a href="#领域问题" class="headerlink" title="领域问题"></a>领域问题</h2><p>广告索引需具备以下基本特性：<strong>层次化的索引结构 + 实时化的索引更新</strong>。</p>
+<h3 id="层次化的索引结构"><a href="#层次化的索引结构" class="headerlink" title="层次化的索引结构"></a>层次化的索引结构</h3><p>一般地，广告系统可抽象为如下投放模型，并实现检索、过滤等处理逻辑。</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220314145817.png" alt="广告投放模型" style="zoom: 67%;" />
+
+<p>​	该层次结构的上下层之间是一对多的关系。<br>​	一个广告主通常创建若干个推广计划，每个计划对应一个较长周期的KPI，比如一个月的预算和投放地域。<br>​	一个推广计划中的多个推广单元分别用于更精细的投放控制，比如一次点击的最高出价、每日预算、定向条件等。<br>​	广告创意是广告曝光使用的素材，根据业务特点，它可以从属于广告主或推广计划层级。</p>
+<h3 id="实时化的索引更新"><a href="#实时化的索引更新" class="headerlink" title="实时化的索引更新"></a>实时化的索引更新</h3><p>​	层次结构可以更准确、更及时地反应广告主的投放控制需求。投放模型的每一层都会定义若干字段，用于实现各类投放控制。广告系统的大部分字段需要支持实时更新，比如审核状态、预算上下线状态等。例如，当一个推广单元由可投放状态变为暂停状态时，若该变更没有在索引中及时生效，就会造成大量的无效投放。</p>
+<h2 id="业内调研"><a href="#业内调研" class="headerlink" title="业内调研"></a>业内调研</h2><p>目前，生产化的开源索引系统大部分为通用搜索引擎设计，基本无法同时满足上述条件。</p>
+<ul>
+<li>Apache Lucene<br>支持实时索引，但不支持层次结构。</li>
+<li>Sphinx<br>全文检索；二次开发难度大。<br>支持实时索引，但不支持层次结构。</li>
+</ul>
+<p>因此，广告业界要么基于开源方案进行定制，要么从头开发自己的闭源系统。</p>
+<h2 id="生产实践"><a href="#生产实践" class="headerlink" title="生产实践"></a>生产实践</h2><p>​	早期的搜索广告是基于自然搜索的系统架构建的，随着业务的发展，需要根据广告特点进行系统改造。新的广告索引实现了纯粹的实时更新和层次化结构，已经在美团搜索广告上线。该架构也适用于各类非搜索的业务场景。</p>
+<p><strong>美团搜索广告的系统架构</strong></p>
+<p>​	作为整个系统的核心，基于实时索引构建的广告检索过滤服务（RS），承担了广告检索和各类业务过滤功能。日常的业务迭代，均可通过升级索引配置完成。</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220314152502.png" alt="系统架构" style="zoom:67%;" />
+
+<p>此外，为提升系统的吞吐量，多个模块已实现服务端异步化。</p>
+<h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><p>广告投放系统是基于 springcloud 开发的项目，主要实现了广告的两个核心的系统。</p>
+<ol>
+<li><strong>广告投放系统，面向广告主实现了广告投放系统。</strong>重点是广告数据结构的设计，最终实现对外服务接口。</li>
+<li><strong>广告检索系统，面向媒体方实现了广告的定向检索。</strong>主要实现了构建索引和广告检索的功能，其中索引数据来自广告投放系统，预加载的部分称之为全量索引，同时检索系统（ ad-search ）会伪装为 MySQL 的 Slave 监听 Binlog，构建增量索引。检索过程依赖于全量和增量索引，实现快速高效的检索。</li>
+<li>区别于直接从数据库中检索数据，项目将检索数据存储在本地缓存中，引入倒排索引，构建全量索引+增量索引的组合，大幅减少了推广单元检索的时间。通过使用开源工具 Binlog-connector-java 监听 Binlog 构建增量索引，实现广告投放和检索服务解耦。通过Kafka重构广告检索服务，降低 MySQL 负担。</li>
+</ol>
+<h2 id="创新点"><a href="#创新点" class="headerlink" title="创新点"></a>创新点</h2><ol>
+<li>投放系统（ ad-sponsor ）引入<strong>倒排索引</strong>存储结构，构建全量索引+增量索引的组合，大幅减少推广单元检索时间。</li>
+<li>使用开源工具 Binlog-connector-java，根据 MySQL Master&#x2F;Slave 协议， 检索系统 ( ad-search )伪装成 Slave 监听 Binlog，动态构建增量索引，实现广告投放和检索服务的解耦。</li>
+<li>检索系统（ad-search）多实例监听 Binlog 效率低，利用 Kafka 优化监听方式，通过 Navicat Monitor 测试，内存占用降低 35%（ 65% -&gt; 42% ），最大程度减轻 MySQL 负担。</li>
+</ol>
+<h2 id="项目架构图"><a href="#项目架构图" class="headerlink" title="项目架构图"></a>项目架构图</h2><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226163345.png" alt="image-20220226163345852" style="zoom:67%;" />
+
+<h2 id="数据库表"><a href="#数据库表" class="headerlink" title="数据库表"></a>数据库表</h2><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226110933.png" alt="image-20220226110926596" style="zoom: 50%;" />
+
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226164325.png" alt="image-20220226164325817" style="zoom:67%;" />
+
+<h2 id="项目启动"><a href="#项目启动" class="headerlink" title="项目启动"></a>项目启动</h2><ol>
+<li><p>启动 kafka</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">先启动zookeeper</span></span><br><span class="line">d:</span><br><span class="line">cd D:\env\kafka_2.12-2.1.0</span><br><span class="line">D:\env\kafka_2.12-2.1.0\bin\windows\zookeeper-server-start.bat config\zookeeper.properties</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">再启动kafka</span></span><br><span class="line">d:</span><br><span class="line">cd D:\env\kafka_2.12-2.1.0</span><br><span class="line">bin\windows\kafka-server-start.bat config\server.properties</span><br></pre></td></tr></table></figure>
+
+<p>说明：kafka 启动可能会报错，修改如下配置</p>
+<blockquote>
+<p>解决办法：修改kafka-run-class.bat中的179行，给%CLASSPATH%加上双引号即可，结果如下：</p>
+<p>set COMMAND&#x3D;%JAVA% %KAFKA_HEAP_OPTS% %KAFKA_JVM_PERFORMANCE_OPTS% %KAFKA_JMX_OPTS%<br>%KAFKA_LOG4J_OPTS% -cp “%CLASSPATH%” %KAFKA_OPTS% %*</p>
+</blockquote>
+</li>
+<li><p>启动MySQL</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p123456</span><br></pre></td></tr></table></figure>
+
+<p>说明：MySQL启动必须确保两个配置</p>
+<ul>
+<li><p>确保开启了 binlog 日志</p>
+</li>
+<li><p>确保 binlog 日志的格式 ROW</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226140049.png" alt="img" style="zoom:67%;" /></li>
+</ul>
+</li>
+<li><p>启动 Eureka，所有的服务都需要向 Eureka 注册</p>
+</li>
+<li><p>启动网关 zuul</p>
+</li>
+<li><p>启动BinLog监听模块 ad-binlog-kafka</p>
+</li>
+<li><p>启动广告检索模块 ad-search</p>
+</li>
+<li><p>最终查看 Eureka 界面，查看服务是否成功</p>
+<p>默认访问路径 <a target="_blank" rel="noopener" href="http://localhost:8000/">http://localhost:8000/</a></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226141246.png" alt="img"></p>
+</li>
+</ol>
+<h2 id="功能测试"><a href="#功能测试" class="headerlink" title="功能测试"></a>功能测试</h2><p>1 全量导出MySQL的一份数据到本地</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220315203847.png" alt="img"></p>
+<p>2 测试广告检索功能</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220315203922.png" alt="img"></p>
+<p>3 项目的一个核心功能：当我们对推广单元( ad_unit )进行增、删、改时，MySQL-binlog-connector 监听到 MySQL数据库 binlog 的变化，通过 kafka 发送修改信息，广告检索模块（ ad-search ) 订阅相关信息，并进行处理更新索引，实现广告检索服务功能。</p>
+<p>首先我们查看广告推广单元 ad_unit 数据</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143308.png" alt="img"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from ad_unit;</span><br><span class="line">update ad_unit <span class="type">set</span> <span class="variable">unit_status</span> <span class="operator">=</span> <span class="number">0</span> <span class="type">where</span> <span class="variable">id</span> <span class="operator">=</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>更新一条数据</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143311.png" alt="img"></p>
+<p>我们查看ad-binlog-kafka，可以看出实现了向kafka的数据投递</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143304.png" alt="img"></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143300.png" alt="img"></p>
+<p>此时我们查看ad-search</p>
+<p>接受到了kafka投递过来的消息，进行索引的变化，可以看到变化前后索引的不同</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143255.png" alt="img"></p>
+<p>具体结果截取部分如下</p>
+<blockquote>
+<p>com.ad.consumer.BinlogConsumer     : kafka processMysqlRowData: {“fieldValueMap”:[{“unit_status”:”0”,”id”:”10”,”position_type”:”1”,”plan_id”:”10”}],”level”:”3”,”opType”:”UPDATE”,”tableName”:”ad_unit”}</p>
+<p>com.ad.index.adunit.AdUnitIndex    : before update: {10&#x3D;AdUnitObject(unitId&#x3D;10, unitStatus&#x3D;1, positionType&#x3D;1, planId&#x3D;10, adPlanObject&#x3D;AdPlanObject(planId&#x3D;10, userId&#x3D;15, planStatus&#x3D;1, startDate&#x3D;Wed Nov 28 00:00:00 CST 2018, endDate&#x3D;Wed Nov 20 00:00:00 CST 2019)), 12&#x3D;AdUnitObject(unitId&#x3D;12, unitStatus&#x3D;1, positionType&#x3D;1, planId&#x3D;10, adPlanObject&#x3D;AdPlanObject(planId&#x3D;10, userId&#x3D;15, planStatus&#x3D;1, startDate&#x3D;Wed Nov 28 00:00:00 CST 2018, endDate&#x3D;Wed Nov 20 00:00:00 CST 2019))}</p>
+<p>com.ad.index.adunit.AdUnitIndex    : after update: {10&#x3D;AdUnitObject(unitId&#x3D;10, unitStatus&#x3D;0, positionType&#x3D;1, planId&#x3D;10, adPlanObject&#x3D;AdPlanObject(planId&#x3D;10, userId&#x3D;15, planStatus&#x3D;1, startDate&#x3D;Wed Nov 28 00:00:00 CST 2018, endDate&#x3D;Wed Nov 20 00:00:00 CST 2019)), 12&#x3D;AdUnitObject(unitId&#x3D;12, unitStatus&#x3D;1, positionType&#x3D;1, planId&#x3D;10, adPlanObject&#x3D;AdPlanObject(planId&#x3D;10, userId&#x3D;15, planStatus&#x3D;1, startDate&#x3D;Wed Nov 28 00:00:00 CST 2018, endDate&#x3D;Wed Nov 20 00:00:00 CST 2019))}</p>
+<p> c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration</p>
+</blockquote>
+<h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><p>我们选取<strong>数据库性能监控工具 Navicat Monitor2</strong>进行测试</p>
+<p>首先确保windows系统开启了<em>简单网络管理协议</em>（<em>SNMP</em>），如果不知道如何开启，请参考：<a target="_blank" rel="noopener" href="https://zhongguo.eskere.club/%E5%A6%82%E4%BD%95%E5%9C%A8-windows-10-%E4%B8%8A%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE-snmp/2021-08-27/">如何在 Windows 10 上安装和配置 SNMP</a></p>
+<p>本机SNMP服务已经开启</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226224746.png" alt="image-20220226224746644"></p>
+<p>在配置monitor2实例的时候，注意这里的社区字段</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226224648.png" alt="image-20220226224641338" style="zoom:67%;" />
+
+<p>当多实例连接 MySQL 服务器进行监听的时候，社区字段必须和上述SNMP配置相同</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226224821.png" alt="image-20220226224821421" style="zoom:67%;" />
+
+<p>配置完成后的监控页面</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226230456.png" alt="image-20220226230456329"></p>
+<p><strong>我们直接多实例连接 MySQL 时的负载状况</strong></p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225137.png" alt="img" style="zoom: 67%;" />
+
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225156.png" alt="img" style="zoom:67%;" />
+
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225223.png" alt="img" style="zoom:67%;" />
+
+<p>当我们将连接数增大到147时，由于使用第三方开源工具 binlog-connector-java 有最大连接数限制，此时DB connectors标红，日志报错 too many connections</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225310.png" alt="img" style="zoom:67%;" />
+
+<p>当我们采取了 <strong>Kafka 优化监听方式</strong>，此时无论是 Memory 占用，还是 CPU 都占用都有了较为明显的降低，很大程度上减少了 MySQL 的负担。</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225518.png" alt="img" style="zoom:67%;" />
+
+<h2 id="未来计划"><a href="#未来计划" class="headerlink" title="未来计划"></a>未来计划</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220314190959.png" alt="image-20220314190959358"></p>
+<p><strong>画像系统架构</strong></p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220314192010.png" alt="画像系统架构"></p>
+<ul>
+<li><input disabled="" type="checkbox"> 广告投放系统的前端页面</li>
+<li><input disabled="" type="checkbox"> 提供用户注册登录等功能</li>
+<li><input disabled="" type="checkbox"> 引入ElasticSearch、Filebeat、Kibana 对打印日志做可视化，方便错误排查等</li>
+<li><input disabled="" type="checkbox"> 构建<strong>人群画像</strong>（当前是模拟用户数据），通过构建人群信息池来实现对广告信息的过滤</li>
+<li><input disabled="" type="checkbox"> 检索得到的用户创意，通过<strong>智能推荐系统</strong>（当前是对满足条件的多个创意进行随机选一个返回），返回用户最感兴趣的创意</li>
+<li><input disabled="" type="checkbox"> 提供更多维度的<strong>条件限制</strong>（当前仅为地域、兴趣、关键词）</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/29/show/community/" rel="prev" title="社区论坛项目">
+      <i class="fa fa-chevron-left"></i> 社区论坛项目
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ad-springcloud"><span class="nav-number">1.</span> <span class="nav-text">ad-springcloud</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%86%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">领域问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%82%E6%AC%A1%E5%8C%96%E7%9A%84%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.1.</span> <span class="nav-text">层次化的索引结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%97%B6%E5%8C%96%E7%9A%84%E7%B4%A2%E5%BC%95%E6%9B%B4%E6%96%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">实时化的索引更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%86%85%E8%B0%83%E7%A0%94"><span class="nav-number">1.3.</span> <span class="nav-text">业内调研</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E5%AE%9E%E8%B7%B5"><span class="nav-number">1.4.</span> <span class="nav-text">生产实践</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="nav-number">1.5.</span> <span class="nav-text">主要功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E6%96%B0%E7%82%B9"><span class="nav-number">1.6.</span> <span class="nav-text">创新点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-number">1.7.</span> <span class="nav-text">项目架构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8"><span class="nav-number">1.8.</span> <span class="nav-text">数据库表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%90%AF%E5%8A%A8"><span class="nav-number">1.9.</span> <span class="nav-text">项目启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-number">1.10.</span> <span class="nav-text">功能测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-number">1.11.</span> <span class="nav-text">性能测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E6%9D%A5%E8%AE%A1%E5%88%92"><span class="nav-number">1.12.</span> <span class="nav-text">未来计划</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">qianguang</p>
+  <div class="site-description" itemprop="description">浅光的博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qianguang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='34,34,34' opacity='0.5' zIndex='-1' count='120' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
