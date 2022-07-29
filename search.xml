@@ -1,219 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>广告推广系统</title>
-    <url>/2022/04/07/show/ad-springcloud/</url>
-    <content><![CDATA[<h1 id="ad-springcloud"><a href="#ad-springcloud" class="headerlink" title="ad-springcloud"></a>ad-springcloud</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在《<strong>美团广告实时索引的设计与实现</strong>》中写道，在线广告是互联网行业常见的商业变现方式。从工程角度看，广告索引的结构和实现方式直接决定了整个系统的服务性能。</p>
-<span id="more"></span>
-
-<h2 id="领域问题"><a href="#领域问题" class="headerlink" title="领域问题"></a>领域问题</h2><p>广告索引需具备以下基本特性：<strong>层次化的索引结构 + 实时化的索引更新</strong>。</p>
-<h3 id="层次化的索引结构"><a href="#层次化的索引结构" class="headerlink" title="层次化的索引结构"></a>层次化的索引结构</h3><p>一般地，广告系统可抽象为如下投放模型，并实现检索、过滤等处理逻辑。</p>
-<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220314145817.png" alt="广告投放模型" style="zoom: 67%;" />
-
-<p>​	该层次结构的上下层之间是一对多的关系。<br>​	一个广告主通常创建若干个推广计划，每个计划对应一个较长周期的KPI，比如一个月的预算和投放地域。<br>​	一个推广计划中的多个推广单元分别用于更精细的投放控制，比如一次点击的最高出价、每日预算、定向条件等。<br>​	广告创意是广告曝光使用的素材，根据业务特点，它可以从属于广告主或推广计划层级。</p>
-<h3 id="实时化的索引更新"><a href="#实时化的索引更新" class="headerlink" title="实时化的索引更新"></a>实时化的索引更新</h3><p>​	层次结构可以更准确、更及时地反应广告主的投放控制需求。投放模型的每一层都会定义若干字段，用于实现各类投放控制。广告系统的大部分字段需要支持实时更新，比如审核状态、预算上下线状态等。例如，当一个推广单元由可投放状态变为暂停状态时，若该变更没有在索引中及时生效，就会造成大量的无效投放。</p>
-<h2 id="业内调研"><a href="#业内调研" class="headerlink" title="业内调研"></a>业内调研</h2><p>目前，生产化的开源索引系统大部分为通用搜索引擎设计，基本无法同时满足上述条件。</p>
-<ul>
-<li>Apache Lucene<br>支持实时索引，但不支持层次结构。</li>
-<li>Sphinx<br>全文检索；二次开发难度大。<br>支持实时索引，但不支持层次结构。</li>
-</ul>
-<p>因此，广告业界要么基于开源方案进行定制，要么从头开发自己的闭源系统。</p>
-<h2 id="生产实践"><a href="#生产实践" class="headerlink" title="生产实践"></a>生产实践</h2><p>​	早期的搜索广告是基于自然搜索的系统架构建的，随着业务的发展，需要根据广告特点进行系统改造。新的广告索引实现了纯粹的实时更新和层次化结构，已经在美团搜索广告上线。该架构也适用于各类非搜索的业务场景。</p>
-<p><strong>美团搜索广告的系统架构</strong></p>
-<p>​	作为整个系统的核心，基于实时索引构建的广告检索过滤服务（RS），承担了广告检索和各类业务过滤功能。日常的业务迭代，均可通过升级索引配置完成。</p>
-<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220314152502.png" alt="系统架构" style="zoom:67%;" />
-
-<p>此外，为提升系统的吞吐量，多个模块已实现服务端异步化。</p>
-<h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><p>广告投放系统是基于 springcloud 开发的项目，主要实现了广告的两个核心的系统。</p>
-<ol>
-<li><strong>广告投放系统，面向广告主实现了广告投放系统。</strong>重点是广告数据结构的设计，最终实现对外服务接口。</li>
-<li><strong>广告检索系统，面向媒体方实现了广告的定向检索。</strong>主要实现了构建索引和广告检索的功能，其中索引数据来自广告投放系统，预加载的部分称之为全量索引，同时检索系统（ ad-search ）会伪装为 MySQL 的 Slave 监听 Binlog，构建增量索引。检索过程依赖于全量和增量索引，实现快速高效的检索。</li>
-<li>区别于直接从数据库中检索数据，项目将检索数据存储在本地缓存中，引入倒排索引，构建全量索引+增量索引的组合，大幅减少了推广单元检索的时间。通过使用开源工具 Binlog-connector-java 监听 Binlog 构建增量索引，实现广告投放和检索服务解耦。通过Kafka重构广告检索服务，降低 MySQL 负担。</li>
-</ol>
-<h2 id="创新点"><a href="#创新点" class="headerlink" title="创新点"></a>创新点</h2><ol>
-<li>投放系统（ ad-sponsor ）引入<strong>倒排索引</strong>存储结构，构建全量索引+增量索引的组合，大幅减少推广单元检索时间。</li>
-<li>使用开源工具 Binlog-connector-java，根据 MySQL Master&#x2F;Slave 协议， 检索系统 ( ad-search )伪装成 Slave 监听 Binlog，动态构建增量索引，实现广告投放和检索服务的解耦。</li>
-<li>检索系统（ad-search）多实例监听 Binlog 效率低，利用 Kafka 优化监听方式，通过 Navicat Monitor 测试，内存占用降低 35%（ 65% -&gt; 42% ），最大程度减轻 MySQL 负担。</li>
-</ol>
-<h2 id="项目架构图"><a href="#项目架构图" class="headerlink" title="项目架构图"></a>项目架构图</h2><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226163345.png" alt="image-20220226163345852" style="zoom:67%;" />
-
-<h2 id="数据库表"><a href="#数据库表" class="headerlink" title="数据库表"></a>数据库表</h2><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226110933.png" alt="image-20220226110926596" style="zoom: 50%;" />
-
-<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226164325.png" alt="image-20220226164325817" style="zoom:67%;" />
-
-<h2 id="项目启动"><a href="#项目启动" class="headerlink" title="项目启动"></a>项目启动</h2><ol>
-<li><p>启动 kafka</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">先启动zookeeper</span></span><br><span class="line">d:</span><br><span class="line">cd D:\env\kafka_2.12-2.1.0</span><br><span class="line">D:\env\kafka_2.12-2.1.0\bin\windows\zookeeper-server-start.bat config\zookeeper.properties</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">再启动kafka</span></span><br><span class="line">d:</span><br><span class="line">cd D:\env\kafka_2.12-2.1.0</span><br><span class="line">bin\windows\kafka-server-start.bat config\server.properties</span><br></pre></td></tr></table></figure>
-
-<p>说明：kafka 启动可能会报错，修改如下配置</p>
-<blockquote>
-<p>解决办法：修改kafka-run-class.bat中的179行，给%CLASSPATH%加上双引号即可，结果如下：</p>
-<p>set COMMAND&#x3D;%JAVA% %KAFKA_HEAP_OPTS% %KAFKA_JVM_PERFORMANCE_OPTS% %KAFKA_JMX_OPTS%<br>%KAFKA_LOG4J_OPTS% -cp “%CLASSPATH%” %KAFKA_OPTS% %*</p>
-</blockquote>
-</li>
-<li><p>启动MySQL</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -uroot -p123456</span><br></pre></td></tr></table></figure>
-
-<p>说明：MySQL启动必须确保两个配置</p>
-<ul>
-<li><p>确保开启了 binlog 日志</p>
-</li>
-<li><p>确保 binlog 日志的格式 ROW</p>
-<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226140049.png" alt="img" style="zoom:67%;" /></li>
-</ul>
-</li>
-<li><p>启动 Eureka，所有的服务都需要向 Eureka 注册</p>
-</li>
-<li><p>启动网关 zuul</p>
-</li>
-<li><p>启动BinLog监听模块 ad-binlog-kafka</p>
-</li>
-<li><p>启动广告检索模块 ad-search</p>
-</li>
-<li><p>最终查看 Eureka 界面，查看服务是否成功</p>
-<p>默认访问路径 <a href="http://localhost:8000/">http://localhost:8000/</a></p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226141246.png" alt="img"></p>
-</li>
-</ol>
-<h2 id="功能测试"><a href="#功能测试" class="headerlink" title="功能测试"></a>功能测试</h2><p>1 全量导出MySQL的一份数据到本地</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220315203847.png" alt="img"></p>
-<p>2 测试广告检索功能</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220315203922.png" alt="img"></p>
-<p>3 项目的一个核心功能：当我们对推广单元( ad_unit )进行增、删、改时，MySQL-binlog-connector 监听到 MySQL数据库 binlog 的变化，通过 kafka 发送修改信息，广告检索模块（ ad-search ) 订阅相关信息，并进行处理更新索引，实现广告检索服务功能。</p>
-<p>首先我们查看广告推广单元 ad_unit 数据</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143308.png" alt="img"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">select * from ad_unit;</span><br><span class="line">update ad_unit <span class="type">set</span> <span class="variable">unit_status</span> <span class="operator">=</span> <span class="number">0</span> <span class="type">where</span> <span class="variable">id</span> <span class="operator">=</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-
-<p>更新一条数据</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143311.png" alt="img"></p>
-<p>我们查看ad-binlog-kafka，可以看出实现了向kafka的数据投递</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143304.png" alt="img"></p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143300.png" alt="img"></p>
-<p>此时我们查看ad-search</p>
-<p>接受到了kafka投递过来的消息，进行索引的变化，可以看到变化前后索引的不同</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226143255.png" alt="img"></p>
-<p>具体结果截取部分如下</p>
-<blockquote>
-<p>com.ad.consumer.BinlogConsumer     : kafka processMysqlRowData: {“fieldValueMap”:[{“unit_status”:”0”,”id”:”10”,”position_type”:”1”,”plan_id”:”10”}],”level”:”3”,”opType”:”UPDATE”,”tableName”:”ad_unit”}</p>
-<p>com.ad.index.adunit.AdUnitIndex    : before update: {10&#x3D;AdUnitObject(unitId&#x3D;10, unitStatus&#x3D;1, positionType&#x3D;1, planId&#x3D;10, adPlanObject&#x3D;AdPlanObject(planId&#x3D;10, userId&#x3D;15, planStatus&#x3D;1, startDate&#x3D;Wed Nov 28 00:00:00 CST 2018, endDate&#x3D;Wed Nov 20 00:00:00 CST 2019)), 12&#x3D;AdUnitObject(unitId&#x3D;12, unitStatus&#x3D;1, positionType&#x3D;1, planId&#x3D;10, adPlanObject&#x3D;AdPlanObject(planId&#x3D;10, userId&#x3D;15, planStatus&#x3D;1, startDate&#x3D;Wed Nov 28 00:00:00 CST 2018, endDate&#x3D;Wed Nov 20 00:00:00 CST 2019))}</p>
-<p>com.ad.index.adunit.AdUnitIndex    : after update: {10&#x3D;AdUnitObject(unitId&#x3D;10, unitStatus&#x3D;0, positionType&#x3D;1, planId&#x3D;10, adPlanObject&#x3D;AdPlanObject(planId&#x3D;10, userId&#x3D;15, planStatus&#x3D;1, startDate&#x3D;Wed Nov 28 00:00:00 CST 2018, endDate&#x3D;Wed Nov 20 00:00:00 CST 2019)), 12&#x3D;AdUnitObject(unitId&#x3D;12, unitStatus&#x3D;1, positionType&#x3D;1, planId&#x3D;10, adPlanObject&#x3D;AdPlanObject(planId&#x3D;10, userId&#x3D;15, planStatus&#x3D;1, startDate&#x3D;Wed Nov 28 00:00:00 CST 2018, endDate&#x3D;Wed Nov 20 00:00:00 CST 2019))}</p>
-<p> c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration</p>
-</blockquote>
-<h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><p>我们选取<strong>数据库性能监控工具 Navicat Monitor2</strong>进行测试</p>
-<p>首先确保windows系统开启了<em>简单网络管理协议</em>（<em>SNMP</em>），如果不知道如何开启，请参考：<a href="https://zhongguo.eskere.club/%E5%A6%82%E4%BD%95%E5%9C%A8-windows-10-%E4%B8%8A%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE-snmp/2021-08-27/">如何在 Windows 10 上安装和配置 SNMP</a></p>
-<p>本机SNMP服务已经开启</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226224746.png" alt="image-20220226224746644"></p>
-<p>在配置monitor2实例的时候，注意这里的社区字段</p>
-<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226224648.png" alt="image-20220226224641338" style="zoom:67%;" />
-
-<p>当多实例连接 MySQL 服务器进行监听的时候，社区字段必须和上述SNMP配置相同</p>
-<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226224821.png" alt="image-20220226224821421" style="zoom:67%;" />
-
-<p>配置完成后的监控页面</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226230456.png" alt="image-20220226230456329"></p>
-<p><strong>我们直接多实例连接 MySQL 时的负载状况</strong></p>
-<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225137.png" alt="img" style="zoom: 67%;" />
-
-<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225156.png" alt="img" style="zoom:67%;" />
-
-<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225223.png" alt="img" style="zoom:67%;" />
-
-<p>当我们将连接数增大到147时，由于使用第三方开源工具 binlog-connector-java 有最大连接数限制，此时DB connectors标红，日志报错 too many connections</p>
-<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225310.png" alt="img" style="zoom:67%;" />
-
-<p>当我们采取了 <strong>Kafka 优化监听方式</strong>，此时无论是 Memory 占用，还是 CPU 都占用都有了较为明显的降低，很大程度上减少了 MySQL 的负担。</p>
-<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226225518.png" alt="img" style="zoom:67%;" />
-
-<h2 id="未来计划"><a href="#未来计划" class="headerlink" title="未来计划"></a>未来计划</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220314190959.png" alt="image-20220314190959358"></p>
-<p><strong>画像系统架构</strong></p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220314192010.png" alt="画像系统架构"></p>
-<ul>
-<li><input disabled="" type="checkbox"> 广告投放系统的前端页面</li>
-<li><input disabled="" type="checkbox"> 提供用户注册登录等功能</li>
-<li><input disabled="" type="checkbox"> 引入ElasticSearch、Filebeat、Kibana 对打印日志做可视化，方便错误排查等</li>
-<li><input disabled="" type="checkbox"> 构建<strong>人群画像</strong>（当前是模拟用户数据），通过构建人群信息池来实现对广告信息的过滤</li>
-<li><input disabled="" type="checkbox"> 检索得到的用户创意，通过<strong>智能推荐系统</strong>（当前是对满足条件的多个创意进行随机选一个返回），返回用户最感兴趣的创意</li>
-<li><input disabled="" type="checkbox"> 提供更多维度的<strong>条件限制</strong>（当前仅为地域、兴趣、关键词）</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>社区论坛项目</title>
-    <url>/2022/03/29/show/community/</url>
-    <content><![CDATA[<h1 id="community"><a href="#community" class="headerlink" title="community"></a>community</h1><h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><p>论坛实现了注册登录、发帖评论、点赞、关注通知和网站数据统计等功能</p>
-<span id="more"></span>
-
-<h2 id="项目启动"><a href="#项目启动" class="headerlink" title="项目启动"></a>项目启动</h2><p>1 启动redis</p>
-<p>redis启动路径D:\env\Redis-x64-3.0.502，点击</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227231651.png" alt="img"></p>
-<p>cmd打开弹窗，输入redis-cli，启动交互窗口</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select 0 </span><br><span class="line">flushdb</span><br><span class="line"></span><br><span class="line">// redis中的规则，如果你有两个单词相连接，中间用冒号隔开</span><br><span class="line">set test:count 1      </span><br><span class="line">get test:count</span><br><span class="line"></span><br><span class="line">incur test:count</span><br><span class="line">decr test:count</span><br><span class="line"></span><br><span class="line">// hashmap</span><br><span class="line">hset test:user id 1 				</span><br><span class="line">hset test:user username zhangsan</span><br><span class="line"></span><br><span class="line">hget test:user id</span><br><span class="line">hget test:user username</span><br><span class="line"></span><br><span class="line">// redis对列表支持比较灵活，可以从左边加入，从右边加入</span><br><span class="line">lpush test:ids 101 102 103 </span><br><span class="line">llen test:ids 				    // 查看列表的长度</span><br><span class="line">lrange test:ids 0 2 			// 范围查看</span><br><span class="line">rpop test:ids</span><br><span class="line"></span><br><span class="line">// set集合中的元素是不能重复的</span><br><span class="line">sadd test:teachers aaa bbb ccc ddd </span><br><span class="line">spop test:teachers 			// 随机弹出一个人，可以用于抽奖</span><br><span class="line">smembers test:teachers		// 查询还有多少人</span><br><span class="line"></span><br><span class="line">// sorted_list 查看有序的集合</span><br><span class="line">zadd test:students 10 aaa 20 bbb 30 ccc 40 ddd</span><br><span class="line"></span><br><span class="line">zscore test:students ccc 30</span><br><span class="line">zrank test:students ccc 2</span><br><span class="line">zrange test:students 0 2 	// 范围内查询 aaa. bbb  ccc</span><br><span class="line"></span><br><span class="line">keys * </span><br><span class="line">keys test*</span><br><span class="line"></span><br><span class="line">type key</span><br><span class="line">exists key</span><br><span class="line">del key</span><br><span class="line"></span><br><span class="line">expire key seconds	// 指定过期时间</span><br></pre></td></tr></table></figure>
-
-<p>2 启动kafka</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 先启动zookeeper</span><br><span class="line">d:</span><br><span class="line">cd D:\env\kafka_2.12-2.3.0</span><br><span class="line">D:\env\kafka_2.12-2.3.0\bin\windows\zookeeper-server-start.bat config\zookeeper.properties</span><br><span class="line"></span><br><span class="line"># 再启动kafka</span><br><span class="line">d:</span><br><span class="line">cd D:\env\kafka_2.12-2.3.0</span><br><span class="line">bin\windows\kafka-server-start.bat config\server.properties</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cd D:\env\kafka_2.12-2.3.0\bin\windows</span><br><span class="line">创建topic主题</span><br><span class="line">kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test</span><br><span class="line"></span><br><span class="line">新建topic</span><br><span class="line">kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic topic_a</span><br><span class="line"></span><br><span class="line">查看已有主题list</span><br><span class="line">kafka-topics --list --zookeeper localhost:2181</span><br><span class="line"></span><br><span class="line">修改分区数</span><br><span class="line">kafka-topics --zookeeper localhost:2181 --alter --topic topic_a  --partitions 2</span><br><span class="line"></span><br><span class="line">创建生产者</span><br><span class="line">kafka-console-producer --topic topic_a --broker-list localhost:9092</span><br><span class="line"></span><br><span class="line">创建消费者</span><br><span class="line">kafka-console-consumer --bootstrap-server localhost:9092 -topic topic_a</span><br><span class="line"></span><br><span class="line"># 关闭kafka的顺序是，先关闭kakfa，再关闭zookeeper</span><br><span class="line"># 关闭kafka</span><br><span class="line">/usr/local/Cellar/kafka/2.7.0/bin/kafka-server-stop</span><br><span class="line"># 关闭zookeeper</span><br><span class="line">/usr/local/Cellar/kafka/2.7.0/bin/zookeeper-server-stop</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>3 启动MySQL</p>
-<h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><p>我们选取压力测试工具 JMeter 进行测试</p>
-<p>双击jmeter.bat进行启动</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227231537.png" alt="img"></p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227231541.png" alt="img"></p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227231545.png" alt="img"></p>
-<p>100个线程同时打过来，自己的电脑肯定就瘫痪了，我们需要设置一定的随机延迟，我们这里设置延迟时间在0-1秒之间</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227231548.png" alt="img"></p>
-<p>我们查看一下吞吐量</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227231551.png" alt="img"></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>爱奇艺实习</title>
-    <url>/2022/02/27/show/%E7%88%B1%E5%A5%87%E8%89%BA%E5%AE%9E%E4%B9%A0/</url>
-    <content><![CDATA[<h1 id="爱奇艺实习"><a href="#爱奇艺实习" class="headerlink" title="爱奇艺实习"></a>爱奇艺实习</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>凌虚 (LINGXU) 是计算云团队提供的基于 IAAS 的自助运维平台，该平台提供了面向用户和后台运维管理的一站式解决方案。主要负责奇境环境相关服务的开发和维护。</p>
-<span id="more"></span>
-
-<h2 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- 开发奇境安全环境所属项目成员对对应环境下白名单的查看权限</span><br><span class="line">- 开发奇境安全环境所属项目管理员对对应白名单进行增删改的功能权限</span><br><span class="line"></span><br><span class="line">- 奇境环境自动生成环境名 &amp; 环境名不可编辑</span><br><span class="line">- 测试设备环境切换</span><br><span class="line">- 测试用户测试设备管理</span><br><span class="line"></span><br><span class="line">- 白名单工单回调逻辑优化，相同白名单更新创建时间和有效期</span><br><span class="line"></span><br><span class="line">- 开发 wifi 设备管理开放接口</span><br><span class="line">- wifi 设备管理开放接口调用完毕</span><br><span class="line">- wifi 前后台根据接口文档调整</span><br><span class="line"></span><br><span class="line">- 安全环境半自动化 wifi 接入接口开发完毕</span><br><span class="line">- VPN 白名单半自动化开发</span><br><span class="line"></span><br><span class="line">- 开放测试环境占用，开发页面入口</span><br><span class="line">- 开放测试环境创建业务，开发开放页面入口</span><br></pre></td></tr></table></figure>
-
-<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><p>前端：Vue+QUI（爱奇艺组件库）<br>后端： SpringBoot + MyBatis Plus+ MySQL</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226233906.png" alt="image-20220226233906658"></p>
-<h2 id="展示"><a href="#展示" class="headerlink" title="展示"></a>展示</h2><p>注意：下面说的凌虚都是指 5.8 版本 ， 4.7 版本仅前几天进行简单了解</p>
-<h3 id="凌虚首页"><a href="#凌虚首页" class="headerlink" title="凌虚首页"></a>凌虚首页</h3><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226234131.png" alt="image-20220226234131814"></p>
-<h3 id="安全环境"><a href="#安全环境" class="headerlink" title="安全环境"></a>安全环境</h3><p>访问权限</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226234208.png" alt="image-20220226234208852"></p>
-<p>提供添加白名单功能</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226234245.png" alt="image-20220226234245876"></p>
-<p>延长安全环境占用的有效期</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226234312.png" alt="image-20220226234312939"></p>
-<p>删除权限</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226234325.png" alt="image-20220226234325556"></p>
-<p>申请访问权限，跳转到爱奇艺工单系统进行申请（<a href="http://order-staging.cloud.qiyi.domain/#/createOrder/218%EF%BC%89">http://order-staging.cloud.qiyi.domain/#/createOrder/218）</a></p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220226234359.png" alt="image-20220226234359321"></p>
-<h3 id="wifi-设备管理"><a href="#wifi-设备管理" class="headerlink" title="wifi 设备管理"></a>wifi 设备管理</h3><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227102109.png" alt="image-20220227102102562"></p>
-<p>进行MAC地址录入</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227102140.png" alt="image-20220227102140877"></p>
-<p>选择占用环境，支持批量的修改</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227102217.jpg" alt="img"></p>
-<h3 id="开放测试环境管理"><a href="#开放测试环境管理" class="headerlink" title="开放测试环境管理"></a>开放测试环境管理</h3><p>负责创建业务功能的开发，原先需要先在网关skywalker上申请，或者通过接口分为两个步骤进行申请，第一步申请域名，第二步申请API。</p>
-<p>网关skywalker的申请方式</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227102501.png" alt="image-20220227102501753"></p>
-<p>接口申请方式</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227102555.png" alt="image-20220227102554994"></p>
-<p><strong>现在通过一个创建业务按钮，将两部分的工作进行合并，直接通过创建业务按钮完成业务的申请。</strong></p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227102348.png" alt="image-20220227102348402"></p>
-<p>点击创业业务按钮</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227102406.png" alt="image-20220227102406286"></p>
-<h3 id="开放测试环境占用"><a href="#开放测试环境占用" class="headerlink" title="开放测试环境占用"></a>开放测试环境占用</h3><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227102740.png" alt="image-20220227102740531"></p>
-<h3 id="负责的文档"><a href="#负责的文档" class="headerlink" title="负责的文档"></a>负责的文档</h3><h4 id="开放测试环境wifi接入"><a href="#开放测试环境wifi接入" class="headerlink" title="开放测试环境wifi接入"></a>开放测试环境wifi接入</h4><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227102915.png" alt="image-20220227102915764"></p>
-<p>这里的环境申请就是上述环境占用功能</p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227103208.png" alt="image-20220227103208496"></p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227103247.png" alt="image-20220227103247653"></p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227103002.jpg" alt="img"></p>
-<h4 id="开放测试环境-环境管理API-访问权限管理部分"><a href="#开放测试环境-环境管理API-访问权限管理部分" class="headerlink" title="开放测试环境-环境管理API-访问权限管理部分"></a>开放测试环境-环境管理API-访问权限管理部分</h4><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227103058.png" alt="image-20220227103058777"></p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227103346.png" alt="image-20220227103345966"></p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227103355.png" alt="image-20220227103355612"></p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227103407.png" alt="image-20220227103407611"></p>
-<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/20220227103413.png" alt="image-20220227103413343"></p>
-]]></content>
-  </entry>
-  <entry>
     <title>leetcode刷题总结归纳</title>
     <url>/2022/04/19/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h2 id="Hot100需要注意的题目"><a href="#Hot100需要注意的题目" class="headerlink" title="Hot100需要注意的题目"></a>Hot100需要注意的题目</h2><ul>
@@ -444,6 +231,24 @@
 ]]></content>
       <categories>
         <category>算法题</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>复习难点总结</title>
+    <url>/2022/04/01/%E9%9A%BE%E7%82%B9%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h2><ul>
+<li>IO多路复用原理</li>
+<li>BIO NIO AIO ，条件触发，边缘触发</li>
+<li>redis为什么很快<ul>
+<li>多路指的是多个socket连接，复用指的是复用一个线程。</li>
+<li>多路复用主要有三种技术：select，poll，epoll。</li>
+<li>epoll是最新的也是目前最好的多路复用技术。采用多路 I&#x2F;O 复用技术可以让单个线程高效的处理多个连接请求（尽量减少网络IO的时间消耗），且Redis在内存中操作数据的速度非常快（内存内的操作不会成为这里的性能瓶颈），主要以上两点造就了Redis具有很高的吞吐量。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>基础</category>
       </categories>
   </entry>
   <entry>
