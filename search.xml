@@ -1537,6 +1537,106 @@
       </categories>
   </entry>
   <entry>
+    <title>Netty仿照微信聊天</title>
+    <url>/2021/06/15/note/Netty%E4%BB%BF%E5%BE%AE%E4%BF%A1%E8%81%8A%E5%A4%A9/</url>
+    <content><![CDATA[<h2 id="Netty-springboot仿微信聊天全栈实战"><a href="#Netty-springboot仿微信聊天全栈实战" class="headerlink" title="Netty springboot仿微信聊天全栈实战"></a>Netty springboot仿微信聊天全栈实战</h2><h3 id="第1章"><a href="#第1章" class="headerlink" title="第1章"></a>第1章</h3><p><a href="https://netty.io/">https://netty.io/</a></p>
+<p>前端：mui+H5PLUS<br>后端：Springboot+netty</p>
+<h3 id="第2章-netty介绍与相关基础知识"><a href="#第2章-netty介绍与相关基础知识" class="headerlink" title="第2章 netty介绍与相关基础知识"></a>第2章 netty介绍与相关基础知识</h3><p>初识netty，学习阻塞与非阻塞，同步与异步，理解BIO、NIO、AIO以及netty的线程模型</p>
+<h4 id="2-1-初始netty"><a href="#2-1-初始netty" class="headerlink" title="2-1 初始netty"></a>2-1 初始netty</h4><ul>
+<li><strong>netty是一个提供了易于使用的API客户端&#x2F;服务器框架，可以快速简单的开发网络应用程序。</strong></li>
+<li>Netty is <em>an asynchronous event-driven network application framework</em><br>for rapid development of maintainable high performance protocol servers &amp; clients.</li>
+<li>Netty is a NIO client server framework which enables quick and easy development of network applications such as protocol servers and clients. It greatly simplifies and streamlines network programming such as TCP and UDP socket server.</li>
+<li>传输快-零拷贝</li>
+<li>我们本次学习的是netty4</li>
+</ul>
+<h4 id="2-2-阻塞和非阻塞、同步和异步的概念"><a href="#2-2-阻塞和非阻塞、同步和异步的概念" class="headerlink" title="2-2 阻塞和非阻塞、同步和异步的概念"></a>2-2 阻塞和非阻塞、同步和异步的概念</h4><ul>
+<li>阻塞和非阻塞<ul>
+<li>说的是线程访问资源，该资源是否准备就绪的一种处理方式</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-3-BIO讲解"><a href="#2-3-BIO讲解" class="headerlink" title="2-3 BIO讲解"></a>2-3 BIO讲解</h4><ul>
+<li>假设应用程序的进程发起<strong>IO调用</strong>，但是如果<strong>内核的数据还没准备好</strong>的话，那应用程序进程就一直在阻塞等待(永久等待），一直等到内核数据准备好了，从内核拷贝到用户空间，才返回成功提示，此次IO操作，称之为<strong>阻塞IO</strong>。</li>
+</ul>
+<h4 id="2-4-NIO讲解"><a href="#2-4-NIO讲解" class="headerlink" title="2-4 NIO讲解"></a>2-4 NIO讲解</h4><ul>
+<li>同步非阻塞IO，如果内核数据还没准备好，可以先返回错误信息给用户进程，让它不需要等待，而是通过轮询的方式再来请求。这就是非阻塞IO</li>
+<li>客户端通信的时候，会使用到&#x3D;&#x3D;selector(选择器，多路复用器)，可以理解为是一个进行轮询的线程&#x3D;&#x3D;，当我们的客户端和服务器进行连接的时候，实际上是进行一个注册，每一个客户端和服务器建立链接，都会有一个channel，一对一的。每一个server都会有一个selector</li>
+<li><img src="E:\house\typora\img2\image-20220526222331783-16591727718251.png" alt="image-20220526222331783" style="zoom:33%;" /></li>
+</ul>
+<h4 id="2-5-BIO-NIO-AIO的区别与理解"><a href="#2-5-BIO-NIO-AIO的区别与理解" class="headerlink" title="2-5 BIO NIO AIO的区别与理解"></a>2-5 BIO NIO AIO的区别与理解</h4><ul>
+<li>AIO，前面讲的<strong>BIO，NIO和信号驱动</strong>，<strong>在数据从内核复制到应用缓冲的时候，都是阻塞的，因此都不算是真正的异步</strong>。AIO实现了IO全流程的非阻塞，就是应用进程发出系统调用后，是立即返回的，但是<strong>立即返回的不是处理结果，而是表示提交成功类似的意思。等内核数据准备好，将数据拷贝到用户进程缓冲区，发送信号通知用户进程IO操作执行完毕。</strong></li>
+<li><img src="E:\house\typora\img2\image-20220526223730955-16591727718253.png" alt="image-20220526223730955" style="zoom:33%;" /></li>
+</ul>
+<h4 id="2-6-再看netty"><a href="#2-6-再看netty" class="headerlink" title="2-6 再看netty"></a>2-6 再看netty</h4><ul>
+<li>netty是开源的java框架，快速开发网络端客户端框架</li>
+<li>NIO的类库使用起来很麻烦，并且需要对多线程有深入的了解；netty api非常简单，开发门槛低；主流协议支持</li>
+</ul>
+<h4 id="2-7-Netty的三种线程模型"><a href="#2-7-Netty的三种线程模型" class="headerlink" title="2-7 Netty的三种线程模型"></a>2-7 Netty的三种线程模型</h4><ul>
+<li><p>netty提供了三种线程模型，线程模型也可以称作 reactor 线程模型</p>
+</li>
+<li><p>单线程模型：所有的 IO 操作都由同一个 NIO 线程处理的</p>
+<ul>
+<li><img src="E:\house\typora\img2\image-20220526224647004-16591727718255.png" alt="image-20220526224647004" style="zoom:33%;" /></li>
+</ul>
+</li>
+<li><p>多线程模型：由一组 NIO 线程处理 IO 操作</p>
+<ul>
+<li><img src="E:\house\typora\img2\image-20220526225057045-16591727718257.png" alt="image-20220526225057045" style="zoom:33%;" /></li>
+</ul>
+</li>
+<li><p>主从线程模型：由一组线程池接受请求，一组线程池处理 io</p>
+<ul>
+<li><img src="E:\house\typora\img2\image-20220526225231916-16591727718259.png" alt="image-20220526225231916" style="zoom:33%;" /></li>
+</ul>
+</li>
+</ul>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="第3章-hello-netty-服务器"><a href="#第3章-hello-netty-服务器" class="headerlink" title="第3章 hello netty 服务器"></a>第3章 hello netty 服务器</h3><p>从零开始使用 netty 编写服务器，在网页访问后返回 hello netty，主要对服务器启动类，channel 初始化器以及助手类讲解，最后会对 channel 的生命周期进行讲解</p>
+<img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20220526230700987.png" alt="image-20220526230700987" style="zoom:33%;" />
+
+<h4 id="3-1-使用maven构建netty基础依赖"><a href="#3-1-使用maven构建netty基础依赖" class="headerlink" title="3-1 使用maven构建netty基础依赖"></a>3-1 使用maven构建netty基础依赖</h4><h4 id="3-2-构建hello服务器"><a href="#3-2-构建hello服务器" class="headerlink" title="3-2 构建hello服务器"></a>3-2 构建hello服务器</h4><h4 id="3-3-为channel设置初始化器"><a href="#3-3-为channel设置初始化器" class="headerlink" title="3-3 为channel设置初始化器"></a>3-3 为channel设置初始化器</h4><h4 id="3-4-编写自定义助手类"><a href="#3-4-编写自定义助手类" class="headerlink" title="3-4 编写自定义助手类"></a>3-4 编写自定义助手类</h4><h4 id="3-5-hello服务器启动与讲解"><a href="#3-5-hello服务器启动与讲解" class="headerlink" title="3-5 hello服务器启动与讲解"></a>3-5 hello服务器启动与讲解</h4><h4 id="3-6-netty生命周期"><a href="#3-6-netty生命周期" class="headerlink" title="3-6 netty生命周期"></a>3-6 netty生命周期</h4><h3 id="第4章-使用netty构建websocket服务器"><a href="#第4章-使用netty构建websocket服务器" class="headerlink" title="第4章 使用netty构建websocket服务器"></a>第4章 使用netty构建websocket服务器</h3><p>理解实时通信，使用netty的websocket编写服务端启动类、子处理器以及助手类。 理解JS相关的websocket api，简单使用hbuilder编写通信页面与netty交互并且使用web浏览器与手机端浏览器进行测试数据交互</p>
+]]></content>
+      <categories>
+        <category>web后端</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Netty基础</title>
+    <url>/2021/05/30/note/netty/</url>
+    <content><![CDATA[<h2 id="Netty"><a href="#Netty" class="headerlink" title="Netty"></a>Netty</h2><h2 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h2><p>channel</p>
+<p>​	channel是Netty对网络操作的抽象，包含了基本的IO操作，如bind()、connect()、read()、write()</p>
+<p>EcentLoop</p>
+<p>​	事件循环是netty中最核心的概念</p>
+<p>​	<strong>EcentLoop主要负责监听网络事件，并调用事件处理器进行相关IO操作处理</strong></p>
+<p>channelFuture</p>
+<p>​	channelFuture的channnel()方法获取关联的channel</p>
+<p>channelHandler和ChannelPipeline</p>
+<p>​	channelHandler是消息的具体处理器。负责读写操作，客户端连接等事情。</p>
+<p>​	ChannelPipeline是channelHandler的链，提供了一个容器并定义用于沿着链传入站和出站事件流的API</p>
+<h2 id="netty的线程模型"><a href="#netty的线程模型" class="headerlink" title="netty的线程模型"></a>netty的线程模型</h2><p>大部分网络框架都是基于Reactor模式开发的</p>
+<p>reactor模式基于事件驱动，采用多路复用将事件分发给相应的Handler处理，非常适合处理海量IO场景</p>
+<h2 id="TCP沾包"><a href="#TCP沾包" class="headerlink" title="TCP沾包"></a>TCP沾包</h2><p>发送字符串发现多个字符串粘在了一起</p>
+<p>1 可以使用netty自带的解码器</p>
+<p>2 可以使用自定义序列化编码器</p>
+<h2 id="netty长连接"><a href="#netty长连接" class="headerlink" title="netty长连接"></a>netty长连接</h2><p>TCP读写之前，server和client必须提前简历一个连接。需要三次握手，释放需要四次挥手，比较耗费时间</p>
+<p>长连接就是说client和server建立连接后，即使client和server完成一次读写，它们之间的连接也不会主动关闭</p>
+<h2 id="心跳机制"><a href="#心跳机制" class="headerlink" title="心跳机制"></a>心跳机制</h2><p>TCP长时间连接过程中，可能出现网络异常，异常发生时，client和server如果没有交互的话，是无法发现对方已经掉线的，需要心跳机制。</p>
+<p>原理：当client和server之间没有数据交互时，客户端和服务端会发送一个特殊的数据包给对方，对方收到这个报文后，立刻回复一个特殊报文，形成了ping-pong交互。所以，当某一方收到心跳消息，就知道对方也在线，确保TCP有效性</p>
+<h2 id="netty零拷贝"><a href="#netty零拷贝" class="headerlink" title="netty零拷贝"></a>netty零拷贝</h2><ul>
+<li><p>OS层面上，零拷贝避免在用户态和内核态之间来回拷贝数据。</p>
+</li>
+<li><p>netty层面，零拷贝体现在对于数据操作的优化。</p>
+<ul>
+<li>使用netty提供的compositeByteBuf类，可以将多个bytebuf合并为一个逻辑上的bytebuf，避免多个bytebuf之间的拷贝</li>
+<li>bytebuf支持slice操作，因此可以将bytebuf分解为多个共享同一存储区域的bytebuf，避免内存的拷贝</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>web后端</category>
+      </categories>
+  </entry>
+  <entry>
     <title>LVS+Nginx集群</title>
     <url>/2021/05/07/note/LVS+Nginx/</url>
     <content><![CDATA[<h2 id="LVS-Nginx集群"><a href="#LVS-Nginx集群" class="headerlink" title="LVS+Nginx集群"></a>LVS+Nginx集群</h2><p>LVS+Nginx做一个高可用的网关，高可用的一个方案</p>
