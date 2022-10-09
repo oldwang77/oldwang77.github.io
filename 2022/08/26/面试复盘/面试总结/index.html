@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wangfx.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="面试复盘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8.19复盘">
+<meta property="og:url" content="http://wangfx.top/2022/08/26/%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="浅光">
+<meta property="og:description" content="面试复盘">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20220906221528059.png">
+<meta property="article:published_time" content="2022-08-26T13:59:04.000Z">
+<meta property="article:modified_time" content="2022-09-13T17:35:59.711Z">
+<meta property="article:author" content="qianguang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20220906221528059.png">
+
+<link rel="canonical" href="http://wangfx.top/2022/08/26/%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>8.19复盘 | 浅光</title><meta name="robots" content="noindex">
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">浅光</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">执着于理想，纯粹于当下</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wangfx.top/2022/08/26/%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="qianguang">
+      <meta itemprop="description" content="浅光的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅光">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          8.19复盘
+        </h1>
+
+        <div class="post-meta">
+		  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-08-26 21:59:04" itemprop="dateCreated datePublished" datetime="2022-08-26T21:59:04+08:00">2022-08-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-09-14 01:35:59" itemprop="dateModified" datetime="2022-09-14T01:35:59+08:00">2022-09-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98/" itemprop="url" rel="index"><span itemprop="name">面试复盘</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">面试复盘</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="8-19-美团一、二面复盘"><a href="#8-19-美团一、二面复盘" class="headerlink" title="8.19 美团一、二面复盘"></a>8.19 美团一、二面复盘</h2><ul>
+<li><p>到店广告，用机器生成广告创意</p>
+</li>
+<li><p>公司的广告平台和你开发的平台有什么区别</p>
+</li>
+<li><p>系统拆了多少微服务嘛，怎么部署的</p>
+</li>
+<li><p>阿里做的工作，是为了降低风险的误报嘛，风险预警在做事后吗？主要做什么呢？</p>
+</li>
+<li><p>广告项目的创新点在那里？</p>
+<ul>
+<li>不同于直接从数据库检索数据，采用索引形式进行检索，可以加快查询速度</li>
+<li>索引的构建引入倒排索引，基于兴趣、地域、关键字等</li>
+<li>索引构建使用第三方工具binlog-connector-java，根据master&#x2F;slave协议，监听binlog，从而动态的构建索引，这样的话实现了服务之间的解耦，耦合度更低</li>
+<li>引入消息队列 kafka，做了一层消息的订阅和分发。这样可以避免多个Binlog直连mysql的binlog，可以减少内存占用，当时也是通过monitor navicat2进行了监控测试，此外大部门Binlog的直连最大值是有限制的，一定程度上解决了这个问题</li>
+</ul>
+</li>
+<li><p><strong>菜鸟项目的难点在哪里？</strong></p>
+<ul>
+<li>做的事风险告警平台，主要负责风险预警事后的部分</li>
+<li>降噪模块的梳理<ul>
+<li>难点在于，需要结合具体的业务场景信息，根据业务场景设计设计出合适的降噪手段。主观上去根据当前的噪声问题尝试给出解决方案，而不是被动的分配接口开发任务。比如在给出口物流团接入告警平台，发生了应急值班人被轰炸的问题。尝试去分析问题的原因，多个sunfire类的指标没有梳理，给出暂时黑名单的解决方案。</li>
+<li>主要负责了四个方面的降噪<ul>
+<li>黑名单</li>
+<li>预发环境 IP 排除</li>
+<li>重复项合并</li>
+<li>多指标联合降噪</li>
+</ul>
+</li>
+<li>自动关单实现</li>
+</ul>
+</li>
+<li>酷应用卡片开发<ul>
+<li>难点在于全新的告警通知形式，先前是短信电话钉钉通知，现在采用酷卡片，调研轻颜低代码平台，从通知卡片的设计，应急状态的流转，卡片存储本地索引构建，token的定时刷新，群内应急机器人的部署，如何推广接入新的应急平台，设计接入的方案，提供了一个绑定告警群聊conservation_id和cardbizId的方案。整体都是从头开始构建的。</li>
+<li>&#x3D;&#x3D;整体的一个完整告警消息的触达的而设计和主动探索解决降噪的过程，是我认为比较大的挑战&#x3D;&#x3D;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Object类的方法</p>
+<ul>
+<li>hashcode、equals、wait、notify、toString</li>
+<li>hashcode 和 equals</li>
+</ul>
+</li>
+<li><p>Threadlocal 实现</p>
+</li>
+<li><p>concurrentHashMap 和 TheadLocal 使用的异同点</p>
+</li>
+<li><p>AQS多线程工具类</p>
+<ul>
+<li>cyclicBarrier 和 <strong>CountDownLatch</strong></li>
+<li>reentrantlock</li>
+</ul>
+</li>
+<li><p>&#x3D;&#x3D;用过RPC协议吗，简单介绍一下rpc原理&#x3D;&#x3D;</p>
+<ul>
+<li><p>远程调用要解决的主要问题</p>
+</li>
+<li><p>序列化 : 如何将对象转化为二进制数据进行传输，如何将二进制数据转化对象</p>
+<ul>
+<li>可以使用java自带的序列化，Hessian，protobuff，json，xml等，性能比较高的是protobuff和hessian</li>
+<li>不过近来出现了一个基于protobuff的框架：protostuff–不用编写proto文件，基于注解，性能可以，推荐使用。</li>
+</ul>
+</li>
+<li><p>数据的传输(协议，第三方框架)</p>
+<ul>
+<li>出于并发性能的考虑，传统的阻塞式 IO 显然不太合适，因此我们需要异步的 IO，即 NIO。Java 提供了 NIO 的解决方案，Java 7 也提供了更优秀的 NIO.2 支持。可以选择Netty或者mina来解决NIO数据传输的问题</li>
+</ul>
+</li>
+<li><p>服务的注册&#x2F;发现，单点故障，分布式服务</p>
+<ul>
+<li>使用ZooKeeper提供服务注册与发现功能，解决单点故障以及分布式部署的问题(注册中心)</li>
+</ul>
+</li>
+<li><p>服务的监控和管理</p>
+<ul>
+<li>需要单独开发一个应用对服务进行监控和管理。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="8-26-中兴SP一二面复盘"><a href="#8-26-中兴SP一二面复盘" class="headerlink" title="8.26 中兴SP一二面复盘"></a>8.26 中兴SP一二面复盘</h2><ul>
+<li>微服务模块如何拆分的</li>
+<li>ddd思路</li>
+<li>private 和 protected 作用域的范围</li>
+<li>抽象类和接口的区别</li>
+<li>100 万数据如何进行排序</li>
+<li>什么时候需要考虑分库分表</li>
+<li>分表对数据的形式有什么要求</li>
+<li>微服务的优缺点</li>
+<li>微服务的鉴权，如何去优化鉴权</li>
+<li>抽象工厂模式</li>
+<li>工厂模式什么时候用啊</li>
+<li>单一职责原则</li>
+</ul>
+<h2 id="8-30-星环一面复盘"><a href="#8-30-星环一面复盘" class="headerlink" title="8.30 星环一面复盘"></a>8.30 星环一面复盘</h2><ul>
+<li><p>线程池中的阻塞队列有哪些知道吗</p>
+<ul>
+<li>working queue</li>
+</ul>
+</li>
+<li><p>实习过程中用到了哪些中间件</p>
+</li>
+<li><p>联合索引</p>
+</li>
+</ul>
+<h2 id="9-1-字节中台一面"><a href="#9-1-字节中台一面" class="headerlink" title="9.1 字节中台一面"></a>9.1 字节中台一面</h2><p>部门主要做离线数据的，大数据相关。迄今为止，最难的一次面试</p>
+<ul>
+<li><p>CAS底层</p>
+</li>
+<li><p>ABA</p>
+</li>
+<li><p>操作系统缺页中断</p>
+</li>
+<li><h2 id="程序如何加载，虚拟地址如何映射到物理地址，完整的流程"><a href="#程序如何加载，虚拟地址如何映射到物理地址，完整的流程" class="headerlink" title="程序如何加载，虚拟地址如何映射到物理地址，完整的流程"></a>程序如何加载，虚拟地址如何映射到物理地址，完整的流程</h2></li>
+<li><p>操作系统内存管理</p>
+<ul>
+<li>分页</li>
+<li>分段</li>
+<li>段页式</li>
+</ul>
+</li>
+<li><h2 id="如果页表的大小从4k到12k，有什么好处吗"><a href="#如果页表的大小从4k到12k，有什么好处吗" class="headerlink" title="如果页表的大小从4k到12k，有什么好处吗"></a>如果页表的大小从4k到12k，有什么好处吗</h2></li>
+<li><p>io多路复用 和 nio bio netty</p>
+</li>
+<li><p>netty</p>
+</li>
+<li><p>脏读出现的原因是什么？如何解决脏读？</p>
+</li>
+<li><p>MVCC在分布式版本情况下，是如何保证</p>
+</li>
+<li><p>代码LFU , &#x3D;&#x3D;没有考虑到并发的情况&#x3D;&#x3D;，使用了HashMap，用concurrentHashMap</p>
+</li>
+</ul>
+<h2 id="9-2-快手基础平台研发"><a href="#9-2-快手基础平台研发" class="headerlink" title="9.2 快手基础平台研发"></a>9.2 快手基础平台研发</h2><ul>
+<li><p>手写单例模式</p>
+</li>
+<li><p>新生代的gc介绍一下</p>
+<ul>
+<li>GC分为Minor GC(发生在新生代，代价小，通常几十ms，频繁发生)和Full GC（发生在老年代，代价大，通常在100ms到几s之间，较少发生）。</li>
+<li>在一次Minor GC过程中，Eden和From区域存活的对象会被移动到To区，如果To满了，那么就会直接移动到老年代，如果连老年代都装不来，那么就会报OutOfMemory错误。From区和To区这两个区域并不是固定的。每次Minor GC后，From区和To区相互对调名字。在下次GC时，To 幸存区会成为From 幸存区。</li>
+<li>当JVM无法为新建对象分配内存空间的时候(Eden满了)，Minor GC被触发。因此新生代空间占用率越高，Minor GC越频繁。MinorGC的过程：采用复制算法。<ol>
+<li>首先，把 Eden 和 From 区域中存活的对象复制到 To 区域（如果有对象的年龄以及达到了老年的标准，一般是15，则赋值到老年代区）</li>
+<li>同时把这些对象的年龄+1（如果ServicorTo不够位置了就放到老年区）</li>
+<li>然后，清空Eden和ServicorFrom中的对象；最后，To 和 From 互换，原 To 成为下一次 GC 时的From区。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>为什么新生代的区间分配时8:1:1</p>
+<ul>
+<li>降低老年代的内存分配压力,通过设置两个s区来对年轻对象进行拦截,降低fullGc的次数</li>
+<li>分三代能使老年代作为担保来应付s区容不下存活对象的情况</li>
+<li>深入理解虚拟机一书里有描述,IBM的一项研究,表明新生代中有98%的对象是朝生夕灭的,换言之,每次mionrGC后存活的对象应该小于等于2%，所以看起来采用复制算法的新生代似乎可以不用将内存分成大小相等的两块了,但考虑到实验偏差以及实际情况的多样性,jvm 默认预留了10%的内存用于存放存活对象,此时结合上文描述的,新生代最优应该分成三块,所以得再预留一块10%的内存给s区,那么自然剩下的80%就是e区的大小了；</li>
+</ul>
+</li>
+<li><p>&#x3D;&#x3D;什么业务场景适合8:1:1，什么场景不适合&#x3D;&#x3D;</p>
+<ul>
+<li>频繁出现大对象，这个比例应该调大还是调小呢？</li>
+<li></li>
+</ul>
+</li>
+<li><p>1堆螺丝和螺帽，进行匹配，螺丝大小各不相同，螺帽大小各不相同，给出匹配方案</p>
+<ul>
+<li>快速排序</li>
+</ul>
+</li>
+<li><p>LinkageError 项目报错怎么解决</p>
+</li>
+<li><p>类加载机制</p>
+</li>
+<li><p>MVCC</p>
+</li>
+</ul>
+<h2 id="9-4-keep-一、二、hr-ok"><a href="#9-4-keep-一、二、hr-ok" class="headerlink" title="9.4 keep 一、二、hr ok"></a>9.4 keep 一、二、hr ok</h2><ul>
+<li><p>反射机制</p>
+</li>
+<li><p>反射是面向对象的吗</p>
+</li>
+<li><p>AOP</p>
+</li>
+<li><p>检查和非检查异常，分别有哪些？</p>
+<ul>
+<li>非检查异常：nullException 和 IndexOutOfBound</li>
+<li>检查异常：FileNotFoundException</li>
+</ul>
+</li>
+<li><p>HashMap 为什么用红黑树，不用AVL树</p>
+</li>
+<li><p>B 树和 B+ 树的区别</p>
+</li>
+<li><p>为什么 B+ 树可以容纳很多的结点，如何进行范围查询的</p>
+</li>
+<li><p>&#x3D;&#x3D;红黑树 和 AVL 树&#x3D;&#x3D;</p>
+</li>
+<li><p>算法：二分查找峰值</p>
+</li>
+</ul>
+<h2 id="9-5-大疆一面"><a href="#9-5-大疆一面" class="headerlink" title="9.5 大疆一面"></a>9.5 大疆一面</h2><ul>
+<li><p>岗位：上海的测开岗位</p>
+</li>
+<li><p>线程池常用的属性</p>
+</li>
+<li><p>线程池的作用</p>
+</li>
+<li><p>接口和抽象类</p>
+</li>
+<li><p>用户态切换到内核态的方式</p>
+</li>
+<li><p>POST和GET的不同</p>
+</li>
+<li><p>HTTP报文的最大长度有限制吗</p>
+<ul>
+<li>Http Get &#x2F; post方法提交的数据大小长度并没有限制，HTTP协议规范没有对URL长度进行限制。这个限制是特定的浏览器及服务器对它的限制。</li>
+</ul>
+</li>
+<li><p>&#x3D;&#x3D;TCP超时的消息是怎么处理的&#x3D;&#x3D;</p>
+<ul>
+<li>重传时间 RTO是的缩写，该时间决定了<strong>发送方在发送数据后，在多长时间内如果没有收到ACK，就重置重传计时器，并重传上次发送失败的报文</strong>。</li>
+<li>RTO说白了就是根据RTT（往返时延）而确定的。网络流量和路由器在包的传输过程中可能改变，因此RTT（往返时延）也会变化，如果超时时间保持不变，假如RTT 变的大了，可能出现ACK还在再发送的路上，却直接重发了包，造成不必要的浪费</li>
+<li><strong>RTTm</strong>：它是本次时间测量的RTT值</li>
+<li>RTTs看成是一个平均的RTT</li>
+<li>RTTD：就是误差值，它也是一个经验累加值。</li>
+<li>RTO： RTO主要考虑RTT的期望值和偏差。</li>
+<li><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20220906221528059.png" alt="image-20220906221528059"></li>
+</ul>
+</li>
+<li><p>为什么选择测开？</p>
+</li>
+</ul>
+<h2 id="9-5字节二面"><a href="#9-5字节二面" class="headerlink" title="9.5字节二面"></a>9.5字节二面</h2><ul>
+<li>太难了面试</li>
+<li>计算机网络五层结构，每层有什么协议</li>
+<li>ARQ在哪一层<ul>
+<li>ARQ是一种可以在不可靠的数据通道上可靠地传输数据的方案，所以其实链路层和传输层都用了ARQ</li>
+</ul>
+</li>
+<li>icmp报文哪一层、原理<ul>
+<li>网络层协议，主要用于在主机与路由器之间传递控制信息，包括报告错误、交换受限控制和状态信息等。当遇到IP数据无法访问目标、IP路由器无法按当前的传输速率转发数据包等情况时，会自动发送ICMP消息。</li>
+<li></li>
+</ul>
+</li>
+<li>一个服务器最多接受多少个连接<ul>
+<li>65535端口，为什么是呢，TCP报文头，端口号16位（&#x3D;&#x3D;学习TCP报文格式&#x3D;&#x3D;）</li>
+</ul>
+</li>
+<li>&#x3D;&#x3D;geohash&#x3D;&#x3D;<ul>
+<li>基于地理位置的hash，面试官建议我研究一下写道项目里</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="9-6-携程一面ok"><a href="#9-6-携程一面ok" class="headerlink" title="9.6 携程一面ok"></a>9.6 携程一面ok</h2><ul>
+<li><p>&#x3D;&#x3D;Redis的主从同步方案&#x3D;&#x3D;</p>
+</li>
+<li><p>其他哪些中间件也有类似的主从方案</p>
+</li>
+<li><p>mysiam 和 innodb 的区别</p>
+<ul>
+<li>为什么用B+树呢</li>
+</ul>
+</li>
+</ul>
+<h2 id="9-6用友一面"><a href="#9-6用友一面" class="headerlink" title="9.6用友一面"></a>9.6用友一面</h2><ul>
+<li>项目难点</li>
+<li></li>
+</ul>
+<h2 id="9-7-途虎一面ok"><a href="#9-7-途虎一面ok" class="headerlink" title="9.7 途虎一面ok"></a>9.7 途虎一面ok</h2><ul>
+<li>实习过程中使用了哪些中间件<ul>
+<li>metaq消息进行消费</li>
+<li>tddl&#x3D;&gt; mysql、缓存封装，分库分表</li>
+<li>shedulex</li>
+<li>diamond配置中心</li>
+<li>aone</li>
+<li>阿里告警中心、轻颜低代码平台</li>
+</ul>
+</li>
+<li>如何均分流量<ul>
+<li>阿里内部可以配置负载均衡的方案，当时我们的机器就是轮询</li>
+<li>可以轮询、加权轮询、一致性hash等等</li>
+</ul>
+</li>
+<li>shedulex做定时任务的时候，如何保证消费的唯一性？<ul>
+<li>比如 shedulex 分布式场景下，如何确保？<ul>
+<li>我们部署一台shedulex 来扫全库，shedulex2 性能非常的好，我们的数据量 7 天 40万，实际上shedulex2 在以前扫过 500-600 万的表</li>
+<li>分布式场景可以通过分布式锁</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>volatile</li>
+<li>如何判断对象是否存活<ul>
+<li>引用计数法</li>
+<li>GC ROOTS：Java栈中的引用、本地方法栈中的引用、静态变量的引用</li>
+</ul>
+</li>
+<li>垃圾收集器熟悉嘛，cms</li>
+<li>线程池</li>
+<li>算法：归并排序</li>
+</ul>
+<h2 id="9-9-美团三面"><a href="#9-9-美团三面" class="headerlink" title="9.9 美团三面"></a>9.9 美团三面</h2><ul>
+<li><p>主管面</p>
+</li>
+<li><p>java基本数据类型有哪些，Integer了解嘛</p>
+</li>
+<li><p>int a &#x3D; 100；申请了多少空间在哪里申请了</p>
+<ul>
+<li>int占用32位，4个字节</li>
+<li>int a &#x3D;10 如果是这个 那么10在栈里面<br>Interger a &#x3D; 10 那么这个在常量池里面</li>
+</ul>
+</li>
+<li><p>int[] a &#x3D; new int[20]，申请了多少的空间，分别在哪里申请了空间</p>
+<ul>
+<li>int占用4个字节，20*4</li>
+</ul>
+</li>
+<li><p>&#x3D;&#x3D;项目中引用了kafka，相当于把流量的压力转到kafka上？？这样优化有效吗，压力全在kafka这一层&#x3D;&#x3D;</p>
+</li>
+</ul>
+<!-- flag of hidden posts -->
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-19-%E7%BE%8E%E5%9B%A2%E4%B8%80%E3%80%81%E4%BA%8C%E9%9D%A2%E5%A4%8D%E7%9B%98"><span class="nav-number">1.</span> <span class="nav-text">8.19 美团一、二面复盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-26-%E4%B8%AD%E5%85%B4SP%E4%B8%80%E4%BA%8C%E9%9D%A2%E5%A4%8D%E7%9B%98"><span class="nav-number">2.</span> <span class="nav-text">8.26 中兴SP一二面复盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-30-%E6%98%9F%E7%8E%AF%E4%B8%80%E9%9D%A2%E5%A4%8D%E7%9B%98"><span class="nav-number">3.</span> <span class="nav-text">8.30 星环一面复盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-%E5%AD%97%E8%8A%82%E4%B8%AD%E5%8F%B0%E4%B8%80%E9%9D%A2"><span class="nav-number">4.</span> <span class="nav-text">9.1 字节中台一面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E5%8A%A0%E8%BD%BD%EF%BC%8C%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E5%A6%82%E4%BD%95%E6%98%A0%E5%B0%84%E5%88%B0%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%EF%BC%8C%E5%AE%8C%E6%95%B4%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">程序如何加载，虚拟地址如何映射到物理地址，完整的流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E9%A1%B5%E8%A1%A8%E7%9A%84%E5%A4%A7%E5%B0%8F%E4%BB%8E4k%E5%88%B012k%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A4%84%E5%90%97"><span class="nav-number">6.</span> <span class="nav-text">如果页表的大小从4k到12k，有什么好处吗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-%E5%BF%AB%E6%89%8B%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B0%E7%A0%94%E5%8F%91"><span class="nav-number">7.</span> <span class="nav-text">9.2 快手基础平台研发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-4-keep-%E4%B8%80%E3%80%81%E4%BA%8C%E3%80%81hr-ok"><span class="nav-number">8.</span> <span class="nav-text">9.4 keep 一、二、hr ok</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-5-%E5%A4%A7%E7%96%86%E4%B8%80%E9%9D%A2"><span class="nav-number">9.</span> <span class="nav-text">9.5 大疆一面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-5%E5%AD%97%E8%8A%82%E4%BA%8C%E9%9D%A2"><span class="nav-number">10.</span> <span class="nav-text">9.5字节二面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-6-%E6%90%BA%E7%A8%8B%E4%B8%80%E9%9D%A2ok"><span class="nav-number">11.</span> <span class="nav-text">9.6 携程一面ok</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-6%E7%94%A8%E5%8F%8B%E4%B8%80%E9%9D%A2"><span class="nav-number">12.</span> <span class="nav-text">9.6用友一面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-7-%E9%80%94%E8%99%8E%E4%B8%80%E9%9D%A2ok"><span class="nav-number">13.</span> <span class="nav-text">9.7 途虎一面ok</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-9-%E7%BE%8E%E5%9B%A2%E4%B8%89%E9%9D%A2"><span class="nav-number">14.</span> <span class="nav-text">9.9 美团三面</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">qianguang</p>
+  <div class="site-description" itemprop="description">浅光的博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qianguang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='34,34,34' opacity='0.5' zIndex='-1' count='120' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
