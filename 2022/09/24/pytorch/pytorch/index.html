@@ -29,10 +29,16 @@
 <meta property="og:site_name" content="浅光">
 <meta property="og:description" content="pytorch 总结">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20221009205920169.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20221009215843484.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20221009215325268.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20221010095000690.png">
+<meta property="og:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20221010151324691.png">
 <meta property="article:published_time" content="2022-09-24T02:08:35.000Z">
-<meta property="article:modified_time" content="2022-10-03T06:10:04.301Z">
+<meta property="article:modified_time" content="2022-10-10T07:16:04.354Z">
 <meta property="article:author" content="qianguang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20221009205920169.png">
 
 <link rel="canonical" href="http://wangfx.top/2022/09/24/pytorch/pytorch/">
 
@@ -223,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-03 14:10:04" itemprop="dateModified" datetime="2022-10-03T14:10:04+08:00">2022-10-03</time>
+                <time title="修改时间：2022-10-10 15:16:04" itemprop="dateModified" datetime="2022-10-10T15:16:04+08:00">2022-10-10</time>
               </span>
 
           
@@ -238,15 +244,48 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Pytorch总结"><a href="#Pytorch总结" class="headerlink" title="Pytorch总结"></a>Pytorch总结</h1><p>参考B站小土堆：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hE411t7RN/?spm_id_from=333.337.search-card.all.click&amp;vd_source=ec8158f9c5639641ada55d1a5998f03b">https://www.bilibili.com/video/BV1hE411t7RN/?spm_id_from=333.337.search-card.all.click&amp;vd_source=ec8158f9c5639641ada55d1a5998f03b</a></p>
+        <h1 id="Pytorch总结"><a href="#Pytorch总结" class="headerlink" title="Pytorch总结"></a>Pytorch总结</h1><p>参考B站小土堆：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hE411t7RN/?spm_id_from=333.337.search-card.all.click&amp;vd_source=ec8158f9c5639641ada55d1a5998f03b%E3%80%81">https://www.bilibili.com/video/BV1hE411t7RN/?spm_id_from=333.337.search-card.all.click&amp;vd_source=ec8158f9c5639641ada55d1a5998f03b、</a></p>
+<p>本地代码：E:\python\pytorch-tutorial</p>
 <h2 id="p1环境配置和安装"><a href="#p1环境配置和安装" class="headerlink" title="p1环境配置和安装"></a>p1环境配置和安装</h2><p>先配置anaconda，官网去安装pytorch(1.3之后)</p>
 <p>3090服务器密码：111111</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pytorch_name python=3.6</span><br><span class="line"></span><br><span class="line">conda activate pytorch_name</span><br><span class="line"></span><br><span class="line">nvidia-smi</span><br><span class="line"></span><br><span class="line">pip list</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pytorch_name python=<span class="number">3.6</span></span><br><span class="line"></span><br><span class="line">conda activate pytorch_name</span><br><span class="line"></span><br><span class="line">nvidia-smi</span><br><span class="line"></span><br><span class="line">pip <span class="built_in">list</span></span><br></pre></td></tr></table></figure>
 
 <p>windows下推荐conda安装，linux推荐pip</p>
 <h2 id="p4重要函数"><a href="#p4重要函数" class="headerlink" title="p4重要函数"></a>p4重要函数</h2><p>dir(torch)</p>
 <p>help(torch.cuda.is_available)</p>
-<h2 id="p5-加载数据"><a href="#p5-加载数据" class="headerlink" title="p5 加载数据"></a>p5 加载数据</h2>
+<h2 id="p5-加载数据"><a href="#p5-加载数据" class="headerlink" title="p5 加载数据"></a>p5 加载数据</h2><p>dataset和dataloader</p>
+<ul>
+<li>dataset提供一种方式获取数据和label</li>
+<li>dataloader为网络提供不同的数据形式</li>
+</ul>
+<h2 id="p9-transform的使用"><a href="#p9-transform的使用" class="headerlink" title="p9 transform的使用"></a>p9 transform的使用</h2><p>我们可以先查看一下transforms.py</p>
+<p>常用的</p>
+<ul>
+<li>Compose</li>
+<li>ToTensor</li>
+<li>PILToTensor</li>
+<li>ToPILImage</li>
+</ul>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20221009205920169.png" alt="image-20221009205920169"></p>
+<p>常见的transform</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20221009215843484.png" alt="image-20221009215843484"></p>
+<p>为什么需要tensor</p>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20221009215325268.png" alt="image-20221009215325268"></p>
+<h2 id="p14-torchvision中的数据集"><a href="#p14-torchvision中的数据集" class="headerlink" title="p14 torchvision中的数据集"></a>p14 torchvision中的数据集</h2><h2 id="p15-dataloader"><a href="#p15-dataloader" class="headerlink" title="p15 dataloader"></a>p15 dataloader</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"></span><br><span class="line"><span class="comment"># 准备的测试数据集</span></span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"><span class="keyword">from</span> torch.utils.tensorboard <span class="keyword">import</span> SummaryWriter</span><br><span class="line"></span><br><span class="line">test_data = torchvision.datasets.CIFAR10(<span class="string">&quot;./dataset&quot;</span>, train=<span class="literal">False</span>, transform=torchvision.transforms.ToTensor())</span><br><span class="line"></span><br><span class="line">test_loader = DataLoader(dataset=test_data, batch_size=<span class="number">4</span>, shuffle=<span class="literal">True</span>, num_workers=<span class="number">0</span>, drop_last=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试数据集中第一张图片及target</span></span><br><span class="line">img, target = test_data[<span class="number">0</span>]</span><br><span class="line"><span class="built_in">print</span>(img.shape)</span><br><span class="line"><span class="built_in">print</span>(target)</span><br><span class="line"></span><br><span class="line">writer = SummaryWriter(<span class="string">&quot;dataloader&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>):</span><br><span class="line">    step = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> test_loader:</span><br><span class="line">        <span class="comment"># 根据test_data决定返回值是什么</span></span><br><span class="line">        <span class="comment"># 主要取决于getitem的返回值</span></span><br><span class="line">        <span class="comment"># getitem():</span></span><br><span class="line">        <span class="comment">#    return img,target</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 这里data是batch size大小的一个打包</span></span><br><span class="line">        <span class="comment"># img0,target0 = dataset[0]</span></span><br><span class="line">        <span class="comment"># img1,target1 = dataset[1]</span></span><br><span class="line">        <span class="comment"># img2,target2 = dataset[2]</span></span><br><span class="line">        <span class="comment"># img3,target3 = dataset[3]</span></span><br><span class="line">        imgs, targets = data</span><br><span class="line">        <span class="comment"># print(imgs.shape)</span></span><br><span class="line">        <span class="comment"># print(targets)</span></span><br><span class="line">        writer.add_images(<span class="string">&quot;Epoch: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(epoch), imgs, step)</span><br><span class="line">        step = step + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">writer.close()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="p16-nn-module神经网络基本骨架"><a href="#p16-nn-module神经网络基本骨架" class="headerlink" title="p16 nn-module神经网络基本骨架"></a>p16 nn-module神经网络基本骨架</h2><ul>
+<li><p>torch.nn</p>
+<p>torch.nn是pytorch中自带的一个函数库，里面包含了神经网络中使用的一些常用函数，如具有可学习参数的nn.Conv2d(),nn.Linear()和不具有可学习的参数(如ReLU，pool，DropOut等)(后面这几个是在nn.functional中)，这些函数可以放在构造函数中，也可以不放。</p>
+</li>
+<li><p>in_channel和out_channel设置完后，会自动设置kernal卷积核的个数</p>
+</li>
+<li><p>输入和输出大小的关系</p>
+</li>
+</ul>
+<p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20221010095000690.png" alt="image-20221010095000690"></p>
+<h2 id="p20神经网络激活"><a href="#p20神经网络激活" class="headerlink" title="p20神经网络激活"></a>p20神经网络激活</h2><p><img src="https://typorayuimages.oss-cn-hangzhou.aliyuncs.com/fx/img/image-20221010151324691.png" alt="image-20221010151324691"></p>
+<p>inplace &#x3D; true，对原来的输入直接修改，inplace &#x3D; false，不修改；默认是false</p>
+
     </div>
 
     
@@ -326,7 +365,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pytorch%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">Pytorch总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#p1%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.</span> <span class="nav-text">p1环境配置和安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p4%E9%87%8D%E8%A6%81%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">p4重要函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p5-%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">p5 加载数据</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pytorch%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">Pytorch总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#p1%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.</span> <span class="nav-text">p1环境配置和安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p4%E9%87%8D%E8%A6%81%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">p4重要函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p5-%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">p5 加载数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p9-transform%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">p9 transform的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p14-torchvision%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.5.</span> <span class="nav-text">p14 torchvision中的数据集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p15-dataloader"><span class="nav-number">1.6.</span> <span class="nav-text">p15 dataloader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p16-nn-module%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E9%AA%A8%E6%9E%B6"><span class="nav-number">1.7.</span> <span class="nav-text">p16 nn-module神经网络基本骨架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p20%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%BF%80%E6%B4%BB"><span class="nav-number">1.8.</span> <span class="nav-text">p20神经网络激活</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
